@@ -23,8 +23,14 @@ windows, pictures, weather, tone and fades. The system is split into plugins
 2. Paint **height regions** (default 1-20; height = region × 0.5 tiles) and
    **ramp regions** (default 21) for stairs and slopes. Cliff walls are generated.
    Keep these separate from your encounter-zone regions.
-3. Give tall B-E tiles (trees, signs, fences) terrain tag **7** to stand them up,
+3. Paint cliffs like a 2D map: cliff-top tiles get a height region, and the
+   cliff face rows in front (south) use A3/A4 wall-side tiles or B-E tiles with
+   terrain tag **5**. In 3D the face rows become a steep slope showing those tiles,
+   covering exactly the same tiles as in 2D (about 2 rows per tile of height).
+4. Give tall B-E tiles (trees, signs, fences) terrain tag **7** to stand them up,
    and ledge tiles terrain tag **6** (and make them impassable).
+5. Water reflects characters, upright tiles and models automatically.
+   Random encounters zoom the 3D camera onto the player.
 
 ### Map note tags
 
@@ -35,6 +41,7 @@ windows, pictures, weather, tone and fades. The system is split into plugins
 <3D Water: depth=0.2 opacity=0.85 bed=#1c3550>
 <3D Fog: #b8d0e8 near=20 far=45>
 <3D Clamp: off>
+<3D Reflections: off>            (or a strength, e.g. <3D Reflections: 0.5>)
 <3D LedgeDirection: 2>
 <3D Model: house.glb x=5 y=8 rot=0 scale=1 block=4x3 door>
 <3D Lighting: off>
@@ -49,6 +56,7 @@ windows, pictures, weather, tone and fades. The system is split into plugins
 ```
 <3D Flat>                                  tile-graphic event lies on the ground
 <3D Shadow: off>                           no blob shadow
+<3D Ledges>                                event hops ledges (move routes, approach/away)
 <3D Model: pokeball.glb scale=0.5 turn keepSprite>
 <3D Light: #ffaa55 radius=4 intensity=1 height=1 flicker>
 ```
