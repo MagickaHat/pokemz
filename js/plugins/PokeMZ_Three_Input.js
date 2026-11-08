@@ -44,6 +44,7 @@
     const PICK_CHARACTERS = Three.parseBool(params.pickCharacters, true);
 
     const raycaster = new THREE.Raycaster();
+    raycaster.layers.enableAll(); // water lives on its own layer
     const ndc = new THREE.Vector2();
     const feet = new THREE.Vector3();
     const screen = new THREE.Vector3();

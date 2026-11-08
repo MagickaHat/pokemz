@@ -139,6 +139,20 @@
  * @type string
  * @default #1c3550
  *
+ * @param reflections
+ * @text Water Reflections
+ * @desc Characters, upright tiles and models reflect in water.
+ * Overridable per map with <3D Reflections: off> or <3D Reflections: 0.5>.
+ * @type boolean
+ * @default true
+ *
+ * @param reflectionStrength
+ * @text Reflection Strength
+ * @desc 0-1. How strongly reflections show on the water.
+ * @type number
+ * @decimals 2
+ * @default 0.35
+ *
  * @param blobShadows
  * @text Character Shadows
  * @desc Draw a soft round shadow under characters.
@@ -358,6 +372,7 @@
  *   <3D Water: depth=0.2 opacity=0.85 bed=#1c3550>
  *   <3D Fog: #b8d0e8 near=20 far=45>
  *   <3D Clamp: off>                       Let the camera see past map edges.
+ *   <3D Reflections: off>                 Or a strength, e.g. 0.5.
  *
  * ---------------------------------------------------------------------------
  * Heights
@@ -605,6 +620,8 @@
         waterDepth: num(params.waterDepth, 0.2),
         waterOpacity: num(params.waterOpacity, 0.85),
         waterBedColor: params.waterBedColor || "#1c3550",
+        reflections: parseBool(params.reflections, true),
+        reflectionStrength: num(params.reflectionStrength, 0.35),
         blobShadows: parseBool(params.blobShadows, true),
         shadowSize: num(params.shadowSize, 0.7),
         depthBias: num(params.depthBias, 0.3),
@@ -625,7 +642,14 @@
         const fog = noteTag(note, "Fog");
         const smooth = noteTag(note, "Smooth");
         const clamp = noteTag(note, "Clamp");
+        const refl = noteTag(note, "Reflections");
+        let reflectionStrength = CONFIG.reflections ? CONFIG.reflectionStrength : 0;
+        if (refl) {
+            reflectionStrength =
+                refl.off || refl.false ? 0 : num(refl.strength, num(refl._[0], CONFIG.reflectionStrength));
+        }
         const cfg = {
+            reflectionStrength,
             pitch: num(cam.pitch, CONFIG.pitch),
             yaw: num(cam.yaw, CONFIG.yaw),
             distance: num(cam.distance, CONFIG.distance),
@@ -1068,6 +1092,8 @@
         uLightColor: { value: Array.from({ length: MAX_BILLBOARD_LIGHTS }, () => new THREE.Color(0, 0, 0)) },
         uLightRange: { value: new Array(MAX_BILLBOARD_LIGHTS).fill(1) },
         uDepthBias: { value: CONFIG.depthBias },
+        /** @brief (1, 1) normally; flips sprites for the reflection pass. */
+        uMirror: { value: new THREE.Vector2(1, 1) },
     };
 
     const BILLBOARD_VERTEX = `
@@ -1077,6 +1103,7 @@
         uniform vec4 uUvRect;
         uniform float uFlat;
         uniform float uDepthBias;
+        uniform vec2 uMirror;
         uniform vec3 uAmbient;
         uniform int uLightCount;
         uniform vec3 uLightPos[MAX_LIGHTS];
@@ -1096,11 +1123,11 @@
             } else {
                 // Face the camera, so pixel art keeps its exact proportions...
                 mvPosition = viewMatrix * vec4(a, 1.0);
-                mvPosition.xy += off;
+                mvPosition.xy += off * uMirror;
                 gl_Position = projectionMatrix * mvPosition;
                 // ...but take depth from an upright card at the anchor, so
                 // sprites never lean into walls or slopes behind them.
-                float upY = max(viewMatrix[1][1], 0.2);
+                float upY = max(abs(viewMatrix[1][1]), 0.2);
                 vec3 dp = a + vec3(0.0, off.y / upY, 0.0);
                 dp += normalize(cameraPosition - a) * uDepthBias;
                 vec4 dc = projectionMatrix * viewMatrix * vec4(dp, 1.0);
@@ -1138,13 +1165,15 @@
             float a = c.a * uOpacity;
             if (vLocalY < uBush) a *= 0.5;
             gl_FragColor = vec4(c.rgb, a);
+            #include <colorspace_fragment>
             #include <fog_fragment>
         }
     `;
 
     /**
      * @brief Creates a billboard material (camera-facing, pixel-exact).
-     * @param {THREE.Texture} map Texture (NoColorSpace).
+     * @param {THREE.Texture} map Texture (sRGB; decoded by the GPU, and the
+     *        result encoded for the output like built-in materials).
      * @param {boolean} transparent Whether to alpha-blend (characters) or
      *        only alpha-test (static cards).
      * @return {THREE.ShaderMaterial} The material.
@@ -1193,7 +1222,7 @@
             if (tex) {
                 tex.dispose();
             }
-            tex = pixelTexture(source, false);
+            tex = pixelTexture(source, true);
             bitmapTextures.set(bitmap, tex);
         }
         return tex;
@@ -1206,6 +1235,218 @@
                 tex.dispose();
                 bitmapTextures.delete(bitmap);
             }
+        }
+    }
+
+    //=========================================================================
+    // Water reflections
+    //=========================================================================
+
+    /** @brief Layer of water surfaces, hidden from the reflection pass. */
+    const WATER_LAYER = 1;
+
+    /** @brief Uniforms shared by every reflective water material. */
+    const reflectionUniforms = {
+        reflectionMap: { value: null },
+        reflectionMatrix: { value: new THREE.Matrix4() },
+        reflectionSize: { value: new THREE.Vector2(1, 1) },
+        reflectionStrength: { value: 0 },
+        reflectionTime: { value: 0 },
+    };
+
+    /**
+     * @brief Makes a water material blend in the planar reflection, with a
+     *        small ripple snapped to the reflection's pixel grid.
+     * @param {THREE.Material} material A MeshBasic/MeshLambert material.
+     */
+    function addReflection(material) {
+        material.onBeforeCompile = shader => {
+            Object.assign(shader.uniforms, reflectionUniforms);
+            shader.vertexShader = shader.vertexShader
+                .replace(
+                    "#include <common>",
+                    "#include <common>\nuniform mat4 reflectionMatrix;\nvarying vec4 vReflUv;\nvarying vec3 vReflPos;"
+                )
+                .replace(
+                    "#include <project_vertex>",
+                    "#include <project_vertex>\n" +
+                        "vReflPos = (modelMatrix * vec4(transformed, 1.0)).xyz;\n" +
+                        "vReflUv = reflectionMatrix * vec4(vReflPos, 1.0);"
+                );
+            shader.fragmentShader = shader.fragmentShader
+                .replace(
+                    "#include <common>",
+                    "#include <common>\nuniform sampler2D reflectionMap;\nuniform vec2 reflectionSize;\n" +
+                        "uniform float reflectionStrength;\nuniform float reflectionTime;\n" +
+                        "varying vec4 vReflUv;\nvarying vec3 vReflPos;"
+                )
+                .replace(
+                    "#include <map_fragment>",
+                    "#include <map_fragment>\n" +
+                        "{\n" +
+                        "  vec2 ruv = vReflUv.xy / vReflUv.w;\n" +
+                        "  float t = reflectionTime * 0.05;\n" +
+                        "  ruv.x += sin(vReflPos.z * 9.0 + t) * 1.5 / reflectionSize.x;\n" +
+                        "  ruv = (floor(ruv * reflectionSize) + 0.5) / reflectionSize;\n" +
+                        "  vec4 r = texture2D(reflectionMap, ruv);\n" +
+                        "  diffuseColor.rgb = mix(diffuseColor.rgb, r.rgb, r.a * reflectionStrength);\n" +
+                        "}"
+                );
+        };
+        material.customProgramCacheKey = () => "pokemz-water-reflection";
+    }
+
+    /**
+     * @brief Renders the scene mirrored about the water level into a texture
+     *        (the planar-reflector technique), only while water is on screen.
+     */
+    class WaterReflection {
+        constructor() {
+            this.target = new THREE.WebGLRenderTarget(1, 1, {
+                minFilter: THREE.NearestFilter,
+                magFilter: THREE.NearestFilter,
+            });
+            this.camera = new THREE.PerspectiveCamera();
+            this.camera.layers.set(0);
+            this.level = null;
+            this.strength = 0;
+            this._normal = new THREE.Vector3(0, 1, 0);
+            this._plane = new THREE.Plane();
+            this._clip = new THREE.Vector4();
+            this._q = new THREE.Vector4();
+            this._mirror = new THREE.Vector3();
+            this._view = new THREE.Vector3();
+            this._look = new THREE.Vector3();
+            this._target = new THREE.Vector3();
+            this._rotation = new THREE.Matrix4();
+            this._frustum = new THREE.Frustum();
+            this._pm = new THREE.Matrix4();
+            this._sphere = new THREE.Sphere();
+            this._size = new THREE.Vector2();
+            reflectionUniforms.reflectionMap.value = this.target.texture;
+        }
+
+        /**
+         * @brief Picks the reflection plane for a newly built map: the most
+         *        common water surface height. Water at other heights still
+         *        shows the reflection, slightly offset.
+         * @param {HeightField} hf Heights of the map.
+         * @param {Object} cfg Result of mapConfig().
+         */
+        setup(hf, cfg) {
+            const counts = new Map();
+            for (let i = 0; i < hf.water.length; i++) {
+                if (hf.water[i]) {
+                    const h = Math.round(hf.corners[i * 4] * 100) / 100;
+                    counts.set(h, (counts.get(h) || 0) + 1);
+                }
+            }
+            let best = null;
+            let bestCount = 0;
+            for (const [h, n] of counts) {
+                if (n > bestCount) {
+                    best = h;
+                    bestCount = n;
+                }
+            }
+            this.level = best;
+            this.strength = best === null ? 0 : cfg.reflectionStrength;
+            reflectionUniforms.reflectionStrength.value = this.strength;
+        }
+
+        /**
+         * @brief Whether any water mesh is inside the camera's view.
+         * @param {ThreeMapView} view The 3D view.
+         * @return {boolean} True if the reflection is worth rendering.
+         */
+        waterVisible(view) {
+            this._pm.multiplyMatrices(view.camera.projectionMatrix, view.camera.matrixWorldInverse);
+            this._frustum.setFromProjectionMatrix(this._pm);
+            for (const chunk of view.terrain.chunks) {
+                for (const mesh of chunk.group.children) {
+                    if (mesh.userData.water) {
+                        this._sphere.copy(mesh.geometry.boundingSphere).applyMatrix4(mesh.matrixWorld);
+                        if (this._frustum.intersectsSphere(this._sphere)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        /**
+         * @brief Renders the reflection texture for this frame.
+         * @param {ThreeMapView} view The 3D view.
+         */
+        render(view) {
+            if (this.strength <= 0 || this.level === null || !this.waterVisible(view)) {
+                return;
+            }
+            const renderer = view.renderer;
+            const main = view.camera;
+            renderer.getDrawingBufferSize(this._size);
+            if (this.target.width !== this._size.x || this.target.height !== this._size.y) {
+                this.target.setSize(this._size.x, this._size.y);
+            }
+            reflectionUniforms.reflectionSize.value.copy(this._size);
+            reflectionUniforms.reflectionTime.value = Graphics.frameCount;
+
+            // Mirror the camera about the plane y = level.
+            const n = this._normal;
+            const mirror = this._mirror.set(main.position.x, this.level, main.position.z);
+            this._view.subVectors(mirror, main.position);
+            if (this._view.dot(n) > 0) {
+                return; // camera below the water
+            }
+            this._view.reflect(n).negate().add(mirror);
+            this._rotation.extractRotation(main.matrixWorld);
+            this._look.set(0, 0, -1).applyMatrix4(this._rotation).add(main.position);
+            this._target.subVectors(mirror, this._look).reflect(n).negate().add(mirror);
+            const cam = this.camera;
+            cam.position.copy(this._view);
+            cam.up.set(0, 1, 0).applyMatrix4(this._rotation).reflect(n);
+            cam.lookAt(this._target);
+            cam.far = main.far;
+            cam.updateMatrixWorld();
+            cam.projectionMatrix.copy(main.projectionMatrix);
+
+            const tm = reflectionUniforms.reflectionMatrix.value;
+            tm.set(0.5, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0.5, 0.5, 0, 0, 0, 1);
+            tm.multiply(cam.projectionMatrix).multiply(cam.matrixWorldInverse);
+
+            // Oblique near plane: clip everything below the water.
+            this._plane.setFromNormalAndCoplanarPoint(n, mirror).applyMatrix4(cam.matrixWorldInverse);
+            this._clip.set(this._plane.normal.x, this._plane.normal.y, this._plane.normal.z, this._plane.constant);
+            const pm = cam.projectionMatrix.elements;
+            this._q.set(
+                (Math.sign(this._clip.x) + pm[8]) / pm[0],
+                (Math.sign(this._clip.y) + pm[9]) / pm[5],
+                -1,
+                (1 + pm[10]) / pm[14]
+            );
+            this._clip.multiplyScalar(2 / this._clip.dot(this._q));
+            pm[2] = this._clip.x;
+            pm[6] = this._clip.y;
+            pm[10] = this._clip.z + 1;
+            pm[14] = this._clip.w;
+            cam.projectionMatrixInverse.copy(cam.projectionMatrix).invert();
+
+            const shadowAuto = renderer.shadowMap.autoUpdate;
+            renderer.shadowMap.autoUpdate = false;
+            billboardUniforms.uMirror.value.set(1, -1);
+            renderer.setRenderTarget(this.target);
+            renderer.setClearColor(0x000000, 0);
+            renderer.clear();
+            renderer.render(view.scene, cam);
+            renderer.setRenderTarget(null);
+            billboardUniforms.uMirror.value.set(1, 1);
+            renderer.shadowMap.autoUpdate = shadowAuto;
+        }
+
+        /** @brief Frees GPU resources. */
+        dispose() {
+            this.target.dispose();
         }
     }
 
@@ -1508,8 +1749,12 @@
                         depthWrite: !translucent,
                         side: THREE.DoubleSide,
                     });
+                    if (cfg.reflectionStrength > 0) {
+                        addReflection(m);
+                    }
                     chunk.materials.push(m);
                     const mesh = new THREE.Mesh(waterGeo, m);
+                    mesh.layers.set(WATER_LAYER);
                     mesh.receiveShadow = true;
                     mesh.userData.pickable = true;
                     mesh.userData.water = true;
@@ -1518,10 +1763,12 @@
                 const bedGeo = bed.build();
                 if (bedGeo) {
                     const m = createSurfaceMaterial({ color: bedColor });
-                    chunk.group.add(new THREE.Mesh(bedGeo, m));
+                    const mesh = new THREE.Mesh(bedGeo, m);
+                    mesh.layers.set(WATER_LAYER);
+                    chunk.group.add(mesh);
                 }
                 if (hasUpright && uprightBaker) {
-                    chunk.uprightTexture = pixelTexture(uprightBaker.bake(cx, cy, 0), false);
+                    chunk.uprightTexture = pixelTexture(uprightBaker.bake(cx, cy, 0), true);
                     const cardGeo = cards.build();
                     const m = createBillboardMaterial(chunk.uprightTexture, false);
                     const mesh = new THREE.Mesh(cardGeo, m);
@@ -1999,7 +2246,9 @@
 
             this.scene = new THREE.Scene();
             this.camera = new THREE.PerspectiveCamera(CONFIG.fov, 1, 0.1, 500);
+            this.camera.layers.enable(WATER_LAYER);
             this.cameraController = new CameraController();
+            this.reflection = new WaterReflection();
 
             const texture = PIXI.Texture.from(this.canvas, { scaleMode: PIXI.SCALE_MODES.NEAREST });
             this.pixiTexture = texture;
@@ -2130,6 +2379,7 @@
 
             const fog = mapConfig().fog;
             this.scene.fog = fog ? new THREE.Fog(parseColor(fog.color).getHex(), fog.near, fog.far) : null;
+            this.reflection.setup(heights(), mapConfig());
             this.callHooks("onMapBuilt");
             return true;
         }
@@ -2203,6 +2453,7 @@
             }
             this.callHooks("onUpdate");
 
+            this.reflection.render(this);
             this.renderer.render(this.scene, this.camera);
             this.pixiTexture.update(); // re-upload the canvas to PIXI
         }
