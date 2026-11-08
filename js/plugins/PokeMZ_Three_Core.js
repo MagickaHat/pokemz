@@ -374,6 +374,9 @@
  *   <3D Clamp: off>                       Let the camera see past map edges.
  *   <3D Reflections: off>                 Or a strength, e.g. 0.5.
  *
+ * Random encounters zoom the 3D camera onto the player (instead of MZ's 2D
+ * screen zoom), after taking the usual battle background snapshot.
+ *
  * ---------------------------------------------------------------------------
  * Heights
  * ---------------------------------------------------------------------------
@@ -2028,6 +2031,10 @@
             this.shake = null;
             this.look = new THREE.Vector3();
             this.smoothY = null;
+            /** @brief Runtime zoom factor (encounter effect); never saved. */
+            this.zoom = 1;
+            /** @brief Encounter effect: look straight at the player's head. */
+            this.focusPlayer = false;
             this._target = new THREE.Vector3();
         }
 
@@ -2063,6 +2070,8 @@
             this.blend = null;
             this.shake = null;
             this.smoothY = null;
+            this.zoom = 1;
+            this.focusPlayer = false;
         }
 
         /** @return {boolean} True while a scripted move is in progress. */
@@ -2167,7 +2176,12 @@
             const pitch = THREE.MathUtils.degToRad(state.pitch);
             const yaw = THREE.MathUtils.degToRad(state.yaw);
             const fovRad = THREE.MathUtils.degToRad(state.fov);
-            if (mapConfig().clampCamera && !this.blend && state.follow.type !== "point") {
+            if (this.focusPlayer) {
+                const p = $gamePlayer;
+                const x = p._realX + 0.5;
+                const z = p._realY + 0.5;
+                target.set(x, Three.heightAtWorld(x, z) + 0.5, z);
+            } else if (mapConfig().clampCamera && !this.blend && state.follow.type !== "point") {
                 this._clamp(target, state.distance, fovRad, camera.aspect, pitch);
             }
             target.x += state.ox;
@@ -2191,7 +2205,7 @@
                 }
             }
 
-            const d = state.distance;
+            const d = state.distance / Math.max(0.01, this.zoom);
             camera.position.set(
                 look.x + Math.sin(yaw) * Math.cos(pitch) * d,
                 look.y + Math.sin(pitch) * d,
@@ -2765,4 +2779,39 @@
     PluginManager.registerCommand(PLUGIN_NAME, "refreshTerrain", () => {
         Three.refreshTerrain();
     });
+    //=========================================================================
+    // Encounter effect: zoom the 3D camera instead of the 2D screen
+    //=========================================================================
+
+    const _Scene_Map_updateEncounterEffect = Scene_Map.prototype.updateEncounterEffect;
+    Scene_Map.prototype.updateEncounterEffect = function() {
+        const cam = Three.isActive() && view.spriteset === this._spriteset ? view.cameraController : null;
+        if (!cam || this._encounterEffectDuration <= 0) {
+            _Scene_Map_updateEncounterEffect.call(this);
+            return;
+        }
+        // Same timing as MZ, but MZ zooms toward the player's 2D screen
+        // position; here the camera itself closes in on the player.
+        this._encounterEffectDuration--;
+        const speed = this.encounterEffectSpeed();
+        const n = speed - this._encounterEffectDuration;
+        const p = n / speed;
+        const q = ((p - 1) * 20 * p + 5) * p + 1;
+        if (n === 2) {
+            cam.zoom = 1;
+            this.snapForBattleBackground();
+            this.startFlashForEncounter(speed / 2);
+            cam.focusPlayer = true;
+        }
+        if (n >= 2) {
+            cam.zoom = q;
+        }
+        if (n === Math.floor(speed / 6)) {
+            this.startFlashForEncounter(speed / 2);
+        }
+        if (n === Math.floor(speed / 2)) {
+            BattleManager.playBattleBgm();
+            this.startFadeOut(this.fadeSpeed());
+        }
+    };
 })();
