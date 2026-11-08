@@ -5,6 +5,7 @@
 const scriptUrls = [
     "js/libs/pixi.js",
     "js/libs/three.min.js",
+    "js/libs/three-addons.js",
     "js/libs/pako.min.js",
     "js/libs/localforage.min.js",
     "js/libs/effekseer.min.js",
