@@ -67,6 +67,11 @@
  *   if the landing tile is free. On 3D maps the player may only hop towards
  *   lower ground; on flat ground the "Default Ledge Direction" is used.
  *   Map note <3D LedgeDirection: 4> changes that direction for one map.
+ *
+ *   Events hop too when their active page has the comment <3D Ledges> (or
+ *   the event note has it). They hop during Set Movement Route and
+ *   Approach / Away movement; random movement never walks into ledges, so
+ *   wandering NPCs can't get stuck below one.
  */
 
 (() => {
@@ -131,21 +136,41 @@
     }
 
     /**
-     * @brief Whether the player can hop a ledge in direction d.
-     * @param {Game_Player} player The player.
+     * @brief Whether a character is allowed to hop ledges at all: the player
+     *        when on foot, and events whose active page (or note) has
+     *        <3D Ledges>. Followers hop together with the player.
+     * @param {Game_CharacterBase} character The character.
+     * @return {boolean} True if it may hop.
+     */
+    function mayHop(character) {
+        if (character.isThrough()) {
+            return false;
+        }
+        if (character instanceof Game_Player) {
+            return !character.isInVehicle();
+        }
+        if (character instanceof Game_Event) {
+            return !character._erased && /<3D\s+Ledges>/i.test(Three.eventText(character));
+        }
+        return false;
+    }
+
+    /**
+     * @brief Whether a character can hop a ledge in direction d.
+     * @param {Game_CharacterBase} character The player or an event.
      * @param {number} d Direction.
      * @return {boolean} True if a hop should happen.
      */
-    function canHopLedge(player, d) {
-        if (CONFIG.ledgeTag <= 0 || player.isInVehicle() || player.isThrough()) {
+    function canHopLedge(character, d) {
+        if (CONFIG.ledgeTag <= 0 || !mayHop(character)) {
             return false;
         }
         const is3D = Three.isMap3D();
         if (!is3D && !CONFIG.ledgesIn2D) {
             return false;
         }
-        const x = player.x;
-        const y = player.y;
+        const x = character.x;
+        const y = character.y;
         const x1 = $gameMap.roundXWithDirection(x, d);
         const y1 = $gameMap.roundYWithDirection(y, d);
         const x2 = $gameMap.roundXWithDirection(x1, d);
@@ -164,25 +189,46 @@
         if (Math.abs(h2 - h0) <= 1e-4 && d !== flatLedgeDirection()) {
             return false;
         }
-        const back = player.reverseDir(d);
-        return $gameMap.isPassable(x2, y2, back) && !player.isCollidedWithCharacters(x2, y2);
+        const back = character.reverseDir(d);
+        return $gameMap.isPassable(x2, y2, back) && !character.isCollidedWithCharacters(x2, y2);
     }
 
     Three.canHopLedge = canHopLedge;
 
+    /**
+     * @brief Hops a character two tiles over a ledge.
+     * @param {Game_Character} character The player or an event.
+     * @param {number} d Direction.
+     */
+    function hopLedge(character, d) {
+        character.setDirection(d);
+        const dx = d === 6 ? 2 : d === 4 ? -2 : 0;
+        const dy = d === 2 ? 2 : d === 8 ? -2 : 0;
+        if (CONFIG.ledgeSe) {
+            AudioManager.playSe({ name: CONFIG.ledgeSe, volume: 90, pitch: 100, pan: 0 });
+        }
+        character.jump(dx, dy); // the player's jump also hops followers
+        character.setMovementSuccess(true);
+    }
+
     const _Game_Player_moveStraight = Game_Player.prototype.moveStraight;
     Game_Player.prototype.moveStraight = function(d) {
         if (canHopLedge(this, d)) {
-            this.setDirection(d);
-            const dx = d === 6 ? 2 : d === 4 ? -2 : 0;
-            const dy = d === 2 ? 2 : d === 8 ? -2 : 0;
-            if (CONFIG.ledgeSe) {
-                AudioManager.playSe({ name: CONFIG.ledgeSe, volume: 90, pitch: 100, pan: 0 });
-            }
-            this.jump(dx, dy);
+            hopLedge(this, d);
             this.increaseSteps();
             return;
         }
         _Game_Player_moveStraight.call(this, d);
+    };
+
+    // Events (move routes, Approach / Away movement). Random movement only
+    // steps onto passable tiles, so wandering NPCs never hop by accident.
+    const _Game_CharacterBase_moveStraight = Game_CharacterBase.prototype.moveStraight;
+    Game_CharacterBase.prototype.moveStraight = function(d) {
+        if (this instanceof Game_Event && canHopLedge(this, d)) {
+            hopLedge(this, d);
+            return;
+        }
+        _Game_CharacterBase_moveStraight.call(this, d);
     };
 })();
