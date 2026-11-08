@@ -2277,6 +2277,8 @@
             if (v && !v.lost) {
                 v.attach(this);
             }
+        } else if (view && !view.failed && view.terrain) {
+            view.disposeTerrain(); // free GPU memory while on 2D maps
         }
     };
 

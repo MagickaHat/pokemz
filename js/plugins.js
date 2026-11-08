@@ -5,5 +5,7 @@ var $plugins =
 {"name":"PokeMZ_Three_Core","status":true,"description":"[v0.2.0] Three.js 3D map renderer (core).","parameters":{"renderScale":"2","snapToTexel":"true","pitch":"55","yaw":"0","distance":"14","fov":"30","clampCamera":"true","regionHeight":"0.5","heightRegions":"1-20","rampRegions":"21","smooth":"0","chunkSize":"16","uprightTag":"7","waterDepth":"0.2","waterOpacity":"0.85","waterBedColor":"#1c3550","blobShadows":"true","shadowSize":"0.7","depthBias":"0.3"}},
 {"name":"PokeMZ_Three_Effects","status":true,"description":"[v0.2.0] Re-attaches balloons, animations and the destination marker to characters on 3D maps.","parameters":{"scaleBalloons":"true","destinationColor":"#ffffff"}},
 {"name":"PokeMZ_Three_Input","status":true,"description":"[v0.2.0] Mouse and touch input for 3D maps.","parameters":{"pickCharacters":"true"}},
-{"name":"PokeMZ_Three_Movement","status":true,"description":"[v0.2.0] Height-aware passability and ledges.","parameters":{"maxStep":"0.3","ledgeTag":"6","ledgeDirection":"2","ledgesIn2D":"true","ledgeSe":"Jump1"}}
+{"name":"PokeMZ_Three_Movement","status":true,"description":"[v0.2.0] Height-aware passability and ledges.","parameters":{"maxStep":"0.3","ledgeTag":"6","ledgeDirection":"2","ledgesIn2D":"true","ledgeSe":"Jump1"}},
+{"name":"PokeMZ_Three_Models","status":true,"description":"[v0.2.0] glTF buildings and props on 3D maps.","parameters":{"folder":"models/","castShadows":"true","pixelTextures":"true"}},
+{"name":"PokeMZ_Three_Lighting","status":true,"description":"[v0.2.0] Ambient, sun and point lights for 3D maps.","parameters":{"ambientColor":"#ffffff","ambientIntensity":"0.7","sunColor":"#fff8ec","sunIntensity":"0.45","sunDirection":"-1,2,1.5","sunShadows":"false","maxLights":"8"}}
 ];
