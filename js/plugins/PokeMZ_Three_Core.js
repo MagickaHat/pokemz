@@ -104,6 +104,22 @@
  * @max 7
  * @default 7
  *
+ * @param paintedCliffs
+ * @text Painted Cliff Faces
+ * @desc Wall tiles painted in front of higher ground (as on a 2D map)
+ * become the sloped face of the cliff.
+ * @type boolean
+ * @default true
+ *
+ * @param cliffTag
+ * @text Cliff Terrain Tag
+ * @desc B-E tiles with this terrain tag count as painted cliff faces
+ * (A3/A4 wall sides always do). 0 = disabled.
+ * @type number
+ * @min 0
+ * @max 7
+ * @default 5
+ *
  * @param waterDepth
  * @text Water Depth (tiles)
  * @desc How far A1 water surfaces sit below the surrounding ground.
@@ -351,6 +367,15 @@
  * and they slope between the tiles at both ends. Cliff walls are generated
  * automatically wherever neighbouring tiles differ in height.
  *
+ * Cliffs: paint them exactly as on a 2D map. Put a height region on the
+ * cliff top, then paint the cliff face rows in front of it (south side) with
+ * A3/A4 wall-side tiles, or B-E tiles with the "Cliff Terrain Tag". The face
+ * rows need no region: in 3D they become a steep slope from the cliff top
+ * down to the ground, covering exactly the tiles they cover in 2D, and show
+ * the tiles you painted. Use about 2 face rows per tile of height (region 2
+ * with the default 0.5 per region). Height steps without painted faces get a
+ * plain wall that repeats the tile above it.
+ *
  * Pokémon-style games also use regions for encounter zones, so keep the
  * height range separate from your encounter regions.
  *
@@ -575,6 +600,8 @@
         smooth: num(params.smooth, 0),
         chunkSize: Math.max(4, num(params.chunkSize, 16)),
         uprightTag: num(params.uprightTag, 7),
+        paintedCliffs: parseBool(params.paintedCliffs, true),
+        cliffTag: num(params.cliffTag, 5),
         waterDepth: num(params.waterDepth, 0.2),
         waterOpacity: num(params.waterOpacity, 0.85),
         waterBedColor: params.waterBedColor || "#1c3550",
@@ -651,7 +678,9 @@
             this.corners = new Float32Array(W * H * 4);
             this.ramp = new Uint8Array(W * H);
             this.water = new Uint8Array(W * H);
+            this.face = new Uint8Array(W * H);
             this.waterDepth = cfg.waterDepth;
+            const flags = gameMap.tilesetFlags();
 
             for (let y = 0; y < H; y++) {
                 for (let x = 0; x < W; x++) {
@@ -664,6 +693,9 @@
                     }
                     if (Tilemap.isWaterTile(gameMap.tileId(x, y, 0))) {
                         this.water[i] = 1;
+                    }
+                    if (CONFIG.paintedCliffs && isCliffFace(gameMap, flags, x, y)) {
+                        this.face[i] = 1;
                     }
                 }
             }
@@ -694,11 +726,20 @@
             return i >= 0 && this.water[i] === 1;
         }
 
+        /** @brief Whether tile (x, y) is a painted cliff face. */
+        isFace(x, y) {
+            const i = this.index(x, y);
+            return i >= 0 && this.face[i] === 1;
+        }
+
         /**
-         * @brief Scans from a ramp tile until a non-ramp tile.
+         * @brief Scans from a ramp (or face) tile until a tile without the
+         *        flag.
+         * @param {Uint8Array} [mask] Flag array to scan through (default ramps).
          * @return {{n: number, h: number}|null} Steps taken and height found.
          */
-        _scan(x, y, dx, dy) {
+        _scan(x, y, dx, dy, mask) {
+            const flag = mask || this.ramp;
             let n = 0;
             for (;;) {
                 x += dx;
@@ -708,7 +749,7 @@
                 if (i < 0) {
                     return null;
                 }
-                if (!this.ramp[i]) {
+                if (!flag[i]) {
                     return { n, h: this.base[i] };
                 }
             }
@@ -719,7 +760,11 @@
             const i = this.index(x, y);
             const c = i * 4;
             let nw, ne, se, sw;
-            if (this.ramp[i]) {
+            const faceSlope = this.face[i] ? this._faceSlope(x, y) : null;
+            if (faceSlope) {
+                [nw, ne, se, sw] = faceSlope;
+                this.base[i] = (nw + se) / 2;
+            } else if (this.ramp[i]) {
                 // Slope along whichever axis has the bigger height change.
                 const n = this._scan(x, y, 0, -1);
                 const s = this._scan(x, y, 0, 1);
@@ -754,6 +799,26 @@
         }
 
         /**
+         * @brief Corners of a painted cliff face: a south-facing slope from the
+         *        higher ground behind it (north) down to the ground in front,
+         *        spread evenly over all face rows painted in that column.
+         *        Faces never rise above the cliff top, so they can't hide
+         *        walkable tiles from any camera angle.
+         * @return {number[]|null} [nw, ne, se, sw], or null to stay flat.
+         */
+        _faceSlope(x, y) {
+            const n = this._scan(x, y, 0, -1, this.face);
+            const s = this._scan(x, y, 0, 1, this.face);
+            if (!n || !s || n.h <= s.h) {
+                return null;
+            }
+            const len = n.n + s.n - 1;
+            const top = n.h + ((s.h - n.h) * (n.n - 1)) / len;
+            const bottom = n.h + ((s.h - n.h) * n.n) / len;
+            return [top, top, bottom, bottom];
+        }
+
+        /**
          * @brief Averages corners that meet at a grid vertex when their heights
          *        differ by no more than `threshold`; bigger steps stay cliffs.
          * @param {number} threshold Max difference to blend.
@@ -775,7 +840,7 @@
                     const slots = [];
                     for (const [ox, oy, corner] of around) {
                         const i = this.index(vx + ox, vy + oy);
-                        if (i >= 0 && !this.water[i]) {
+                        if (i >= 0 && !this.water[i] && !this.face[i]) {
                             slots.push(i * 4 + corner);
                         }
                     }
@@ -848,6 +913,31 @@
             const bottom = c[3] + (c[2] - c[3]) * u;
             return top + (bottom - top) * v;
         }
+    }
+
+    /**
+     * @brief Whether a tile shows a cliff face: an A3/A4 wall side, or a B-E
+     *        tile with the cliff terrain tag, on any tile layer.
+     * @param {Game_Map} gameMap The map.
+     * @param {number[]} flags Tileset flags.
+     * @return {boolean} True for cliff faces.
+     */
+    function isCliffFace(gameMap, flags, x, y) {
+        for (let z = 0; z < 4; z++) {
+            const tileId = gameMap.tileId(x, y, z);
+            if (Tilemap.isWallSideTile(tileId)) {
+                return true;
+            }
+            if (
+                CONFIG.cliffTag > 0 &&
+                tileId > 0 &&
+                tileId < Tilemap.TILE_ID_A5 &&
+                flags[tileId] >> 12 === CONFIG.cliffTag
+            ) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** @brief HeightField cache for the current map. */
