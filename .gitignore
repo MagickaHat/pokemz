@@ -1,0 +1,31 @@
+# RPG Maker MZ
+backups/
+Game.exe
+Game.app
+save/
+*.rpgsave
+.rmmz
+config.rpgproject
+*.log
+www/
+deploy/
+output/
+
+# Visual Studio
+.vs/
+*.sln
+
+# Visual Studio Code
+.vscode/
+
+# OS Generated
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# NodeJS
+node_modules/
+server/npm-debug.log*
+server/yarn-debug.log*
+server/error.log*
