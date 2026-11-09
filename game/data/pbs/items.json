@@ -985,6 +985,50 @@
     "price": 100,
     "flingPower": 30
   },
+  "growthmulch": {
+    "num": 95,
+    "name": "Growth Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30,
+    "effect": "mulch",
+    "params": {"growth":0.75,"drying":1.5},
+    "fieldUse": "none"
+  },
+  "dampmulch": {
+    "num": 96,
+    "name": "Damp Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30,
+    "effect": "mulch",
+    "params": {"growth":1.5,"drying":0.5},
+    "fieldUse": "none"
+  },
+  "stablemulch": {
+    "num": 97,
+    "name": "Stable Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30,
+    "effect": "mulch",
+    "params": {"stay":1.5},
+    "fieldUse": "none"
+  },
+  "gooeymulch": {
+    "num": 98,
+    "name": "Gooey Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30,
+    "effect": "mulch",
+    "params": {"regrow":1.5},
+    "fieldUse": "none"
+  },
   "rootfossil": {
     "num": 99,
     "name": "Root Fossil",
@@ -2891,6 +2935,18 @@
     "consumable": false,
     "flags": ["keyitem"]
   },
+  "sprayduck": {
+    "num": 425,
+    "name": "Sprayduck",
+    "description": "A watering can shaped like a Psyduck. It helps promote the healthy growth of any Berries planted in good, soft soil.",
+    "pocket": "key",
+    "price": 0,
+    "effect": "wateringcan",
+    "params": {},
+    "fieldUse": "direct",
+    "consumable": false,
+    "flags": ["keyitem","wateringcan"]
+  },
   "bicycle": {
     "num": 427,
     "name": "Bicycle",
@@ -2911,6 +2967,18 @@
     "price": 0,
     "flingPower": 60,
     "showdown": true
+  },
+  "squirtbottle": {
+    "num": 448,
+    "name": "Squirt Bottle",
+    "description": "A bottle used for watering plants in the Berry Pots.",
+    "pocket": "key",
+    "price": 0,
+    "effect": "wateringcan",
+    "params": {},
+    "fieldUse": "direct",
+    "consumable": false,
+    "flags": ["keyitem","wateringcan"]
   },
   "lureball": {
     "num": 449,
@@ -3010,6 +3078,18 @@
     "effect": "ball",
     "params": {"modifier":1.5},
     "battleUse": "ball"
+  },
+  "wailmerpail": {
+    "num": 529,
+    "name": "Wailmer Pail",
+    "description": "This is a tool for watering Berries you planted to make them grow more quickly.",
+    "pocket": "key",
+    "price": 0,
+    "effect": "wateringcan",
+    "params": {},
+    "fieldUse": "direct",
+    "consumable": false,
+    "flags": ["keyitem","wateringcan"]
   },
   "redorb": {
     "num": 534,
@@ -3594,6 +3674,38 @@
     "flingPower": 80,
     "showdown": true
   },
+  "richmulch": {
+    "num": 691,
+    "name": "Rich Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30
+  },
+  "surprisemulch": {
+    "num": 692,
+    "name": "Surprise Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30
+  },
+  "boostmulch": {
+    "num": 693,
+    "name": "Boost Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30
+  },
+  "amazemulch": {
+    "num": 694,
+    "name": "Amaze Mulch",
+    "description": "A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.",
+    "pocket": "items",
+    "price": 200,
+    "flingPower": 30
+  },
   "gengarite": {
     "num": 695,
     "name": "Gengarite",
@@ -3943,6 +4055,15 @@
     "pocket": "items",
     "price": 200,
     "showdown": true
+  },
+  "megaring": {
+    "num": 739,
+    "name": "Mega Ring",
+    "description": "This ring contains an untold power that somehow enables Pokémon carrying Mega Stones to Mega Evolve in battle.",
+    "pocket": "key",
+    "price": 0,
+    "consumable": false,
+    "flags": ["keyitem"]
   },
   "latiasite": {
     "num": 760,
@@ -4370,6 +4491,139 @@
     "showdown": true,
     "consumable": false
   },
+  "normaliumzheld": {
+    "num": 817,
+    "name": "Normalium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Normal-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "firiumzheld": {
+    "num": 818,
+    "name": "Firium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Fire-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "wateriumzheld": {
+    "num": 819,
+    "name": "Waterium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Water-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "electriumzheld": {
+    "num": 820,
+    "name": "Electrium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Electric-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "grassiumzheld": {
+    "num": 821,
+    "name": "Grassium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Grass-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "iciumzheld": {
+    "num": 822,
+    "name": "Icium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Ice-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "fightiniumzheld": {
+    "num": 823,
+    "name": "Fightinium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Fighting-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "poisoniumzheld": {
+    "num": 824,
+    "name": "Poisonium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Poison-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "groundiumzheld": {
+    "num": 825,
+    "name": "Groundium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Ground-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "flyiniumzheld": {
+    "num": 826,
+    "name": "Flyinium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Flying-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "psychiumzheld": {
+    "num": 827,
+    "name": "Psychium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Psychic-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "buginiumzheld": {
+    "num": 828,
+    "name": "Buginium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Bug-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "rockiumzheld": {
+    "num": 829,
+    "name": "Rockium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Rock-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "ghostiumzheld": {
+    "num": 830,
+    "name": "Ghostium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Ghost-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "dragoniumzheld": {
+    "num": 831,
+    "name": "Dragonium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Dragon-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "darkiniumzheld": {
+    "num": 832,
+    "name": "Darkinium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Dark-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "steeliumzheld": {
+    "num": 833,
+    "name": "Steelium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Steel-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "fairiumzheld": {
+    "num": 834,
+    "name": "Fairium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Fairy-type moves to Z-Moves.",
+    "pocket": "items",
+    "price": 0
+  },
+  "pikaniumzheld": {
+    "num": 835,
+    "name": "Pikanium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Pikachu’s Volt Tackle to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
   "bottlecap": {
     "num": 836,
     "name": "Bottle Cap",
@@ -4395,6 +4649,85 @@
     "price": 10000,
     "flingPower": 30,
     "showdown": true
+  },
+  "zring": {
+    "num": 838,
+    "name": "Z-Ring",
+    "description": "A mysterious ring that enables Pokémon to use Z-Power. It requires both the willpower and the physical power of the Trainer wearing it.",
+    "pocket": "key",
+    "price": 0,
+    "consumable": false,
+    "flags": ["keyitem"]
+  },
+  "decidiumzheld": {
+    "num": 839,
+    "name": "Decidium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Decidueye’s Spirit Shackle to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "inciniumzheld": {
+    "num": 840,
+    "name": "Incinium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Incineroar’s Darkest Lariat to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "primariumzheld": {
+    "num": 841,
+    "name": "Primarium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Primarina’s Sparkling Aria to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "tapuniumzheld": {
+    "num": 842,
+    "name": "Tapunium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades the tapu’s Nature’s Madness to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "marshadiumzheld": {
+    "num": 843,
+    "name": "Marshadium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Marshadow’s Spectral Thief to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "aloraichiumzheld": {
+    "num": 844,
+    "name": "Aloraichium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Alolan Raichu’s Thunderbolt to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "snorliumzheld": {
+    "num": 845,
+    "name": "Snorlium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Snorlax’s Giga Impact to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "eeviumzheld": {
+    "num": 846,
+    "name": "Eevium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Eevee’s Last Resort to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "mewniumzheld": {
+    "num": 847,
+    "name": "Mewnium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades Mew’s Psychic to a Z-Move.",
+    "pocket": "items",
+    "price": 0
+  },
+  "pikashuniumzheld": {
+    "num": 877,
+    "name": "Pikashunium Z",
+    "description": "This is a crystallized form of Z-Power. It upgrades a Thunderbolt by Pikachu in a cap to a Z-Move.",
+    "pocket": "items",
+    "price": 0
   },
   "adrenalineorb": {
     "num": 883,
@@ -5105,6 +5438,15 @@
     "showdown": true,
     "flingPower": 100
   },
+  "dynamaxband": {
+    "num": 1141,
+    "name": "Dynamax Band",
+    "description": "A Wishing Star has been affixed to it. It lets out a light that allows Pokémon to Dynamax when at a Power Spot.",
+    "pocket": "key",
+    "price": 0,
+    "consumable": false,
+    "flags": ["keyitem"]
+  },
   "tr11": {
     "num": 1141,
     "name": "TR11",
@@ -5691,7 +6033,10 @@
     "description": "A candy that is packed with energy. When consumed, it will raise the Dynamax Level of a single Pokémon by one. A higher level means higher HP when Dynamaxed.",
     "pocket": "medicine",
     "price": 0,
-    "flingPower": 30
+    "flingPower": 30,
+    "effect": "dynamaxcandy",
+    "params": {},
+    "fieldUse": "onpokemon"
   },
   "tr57": {
     "num": 1187,
@@ -6315,6 +6660,15 @@
     "price": 0,
     "showdown": true
   },
+  "teraorb": {
+    "num": 1669,
+    "name": "Tera Orb",
+    "description": "",
+    "pocket": "key",
+    "price": 0,
+    "consumable": false,
+    "flags": ["keyitem"]
+  },
   "tinybambooshoot": {"num":1673,"name":"Tiny Bamboo Shoot","description":"","pocket":"treasures","price":375},
   "bigbambooshoot": {"num":1674,"name":"Big Bamboo Shoot","description":"","pocket":"treasures","price":1500},
   "maliciousarmor": {
@@ -6325,6 +6679,186 @@
     "price": 750,
     "showdown": true,
     "flingPower": 30
+  },
+  "normalterashard": {
+    "num": 1678,
+    "name": "Normal Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"normal","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "fireterashard": {
+    "num": 1679,
+    "name": "Fire Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"fire","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "waterterashard": {
+    "num": 1680,
+    "name": "Water Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"water","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "electricterashard": {
+    "num": 1681,
+    "name": "Electric Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"electric","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "grassterashard": {
+    "num": 1682,
+    "name": "Grass Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"grass","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "iceterashard": {
+    "num": 1683,
+    "name": "Ice Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"ice","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "fightingterashard": {
+    "num": 1684,
+    "name": "Fighting Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"fighting","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "poisonterashard": {
+    "num": 1685,
+    "name": "Poison Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"poison","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "groundterashard": {
+    "num": 1686,
+    "name": "Ground Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"ground","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "flyingterashard": {
+    "num": 1687,
+    "name": "Flying Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"flying","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "psychicterashard": {
+    "num": 1688,
+    "name": "Psychic Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"psychic","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "bugterashard": {
+    "num": 1689,
+    "name": "Bug Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"bug","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "rockterashard": {
+    "num": 1690,
+    "name": "Rock Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"rock","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "ghostterashard": {
+    "num": 1691,
+    "name": "Ghost Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"ghost","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "dragonterashard": {
+    "num": 1692,
+    "name": "Dragon Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"dragon","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "darkterashard": {
+    "num": 1693,
+    "name": "Dark Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"dark","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "steelterashard": {
+    "num": 1694,
+    "name": "Steel Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"steel","count":50},
+    "fieldUse": "onpokemon"
+  },
+  "fairyterashard": {
+    "num": 1695,
+    "name": "Fairy Tera Shard",
+    "description": "",
+    "pocket": "items",
+    "price": 500,
+    "effect": "terashard",
+    "params": {"type":"fairy","count":50},
+    "fieldUse": "onpokemon"
   },
   "boosterenergy": {
     "num": 1696,
@@ -7038,5 +7572,14 @@
     "pocket": "items",
     "showdown": true,
     "flingPower": 30
+  },
+  "maxsoup": {
+    "num": 30001,
+    "name": "Max Soup",
+    "description": "A soup made with Max Mushrooms. It gives a Pokémon that can Gigantamax the G-Max Factor, or takes it away.",
+    "pocket": "medicine",
+    "price": 0,
+    "effect": "maxsoup",
+    "fieldUse": "onpokemon"
   }
 }

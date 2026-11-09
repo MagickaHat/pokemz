@@ -244,10 +244,27 @@ const ITEM_CATEGORIES = {
     "bad-held-items": "items", training: "items", plates: "items", "species-specific": "items", "type-enhancement": "items",
     jewels: "items", "mega-stones": "items", memories: "items", scarves: "items",
     collectibles: "treasures", loot: "treasures",
+    "z-crystals": "items", "tera-shard": "items", mulch: "items",
 };
 
 /** @brief Key items imported from PokeAPI's "gameplay" category. */
-const KEY_ITEMS = ["bicycle", "oldrod", "goodrod", "superrod", "townmap"];
+const KEY_ITEMS = [
+    "bicycle", "oldrod", "goodrod", "superrod", "townmap", "megaring", "zring", "dynamaxband", "teraorb",
+    "sprayduck", "wailmerpail", "squirtbottle",
+];
+
+/** @brief Items PokeAPI lacks, written as-is (English source text). */
+const EXTRA_ITEMS = {
+    maxsoup: {
+        num: 30001,
+        name: "Max Soup",
+        description: "A soup made with Max Mushrooms. It gives a Pokémon that can Gigantamax the G-Max Factor, or takes it away.",
+        pocket: "medicine",
+        price: 0,
+        effect: "maxsoup",
+        fieldUse: "onpokemon",
+    },
+};
 
 /**
  * @brief Field behaviour of canon items (Gen 9 values). Effects are the
@@ -284,6 +301,10 @@ const FIELD_ITEMS = {
     leppaberry: ["pp", { pp: 10 }],
     bicycle: ["bicycle", {}], oldrod: ["rod", { type: "oldrod" }], goodrod: ["rod", { type: "goodrod" }],
     superrod: ["rod", { type: "superrod" }], townmap: ["townmap", {}],
+    dynamaxcandy: ["dynamaxcandy", {}],
+    growthmulch: ["mulch", { growth: 0.75, drying: 1.5 }], dampmulch: ["mulch", { growth: 1.5, drying: 0.5 }],
+    stablemulch: ["mulch", { stay: 1.5 }], gooeymulch: ["mulch", { regrow: 1.5 }],
+    sprayduck: ["wateringcan", {}], wailmerpail: ["wateringcan", {}], squirtbottle: ["wateringcan", {}],
 };
 
 /** @brief Catch rate modifiers of balls (Gen 9); special balls use handlers. */
@@ -304,9 +325,9 @@ const GROWTH = { slow: "slow", medium: "mediumfast", fast: "fast", "medium-slow"
 const FLAVORS = { 1: "spicy", 2: "dry", 3: "sweet", 4: "bitter", 5: "sour" };
 const STAT_IDS = { 1: "hp", 2: "atk", 3: "def", 4: "spa", 5: "spd", 6: "spe" };
 
-/** @brief Showdown species that are not imported. */
-const skipSpecies = s =>
-    !s.exists || s.num <= 0 || ["CAP", "Custom", "LGPE", "Future"].includes(s.isNonstandard) || /Gmax|Totem|Eternamax/.test(s.forme || "");
+/** @brief Showdown species that are not imported (Gmax formes are kept as
+ *         battle-only forms). */
+const skipSpecies = s => !s.exists || s.num <= 0 || ["CAP", "Custom", "LGPE", "Future"].includes(s.isNonstandard) || /Totem|Eternamax/.test(s.forme || "");
 
 /**
  * @brief Picks the learnset of the newest generation the species has.
@@ -649,13 +670,24 @@ async function importData(root, o) {
                 items[it.id].flingPower = it.fling.basePower;
             }
         }
+        for (const [id, extra] of Object.entries(EXTRA_ITEMS)) {
+            if (!items[id]) {
+                add(id, Object.assign({}, extra), null);
+            }
+        }
         // Behaviour of canon items.
         for (const [id, item] of Object.entries(items)) {
+            const shard = /^(\w+)terashard$/.exec(id);
+            if (shard && shard[1] !== "stellar") {
+                item.effect = "terashard";
+                item.params = { type: shard[1], count: 50 };
+                item.fieldUse = "onpokemon";
+            }
             const field = FIELD_ITEMS[id];
             if (field) {
                 item.effect = field[0];
                 item.params = field[1];
-                item.fieldUse = ["repel", "escaperope", "bicycle", "rod", "townmap"].includes(field[0]) ? "direct" : "onpokemon";
+                item.fieldUse = ["repel", "escaperope", "bicycle", "rod", "townmap", "wateringcan"].includes(field[0]) ? "direct" : field[0] === "mulch" ? "none" : "onpokemon";
                 if (["heal", "revive", "pp"].includes(field[0])) {
                     item.battleUse = item.pocket === "berries" ? "none" : field[0] === "pp" ? "onmove" : "onpokemon";
                 }
@@ -675,6 +707,9 @@ async function importData(root, o) {
             if (item.pocket === "key") {
                 item.consumable = false;
                 item.flags = ["keyitem"];
+                if (item.effect === "wateringcan") {
+                    item.flags.push("wateringcan");
+                }
             }
             const db = dex.items.get(id);
             if (db.exists && (db.megaStone || db.zMove)) {
@@ -826,8 +861,11 @@ async function importData(root, o) {
                     entry[k] = v;
                 }
             }
-            if (s.battleOnly) {
+            if (s.battleOnly || /Gmax/.test(s.forme)) {
                 entry.battleOnly = true;
+            }
+            if (/Gmax/.test(s.forme)) {
+                entry.flags = ["gigantamax"];
             }
             if (s.requiredItem) {
                 entry.requiredItem = toID(s.requiredItem);
@@ -840,6 +878,27 @@ async function importData(root, o) {
         if (missing.length) {
             console.log(`PokeAPI has no species data for ${missing.length} species (defaults used): ${missing.slice(0, 20).join(", ")}${missing.length > 20 ? "..." : ""}`);
         }
+    }
+
+    // Berry plants (Gen 4 growth data) for every imported berry item.
+    if (want("berries") || want("items")) {
+        const berries = await pokeapi("berries", o.offline);
+        const itemRows = byId(api.items);
+        const itemIds = new Set(Object.keys(out["items.json"] || JSON.parse(fs.readFileSync(path.join(pbsDir, "items.json"), "utf8") || "{}")));
+        const plants = {};
+        for (const b of berries) {
+            const row = itemRows.get(b.item_id);
+            const id = row ? toID(row.identifier) : "";
+            if (!id || !itemIds.has(id)) {
+                continue;
+            }
+            plants[id] = {
+                hoursPerStage: Math.max(1, Number(b.growth_time) || 3),
+                dryingPerHour: Number(b.soil_dryness) || 15,
+                yield: [Math.min(2, Number(b.max_harvest) || 2), Math.max(2, Number(b.max_harvest) || 5)],
+            };
+        }
+        out["berry_plants.json"] = plants;
     }
 
     // Drop references to things that were not imported (e.g. Past items).

@@ -1252,48 +1252,122 @@
     }
 
     //=========================================================================
-    // Battle screen (FRLG inspired)
+    // Battle screen (FRLG inspired; singles, doubles and multi)
     //=========================================================================
 
-    /** @brief A side's HP box. */
-    function BattleBox({ side, info, pokemon }) {
+    const Engine = () => window.PokeMZ.Battle || {};
+
+    /**
+     * @brief Screen position of a battler: "foe0", "foe1", "player0",
+     *        "player1". In multi battles the partner (p3) and the second foe
+     *        (p4) take the second positions.
+     * @param {string} side Side ID.
+     * @param {number} slot Active slot.
+     * @return {string} Position key.
+     */
+    function viewKey(side, slot) {
+        if (side === "p3") {
+            return "player1";
+        }
+        if (side === "p4") {
+            return "foe1";
+        }
+        return `${side === "p1" ? "player" : "foe"}${Math.max(0, slot)}`;
+    }
+
+    /** @brief A battler's HP box. */
+    function BattleBox({ pos, info, compact }) {
         if (!info || info.hidden) {
             return null;
         }
-        return html`<div class=${`pmz-panel pmz-pk-bbox is-${side}`} aria-live="polite">
+        const mine = pos.startsWith("player") && info.side === "p1";
+        return html`<div class=${`pmz-panel pmz-pk-bbox is-${pos} ${compact ? "is-compact" : ""}`} aria-live="polite">
             <div class="pmz-pk-bbox-top">
                 <span class="pmz-pk-name">${info.name}</span>
                 <${Gender} gender=${info.gender} />
                 <${Level} level=${info.level} />
+                ${info.tera ? html`<${TypeBadge} type=${info.tera} />` : null}
             </div>
             <div class="pmz-pk-bbox-hp">
                 <${StatusBadge} status=${info.status} />
-                <${HpBar} hp=${info.hp} max=${info.maxhp} numbers=${side === "player"} />
+                <${HpBar} hp=${info.hp} max=${info.maxhp} numbers=${mine && !compact} />
             </div>
-            ${side === "player" && pokemon ? html`<${ExpBar} pokemon=${pokemon} />` : null}
+            ${mine && info.pokemon && !compact ? html`<${ExpBar} pokemon=${info.pokemon} />` : null}
         </div>`;
+    }
+
+    /** @brief One battler sprite (with form, Dynamax and Tera looks). */
+    function Battler({ pos, info }) {
+        if (!info || info.hidden) {
+            return null;
+        }
+        const back = pos.startsWith("player");
+        const cls = `pmz-pk-battler is-${pos} anim-${info.anim || ""} ${info.dmax ? "is-dynamax" : ""} ${info.tera ? "is-tera" : ""}`;
+        const form = info.formId && info.pokemon && info.formId !== info.pokemon.speciesId;
+        return html`<div class=${cls} key=${`${pos}-${info.token}`}>
+            ${form
+                ? html`<${PokemonImage} speciesId=${info.formId} shiny=${info.pokemon.shiny} view=${back ? "back" : "front"} scale=${2} />`
+                : html`<${PokemonImage} pokemon=${info.pokemon} view=${back ? "back" : "front"} scale=${2} />`}
+        </div>`;
+    }
+
+    /**
+     * @brief Picks a move target (doubles): foes on top, allies below.
+     * @param {Array<{loc, pokemon, side}>} targets Choices from the bridge.
+     * @param {BattleBridge} bridge Bridge.
+     * @return {Promise<number|null>} Target location (null = cancel).
+     */
+    function pickTarget(targets, bridge) {
+        const foes = targets.filter(t => t.loc > 0).sort((a, b) => b.loc - a.loc);
+        const allies = targets.filter(t => t.loc < 0).sort((a, b) => a.loc - b.loc);
+        const list = foes.concat(allies);
+        return modal(done => {
+            function TargetPicker() {
+                const cursor = useCursorList(list.length, { columns: 2, onOk: i => done(list[i].loc), onCancel: () => done(null), priority: 6 });
+                return html`<div class="pmz-pk-target">
+                    <div class="pmz-panel pmz-pk-target-panel" role="listbox" aria-label=${tr("Battle.ChooseTarget", "Choose a target.")}>
+                        <div class="pmz-pk-target-title">${tr("Battle.ChooseTarget", "Choose a target.")}</div>
+                        <div class="pmz-list" style=${{ "--pmz-columns": 2 }} ...${cursor.listProps}>
+                            ${list.map((t, i) => {
+                                const p = bridge.member(t.side, t.pokemon.name);
+                                return html`<div key=${t.loc} role="option" ...${cursor.itemProps(i, t.loc > 0 ? "is-foe" : "is-ally")}>${p ? p.name() : t.pokemon.name}</div>`;
+                            })}
+                        </div>
+                    </div>
+                </div>`;
+            }
+            return html`<${TargetPicker} />`;
+        });
     }
 
     /** @brief The battle screen. Gets {bridge} from PokeMZ.Battle. */
     function BattleScreen({ bridge, close }) {
         UI.useStrings();
-        const [foe, setFoe] = useState(null);
-        const [mine, setMine] = useState(null);
-        const [message, setMessage] = useState(null); // {text, done, frames}
-        const [menu, setMenu] = useState(null); // {kind: "command" | "moves", resolve}
-        const [ball, setBall] = useState(null); // {shakes, caught, key}
-        const [, setTick] = useState(0);
+        const [field, setField] = useState({});
+        const [message, setMessage] = useState(null); // {text, done}
+        const [menu, setMenu] = useState(null); // {kind, slot, ctx, resolve}
+        const [ball, setBall] = useState(null); // {shakes, caught, key, pos}
         const msgFrames = useRef(0);
-        const stateRef = useRef({ foe: null, mine: null });
+        const fieldRef = useRef({});
 
         const wait = frames => UI.wait(frames);
-        const sideInfo = (side, token) => {
+        /** @brief Finds the position of a token (events without a slot). */
+        const posOf = (side, slot, token) => {
+            if (slot >= 0 || side === "p3" || side === "p4") {
+                return viewKey(side, slot);
+            }
+            const found = Object.keys(fieldRef.current).find(k => fieldRef.current[k] && fieldRef.current[k].side === side && fieldRef.current[k].token === token);
+            return found || viewKey(side, 0);
+        };
+        const simOf = (side, token) => bridge.battle[side].pokemon.find(x => x.name === token);
+        const infoFor = (side, token) => {
             const p = bridge.member(side, token);
-            const sp = bridge.battle[side].pokemon.find(x => x.name === token);
+            const sp = simOf(side, token);
             return {
+                side,
                 token,
                 pokemon: p,
-                speciesId: p ? p.speciesId : "",
+                formId: sp ? sp.species.id : p ? p.speciesId : "",
                 name: p ? p.name() : token,
                 level: sp ? sp.level : p ? p.level : 1,
                 gender: p ? p.gender : "",
@@ -1303,11 +1377,16 @@
                 anim: "enter",
             };
         };
-        const update = (side, patch) => {
-            const key = side === "p1" ? "mine" : "foe";
-            const next = Object.assign({}, stateRef.current[key], patch);
-            stateRef.current[key] = next;
-            (side === "p1" ? setMine : setFoe)(next);
+        const update = (pos, patch) => {
+            const next = Object.assign({}, fieldRef.current[pos], patch);
+            fieldRef.current = Object.assign({}, fieldRef.current, { [pos]: next });
+            setField(fieldRef.current);
+        };
+        const refreshHp = (pos, side, token) => {
+            const sp = simOf(side, token);
+            if (sp) {
+                update(pos, { hp: sp.hp, maxhp: sp.maxhp, level: sp.level });
+            }
         };
 
         const presenter = useMemo(
@@ -1323,56 +1402,78 @@
                     });
                 },
                 async show(ev) {
+                    const pos = ev.side ? posOf(ev.side, ev.slot, ev.token) : "";
                     switch (ev.type) {
                         case "switch":
-                            update(ev.side, sideInfo(ev.side, ev.token));
+                            update(pos, infoFor(ev.side, ev.token));
                             if (ev.side === "p1") {
                                 SoundManager.playOk();
                             }
                             break;
                         case "damage":
                         case "heal":
-                        case "sethp": {
-                            const sp = bridge.battle[ev.side].pokemon.find(x => x.name === ev.token);
-                            update(ev.side, { hp: sp ? sp.hp : ev.hp, maxhp: sp ? sp.maxhp : ev.maxhp, anim: ev.type === "damage" && !ev.from ? "hit" : "" });
+                        case "sethp":
+                            refreshHp(pos, ev.side, ev.token);
+                            update(pos, { anim: ev.type === "damage" && !ev.from ? "hit" : "" });
                             if (ev.type === "damage" && !ev.from) {
                                 SoundManager.playEnemyDamage();
                             }
                             await wait(24);
                             break;
-                        }
                         case "faint":
-                            update(ev.side, { anim: "faint", hp: 0 });
+                            update(pos, { anim: "faint", hp: 0 });
                             SoundManager.playEnemyCollapse();
                             await wait(30);
                             break;
                         case "status":
-                            update(ev.side, { status: ev.status });
+                            update(pos, { status: ev.status });
                             break;
                         case "curestatus":
-                            update(ev.side, { status: "" });
+                            update(pos, { status: "" });
+                            break;
+                        case "detailschange":
+                        case "formechange":
+                            update(pos, { formId: ev.species, anim: "" });
+                            refreshHp(pos, ev.side, ev.token);
+                            SoundManager.playRecovery();
+                            await wait(20);
+                            break;
+                        case "terastallize":
+                            update(pos, { tera: ev.teraType });
+                            SoundManager.playRecovery();
+                            break;
+                        case "start":
+                        case "end":
+                            if (ev.effect === "dynamax") {
+                                update(pos, { dmax: ev.type === "start" });
+                                refreshHp(pos, ev.side, ev.token);
+                                await wait(20);
+                            }
                             break;
                         default:
                             break;
                     }
-                    const text = bridge.format(ev);
+                    const text = bridge.formatText(ev);
                     if (text) {
                         await this.say(text);
                     }
                     if (ev.type === "faint") {
-                        update(ev.side, { hidden: true });
+                        update(pos, { hidden: true });
                     }
                 },
-                chooseAction() {
-                    return new Promise(resolve => setMenu({ kind: "command", resolve }));
+                chooseAction(b, slot = 0, ctx = {}) {
+                    return new Promise(resolve => setMenu({ kind: "command", slot, ctx, resolve }));
                 },
-                async chooseSwitch(b, forced) {
+                async chooseSwitch(b, forced, o = {}) {
+                    const taken = o.taken || new Set();
                     for (;;) {
-                        const active = b.active("p1");
                         const p = await pickPokemon({
                             list: $gameParty.pokemon(),
                             help: forced ? tr("Battle.ChooseNext", "Choose a Pokémon to send out.") : tr("Party.Choose", "Choose a Pokémon."),
-                            filter: x => x.isAble() && !(active && b.member("p1", active.name) === x && !active.fainted) && !!b.simOf(x) && !b.simOf(x).fainted,
+                            filter: x => {
+                                const sp = b.simOf(x);
+                                return x.isAble() && !!sp && !sp.fainted && !sp.isActive && !taken.has(b.battle.p1.pokemon.indexOf(sp));
+                            },
                             cancel: !forced,
                         });
                         if (p || !forced) {
@@ -1382,17 +1483,15 @@
                 },
                 chooseMoveSlot: (p, prompt) => pickMove(p, { title: prompt }),
                 refresh(b) {
-                    const active = b.active("p1");
-                    if (active) {
-                        update("p1", { level: active.level, hp: active.hp, maxhp: active.maxhp });
-                    }
-                    setTick(t => t + 1);
+                    b.battle.p1.active.forEach((sp, slot) => sp && refreshHp(viewKey("p1", slot), "p1", sp.name));
                 },
                 async ballShakes(shakes, caught) {
-                    setBall({ shakes, caught, key: Date.now() });
+                    const target = bridge.foesOf("p1")[0];
+                    const pos = target ? posOf(target.side.id, target.position, target.name) : "foe0";
+                    setBall({ shakes, caught, key: Date.now(), pos });
                     await wait(30 + shakes * 36 + 20);
                     if (caught) {
-                        update("p2", { hidden: true });
+                        update(pos, { hidden: true });
                     } else {
                         setBall(null);
                     }
@@ -1443,38 +1542,35 @@
             { enabled: !!message, priority: 1 }
         );
 
-        const activeMine = mine && mine.pokemon;
-        return html`<div class="pmz-pk-battle" role="application" aria-label=${tr("Battle.Title", "Battle")}>
+        const doubles = bridge.format !== "singles";
+        const positions = doubles ? ["foe1", "foe0", "player1", "player0"] : ["foe0", "player0"];
+        const resolve = a => {
+            const m = menu;
+            setMenu(null);
+            m.resolve(a);
+        };
+        return html`<div class=${`pmz-pk-battle ${doubles ? "is-doubles" : "is-singles"}`} role="application" aria-label=${tr("Battle.Title", "Battle")}>
             <div class="pmz-pk-battle-field">
                 <div class="pmz-pk-platform is-foe"></div>
                 <div class="pmz-pk-platform is-player"></div>
-                ${foe && !foe.hidden
-                    ? html`<div class=${`pmz-pk-battler is-foe anim-${foe.anim || ""}`} key=${`f-${foe.token}`}>
-                          <${PokemonImage} pokemon=${foe.pokemon} view="front" scale=${2} />
-                      </div>`
-                    : null}
-                ${mine && !mine.hidden
-                    ? html`<div class=${`pmz-pk-battler is-player anim-${mine.anim || ""}`} key=${`p-${mine.token}`}>
-                          <${PokemonImage} pokemon=${mine.pokemon} view="back" scale=${2} />
-                      </div>`
-                    : null}
-                ${ball ? html`<div key=${ball.key} class=${`pmz-pk-ball shakes-${ball.shakes} ${ball.caught ? "is-caught" : ""}`} aria-hidden="true"></div>` : null}
-                <${BattleBox} side="foe" info=${foe} />
-                <${BattleBox} side="player" info=${mine} pokemon=${activeMine} />
+                ${positions.map(pos => html`<${Battler} key=${pos} pos=${pos} info=${field[pos]} />`)}
+                ${ball ? html`<div key=${ball.key} class=${`pmz-pk-ball at-${ball.pos} shakes-${ball.shakes} ${ball.caught ? "is-caught" : ""}`} aria-hidden="true"></div>` : null}
+                ${positions.map(pos => html`<${BattleBox} key=${`b-${pos}`} pos=${pos} info=${field[pos]} compact=${doubles} />`)}
             </div>
             <div class="pmz-pk-battle-bottom">
                 ${menu && !message
                     ? menu.kind === "moves"
-                        ? html`<${MoveMenu} bridge=${bridge} back=${() => setMenu(Object.assign({}, menu, { kind: "command" }))} pick=${a => (setMenu(null), menu.resolve(a))} />`
-                        : html`<${CommandMenu} bridge=${bridge} menu=${menu} setMenu=${setMenu} />`
+                        ? html`<${MoveMenu} bridge=${bridge} menu=${menu} back=${() => setMenu(Object.assign({}, menu, { kind: "command" }))} pick=${resolve} />`
+                        : html`<${CommandMenu} bridge=${bridge} menu=${menu} setMenu=${setMenu} pick=${resolve} />`
                     : html`<div class="pmz-panel pmz-pk-battle-msg" aria-live="assertive"><span>${message ? message.text : ""}</span></div>`}
             </div>
         </div>`;
     }
 
-    /** @brief FIGHT / BAG / POKéMON / RUN. */
-    function CommandMenu({ bridge, menu, setMenu }) {
-        const active = bridge.active("p1");
+    /** @brief FIGHT / BAG / POKéMON / RUN for one active slot. */
+    function CommandMenu({ bridge, menu, setMenu, pick }) {
+        const slot = menu.slot || 0;
+        const active = bridge.active("p1", slot);
         const p = active ? bridge.member("p1", active.name) : null;
         const items = [
             { label: tr("Battle.Cmd.Fight", "FIGHT"), value: "fight" },
@@ -1489,8 +1585,7 @@
                 return;
             }
             if (value === "run") {
-                setMenu(null);
-                menu.resolve({ type: "run" });
+                pick({ type: "run" });
                 return;
             }
             setBusy(true);
@@ -1516,20 +1611,23 @@
                             return;
                         }
                     }
-                    setMenu(null);
-                    menu.resolve({ type: "item", item: id, target });
+                    pick({ type: "item", item: id, target });
                 } else if (value === "pokemon") {
-                    const pk = await bridge.presenter.chooseSwitch(bridge, false);
+                    const pk = await bridge.presenter.chooseSwitch(bridge, false, { slot, taken: menu.ctx && menu.ctx.taken });
                     if (pk) {
-                        setMenu(null);
-                        menu.resolve({ type: "switch", pokemon: pk });
+                        pick({ type: "switch", pokemon: pk });
                     }
                 }
             } finally {
                 setBusy(false);
             }
         };
-        const cursor = useCursorList(items.length, { columns: 2, onOk: i => choose(items[i].value), priority: busy ? -1 : 2 });
+        const cursor = useCursorList(items.length, {
+            columns: 2,
+            onOk: i => choose(items[i].value),
+            onCancel: slot > 0 ? () => pick({ type: "back" }) : undefined,
+            priority: busy ? -1 : 2,
+        });
         return html`<div class="pmz-pk-battle-cmd">
             <div class="pmz-panel pmz-pk-battle-msg"><span>${tr("Battle.WhatWillDo", "What will {pokemon} do?", { pokemon: p ? p.name() : "" })}</span></div>
             <div class="pmz-panel pmz-pk-battle-commands">
@@ -1540,37 +1638,119 @@
         </div>`;
     }
 
-    /** @brief The move menu with the PP / TYPE panel. */
-    function MoveMenu({ bridge, back, pick }) {
-        const active = bridge.active("p1");
+    /** @brief Key item each gimmick needs. */
+    const GIMMICK_ITEMS = { mega: "megaring", zmove: "zring", dynamax: "dynamaxband", terastallize: "teraorb" };
+
+    /**
+     * @return {Array<string>} Gimmicks the player may use for a slot now.
+     */
+    function gimmicksFor(slotReq, ctx) {
+        if (ctx && ctx.gimmickUsed) {
+            return [];
+        }
+        const bag = $gameParty.bag();
+        const out = [];
+        const has = g => bag.count(GIMMICK_ITEMS[g]) > 0;
+        if (slotReq.canMegaEvo && has("mega")) {
+            out.push("mega");
+        }
+        if (slotReq.canZMove && has("zmove")) {
+            out.push("zmove");
+        }
+        if (slotReq.canDynamax && has("dynamax")) {
+            out.push("dynamax");
+        }
+        if (slotReq.canTerastallize && has("terastallize") && $gamePokemon.teraCharged !== false) {
+            out.push("terastallize");
+        }
+        return out;
+    }
+
+    /** @brief The move menu with the PP / TYPE panel and gimmick toggle. */
+    function MoveMenu({ bridge, menu, back, pick }) {
+        const slot = menu.slot || 0;
         const req = bridge.battle.p1.activeRequest;
-        const moves = ((req && req.active && req.active[0] && req.active[0].moves) || []).filter(m => m.id !== Engine().ACTION_MOVE);
+        const slotReq = (req && req.active && req.active[slot]) || { moves: [] };
+        const moves = slotReq.moves.filter(m => m.id !== Engine().ACTION_MOVE);
+        const gimmicks = gimmicksFor(slotReq, menu.ctx);
+        const [gimmick, setGimmick] = useState("");
         const [sel, setSel] = useState(0);
+        const [busy, setBusy] = useState(false);
+        const labelOf = (m, i) => {
+            if (gimmick === "zmove" && slotReq.canZMove) {
+                const z = slotReq.canZMove[i];
+                return z ? z.move : m.move;
+            }
+            if (gimmick === "dynamax" && slotReq.maxMoves) {
+                const mx = slotReq.maxMoves.maxMoves[i];
+                return mx ? (PBS.moves.tryGet(mx.move) || { name: mx.move }).name : m.move;
+            }
+            return (PBS.moves.tryGet(m.id) || { name: m.move }).name;
+        };
+        const targetOf = i => {
+            if (gimmick === "zmove" && slotReq.canZMove && slotReq.canZMove[i]) {
+                return slotReq.canZMove[i].target;
+            }
+            if (gimmick === "dynamax" && slotReq.maxMoves && slotReq.maxMoves.maxMoves[i]) {
+                return slotReq.maxMoves.maxMoves[i].target;
+            }
+            return moves[i].target;
+        };
+        const choose = async i => {
+            setBusy(true);
+            try {
+                let target = null;
+                const targets = bridge.targetsFor(slot, targetOf(i));
+                if (targets) {
+                    target = await pickTarget(targets, bridge);
+                    if (target === null) {
+                        return;
+                    }
+                }
+                pick({ type: "move", slot: i, target, gimmick });
+            } finally {
+                setBusy(false);
+            }
+        };
+        const cycleGimmick = () => {
+            if (!gimmicks.length) {
+                SoundManager.playBuzzer();
+                return;
+            }
+            SoundManager.playCursor();
+            const order = [""].concat(gimmicks);
+            setGimmick(order[(order.indexOf(gimmick) + 1) % order.length]);
+        };
         const cursor = useCursorList(moves.length, {
             columns: 2,
-            onOk: i => pick({ type: "move", slot: i }),
+            onOk: choose,
             onCancel: back,
             onChange: setSel,
-            isEnabled: i => !moves[i].disabled && moves[i].pp > 0,
-            priority: 2,
+            isEnabled: i => !moves[i].disabled && moves[i].pp > 0 && (gimmick !== "zmove" || !!(slotReq.canZMove && slotReq.canZMove[i])),
+            handlers: { shift: cycleGimmick },
+            priority: busy ? -1 : 2,
         });
         const m = moves[sel];
         const data = m ? PBS.moves.tryGet(m.id) : null;
+        const gLabel = g => tr(`Battle.Gimmick.${g}`, { mega: "MEGA", zmove: "Z-MOVE", dynamax: "DYNAMAX", terastallize: "TERA" }[g]);
         return html`<div class="pmz-pk-battle-moves">
             <div class="pmz-panel pmz-pk-battle-movelist">
                 <div class="pmz-list" role="menu" style=${{ "--pmz-columns": 2 }} ...${cursor.listProps}>
-                    ${moves.map((mv, i) => html`<div key=${mv.id} role="menuitem" ...${cursor.itemProps(i)}>${(PBS.moves.tryGet(mv.id) || { name: mv.move }).name}</div>`)}
+                    ${moves.map((mv, i) => html`<div key=${mv.id} role="menuitem" ...${cursor.itemProps(i)}>${labelOf(mv, i)}</div>`)}
                 </div>
             </div>
             <div class="pmz-panel pmz-pk-battle-moveinfo">
                 <div>${tr("Pkmn.PP", "PP")} ${m ? `${m.pp}/${m.maxpp}` : ""}</div>
                 <div>${tr("Battle.TypeLabel", "TYPE/")}${data ? html`<${TypeBadge} type=${data.type} />` : null}</div>
+                ${gimmicks.length
+                    ? html`<${Button} class=${`pmz-pk-gimmick ${gimmick ? "is-on" : ""}`} onPress=${cycleGimmick} sound="">
+                          ${gimmick ? gLabel(gimmick) : tr("Battle.Gimmick.Off", "Shift: {g}", { g: gimmicks.map(gLabel).join(" / ") })}
+                      <//>`
+                    : null}
             </div>
             <${BackButton} onPress=${back} class="pmz-pk-battle-back" />
         </div>`;
     }
-
-    const Engine = () => window.PokeMZ.Battle || {};
 
     //=========================================================================
     // Registration
@@ -1591,6 +1771,7 @@
         pickMove,
         pickCommand,
         showSummary,
+        pickTarget,
         components: { PokemonImage, PokemonIcon, HpBar, ExpBar, TypeBadge, Gender, StatusBadge, PartyView, BagView, SummaryView },
     };
 })();

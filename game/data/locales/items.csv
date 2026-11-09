@@ -1587,3 +1587,129 @@ Item.przcureberry.Name,PRZ Cure Berry,,,,,
 Item.przcureberry.Description,(Gen 2) Holder cures itself if it is paralyzed. Single use.,,,,,
 Item.psncureberry.Name,PSN Cure Berry,,,,,
 Item.psncureberry.Description,(Gen 2) Holder is cured if it is poisoned. Single use.,,,,,
+Item.growthmulch.Name,Growth Mulch,Abono Rápido,Abono Rápido,,,Fertipousse
+Item.growthmulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.dampmulch.Name,Damp Mulch,Abono Lento,Abono Lento,,,Fertihumide
+Item.dampmulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.stablemulch.Name,Stable Mulch,Abono Fijador,Abono Fijador,,,Fertistable
+Item.stablemulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.gooeymulch.Name,Gooey Mulch,Abono Brote,Abono Brote,,,Fertiglu
+Item.gooeymulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.sprayduck.Name,Sprayduck,Psydugadera,Psydugadera,,,Kwakarrosoir
+Item.sprayduck.Description,"A watering can shaped like a Psyduck. It helps promote the healthy growth of any Berries planted in good, soft soil.",Una regadera con forma de Psyduck. Ayuda a que las bayas plantadas en suelo fértil crezcan mejor.,Una regadera con forma de Psyduck. Ayuda a que las bayas plantadas en suelo fértil crezcan mejor.,,,Un arrosoir en forme de Psykokwak. Aide à la croissance des Baies plantées dans les sols meubles.
+Item.squirtbottle.Name,Squirt Bottle,Regadera,Regadera,,,Carapuce à O
+Item.squirtbottle.Description,A bottle used for watering plants in the Berry Pots.,Objeto que contiene agua y se usa para regar las bayas del Plantabayas.,Objeto que contiene agua y se usa para regar las bayas del Plantabayas.,,,Un arrosoir qui permet de faire croître rapidement les Baies plantées dans le Plante-Baies.
+Item.wailmerpail.Name,Wailmer Pail,Wailmegadera,Wailmegadera,,,Wailmerrosoir
+Item.wailmerpail.Description,This is a tool for watering Berries you planted to make them grow more quickly.,Regadera con forma de Wailmer. Muy útil para que crezcan las bayas plantadas.,Regadera con forma de Wailmer. Muy útil para que crezcan las bayas plantadas.,,,Sert à arroser les Baies plantées dans le sol.
+Item.richmulch.Name,Rich Mulch,Abono Fértil,Abono Fértil,,,Fertibondance
+Item.richmulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.surprisemulch.Name,Surprise Mulch,Abono Sorpresa,Abono Sorpresa,,,Fertistantané
+Item.surprisemulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.boostmulch.Name,Boost Mulch,Abono Fructífero,Abono Fructífero,,,Fertibérance
+Item.boostmulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.amazemulch.Name,Amaze Mulch,Abono Insólito,Abono Insólito,,,Fertiprodige
+Item.amazemulch.Description,"A fertilizer for growing Berries. However, it appears to be unsuitable for the soil in the Hoenn region and has no effect.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.","Un fertilizante usado para el cultivo de bayas. Parece que no se asienta bien en el suelo de Hoenn, por lo que no tiene efecto en esta región.",,,Un engrais à utiliser sur un sol meuble. Il n’est cependant pas adapté aux terres de Hoenn et n’y a aucun effet.
+Item.megaring.Name,Mega Ring,Mega-Aro,Mega-Aro,,,Méga-Anneau
+Item.megaring.Description,This ring contains an untold power that somehow enables Pokémon carrying Mega Stones to Mega Evolve in battle.,Accesorio con un poder misterioso que permite megaevolucionar a Pokémon que lleven la Megapiedra adecuada.,Accesorio con un poder misterioso que permite megaevolucionar a Pokémon que lleven la Megapiedra adecuada.,,,Un anneau aux pouvoirs mystérieux permettant à un Pokémon de méga-évoluer au combat s’il tient la bonne Méga-Gemme.
+Item.normaliumzheld.Name,Normalium Z,Normastal Z,Normastal Z,,,Normazélite
+Item.normaliumzheld.Description,This is a crystallized form of Z-Power. It upgrades Normal-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Normal.,Cristal que confiere el Poder Z a los movimientos de tipo Normal.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Normal en capacité Z."
+Item.firiumzheld.Name,Firium Z,Pirostal Z,Pirostal Z,,,Pyrozélite
+Item.firiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Fire-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Fuego.,Cristal que confiere el Poder Z a los movimientos de tipo Fuego.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Feu en capacité Z."
+Item.wateriumzheld.Name,Waterium Z,Hidrostal Z,Hidrostal Z,,,Aquazélite
+Item.wateriumzheld.Description,This is a crystallized form of Z-Power. It upgrades Water-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Agua.,Cristal que confiere el Poder Z a los movimientos de tipo Agua.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Eau en capacité Z."
+Item.electriumzheld.Name,Electrium Z,Electrostal Z,Electrostal Z,,,Voltazélite
+Item.electriumzheld.Description,This is a crystallized form of Z-Power. It upgrades Electric-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Eléctrico.,Cristal que confiere el Poder Z a los movimientos de tipo Eléctrico.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Électrik en capacité Z."
+Item.grassiumzheld.Name,Grassium Z,Fitostal Z,Fitostal Z,,,Florazélite
+Item.grassiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Grass-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Planta.,Cristal que confiere el Poder Z a los movimientos de tipo Planta.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Plante en capacité Z."
+Item.iciumzheld.Name,Icium Z,Criostal Z,Criostal Z,,,Cryozélite
+Item.iciumzheld.Description,This is a crystallized form of Z-Power. It upgrades Ice-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Hielo.,Cristal que confiere el Poder Z a los movimientos de tipo Hielo.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Glace en capacité Z."
+Item.fightiniumzheld.Name,Fightinium Z,Lizastal Z,Lizastal Z,,,Combazélite
+Item.fightiniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Fighting-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Lucha.,Cristal que confiere el Poder Z a los movimientos de tipo Lucha.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Combat en capacité Z."
+Item.poisoniumzheld.Name,Poisonium Z,Toxistal Z,Toxistal Z,,,Toxizélite
+Item.poisoniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Poison-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Veneno.,Cristal que confiere el Poder Z a los movimientos de tipo Veneno.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Poison en capacité Z."
+Item.groundiumzheld.Name,Groundium Z,Geostal Z,Geostal Z,,,Terrazélite
+Item.groundiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Ground-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Tierra.,Cristal que confiere el Poder Z a los movimientos de tipo Tierra.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Sol en capacité Z."
+Item.flyiniumzheld.Name,Flyinium Z,Aerostal Z,Aerostal Z,,,Aérozélite
+Item.flyiniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Flying-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Volador.,Cristal que confiere el Poder Z a los movimientos de tipo Volador.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Vol en capacité Z."
+Item.psychiumzheld.Name,Psychium Z,Psicostal Z,Psicostal Z,,,Psychézélite
+Item.psychiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Psychic-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Psíquico.,Cristal que confiere el Poder Z a los movimientos de tipo Psíquico.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Psy en capacité Z."
+Item.buginiumzheld.Name,Buginium Z,Insectostal Z,Insectostal Z,,,Insectozélite
+Item.buginiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Bug-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Bicho.,Cristal que confiere el Poder Z a los movimientos de tipo Bicho.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Insecte en capacité Z."
+Item.rockiumzheld.Name,Rockium Z,Litostal Z,Litostal Z,,,Rocazélite
+Item.rockiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Rock-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Roca.,Cristal que confiere el Poder Z a los movimientos de tipo Roca.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Roche en capacité Z."
+Item.ghostiumzheld.Name,Ghostium Z,Espectrostal Z,Espectrostal Z,,,Spectrozélite
+Item.ghostiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Ghost-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Fantasma.,Cristal que confiere el Poder Z a los movimientos de tipo Fantasma.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Spectre en capacité Z."
+Item.dragoniumzheld.Name,Dragonium Z,Dracostal Z,Dracostal Z,,,Dracozélite
+Item.dragoniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Dragon-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Dragón.,Cristal que confiere el Poder Z a los movimientos de tipo Dragón.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Dragon en capacité Z."
+Item.darkiniumzheld.Name,Darkinium Z,Nictostal Z,Nictostal Z,,,Ténébrozélite
+Item.darkiniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Dark-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Siniestro.,Cristal que confiere el Poder Z a los movimientos de tipo Siniestro.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Ténèbres en capacité Z."
+Item.steeliumzheld.Name,Steelium Z,Metalostal Z,Metalostal Z,,,Métallozélite
+Item.steeliumzheld.Description,This is a crystallized form of Z-Power. It upgrades Steel-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Acero.,Cristal que confiere el Poder Z a los movimientos de tipo Acero.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Acier en capacité Z."
+Item.fairiumzheld.Name,Fairium Z,Feeristal Z,Feeristal Z,,,Nymphézélite
+Item.fairiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Fairy-type moves to Z-Moves.,Cristal que confiere el Poder Z a los movimientos de tipo Hada.,Cristal que confiere el Poder Z a los movimientos de tipo Hada.,,,"Une cristallisation de la Force Z, permettant de transformer les capacités de type Fée en capacité Z."
+Item.pikaniumzheld.Name,Pikanium Z,Pikastal Z,Pikastal Z,,,Pikazélite
+Item.pikaniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Pikachu’s Volt Tackle to a Z-Move.,Cristal que confiere el Poder Z al movimiento Placaje Eléctrico de Pikachu.,Cristal que confiere el Poder Z al movimiento Placaje Eléctrico de Pikachu.,,,"Une cristallisation de la Force Z, permettant de transformer l’Électacle d’un Pikachu en capacité Z."
+Item.zring.Name,Z-Ring,Pulsera Z,Pulsera Z,,,Bracelet Z
+Item.zring.Description,A mysterious ring that enables Pokémon to use Z-Power. It requires both the willpower and the physical power of the Trainer wearing it.,"Misteriosa pulsera que transmite la fuerza física y mental del Entrenador a sus Pokémon, lo que les permite usar movimientos Z.","Misteriosa pulsera que transmite la fuerza física y mental del Entrenador a sus Pokémon, lo que les permite usar movimientos Z.",,,Un bracelet mystérieux utilisant la force vitale du Dresseur pour permettre à ses Pokémon d’utiliser la Force Z.
+Item.decidiumzheld.Name,Decidium Z,Dueyestal Z,Dueyestal Z,,,Archézélite
+Item.decidiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Decidueye’s Spirit Shackle to a Z-Move.,Cristal que confiere el Poder Z al movimiento Puntada Sombría de Decidueye.,Cristal que confiere el Poder Z al movimiento Puntada Sombría de Decidueye.,,,"Une cristallisation de la Force Z, permettant de transformer le Tisse Ombre d’un Archéduc en capacité Z."
+Item.inciniumzheld.Name,Incinium Z,Incinostal Z,Incinostal Z,,,Félinozélite
+Item.inciniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Incineroar’s Darkest Lariat to a Z-Move.,Cristal que confiere el Poder Z al movimiento Lariat Oscuro de Incineroar.,Cristal que confiere el Poder Z al movimiento Lariat Oscuro de Incineroar.,,,"Une cristallisation de la Force Z, permettant de transformer le Dark Lariat d’un Félinferno en capacité Z."
+Item.primariumzheld.Name,Primarium Z,Primastal Z,Primastal Z,,,Oratozélite
+Item.primariumzheld.Description,This is a crystallized form of Z-Power. It upgrades Primarina’s Sparkling Aria to a Z-Move.,Cristal que confiere el Poder Z al movimiento Aria Burbuja de Primarina.,Cristal que confiere el Poder Z al movimiento Aria Burbuja de Primarina.,,,"Une cristallisation de la Force Z, permettant de transformer l’Aria de l’Écume d’un Oratoria en capacité Z."
+Item.tapuniumzheld.Name,Tapunium Z,Tapistal Z,Tapistal Z,,,Tokozélite
+Item.tapuniumzheld.Description,This is a crystallized form of Z-Power. It upgrades the tapu’s Nature’s Madness to a Z-Move.,Cristal que confiere el Poder Z al movimiento Furia Natural de los Tapu.,Cristal que confiere el Poder Z al movimiento Furia Natural de los Tapu.,,,"Une cristallisation de la Force Z, permettant de transformer l’Ire de la Nature d’un Toko en capacité Z."
+Item.marshadiumzheld.Name,Marshadium Z,Marshastal Z,Marshastal Z,,,Marshadozélite
+Item.marshadiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Marshadow’s Spectral Thief to a Z-Move.,Cristal que confiere el Poder Z al movimiento Robasombra de Marshadow.,Cristal que confiere el Poder Z al movimiento Robasombra de Marshadow.,,,"Une cristallisation de la Force Z, permettant de transformer le Clepto-Mânes de Marshadow en capacité Z."
+Item.aloraichiumzheld.Name,Aloraichium Z,Alo-Raistal Z,Alo-Raistal Z,,,Aloraïzélite
+Item.aloraichiumzheld.Description,This is a crystallized form of Z-Power. It upgrades Alolan Raichu’s Thunderbolt to a Z-Move.,Cristal que confiere el Poder Z al movimiento Rayo de los Raichu de Alola.,Cristal que confiere el Poder Z al movimiento Rayo de los Raichu de Alola.,,,"Une cristallisation de la Force Z, permettant de transformer le Tonnerre d’un Raichu de la région d’Alola en capacité Z."
+Item.snorliumzheld.Name,Snorlium Z,Snorlastal Z,Snorlastal Z,,,Ronflézélite
+Item.snorliumzheld.Description,This is a crystallized form of Z-Power. It upgrades Snorlax’s Giga Impact to a Z-Move.,Cristal que confiere el Poder Z al movimiento Gigaimpacto de Snorlax.,Cristal que confiere el Poder Z al movimiento Gigaimpacto de Snorlax.,,,"Une cristallisation de la Force Z, permettant de transformer le Giga Impact d’un Ronflex en capacité Z."
+Item.eeviumzheld.Name,Eevium Z,Eeveestal Z,Eeveestal Z,,,Évolizélite
+Item.eeviumzheld.Description,This is a crystallized form of Z-Power. It upgrades Eevee’s Last Resort to a Z-Move.,Cristal que confiere el Poder Z al movimiento Última Baza de Eevee.,Cristal que confiere el Poder Z al movimiento Última Baza de Eevee.,,,"Une cristallisation de la Force Z, permettant de transformer le Dernier Recours d’un Évoli en capacité Z."
+Item.mewniumzheld.Name,Mewnium Z,Mewstal Z,Mewstal Z,,,Mewzélite
+Item.mewniumzheld.Description,This is a crystallized form of Z-Power. It upgrades Mew’s Psychic to a Z-Move.,Cristal que confiere el Poder Z al movimiento Psíquico de Mew.,Cristal que confiere el Poder Z al movimiento Psíquico de Mew.,,,"Une cristallisation de la Force Z, permettant de transformer le Psyko de Mew en capacité Z."
+Item.pikashuniumzheld.Name,Pikashunium Z,Ash-Pikastal Z,Ash-Pikastal Z,,,Pikachazélite
+Item.pikashuniumzheld.Description,This is a crystallized form of Z-Power. It upgrades a Thunderbolt by Pikachu in a cap to a Z-Move.,Cristal que confiere el Poder Z al movimiento Rayo de los Pikachu que llevan gorra.,Cristal que confiere el Poder Z al movimiento Rayo de los Pikachu que llevan gorra.,,,"Une cristallisation de la Force Z, permettant de transformer le Tonnerre du Pikachu à casquette en capacité Z."
+Item.dynamaxband.Name,Dynamax Band,Maximuñequera,Maximuñequera,,,Poignet Dynamax
+Item.dynamaxband.Description,A Wishing Star has been affixed to it. It lets out a light that allows Pokémon to Dynamax when at a Power Spot.,"Si lleva engarzada una Estrella Deseo y el portador se halla junto a un nodo energético, reacciona emitiendo una luz y permite dinamaxizar Pokémon.","Si lleva engarzada una Estrella Deseo y el portador se halla junto a un nodo energético, reacciona emitiendo una luz y permite dinamaxizar Pokémon.",,,"Quand elle se trouve près d’une Source d’Énergie, l’Étoile Vœu sertie dans ce poignet brille, ce qui permet de donner à un Pokémon sa forme Dynamax."
+Item.teraorb.Name,Tera Orb,Orbe Teracristal,,,,Orbe Téracristal
+Item.teraorb.Description,,,,,,
+Item.normalterashard.Name,Normal Tera Shard,Teralito Normal,,,,Téra-Éclat Normal
+Item.normalterashard.Description,,,,,,
+Item.fireterashard.Name,Fire Tera Shard,Teralito Fuego,,,,Téra-Éclat Feu
+Item.fireterashard.Description,,,,,,
+Item.waterterashard.Name,Water Tera Shard,Teralito Agua,,,,Téra-Éclat Eau
+Item.waterterashard.Description,,,,,,
+Item.electricterashard.Name,Electric Tera Shard,Teralito Eléctrico,,,,Téra-Éclat Électrik
+Item.electricterashard.Description,,,,,,
+Item.grassterashard.Name,Grass Tera Shard,Teralito Planta,,,,Téra-Éclat Plante
+Item.grassterashard.Description,,,,,,
+Item.iceterashard.Name,Ice Tera Shard,Teralito Hielo,,,,Téra-Éclat Glace
+Item.iceterashard.Description,,,,,,
+Item.fightingterashard.Name,Fighting Tera Shard,Teralito Lucha,,,,Téra-Éclat Combat
+Item.fightingterashard.Description,,,,,,
+Item.poisonterashard.Name,Poison Tera Shard,Teralito Veneno,,,,Téra-Éclat Poison
+Item.poisonterashard.Description,,,,,,
+Item.groundterashard.Name,Ground Tera Shard,Teralito Tierra,,,,Téra-Éclat Sol
+Item.groundterashard.Description,,,,,,
+Item.flyingterashard.Name,Flying Tera Shard,Teralito Volador,,,,Téra-Éclat Vol
+Item.flyingterashard.Description,,,,,,
+Item.psychicterashard.Name,Psychic Tera Shard,Teralito Psíquico,,,,Téra-Éclat Psy
+Item.psychicterashard.Description,,,,,,
+Item.bugterashard.Name,Bug Tera Shard,Teralito Bicho,,,,Téra-Éclat Insecte
+Item.bugterashard.Description,,,,,,
+Item.rockterashard.Name,Rock Tera Shard,Teralito Roca,,,,Téra-Éclat Roche
+Item.rockterashard.Description,,,,,,
+Item.ghostterashard.Name,Ghost Tera Shard,Teralito Fantasma,,,,Téra-Éclat Spectre
+Item.ghostterashard.Description,,,,,,
+Item.dragonterashard.Name,Dragon Tera Shard,Teralito Dragón,,,,Téra-Éclat Dragon
+Item.dragonterashard.Description,,,,,,
+Item.darkterashard.Name,Dark Tera Shard,Teralito Siniestro,,,,Téra-Éclat Ténèbres
+Item.darkterashard.Description,,,,,,
+Item.steelterashard.Name,Steel Tera Shard,Teralito Acero,,,,Téra-Éclat Acier
+Item.steelterashard.Description,,,,,,
+Item.fairyterashard.Name,Fairy Tera Shard,Teralito Hada,,,,Téra-Éclat Fée
+Item.fairyterashard.Description,,,,,,
+Item.maxsoup.Name,Max Soup,,,,,
+Item.maxsoup.Description,"A soup made with Max Mushrooms. It gives a Pokémon that can Gigantamax the G-Max Factor, or takes it away.",,,,,

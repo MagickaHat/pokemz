@@ -11,6 +11,15 @@
     "battleOnly": true,
     "requiredItem": "venusaurite"
   },
+  "venusaurgmax": {
+    "baseSpecies": "venusaur",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 240,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "charizardmegax": {
     "baseSpecies": "charizard",
     "forme": "Mega-X",
@@ -35,6 +44,15 @@
     "battleOnly": true,
     "requiredItem": "charizarditey"
   },
+  "charizardgmax": {
+    "baseSpecies": "charizard",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 280,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "blastoisemega": {
     "baseSpecies": "blastoise",
     "forme": "Mega",
@@ -45,6 +63,24 @@
     "baseExp": 284,
     "battleOnly": true,
     "requiredItem": "blastoisinite"
+  },
+  "blastoisegmax": {
+    "baseSpecies": "blastoise",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 250,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "butterfreegmax": {
+    "baseSpecies": "butterfree",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 170,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "beedrillmega": {
     "baseSpecies": "beedrill",
@@ -246,6 +282,15 @@
     "formName": "Partner",
     "gender": "male",
     "eggGroups": ["undiscovered"]
+  },
+  "pikachugmax": {
+    "baseSpecies": "pikachu",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 210,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "pikachuworld": {
     "baseSpecies": "pikachu",
@@ -533,6 +578,15 @@
     },
     "evolutions": [{"species":"perrserker","method":"level","param":28,"condition":null}]
   },
+  "meowthgmax": {
+    "baseSpecies": "meowth",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 330,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "persianalola": {
     "baseSpecies": "persian",
     "forme": "Alola",
@@ -631,6 +685,15 @@
     "baseExp": 270,
     "battleOnly": true,
     "requiredItem": "alakazite"
+  },
+  "machampgmax": {
+    "baseSpecies": "machamp",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 250,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "geodudealola": {
     "baseSpecies": "geodude",
@@ -951,6 +1014,24 @@
     "battleOnly": true,
     "requiredItem": "gengarite"
   },
+  "gengargmax": {
+    "baseSpecies": "gengar",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 200,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "kinglergmax": {
+    "baseSpecies": "kingler",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 190,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "voltorbhisui": {
     "baseSpecies": "voltorb",
     "forme": "Hisui",
@@ -1245,6 +1326,24 @@
     "battleOnly": true,
     "requiredItem": "gyaradosite"
   },
+  "laprasgmax": {
+    "baseSpecies": "lapras",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 240,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "eeveegmax": {
+    "baseSpecies": "eevee",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 180,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "aerodactylmega": {
     "baseSpecies": "aerodactyl",
     "forme": "Mega",
@@ -1256,6 +1355,15 @@
     "baseExp": 215,
     "battleOnly": true,
     "requiredItem": "aerodactylite"
+  },
+  "snorlaxgmax": {
+    "baseSpecies": "snorlax",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 350,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "articunogalar": {
     "baseSpecies": "articuno",
@@ -2468,6 +2576,15 @@
       }
     ]
   },
+  "garbodorgmax": {
+    "baseSpecies": "garbodor",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 210,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "zoruahisui": {
     "baseSpecies": "zorua",
     "forme": "Hisui",
@@ -3366,6 +3483,105 @@
     "color": "red",
     "baseExp": 300
   },
+  "melmetalgmax": {
+    "baseSpecies": "melmetal",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 250,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "rillaboomgmax": {
+    "baseSpecies": "rillaboom",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 280,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "cinderacegmax": {
+    "baseSpecies": "cinderace",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 270,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "inteleongmax": {
+    "baseSpecies": "inteleon",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 400,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "corviknightgmax": {
+    "baseSpecies": "corviknight",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 140,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "orbeetlegmax": {
+    "baseSpecies": "orbeetle",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 140,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "drednawgmax": {
+    "baseSpecies": "drednaw",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 240,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "coalossalgmax": {
+    "baseSpecies": "coalossal",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 420,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "flapplegmax": {
+    "baseSpecies": "flapple",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 240,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "appletungmax": {
+    "baseSpecies": "appletun",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 240,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "sandacondagmax": {
+    "baseSpecies": "sandaconda",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 220,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "cramorantgulping": {"baseSpecies":"cramorant","forme":"Gulping","formName":"Gulping Form","battleOnly":true},
   "cramorantgorging": {"baseSpecies":"cramorant","forme":"Gorging","formName":"Gorging Form","battleOnly":true},
   "toxtricitylowkey": {
@@ -3394,6 +3610,34 @@
       "egg": []
     }
   },
+  "toxtricitygmax": {
+    "baseSpecies": "toxtricity",
+    "forme": "Gmax",
+    "formName": "Gmax",
+    "height": 240,
+    "weight": 0,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "toxtricitylowkeygmax": {
+    "baseSpecies": "toxtricity",
+    "forme": "Low-Key-Gmax",
+    "formName": "Gigantamax Form",
+    "abilities": {"0":"punkrock","1":"minus","H":"technician"},
+    "height": 240,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "centiskorchgmax": {
+    "baseSpecies": "centiskorch",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 750,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
   "sinisteaantique": {
     "baseSpecies": "sinistea",
     "forme": "Antique",
@@ -3406,6 +3650,24 @@
     "forme": "Antique",
     "formName": "Antique",
     "eggGroups": ["undiscovered"]
+  },
+  "hatterenegmax": {
+    "baseSpecies": "hatterene",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 260,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "grimmsnarlgmax": {
+    "baseSpecies": "grimmsnarl",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 320,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "alcremierubycream": {"baseSpecies":"alcremie","forme":"Ruby-Cream","formName":"Ruby-Cream","color":"pink"},
   "alcremiematchacream": {
@@ -3428,6 +3690,16 @@
     "forme": "Rainbow-Swirl",
     "formName": "Rainbow-Swirl",
     "color": "yellow"
+  },
+  "alcremiegmax": {
+    "baseSpecies": "alcremie",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "color": "yellow",
+    "height": 300,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "eiscuenoice": {
     "baseSpecies": "eiscue",
@@ -3467,6 +3739,24 @@
     "formName": "Hangry Mode",
     "color": "purple",
     "battleOnly": true
+  },
+  "copperajahgmax": {
+    "baseSpecies": "copperajah",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 230,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "duraludongmax": {
+    "baseSpecies": "duraludon",
+    "forme": "Gmax",
+    "formName": "Gigantamax Form",
+    "height": 430,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "zaciancrowned": {
     "baseSpecies": "zacian",
@@ -3514,6 +3804,25 @@
       "tutor": [],
       "egg": []
     }
+  },
+  "urshifugmax": {
+    "baseSpecies": "urshifu",
+    "forme": "Gmax",
+    "formName": "Gmax",
+    "height": 290,
+    "weight": 0,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
+  },
+  "urshifurapidstrikegmax": {
+    "baseSpecies": "urshifu",
+    "forme": "Rapid-Strike-Gmax",
+    "formName": "Gigantamax Form",
+    "types": ["fighting","water"],
+    "height": 260,
+    "weight": 10000,
+    "battleOnly": true,
+    "flags": ["gigantamax"]
   },
   "zarudedada": {"baseSpecies":"zarude","forme":"Dada","formName":"Dada"},
   "calyrexice": {

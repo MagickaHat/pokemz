@@ -496,6 +496,7 @@
     enums.add("genders", "male", "female", "genderless", "mixed");
     enums.add("flavors", "", "spicy", "dry", "sweet", "bitter", "sour");
     enums.add("edges", "north", "south", "east", "west");
+    enums.add("battleTypes", "single", "double");
     enums.add("encounterTypes", [
         "land", "landday", "landnight", "landmorning", "cave", "water", "oldrod", "goodrod", "superrod",
         "rocksmash", "headbutt", "bugcontest",
@@ -1665,6 +1666,9 @@
             wildVictoryBGM: T.string().opt(""),
             trainerVictoryBGM: T.string().opt(""),
             wildCaptureME: T.string().opt(""),
+            followers: T.bool().opt(true),
+            followerItems: T.array(T.tuple([T.int({ min: 1 }), T.ref("items")])).opt(),
+            dynamax: T.bool().opt(false),
             flags: T.flags().opt([]),
         }),
     });
@@ -1686,6 +1690,7 @@
             types: T.dict(
                 T.struct({
                     density: T.int({ min: 0, max: 100 }).opt(10),
+                    doubles: T.int({ min: 0, max: 100 }).opt(0),
                     slots: T.array(T.tuple([T.int({ min: 1 }), T.ref("species"), T.int({ min: 1, max: 100 }), T.int({ min: 1, max: 100 }).opt()])),
                 }),
                 T.enum("encounterTypes")
@@ -1723,6 +1728,8 @@
             loseText: T.localized().opt(""),
             winText: T.localized().opt(""),
             ai: T.string().opt(""),
+            battleType: T.enum("battleTypes").opt("single"),
+            gimmicks: T.flags().opt([]),
             pokemon: T.array(
                 T.struct({
                     species: T.ref("species"),
@@ -1738,6 +1745,9 @@
                     evs: T.stats({ max: 252 }).opt(),
                     friendship: T.int({ min: 0, max: 255 }).opt(),
                     ball: optRef("items"),
+                    teraType: optRef("types"),
+                    dynamaxLevel: T.int({ min: 0, max: 10 }).opt(),
+                    gigantamax: T.bool().opt(false),
                 }),
                 { min: 1, max: 6 }
             ),

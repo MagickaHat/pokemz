@@ -696,6 +696,9 @@
             this._statusTurns = 0;
             this._ribbons = [];
             this._pokerus = 0;
+            this._teraType = opts.teraType && PBS.types.has(opts.teraType) ? opts.teraType : species.types[0];
+            this._dynamaxLevel = Math.max(0, Math.min(10, opts.dynamaxLevel || 0));
+            this._gmaxFactor = !!opts.gmaxFactor;
             this._isEgg = !!opts.egg;
             this._eggSteps = this._isEgg ? species.eggCycles * rules.eggStepsPerCycle : 0;
             this._moves = [];
@@ -801,6 +804,33 @@
         /** @return {string} Ability slot ("0", "1", "H"). */
         get abilitySlot() {
             return this._abilitySlot;
+        }
+
+        /** @return {string} Tera Type ID. */
+        get teraType() {
+            return this._teraType || this.species().types[0];
+        }
+
+        set teraType(id) {
+            this._teraType = id;
+        }
+
+        /** @return {number} Dynamax Level (0-10). */
+        get dynamaxLevel() {
+            return this._dynamaxLevel || 0;
+        }
+
+        set dynamaxLevel(n) {
+            this._dynamaxLevel = Math.max(0, Math.min(10, n));
+        }
+
+        /** @return {boolean} True if it has the G-Max Factor. */
+        get gmaxFactor() {
+            return !!this._gmaxFactor;
+        }
+
+        set gmaxFactor(v) {
+            this._gmaxFactor = !!v;
         }
 
         /** @return {Array<string>} Type IDs. */
@@ -1355,7 +1385,9 @@
                 shiny: this._shiny,
                 happiness: this._friendship,
                 pokeball: nameOf("items", this._ball),
-                teraType: nameOf("types", species.types[0]),
+                teraType: nameOf("types", this.teraType),
+                dynamaxLevel: this.dynamaxLevel,
+                gigantamax: this.gmaxFactor,
             };
         }
     }
@@ -1873,6 +1905,10 @@
             this.secretId = randInt(65536);
             this.stepCounter = 0;
             this.lastHealSpot = null;
+            this.teraCharged = true;
+            this.visitedMaps = {};
+            this.berries = {};
+            this.trades = {};
         }
     }
     window.Game_PokemonState = Game_PokemonState;
@@ -1985,6 +2021,9 @@
     Game_Party.prototype.healPokemon = function() {
         for (const p of this.pokemon()) {
             p.healAll();
+        }
+        if (window.$gamePokemon) {
+            $gamePokemon.teraCharged = true;
         }
     };
 
@@ -2125,6 +2164,13 @@
         if ($gamePokemon.repelSteps > 0 && lead && enc.level < lead.level) {
             return null;
         }
+        const doubles = table.types[type].doubles || 0;
+        if (doubles && Math.random() * 100 < doubles && $gameParty.ablePokemon().length > 1) {
+            const second = table.roll(type);
+            if (second) {
+                enc.second = second;
+            }
+        }
         return Object.assign(enc, { type });
     }
 
@@ -2139,7 +2185,7 @@
             if (enc && PokeMZ.Battle && PokeMZ.Battle.startWild) {
                 // The battle screen is pushed by startWild; returning false
                 // keeps Scene_Map from pushing MZ's Scene_Battle.
-                PokeMZ.Battle.startWild(enc.species, enc.level, { encounterType: enc.type });
+                PokeMZ.Battle.startWild(enc.species, enc.level, { encounterType: enc.type, second: enc.second });
             }
             return false;
         }
@@ -2487,6 +2533,43 @@
                 PokeMZ.UI.openScreen("townMap");
             }
             return "keep";
+        },
+    });
+
+    ItemHandlers.register("terashard", {
+        canUse: (pk, item) => !pk.isEgg() && $gameParty.bag().count(item.id) >= (P(item, "count") || 50) && pk.teraType !== P(item, "type"),
+        async use(pk, item) {
+            const type = P(item, "type");
+            const n = P(item, "count") || 50;
+            if (!(await Flow.confirm(tr("Item.Msg.TeraConfirm", "Use {n} {item} to change {name}'s Tera Type to {type}?", { n, item: item.name, name: pk.name(), type: PBS.types.get(type).name })))) {
+                return false;
+            }
+            $gameParty.bag().lose(item.id, n - 1);
+            pk.teraType = type;
+            await say(tr("Item.Msg.TeraChanged", "{name}'s Tera Type is now {type}!", { name: pk.name(), type: PBS.types.get(type).name }));
+            return true;
+        },
+    });
+
+    ItemHandlers.register("dynamaxcandy", {
+        canUse: pk => !pk.isEgg() && pk.dynamaxLevel < 10,
+        async use(pk) {
+            pk.dynamaxLevel += 1;
+            await say(tr("Item.Msg.DynamaxLevel", "{name}'s Dynamax Level rose to {n}!", { name: pk.name(), n: pk.dynamaxLevel }));
+            return true;
+        },
+    });
+
+    ItemHandlers.register("maxsoup", {
+        canUse: pk => !pk.isEgg() && PBS.species.has(`${pk.baseSpeciesId}gmax`),
+        async use(pk) {
+            pk.gmaxFactor = !pk.gmaxFactor;
+            await say(
+                pk.gmaxFactor
+                    ? tr("Item.Msg.GmaxOn", "{name} can now Gigantamax!", { name: pk.name() })
+                    : tr("Item.Msg.GmaxOff", "{name} can no longer Gigantamax.", { name: pk.name() })
+            );
+            return true;
         },
     });
 

@@ -44,6 +44,15 @@
  * @arg shiny
  * @type boolean
  * @default false
+ * @arg species2
+ * @text Second Species (double)
+ * @desc Fill in for a wild double battle.
+ * @type string
+ * @default
+ * @arg level2
+ * @text Second Level
+ * @type number
+ * @default 0
  * @arg canLose
  * @text Can Lose
  * @desc Losing doesn't send the player back to a Pokémon Center.
@@ -60,6 +69,17 @@
  * @arg trainer
  * @text Trainer ID
  * @desc ID of an entry in trainers.json.
+ * @type string
+ * @default
+ * @arg trainer2
+ * @text Second Trainer ID
+ * @desc Two trainers at once (double battle), or the second foe of a
+ * partner battle.
+ * @type string
+ * @default
+ * @arg partner
+ * @text Partner Trainer ID
+ * @desc A trainer who fights beside the player (multi battle).
  * @type string
  * @default
  * @arg canLose
@@ -106,6 +126,8 @@
 
     const ACTION_MOVE = "pokemzaction";
     const FORMAT = "pokemzsingles";
+    /** @brief Showdown format IDs by battle layout. */
+    const FORMATS = { singles: "pokemzsingles", doubles: "pokemzdoubles", multi: "pokemzmulti" };
     const toID = s =>
         String(s || "")
             .toLowerCase()
@@ -151,7 +173,25 @@
         };
         const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
         const data = {
-            Scripts: { inherit: "gen9" },
+            Scripts: {
+                inherit: "gen9",
+                side: {
+                    // Dynamax is gen 8 only in Showdown; PokéMZ turns it on
+                    // per battle (battle.pmzDynamax).
+                    canDynamaxNow() {
+                        if (!this.battle.pmzDynamax) {
+                            return false;
+                        }
+                        if (this.battle.gameType === "multi" && this.battle.turn % 2 !== [1, 1, 0, 0][this.n]) {
+                            return false;
+                        }
+                        // dynamaxUsed starts true outside gen 8, so look for
+                        // this side's own Dynamax in the log instead.
+                        const tag = `|-start|${this.id}`;
+                        return !this.battle.log.some(l => l.startsWith(tag) && l.includes("|Dynamax"));
+                    },
+                },
+            },
             Moves: {
                 [ACTION_MOVE]: {
                     num: -9000,
@@ -175,7 +215,11 @@
             Abilities: {},
             Items: {},
             Conditions: {},
-            Formats: [{ name: "PokeMZ Singles", mod: "pokemz", gameType: "singles", ruleset: [] }],
+            Formats: [
+                { name: "PokeMZ Singles", mod: "pokemz", gameType: "singles", ruleset: [] },
+                { name: "PokeMZ Doubles", mod: "pokemz", gameType: "doubles", ruleset: [] },
+                { name: "PokeMZ Multi", mod: "pokemz", gameType: "multi", ruleset: [] },
+            ],
         };
         for (const m of registries.moves || []) {
             if (!m.custom) {
@@ -308,13 +352,14 @@
     }
 
     /**
-     * @brief "p2a: W" -> {side: "p2", token: "W"}.
+     * @brief "p2b: W" -> {side: "p2", slot: 1, token: "W"}.
      * @param {string} ident Pokémon ident.
-     * @return {{side: string, token: string}} Parts.
+     * @return {{side: string, slot: number, token: string}} Parts (slot -1
+     *         when the ident has no position letter).
      */
     function parseIdent(ident) {
-        const m = /^(p\d)[a-z]?:\s*(.*)$/.exec(ident || "");
-        return m ? { side: m[1], token: m[2] } : { side: "", token: "" };
+        const m = /^(p\d)([a-z]?):\s*(.*)$/.exec(ident || "");
+        return m ? { side: m[1], slot: m[2] ? m[2].charCodeAt(0) - 97 : -1, token: m[3] } : { side: "", slot: -1, token: "" };
     }
 
     /**
@@ -334,7 +379,7 @@
             }
             const { cmd, args, kw } = parseLine(line);
             const who = parseIdent(args[0]);
-            const ev = { type: cmd.replace(/^-/, ""), side: who.side, token: who.token, from: kw.from || "", of: kw.of ? parseIdent(kw.of) : null, kw, args };
+            const ev = { type: cmd.replace(/^-/, ""), side: who.side, slot: who.slot, token: who.token, from: kw.from || "", of: kw.of ? parseIdent(kw.of) : null, kw, args };
             switch (cmd) {
                 case "switch":
                 case "drag":
@@ -394,6 +439,18 @@
                 case "-end":
                 case "-activate":
                     ev.effect = toID(String(args[1] || "").replace(/^(move|ability|item):\s*/, ""));
+                    ev.gmax = args[2] === "Gmax";
+                    break;
+                case "detailschange":
+                case "-formechange":
+                    ev.type = cmd === "detailschange" ? "detailschange" : "formechange";
+                    ev.species = toID(String(args[1] || "").split(", ")[0]);
+                    break;
+                case "-mega":
+                    ev.item = toID(args[2]);
+                    break;
+                case "-terastallize":
+                    ev.teraType = toID(args[1]);
                     break;
                 case "-hitcount":
                     ev.count = Number(args[1]) || 0;
@@ -468,11 +525,22 @@
             }
             const from = String(ev.from || "");
             switch (ev.type) {
-                case "switch":
+                case "switch": {
                     if (ev.side === "p1") {
                         return t("Msg.Go", "Go! {pokemon}!", { pokemon: p });
                     }
-                    return e.wild ? t("Msg.WildAppeared", "A wild {pokemon} appeared!", { pokemon: e.speciesName(ev.species) }) : t("Msg.SentOut", "{trainer} sent out {pokemon}!", { trainer: e.trainer, pokemon: e.speciesName(ev.species) });
+                    const sender = e.sender ? e.sender(ev.side, ev.token) : e.wild ? "" : e.trainer;
+                    const name = e.memberName ? e.memberName(ev.side, ev.token) : e.speciesName(ev.species);
+                    return sender ? t("Msg.SentOut", "{trainer} sent out {pokemon}!", { trainer: sender, pokemon: name }) : t("Msg.WildAppeared", "A wild {pokemon} appeared!", { pokemon: name });
+                }
+                case "mega":
+                    return t("Msg.Mega", "{pokemon} has Mega Evolved!", { pokemon: p });
+                case "primal":
+                    return t("Msg.Primal", "{pokemon}'s Primal Reversion! It reverted to its primal form!", { pokemon: p });
+                case "zpower":
+                    return t("Msg.ZPower", "{pokemon} surrounds itself with its Z-Power!", { pokemon: p });
+                case "terastallize":
+                    return t("Msg.Terastallize", "{pokemon} has Terastallized into the {type} type!", { pokemon: p, type: e.typeName ? e.typeName(ev.teraType) : ev.teraType });
                 case "move":
                     return t("Msg.UsedMove", "{pokemon} used {move}!", { pokemon: p, move: e.move(ev.move) });
                 case "damage":
@@ -553,6 +621,9 @@
                 case "item":
                     return null;
                 case "start":
+                    if (ev.effect === "dynamax") {
+                        return ev.gmax ? t("Msg.Gigantamax", "{pokemon} Gigantamaxed!", { pokemon: p }) : t("Msg.Dynamax", "{pokemon} Dynamaxed!", { pokemon: p });
+                    }
                     if (ev.effect === "confusion") {
                         return t("Msg.Confused", "{pokemon} became confused!", { pokemon: p });
                     }
@@ -561,6 +632,9 @@
                     }
                     return null;
                 case "end":
+                    if (ev.effect === "dynamax") {
+                        return t("Msg.DynamaxEnd", "{pokemon} returned to its normal size!", { pokemon: p });
+                    }
                     return ev.effect === "confusion" ? t("Msg.ConfusionEnd", "{pokemon} snapped out of its confusion!", { pokemon: p }) : null;
                 case "activate":
                     return ev.effect === "confusion" ? t("Msg.IsConfused", "{pokemon} is confused!", { pokemon: p }) : null;
@@ -643,71 +717,206 @@
     }
 
     /**
-     * @brief Picks a move for an AI side.
-     * @param {Object} request Showdown request of that side.
-     * @param {Object} c {skill, dex, self (sim Pokémon), foe (sim Pokémon)}.
+     * @brief Picks a move for one active slot (random, or by damage
+     *        estimate for skilled trainers).
+     * @param {Object} slotReq request.active[i] of that slot.
+     * @param {Object} c {skill, dex, self (sim Pokémon), foes (sim Pokémon)}.
      * @param {function(): number} [rng] Random.
-     * @return {string} Choice ("move N").
+     * @return {{index: number, target: Object|null}} Move index and target.
      */
-    function aiChoice(request, c = {}, rng = Math.random) {
-        const active = request.active && request.active[0];
-        if (!active) {
-            return "default";
-        }
-        const options = active.moves.map((m, i) => ({ m, i })).filter(o => !o.m.disabled && o.m.id !== ACTION_MOVE && (o.m.pp === undefined || o.m.pp > 0));
+    function aiPickMove(slotReq, c = {}, rng = Math.random) {
+        const options = slotReq.moves.map((m, i) => ({ m, i })).filter(o => !o.m.disabled && o.m.id !== ACTION_MOVE && (o.m.pp === undefined || o.m.pp > 0));
+        const foes = (c.foes || []).filter(f => f && !f.fainted);
         if (!options.length) {
-            return "move 1";
+            return { index: 0, target: foes[0] || null };
         }
-        if (c.skill > 0 && c.dex && c.foe) {
-            let best = null;
-            for (const o of options) {
+        let best = null;
+        for (const o of options) {
+            const target = foes.length ? foes[Math.floor(rng() * foes.length)] : null;
+            let score = 1;
+            if (c.skill > 0 && c.dex && target) {
                 const move = c.dex.moves.get(o.m.id);
-                let score = move.category === "Status" ? 20 : move.basePower || 40;
+                score = move.category === "Status" ? 20 : move.basePower || 40;
+                const types = target.getTypes ? target.getTypes() : [];
                 if (move.category !== "Status") {
-                    score *= c.dex.getEffectiveness ? Math.pow(2, c.dex.getEffectiveness(move.type, c.foe.getTypes ? c.foe.getTypes() : [])) : 1;
-                    if (c.dex.getImmunity && !c.dex.getImmunity(move.type, c.foe.getTypes ? c.foe.getTypes() : [])) {
+                    if (c.dex.getImmunity && !c.dex.getImmunity(move.type, types)) {
                         score = 0;
+                    } else if (c.dex.getEffectiveness) {
+                        score *= Math.pow(2, c.dex.getEffectiveness(move.type, types));
                     }
                     if (c.self && c.self.getTypes && c.self.getTypes().includes(move.type)) {
                         score *= 1.5;
                     }
                 }
-                score *= 0.85 + rng() * 0.3;
-                if (!best || score > best.score) {
-                    best = { score, i: o.i };
-                }
             }
-            return `move ${best.i + 1}`;
+            score *= 0.85 + rng() * 0.3;
+            if (!best || score > best.score) {
+                best = { score, index: o.i, target };
+            }
         }
-        return `move ${options[Math.floor(rng() * options.length)].i + 1}`;
+        return best;
     }
 
-    //-------------------------------------------------------------------------
-    // Bridge
-    //-------------------------------------------------------------------------
+    /**
+     * @brief Old single-slot helper (kept for scripts): "move N".
+     * @param {Object} request Showdown request.
+     * @param {Object} [c] Context of aiPickMove.
+     * @return {string} Choice.
+     */
+    function aiChoice(request, c = {}, rng = Math.random) {
+        const active = request.active && request.active[0];
+        return active ? `move ${aiPickMove(active, c, rng).index + 1}` : "default";
+    }
 
     /**
-     * @brief Runs one battle between the player's party and a wild Pokémon
-     *        or a trainer in the Showdown simulator.
+     * @brief Controls a side with the computer. Any object with the same
+     *        choose(sideId, bridge) method can control a side (e.g. a
+     *        future online player).
+     */
+    class AIController {
+        /**
+         * @param {Object} [o] {skill, gimmicks: ["mega", "zmove", "dynamax",
+         *        "terastallize"], rng}.
+         */
+        constructor(o = {}) {
+            this.skill = o.skill || 0;
+            this.gimmicks = new Set(o.gimmicks || []);
+            this.rng = o.rng || Math.random;
+        }
+
+        /**
+         * @brief Makes the choice string for a side's request.
+         * @param {string} sideId "p2" ...
+         * @param {BattleBridge} bridge Bridge.
+         * @return {string} Choice.
+         */
+        choose(sideId, bridge) {
+            const side = bridge.battle[sideId];
+            const req = side.activeRequest;
+            if (req.forceSwitch) {
+                const taken = new Set();
+                return req.forceSwitch
+                    .map((need, slot) => {
+                        if (!need) {
+                            return "pass";
+                        }
+                        const idx = bridge.benchFor(sideId, slot, taken);
+                        if (idx < 0) {
+                            return "pass";
+                        }
+                        taken.add(idx);
+                        return `switch ${idx + 1}`;
+                    })
+                    .join(", ");
+            }
+            let gimmickUsed = false;
+            return req.active
+                .map((slotReq, slot) => {
+                    const self = side.active[slot];
+                    if (!self || self.fainted || slotReq.commanding) {
+                        return "pass";
+                    }
+                    const foes = bridge.foesOf(sideId);
+                    const pick = aiPickMove(slotReq, { skill: this.skill, dex: bridge.dex, self, foes }, this.rng);
+                    let choice = `move ${pick.index + 1}`;
+                    const target = bridge.targetLoc(self, pick.target, slotReq.moves[pick.index] && slotReq.moves[pick.index].target);
+                    if (target !== null) {
+                        choice += ` ${target}`;
+                    }
+                    if (!gimmickUsed) {
+                        const g = this.gimmickFor(slotReq, pick.index);
+                        if (g) {
+                            choice += ` ${g}`;
+                            gimmickUsed = true;
+                        }
+                    }
+                    return choice;
+                })
+                .join(", ");
+        }
+
+        /** @return {string} A gimmick keyword this trainer may use now. */
+        gimmickFor(slotReq, moveIndex) {
+            if (this.gimmicks.has("mega") && slotReq.canMegaEvo) {
+                return "mega";
+            }
+            if (this.gimmicks.has("zmove") && slotReq.canZMove && slotReq.canZMove[moveIndex]) {
+                return "zmove";
+            }
+            if (this.gimmicks.has("dynamax") && slotReq.canDynamax) {
+                return "dynamax";
+            }
+            if (this.gimmicks.has("terastallize") && slotReq.canTerastallize) {
+                return "terastallize";
+            }
+            return "";
+        }
+    }
+
+    /** @brief Move targets that need a chosen target with two or more foes. */
+    const TARGETED = new Set(["normal", "any", "adjacentAlly", "adjacentAllyOrSelf", "adjacentFoe"]);
+
+    /**
+     * @brief Runs one battle in the Showdown simulator: singles, doubles
+     *        (one or two trainers, or two wild Pokémon) or multi battles with
+     *        a partner.
      *
-     *        Game-side work goes through `adapter` so the bridge also runs
-     *        in Node: {exp(winner, fainted, participated) => Promise,
-     *        caught(foe) => Promise, seen(foe), useItem(...)}.
+     *        Sides: p1 is the player (asked through the presenter), p2 the
+     *        opponent, and in multi battles p3 the partner and p4 the second
+     *        opponent. Other sides are run by controllers (AIController now;
+     *        anything with choose(sideId, bridge) works).
+     *
+     *        Game-side work goes through `adapter` so the bridge also runs in
+     *        Node: {exp(foe, members, bridge), seen(foe), useItem(action,
+     *        bridge)}.
      */
     class BattleBridge {
         /**
-         * @param {Object} o {sim, dex, party: [pokemon-like], foes: [pokemon-like],
-         *        wild: boolean, trainer: {name, skill}, presenter, adapter,
-         *        seed}.
+         * @param {Object} o {sim, dex, format ("singles" | "doubles" |
+         *        "multi"), party, foes, sides ({p2: {team, name, owners,
+         *        controller}, p3, p4}), wild, trainer, presenter, adapter,
+         *        seed, gimmicks ({dynamax})}. party/foes are shortcuts for
+         *        p1/p2 teams.
          */
         constructor(o) {
             Object.assign(this, o);
+            this.format = o.format || "singles";
+            this.sides = Object.assign({}, o.sides || {});
+            this.sides.p1 = Object.assign({ team: o.party || [], name: "Player" }, this.sides.p1 || {});
+            if (!this.sides.p2) {
+                this.sides.p2 = { team: o.foes || [], name: o.wild ? "Wild" : (o.trainer && o.trainer.name) || "Foe" };
+            }
             this.result = null;
             this.turn = 0;
             this.logIndex = 0;
             this.escapeAttempts = 0;
             this.participants = new Map();
             this.tokens = new Map();
+            this.owners = new Map();
+        }
+
+        /** @return {Array<string>} Side IDs in this battle. */
+        sideIds() {
+            return this.format === "multi" ? ["p1", "p2", "p3", "p4"] : ["p1", "p2"];
+        }
+
+        /** @return {Array<string>} Opposing side IDs of a side. */
+        opponentsOf(sideId) {
+            const mine = sideId === "p1" || sideId === "p3";
+            return this.sideIds().filter(id => (id === "p1" || id === "p3") !== mine);
+        }
+
+        /** @return {Array<Object>} Active, not fainted foe sim Pokémon. */
+        foesOf(sideId) {
+            const out = [];
+            for (const id of this.opponentsOf(sideId)) {
+                for (const p of this.battle[id].active) {
+                    if (p && !p.fainted) {
+                        out.push(p);
+                    }
+                }
+            }
+            return out;
         }
 
         /** @return {Object} Game Pokémon for a side and token. */
@@ -715,10 +924,15 @@
             return this.tokens.get(`${side}:${token}`) || null;
         }
 
+        /** @return {*} The owner (trainer) of a token. */
+        ownerOf(side, token) {
+            return this.owners.get(`${side}:${token}`);
+        }
+
         /** @return {Object|null} The sim Pokémon of a game Pokémon. */
         simOf(pkmn) {
-            for (const side of [this.battle.p1, this.battle.p2]) {
-                const s = side.pokemon.find(p => this.member(side.id, p.name) === pkmn);
+            for (const id of this.sideIds()) {
+                const s = this.battle[id].pokemon.find(p => this.member(id, p.name) === pkmn);
                 if (s) {
                     return s;
                 }
@@ -726,48 +940,113 @@
             return null;
         }
 
-        /** @return {Object|null} Active sim Pokémon of a side. */
-        active(side) {
-            return this.battle[side].active[0] || null;
+        /** @return {Object|null} An active sim Pokémon of a side. */
+        active(side, slot = 0) {
+            return (this.battle[side] && this.battle[side].active[slot]) || null;
+        }
+
+        /** @return {Array<Object>} The player's active sim Pokémon. */
+        playerActives() {
+            return this.battle.p1.active.filter(Boolean);
+        }
+
+        /**
+         * @brief Bench index for a forced switch, keeping each slot to its
+         *        owner's Pokémon (two trainers sharing a side).
+         * @param {string} sideId Side.
+         * @param {number} slot Active slot.
+         * @param {Set<number>} taken Indexes already chosen this turn.
+         * @return {number} Index in side.pokemon (-1 = none).
+         */
+        benchFor(sideId, slot, taken) {
+            const side = this.battle[sideId];
+            const free = side.pokemon.map((p, i) => ({ p, i })).filter(({ p, i }) => !p.fainted && !p.isActive && !taken.has(i));
+            const owned = free.filter(({ p }) => this.ownerOf(sideId, p.name) === undefined || this.ownerOf(sideId, p.name) === slot);
+            const pick = (this.sides[sideId].owners ? owned : free)[0] || free[0];
+            return pick ? pick.i : -1;
+        }
+
+        /**
+         * @brief Showdown target location of a target for a move.
+         * @param {Object} source Sim Pokémon using the move.
+         * @param {Object|null} target Sim Pokémon targeted.
+         * @param {string} moveTarget Move target type.
+         * @return {number|null} Location, or null when none is needed.
+         */
+        targetLoc(source, target, moveTarget) {
+            if (this.format === "singles" || !TARGETED.has(moveTarget) || !target) {
+                return null;
+            }
+            const loc = source.getLocOf ? source.getLocOf(target) : null;
+            return typeof loc === "number" ? loc : null;
+        }
+
+        /**
+         * @brief Targets the player may pick for a move.
+         * @param {number} slot Player's active slot.
+         * @param {string} moveTarget Move target type.
+         * @return {Array<{loc: number, pokemon: Object, side: string}>|null}
+         *         Choices, or null when no target is chosen.
+         */
+        targetsFor(slot, moveTarget) {
+            if (this.format === "singles" || !TARGETED.has(moveTarget)) {
+                return null;
+            }
+            const source = this.battle.p1.active[slot];
+            const out = [];
+            for (const loc of [1, 2, -1, -2]) {
+                if (!this.battle.validTargetLoc(loc, source, moveTarget)) {
+                    continue;
+                }
+                const target = source.getAtLoc ? source.getAtLoc(loc) : null;
+                if (target && !target.fainted) {
+                    out.push({ loc, pokemon: target, side: target.side.id });
+                }
+            }
+            return out.length > 1 ? out : null;
         }
 
         /** @brief Creates the simulator battle. */
         start() {
-            const battle = new this.sim.Battle({ formatid: FORMAT, seed: this.seed }, this.dex);
+            const battle = new this.sim.Battle({ formatid: FORMATS[this.format] || FORMAT, seed: this.seed }, this.dex);
+            battle.pmzDynamax = !!(this.gimmicks && this.gimmicks.dynamax);
             this.battle = battle;
-            const team = (list, side) => {
-                // The first Pokémon able to battle leads.
+            const prefix = { p1: "P", p2: "F", p3: "A", p4: "G" };
+            const team = sideId => {
+                const s = this.sides[sideId];
+                const list = s.team.filter(p => !p.isEgg());
+                const lead = list.findIndex(p => p.hp > 0);
                 const order = list.slice();
-                const lead = order.findIndex(p => p.hp > 0 && !p.isEgg());
                 if (lead > 0) {
                     order.unshift(order.splice(lead, 1)[0]);
                 }
-                return order
-                    .filter(p => !p.isEgg())
-                    .map((p, i) => {
-                        const token = `${side === "p1" ? "P" : "F"}${i}`;
-                        this.tokens.set(`${side}:${token}`, p);
-                        return Object.assign(p.toShowdownSet(), { name: token });
-                    });
+                return order.map((p, i) => {
+                    const token = `${prefix[sideId]}${i}`;
+                    this.tokens.set(`${sideId}:${token}`, p);
+                    if (s.owners) {
+                        this.owners.set(`${sideId}:${token}`, s.owners.get(p));
+                    }
+                    return Object.assign(p.toShowdownSet(), { name: token });
+                });
             };
-            const p1 = team(this.party, "p1");
-            battle.setPlayer("p1", { name: "Player", team: p1 });
-            // Current HP, status and PP of the party.
-            for (const sp of battle.p1.pokemon) {
-                const gp = this.member("p1", sp.name);
-                this.applyToSim(gp, sp);
-                sp.moveSlots.push({ move: "PokeMZ Action", id: ACTION_MOVE, pp: 64, maxpp: 64, target: "self", disabled: false, used: false, virtual: true });
-            }
-            const p2 = team(this.foes, "p2");
-            battle.setPlayer("p2", { name: this.wild ? "Wild" : this.trainer.name, team: p2 });
-            for (const sp of battle.p2.pokemon) {
-                this.applyToSim(this.member("p2", sp.name), sp);
+            // Our side first, so HP/status/PP are set before the battle starts.
+            const order = this.format === "multi" ? ["p1", "p3", "p2", "p4"] : ["p1", "p2"];
+            for (const id of order) {
+                battle.setPlayer(id, { name: this.sides[id].name || id, team: team(id) });
+                if (battle[id]) {
+                    for (const sp of battle[id].pokemon) {
+                        this.applyToSim(this.member(id, sp.name), sp);
+                        if (id === "p1") {
+                            sp.moveSlots.push({ move: "PokeMZ Action", id: ACTION_MOVE, pp: 64, maxpp: 64, target: "self", disabled: false, used: false, virtual: true });
+                        }
+                    }
+                }
             }
         }
 
         /** @brief Copies HP, status and PP from a game Pokémon to the sim. */
         applyToSim(gp, sp) {
-            if (!gp || !sp) {
+            if (!gp || !sp || this.battle.started && sp.isActive) {
                 return;
             }
             if (gp.hp < sp.maxhp) {
@@ -789,7 +1068,7 @@
             });
         }
 
-        /** @brief Copies HP, status and PP back to the game Pokémon. */
+        /** @brief Copies HP, status and PP back to the player's Pokémon. */
         syncBack() {
             for (const sp of this.battle.p1.pokemon) {
                 const gp = this.member("p1", sp.name);
@@ -798,7 +1077,7 @@
                 }
                 gp.setHp(Math.max(0, Math.min(gp.mhp, sp.fainted ? 0 : sp.hp)));
                 gp.status = sp.fainted || sp.status === "fnt" ? "" : sp.status || "";
-                gp.moves().forEach((m, i) => {
+                gp.moves().forEach(m => {
                     const slot = sp.baseMoveSlots && sp.baseMoveSlots.find(s => s.id === m.id);
                     if (slot) {
                         m.pp = slot.pp;
@@ -816,15 +1095,16 @@
             this.logIndex = this.battle.log.length;
             let events = toEvents(lines);
             if (!this.introShown) {
-                // The foe appears before the player sends out a Pokémon.
+                // The foes appear before the player sends out a Pokémon.
                 this.introShown = true;
-                events = events.filter(e => e.type === "switch" && e.side === "p2").concat(events.filter(e => !(e.type === "switch" && e.side === "p2")));
+                const foe = e => e.type === "switch" && (e.side === "p2" || e.side === "p4");
+                events = events.filter(foe).concat(events.filter(e => !foe(e)));
             }
             for (const ev of events) {
                 this.track(ev);
                 await this.presenter.show(ev, this);
-                if (ev.type === "faint" && ev.side === "p2") {
-                    await this.onFoeFainted(ev.token);
+                if (ev.type === "faint" && this.opponentsOf("p1").includes(ev.side)) {
+                    await this.onFoeFainted(ev.side, ev.token);
                 }
             }
         }
@@ -834,23 +1114,28 @@
             if (ev.type === "turn") {
                 this.turn = ev.turn;
             }
-            if (ev.type === "switch" && ev.side === "p2" && this.adapter.seen) {
-                this.adapter.seen(this.member("p2", ev.token));
+            if (ev.type === "switch" && this.opponentsOf("p1").includes(ev.side) && this.adapter.seen) {
+                this.adapter.seen(this.member(ev.side, ev.token));
             }
-            const foe = this.active("p2");
-            const mine = this.active("p1");
-            if (foe && mine && !mine.fainted) {
-                if (!this.participants.has(foe.name)) {
-                    this.participants.set(foe.name, new Set());
+            if (ev.type === "terastallize" && ev.side === "p1" && this.adapter.usedGimmick) {
+                this.adapter.usedGimmick("terastallize");
+            }
+            const mine = this.playerActives().filter(p => !p.fainted);
+            for (const foe of this.foesOf("p1")) {
+                const key = `${foe.side.id}:${foe.name}`;
+                if (!this.participants.has(key)) {
+                    this.participants.set(key, new Set());
                 }
-                this.participants.get(foe.name).add(mine.name);
+                for (const m of mine) {
+                    this.participants.get(key).add(m.name);
+                }
             }
         }
 
         /** @brief EXP and EVs for a fainted foe (adapter does the work). */
-        async onFoeFainted(token) {
-            const foe = this.member("p2", token);
-            const part = this.participants.get(token) || new Set();
+        async onFoeFainted(side, token) {
+            const foe = this.member(side, token);
+            const part = this.participants.get(`${side}:${token}`) || new Set();
             if (this.adapter.exp && foe) {
                 await this.adapter.exp(
                     foe,
@@ -875,8 +1160,11 @@
             for (const s of ["atk", "def", "spa", "spd", "spe"]) {
                 sp.storedStats[s] = stats[s];
             }
-            const diff = stats.hp - sp.maxhp;
-            sp.maxhp = sp.baseMaxhp = stats.hp;
+            const diff = stats.hp - sp.baseMaxhp;
+            if (!sp.volatiles.dynamax) {
+                sp.maxhp = stats.hp;
+            }
+            sp.baseMaxhp = stats.hp;
             sp.hp = Math.min(sp.maxhp, sp.hp + Math.max(0, diff));
             sp.details = sp.getUpdatedDetails ? sp.getUpdatedDetails() : sp.details;
             const slots = gp.moves().map((m, i) => {
@@ -884,13 +1172,21 @@
                 return { move: move.name, id: move.id, pp: m.pp, maxpp: gp.maxPp(i), target: move.target, disabled: false, used: false };
             });
             sp.baseMoveSlots = slots.map(s => Object.assign({}, s));
-            sp.moveSlots = slots.concat([{ move: "PokeMZ Action", id: ACTION_MOVE, pp: 64, maxpp: 64, target: "self", disabled: false, used: false, virtual: true }]);
+            if (!sp.transformed) {
+                sp.moveSlots = slots.concat([{ move: "PokeMZ Action", id: ACTION_MOVE, pp: 64, maxpp: 64, target: "self", disabled: false, used: false, virtual: true }]);
+            }
         }
 
         /** @return {boolean} True if a side needs a choice now. */
         needs(side) {
-            const req = this.battle[side].activeRequest;
-            return !!req && !req.wait && !this.battle[side].isChoiceDone();
+            const s = this.battle[side];
+            const req = s && s.activeRequest;
+            return !!req && !req.wait && !s.isChoiceDone();
+        }
+
+        /** @return {boolean} True if every foe Pokémon fainted. */
+        foesDefeated() {
+            return this.opponentsOf("p1").every(id => this.battle[id].pokemon.every(p => p.fainted));
         }
 
         /**
@@ -900,101 +1196,172 @@
         async run() {
             this.start();
             await this.flush();
+            let guard = 0;
             while (!this.battle.ended && !this.result) {
                 if (this.needs("p1")) {
-                    const req = this.battle.p1.activeRequest;
-                    if (req.forceSwitch) {
-                        const pkmn = await this.presenter.chooseSwitch(this, true);
-                        this.chooseSwitch(pkmn);
-                    } else {
-                        const action = await this.presenter.chooseAction(this);
-                        await this.perform(action);
-                        if (this.result) {
-                            break;
+                    await this.chooseForPlayer();
+                    if (this.result) {
+                        break;
+                    }
+                }
+                for (const id of this.sideIds().slice(1)) {
+                    if (this.needs(id)) {
+                        const ctrl = this.sides[id].controller || this.ai || new AIController();
+                        const choice = ctrl.choose(id, this);
+                        if (!this.battle.choose(id, choice)) {
+                            this.battle.choose(id, "default");
                         }
                     }
                 }
-                if (this.needs("p2")) {
-                    const req = this.battle.p2.activeRequest;
-                    if (req.forceSwitch) {
-                        const idx = this.battle.p2.pokemon.findIndex(p => !p.fainted && !p.isActive);
-                        this.battle.choose("p2", idx >= 0 ? `switch ${idx + 1}` : "pass");
-                    } else {
-                        const ai = this.ai || aiChoice;
-                        this.battle.choose("p2", ai(req, { skill: this.wild ? 0 : (this.trainer && this.trainer.skill) || 0, dex: this.dex, self: this.active("p2"), foe: this.active("p1") }));
-                    }
-                }
                 await this.flush();
+                if (++guard > 2000) {
+                    break; // never hang on an unexpected request
+                }
             }
             if (!this.result) {
-                this.result = this.battle.winner === "Player" ? "win" : this.battle.winner ? "lose" : "lose";
+                this.result = this.foesDefeated() ? "win" : "lose";
             }
             this.syncBack();
             return this.result;
         }
 
-        /** @brief Chooses a switch to a game Pokémon. */
-        chooseSwitch(pkmn) {
-            const idx = this.battle.p1.pokemon.findIndex(sp => this.member("p1", sp.name) === pkmn);
-            if (idx < 0 || !this.battle.choose("p1", `switch ${idx + 1}`)) {
-                this.battle.choose("p1", "default");
+        /**
+         * @brief Asks the player for every active slot and sends the choice.
+         *        Bag items and balls act at once; failed escapes and items use
+         *        the slot's turn through the action move.
+         */
+        async chooseForPlayer() {
+            const side = this.battle.p1;
+            const req = side.activeRequest;
+            if (req.forceSwitch) {
+                const parts = [];
+                const taken = new Set();
+                for (let slot = 0; slot < req.forceSwitch.length; slot++) {
+                    if (!req.forceSwitch[slot] || this.benchFor("p1", slot, taken) < 0) {
+                        parts.push("pass");
+                        continue;
+                    }
+                    const pkmn = await this.presenter.chooseSwitch(this, true, { slot, taken });
+                    const idx = side.pokemon.findIndex(sp => this.member("p1", sp.name) === pkmn);
+                    taken.add(idx);
+                    parts.push(`switch ${idx + 1}`);
+                }
+                if (!this.battle.choose("p1", parts.join(", "))) {
+                    this.battle.choose("p1", "default");
+                }
+                return;
             }
-        }
-
-        /** @brief Uses the turn without doing anything (items, balls). */
-        passTurn() {
-            if (!this.battle.choose("p1", `move ${ACTION_MOVE}`)) {
+            const actions = [];
+            const ctx = { taken: new Set(), gimmickUsed: false };
+            for (let slot = 0; slot < req.active.length; ) {
+                const self = side.active[slot];
+                if (!self || self.fainted || req.active[slot].commanding) {
+                    actions[slot] = "pass";
+                    slot++;
+                    continue;
+                }
+                const a = await this.presenter.chooseAction(this, slot, ctx);
+                if (a.type === "back") {
+                    // Undo the previous slot's choice.
+                    let prev = slot - 1;
+                    while (prev >= 0 && actions[prev] === "pass") {
+                        prev--;
+                    }
+                    if (prev >= 0) {
+                        const undone = actions[prev];
+                        if (undone && undone.gimmick) {
+                            ctx.gimmickUsed = false;
+                        }
+                        if (undone && undone.switchIndex !== undefined) {
+                            ctx.taken.delete(undone.switchIndex);
+                        }
+                        slot = prev;
+                    }
+                    continue;
+                }
+                const choice = await this.perform(a, slot, ctx);
+                if (this.result) {
+                    return;
+                }
+                if (choice === null) {
+                    continue; // e.g. a cancelled item: ask this slot again
+                }
+                actions[slot] = choice;
+                slot++;
+                if (ctx.allPass) {
+                    for (; slot < req.active.length; slot++) {
+                        actions[slot] = side.active[slot] && !side.active[slot].fainted ? { text: `move ${ACTION_MOVE}` } : "pass";
+                    }
+                }
+            }
+            const text = actions.map(c => (typeof c === "string" ? c : c.text)).join(", ");
+            if (!this.battle.choose("p1", text)) {
                 this.battle.choose("p1", "default");
             }
         }
 
         /**
-         * @brief Carries out a player action.
-         * @param {Object} a {type: "move", slot} | {type: "switch", pokemon} |
-         *        {type: "item", item, target, slot} | {type: "run"}.
+         * @brief Turns one player action into a choice (doing items now).
+         * @param {Object} a {type: "move", slot, target, gimmick} |
+         *        {type: "switch", pokemon} | {type: "item", item, target} |
+         *        {type: "run"}.
+         * @param {number} slot Active slot.
+         * @param {Object} ctx Choice context of this turn.
+         * @return {Promise<Object|string|null>} Choice ({text, ...}), or null
+         *         to ask again.
          */
-        async perform(a) {
+        async perform(a, slot = 0, ctx = { taken: new Set() }) {
             const say = (key, fallback, args) => this.presenter.say(this.presenter.tr(`Battle.${key}`, fallback, args));
+            const action = { text: `move ${ACTION_MOVE}` };
             switch (a.type) {
-                case "move":
-                    if (!this.battle.choose("p1", `move ${a.slot + 1}`)) {
-                        this.battle.choose("p1", "default");
+                case "move": {
+                    let text = `move ${a.slot + 1}`;
+                    if (a.target !== undefined && a.target !== null) {
+                        text += ` ${a.target}`;
                     }
-                    return;
-                case "switch":
-                    this.chooseSwitch(a.pokemon);
-                    return;
+                    if (a.gimmick) {
+                        text += ` ${a.gimmick}`;
+                        ctx.gimmickUsed = true;
+                    }
+                    return { text, gimmick: a.gimmick || "" };
+                }
+                case "switch": {
+                    const idx = this.battle.p1.pokemon.findIndex(sp => this.member("p1", sp.name) === a.pokemon);
+                    if (idx < 0) {
+                        return null;
+                    }
+                    ctx.taken.add(idx);
+                    return { text: `switch ${idx + 1}`, switchIndex: idx };
+                }
                 case "run": {
                     if (!this.wild) {
                         await say("Msg.NoRunning", "No! There's no running from a Trainer battle!");
-                        return this.perform(await this.presenter.chooseAction(this));
+                        return null;
                     }
                     this.escapeAttempts++;
-                    const mine = this.active("p1");
-                    const foe = this.active("p2");
-                    if (canEscape(mine.getStat("spe"), foe.getStat("spe"), this.escapeAttempts)) {
+                    const mine = this.active("p1", slot);
+                    const foes = this.foesOf("p1");
+                    const fastest = foes.reduce((n, f) => Math.max(n, f.getStat("spe")), 0);
+                    if (canEscape(mine.getStat("spe"), fastest, this.escapeAttempts)) {
                         await say("Msg.GotAway", "You got away safely!");
                         this.result = "run";
-                        return;
+                        return action;
                     }
                     await say("Msg.CantEscape", "You couldn't get away!");
-                    this.passTurn();
-                    return;
+                    // A failed escape uses the whole side's turn.
+                    ctx.allPass = true;
+                    return action;
                 }
                 case "item": {
-                    const r = await this.adapter.useItem(a, this);
+                    const r = await this.adapter.useItem(Object.assign({ slot }, a), this);
                     if (r === "caught") {
                         this.result = "caught";
-                        return;
+                        return action;
                     }
-                    if (r === "cancel") {
-                        return this.perform(await this.presenter.chooseAction(this));
-                    }
-                    this.passTurn();
-                    return;
+                    return r === "cancel" ? null : action;
                 }
                 default:
-                    this.battle.choose("p1", "default");
+                    return { text: "default" };
             }
         }
     }
@@ -1002,6 +1369,10 @@
     const Engine = {
         ACTION_MOVE,
         FORMAT,
+        FORMATS,
+        TARGETED,
+        AIController,
+        aiPickMove,
         TARGET_BY_ID,
         effects,
         registerEffect,
@@ -1074,8 +1445,28 @@
                 if (side === "p1") {
                     return name;
                 }
+                if (side === "p3") {
+                    return tr("Battle.Name.Partner", "{trainer}'s {name}", { trainer: bridge.sides.p3.displayName || "", name });
+                }
                 return bridge.wild ? tr("Battle.Name.Wild", "the wild {name}", { name }) : tr("Battle.Name.Foe", "the opposing {name}", { name });
             },
+            /** @return {string} Who sends a Pokémon out ("" = wild). */
+            sender(side, token) {
+                if (bridge.wild && side !== "p3") {
+                    return "";
+                }
+                const owner = bridge.ownerOf(side, token);
+                const s = bridge.sides[side] || {};
+                if (owner !== undefined && s.trainers && s.trainers[owner]) {
+                    return s.trainers[owner].displayName;
+                }
+                return s.displayName || (bridge.trainer ? bridge.trainer.displayName : "");
+            },
+            memberName(side, token) {
+                const p = bridge.member(side, token);
+                return p ? p.name() : token;
+            },
+            typeName: id => nameOf("types", id),
             speciesName: id => nameOf("species", id),
             move: id => nameOf("moves", id),
             ability: id => nameOf("abilities", id),
@@ -1096,6 +1487,13 @@
         seen(foe) {
             if (foe) {
                 $gamePokemon.pokedex.register(foe.speciesId, false);
+            }
+        },
+
+        /** @brief A gimmick was used (the Tera Orb needs recharging). */
+        usedGimmick(kind) {
+            if (kind === "terastallize") {
+                $gamePokemon.teraCharged = false;
             }
         },
 
@@ -1158,12 +1556,17 @@
                     bag.lose(item.id, 1);
                     return "used";
                 }
+                const foes = bridge.foesOf("p1");
+                if (foes.length > 1) {
+                    await say(tr("Battle.Msg.CantAim", "You can't aim when there are two Pokémon!"));
+                    return "cancel";
+                }
                 bag.lose(item.id, 1);
                 await say(tr("Battle.Msg.ThrewBall", "{player} threw a {item}!", { player, item: item.name }));
-                const foe = bridge.active("p2");
-                const gp = bridge.member("p2", foe.name);
+                const foe = foes[0];
+                const gp = bridge.member(foe.side.id, foe.name);
                 const species = gp.species();
-                const mine = bridge.active("p1");
+                const mine = bridge.active("p1", a.slot || 0);
                 const meta = PBS.mapMetadataFor($gameMap.mapId());
                 const mult = ballModifier(item.params || {}, {
                     turn: bridge.turn,
@@ -1212,9 +1615,9 @@
                 bridge.caught = gp;
                 return "caught";
             }
-            const target = a.target || bridge.member("p1", bridge.active("p1").name);
+            const target = a.target || bridge.member("p1", bridge.active("p1", a.slot || 0).name);
             if (item.effect === "xitem") {
-                const sp = bridge.active("p1");
+                const sp = bridge.active("p1", a.slot || 0);
                 const stat = item.params.stat;
                 bag.lose(item.id, 1);
                 await say(tr("Battle.Msg.UsedItem", "{player} used the {item}.", { player, item: item.name }));
@@ -1262,8 +1665,65 @@
     };
 
     /**
+     * @brief Builds a trainer's side data from trainers.json.
+     * @param {string} id Trainer ID.
+     * @return {Object} {id, name, displayName, skill, loseText, money,
+     *         gimmicks, battleType, bgm, team: [Game_Pokemon]}.
+     */
+    function trainerData(id) {
+        const t = PBS.trainers.get(id);
+        const type = PBS.trainerTypes.get(t.trainerType);
+        const team = t.pokemon.map(m => {
+            const p = new Game_Pokemon(m.species, m.level, {
+                moves: m.moves && m.moves.length ? m.moves : undefined,
+                nature: m.nature,
+                gender: m.gender,
+                shiny: m.shiny,
+                nickname: m.nickname,
+                heldItem: m.item || "",
+                ivs: m.ivs,
+                evs: m.evs,
+                friendship: m.friendship,
+                ball: m.ball || "pokeball",
+                otName: t.name,
+                otId: -2,
+                teraType: m.teraType,
+                dynamaxLevel: m.dynamaxLevel,
+                gmaxFactor: m.gigantamax,
+            });
+            if (m.ability) {
+                const slot = Object.keys(p.species().abilities).find(k => p.species().abilities[k] === m.ability);
+                if (slot) {
+                    p._abilitySlot = slot;
+                }
+            }
+            return p;
+        });
+        const last = t.pokemon[t.pokemon.length - 1];
+        return {
+            id,
+            name: t.sourceText("name"),
+            displayName: `${type.name} ${t.name}`,
+            skill: type.skill,
+            loseText: t.loseText,
+            money: type.baseMoney * (last ? last.level : 1),
+            gimmicks: t.gimmicks || [],
+            battleType: t.battleType || "single",
+            bgm: type.battleBGM,
+            team,
+        };
+    }
+
+    /** @return {Object} An AI controller for a trainer. */
+    const controllerFor = t => new AIController({ skill: t ? t.skill : 0, gimmicks: t ? t.gimmicks : [] });
+
+    /**
      * @brief Starts a battle in the battle screen.
-     * @param {Object} o {wild, foes, trainer, canLose, encounterType, bgm}.
+     * @param {Object} o {format ("singles" | "doubles" | "multi"), wild,
+     *        sides ({p2, p3, p4}: {team, name, displayName, owners,
+     *        trainers, controller}), trainers ([trainer data] beaten for
+     *        money), canLose, encounterType, bgm, dynamax}. The old
+     *        {foes, trainer} form still works.
      * @return {Promise<string>} Result.
      */
     function startBattle(o) {
@@ -1272,22 +1732,35 @@
             console.error("[PokeMZ.Battle] the battle screen needs PokeMZ_UI_Pokemon.");
             return Promise.resolve("win");
         }
+        const meta = PBS.mapMetadataFor($gameMap.mapId());
         return new Promise(resolve => {
+            const sides = Object.assign({}, o.sides || {});
+            if (!sides.p2) {
+                sides.p2 = {
+                    team: o.foes,
+                    name: o.wild ? "Wild" : o.trainer ? o.trainer.name : "Foe",
+                    displayName: o.trainer ? o.trainer.displayName : "",
+                    controller: controllerFor(o.trainer),
+                };
+            }
             const bridge = new BattleBridge({
                 sim: window.PSSim,
                 dex: battleDex(),
+                format: o.format || "singles",
                 party: $gameParty.pokemon(),
-                foes: o.foes,
+                sides,
                 wild: !!o.wild,
-                trainer: o.trainer,
+                trainer: o.trainer || (o.trainers && o.trainers[0]) || null,
                 adapter,
                 encounterType: o.encounterType || "",
+                gimmicks: { dynamax: o.dynamax !== undefined ? !!o.dynamax : !!(meta && (meta.dynamax || (meta.flags || []).includes("dynamax"))) },
                 seed: [1, 2, 3, 4].map(() => Math.floor(Math.random() * 65536)),
             });
             bridge.textEnv = textEnv(bridge);
             bridge.text = new TextPresenter(bridge.textEnv);
-            bridge.format = ev => sentence(bridge.text.format(ev));
+            bridge.formatText = ev => sentence(bridge.text.format(ev));
             bridge.messageFrames = CONFIG.messageFrames;
+            const trainers = o.trainers || (o.trainer ? [o.trainer] : []);
             const mapBgm = AudioManager.saveBgm();
             const mapBgs = AudioManager.saveBgs();
             const bgm = o.bgm || (o.wild ? CONFIG.wildBgm : CONFIG.trainerBgm);
@@ -1295,18 +1768,20 @@
             AudioManager.stopBgs();
             SoundManager.playBattleStart();
             bridge.finish = async result => {
-                if (result === "win" && !o.wild && o.trainer) {
-                    await bridge.presenter.say(tr("Battle.Msg.Defeated", "You defeated {trainer}!", { trainer: o.trainer.displayName }));
-                    if (o.trainer.loseText) {
-                        await bridge.presenter.say(o.trainer.loseText);
+                if (result === "win" && !o.wild && trainers.length) {
+                    for (const t of trainers) {
+                        await bridge.presenter.say(tr("Battle.Msg.Defeated", "You defeated {trainer}!", { trainer: t.displayName }));
+                        if (t.loseText) {
+                            await bridge.presenter.say(t.loseText);
+                        }
+                        $gamePokemon.defeatedTrainers = $gamePokemon.defeatedTrainers || {};
+                        $gamePokemon.defeatedTrainers[t.id] = true;
                     }
-                    const money = o.trainer.money || 0;
+                    const money = trainers.reduce((n, t) => n + (t.money || 0), 0);
                     if (money) {
                         $gameParty.gainGold(money);
                         await bridge.presenter.say(tr("Battle.Msg.GotMoney", "You got {money} for winning!", { money: window.PokeMZ.L10n ? PokeMZ.L10n.formatCurrency(money) : money }));
                     }
-                    $gamePokemon.defeatedTrainers = $gamePokemon.defeatedTrainers || {};
-                    $gamePokemon.defeatedTrainers[o.trainer.id] = true;
                 }
                 if (result === "lose") {
                     await bridge.presenter.say(tr("Battle.Msg.OutOfPokemon", "You have no more Pokémon that can fight!"));
@@ -1354,59 +1829,94 @@
     }
 
     /**
-     * @brief Starts a wild battle.
+     * @brief Starts a wild battle (one or two wild Pokémon).
      * @param {string} species Species ID.
      * @param {number} level Level.
-     * @param {Object} [o] {shiny, encounterType, canLose}.
+     * @param {Object} [o] {shiny, encounterType, canLose, double, second:
+     *        {species, level, shiny}}. With double and no second, the second
+     *        Pokémon is rolled from the map's encounter table (or is the
+     *        same species).
      * @return {Promise<string>} Result.
      */
     function startWild(species, level, o = {}) {
-        const foe = new Game_Pokemon(species, level, { shiny: o.shiny, otName: "", otId: -1 });
-        return startBattle(Object.assign({ wild: true, foes: [foe] }, o));
+        const foes = [new Game_Pokemon(species, level, { shiny: o.shiny, otName: "", otId: -1 })];
+        if (o.double || o.second) {
+            let second = o.second;
+            if (!second) {
+                const table = PBS.encountersFor($gameMap.mapId());
+                second = (table && o.encounterType && table.roll(o.encounterType)) || { species, level };
+            }
+            foes.push(new Game_Pokemon(second.species, second.level, { shiny: second.shiny, otName: "", otId: -1 }));
+        }
+        return startBattle(Object.assign({ wild: true, foes, format: foes.length > 1 ? "doubles" : "singles" }, o));
     }
 
     /**
      * @brief Starts a trainer battle from trainers.json.
-     * @param {string} id Trainer ID.
-     * @param {Object} [o] {canLose}.
+     *
+     *        - One trainer: singles, or doubles when its battleType is
+     *          "double".
+     *        - Two trainers: a double battle against both (each keeps to
+     *          their own slot).
+     *        - With o.partner: a multi battle; the partner fights beside the
+     *          player against one or two trainers.
+     *
+     * @param {string|Array<string>} ids Trainer ID(s).
+     * @param {Object} [o] {canLose, partner (trainer ID), dynamax}.
      * @return {Promise<string>} Result.
      */
-    function startTrainer(id, o = {}) {
-        const t = PBS.trainers.get(id);
-        const type = PBS.trainerTypes.get(t.trainerType);
-        const foes = t.pokemon.map(m => {
-            const p = new Game_Pokemon(m.species, m.level, {
-                moves: m.moves && m.moves.length ? m.moves : undefined,
-                nature: m.nature,
-                gender: m.gender,
-                shiny: m.shiny,
-                nickname: m.nickname,
-                heldItem: m.item || "",
-                ivs: m.ivs,
-                evs: m.evs,
-                friendship: m.friendship,
-                ball: m.ball || "pokeball",
-                otName: t.name,
-                otId: -2,
-            });
-            if (m.ability) {
-                const slot = Object.keys(p.species().abilities).find(k => p.species().abilities[k] === m.ability);
-                if (slot) {
-                    p._abilitySlot = slot;
-                }
-            }
-            return p;
-        });
-        const last = t.pokemon[t.pokemon.length - 1];
-        const trainer = {
-            id,
-            name: t.sourceText("name"),
-            displayName: `${type.name} ${t.name}`,
-            skill: type.skill,
-            loseText: t.loseText,
-            money: type.baseMoney * (last ? last.level : 1),
-        };
-        return startBattle(Object.assign({ wild: false, foes, trainer, bgm: type.battleBGM }, o));
+    function startTrainer(ids, o = {}) {
+        const list = [].concat(ids).map(trainerData);
+        const [a, b] = list;
+        if (o.partner) {
+            const partner = trainerData(o.partner);
+            // One opponent: their team is split over both foe sides.
+            const foeB = b || Object.assign({}, a, { team: a.team.splice(Math.ceil(a.team.length / 2)) });
+            return startBattle(
+                Object.assign(
+                    {
+                        format: "multi",
+                        trainers: b ? list : [a],
+                        bgm: a.bgm,
+                        sides: {
+                            p2: { team: a.team, name: a.name, displayName: a.displayName, controller: controllerFor(a) },
+                            p4: { team: foeB.team, name: foeB.name, displayName: foeB.displayName, controller: controllerFor(foeB) },
+                            p3: { team: partner.team, name: partner.name, displayName: partner.displayName, controller: controllerFor(partner) },
+                        },
+                    },
+                    o
+                )
+            );
+        }
+        if (b) {
+            const owners = new Map();
+            a.team.forEach(p => owners.set(p, 0));
+            b.team.forEach(p => owners.set(p, 1));
+            const merged = new AIController({ skill: Math.max(a.skill, b.skill), gimmicks: a.gimmicks.concat(b.gimmicks) });
+            return startBattle(
+                Object.assign(
+                    {
+                        format: "doubles",
+                        trainers: list,
+                        bgm: a.bgm,
+                        sides: { p2: { team: a.team.concat(b.team), name: `${a.name} & ${b.name}`, owners, trainers: [a, b], controller: merged } },
+                    },
+                    o
+                )
+            );
+        }
+        return startBattle(
+            Object.assign(
+                {
+                    format: a.battleType === "double" && a.team.length > 1 ? "doubles" : "singles",
+                    trainers: [a],
+                    trainer: a,
+                    foes: a.team,
+                    bgm: a.bgm,
+                },
+                o
+            )
+        );
     }
 
     // Plugin commands wait for the battle to end.
@@ -1424,12 +1934,24 @@
     const RESULTS = { win: 1, lose: 2, run: 3, caught: 4 };
 
     PluginManager.registerCommand(PLUGIN_NAME, "wildBattle", function(args) {
-        const p = startWild(PBS.toID(args.species), Number(args.level || 5), { shiny: args.shiny === "true", canLose: args.canLose === "true" });
+        const o = { shiny: args.shiny === "true", canLose: args.canLose === "true" };
+        if (args.species2) {
+            o.second = { species: PBS.toID(args.species2), level: Number(args.level2 || args.level || 5) };
+        }
+        const p = startWild(PBS.toID(args.species), Number(args.level || 5), o);
         waitFor(this, p, Number(args.variable || 0), RESULTS);
     });
 
     PluginManager.registerCommand(PLUGIN_NAME, "trainerBattle", function(args) {
-        const p = startTrainer(PBS.toID(args.trainer), { canLose: args.canLose === "true" });
+        const ids = [PBS.toID(args.trainer)];
+        if (args.trainer2) {
+            ids.push(PBS.toID(args.trainer2));
+        }
+        const o = { canLose: args.canLose === "true" };
+        if (args.partner) {
+            o.partner = PBS.toID(args.partner);
+        }
+        const p = startTrainer(ids, o);
         waitFor(this, p, Number(args.variable || 0), RESULTS);
     });
 
@@ -1441,6 +1963,7 @@
         startBattle,
         startWild,
         startTrainer,
+        trainerData,
         /** @return {boolean} True if the trainer was beaten. */
         isDefeated: id => !!($gamePokemon.defeatedTrainers || {})[PBS.toID(id)],
         /** @brief Rebuilds the battle dex (after registerEffect at runtime). */
