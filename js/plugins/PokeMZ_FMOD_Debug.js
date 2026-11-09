@@ -32,7 +32,7 @@
  * PokeMZ_FMOD_Debug
  * ============================================================================
  * Press F6 while playtesting for an overlay with: FMOD version and status,
- * CPU and memory, banks and their state, live event instances (path, owner,
+ * CPU, memory against the budget, preloads, banks and their state, live event instances (path, owner,
  * state, volume, parameters, distance), listener, global parameters,
  * snapshots, focus state and the latest errors.
  *
@@ -44,8 +44,8 @@
  *   errors()            error log
  *   toggle()            show/hide the overlay
  *
- * FMOD's Live Update / Profiler is not available in HTML5 builds; profile the
- * same banks in a desktop build of FMOD Studio's own player instead.
+ * FMOD's Live Update / Profiler is not available in HTML5 builds: use
+ * PokeMZ_FMOD_Profiler (Shift+F6 panel, Ctrl+F6 recordings) instead.
  */
 
 (() => {
@@ -156,10 +156,19 @@
         rows.push(`<b>FMOD ${esc(FMOD.version || "")}</b> ${status}`);
         if (FMOD.available) {
             const s = stats();
+            const m = FMOD.memory();
+            const mb = n => fmt(n / 1048576);
+            const budget = m.budget > 0 ? ` budget ${mb(m.budget)}` : "";
+            const color = m.over ? "#f88" : "inherit";
+            rows.push(`CPU studio ${fmt(s.studio)}% dsp ${fmt(s.dsp)}% stream ${fmt(s.stream)}%`);
             rows.push(
-                `CPU studio ${fmt(s.studio)}% dsp ${fmt(s.dsp)}% stream ${fmt(s.stream)}% | ` +
-                    `mem ${fmt((s.memory || 0) / 1048576)} / ${fmt((s.memoryMax || 0) / 1048576)} MB`
+                `<span style="color:${color}">mem ${mb(m.current)} MB (peak ${mb(m.peak)}${budget}${m.over ? " OVER" : ""})</span>` +
+                    ` heap ${mb(m.heap)} MB | ${FMOD.platform}`
             );
+            const pre = Array.from(FMOD.preloads.values());
+            if (pre.length) {
+                rows.push(`preloads: ${esc(pre.map(p => `${p.key} ${p.state}${p.pinned ? " pinned" : ""}`).join(", "))}`);
+            }
         }
         const focus = FMOD.focusState();
         rows.push(`focus: hidden=${focus.hidden} blurred=${focus.blurred} applied=${focus.applied}`);
@@ -242,7 +251,7 @@
         return;
     }
     document.addEventListener("keydown", e => {
-        if (e.key === CONFIG.key && !e.repeat) {
+        if (e.key === CONFIG.key && !e.repeat && !e.shiftKey && !e.ctrlKey) {
             toggle();
             e.preventDefault();
         }
