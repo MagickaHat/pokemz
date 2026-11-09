@@ -1,0 +1,617 @@
+/*
+ * PokéMZ UI theme (PokeMZ_UI_Core and friends).
+ * Sizes are in game pixels: the overlay is scaled with the canvas.
+ * Override the variables below (or any class) to restyle or add graphics.
+ */
+
+#pokemz-ui {
+    --pmz-font: "pokemz-ui-font", rmmz-mainfont, Verdana, sans-serif;
+    --pmz-font-size: 30px;
+    --pmz-line: 36px;
+    --pmz-fg: #404040;
+    --pmz-fg-shadow: #d0d0c8;
+    --pmz-muted: #8a8a8a;
+    --pmz-bg: #f8f8f8;
+    --pmz-border: #4a6890;
+    --pmz-border-inner: #a8c0e0;
+    --pmz-accent: #e04838;
+    --pmz-select: #dce8f8;
+    --pmz-dim: rgba(0, 0, 0, 0.45);
+    --pmz-radius: 10px;
+    --pmz-pad: 14px;
+    --pmz-message-lines: 4;
+    pointer-events: none;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.pmz-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;
+    font-family: var(--pmz-font);
+    font-size: var(--pmz-font-size);
+    line-height: var(--pmz-line);
+    color: var(--pmz-fg);
+    text-shadow: 2px 2px 0 var(--pmz-fg-shadow);
+    -webkit-font-smoothing: none;
+}
+
+.pmz-layer,
+.pmz-mount {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Anything interactive opts back in to pointer events. */
+.pmz-screen,
+.pmz-panel,
+.pmz-button,
+.pmz-item,
+.pmz-key,
+.pmz-message-area,
+.pmz-capture,
+.pmz-start {
+    pointer-events: auto;
+    touch-action: none;
+}
+
+.pmz-transition {
+    position: absolute;
+    inset: 0;
+}
+
+.pmz-screen {
+    position: absolute;
+    inset: 0;
+}
+
+/* MZ's (normally empty) error box sits above the overlay; let clicks pass
+ * through it while keeping its Retry button usable. */
+#errorPrinter {
+    pointer-events: none;
+}
+
+#errorPrinter button,
+#errorPrinter #retryButton {
+    pointer-events: auto;
+}
+
+/*-------------------------------------------------------------------------
+ * Building blocks
+ *-----------------------------------------------------------------------*/
+
+.pmz-panel {
+    position: relative;
+    box-sizing: border-box;
+    background: var(--pmz-bg);
+    border: 4px solid var(--pmz-border);
+    box-shadow: inset 0 0 0 3px var(--pmz-border-inner);
+    border-radius: var(--pmz-radius);
+    padding: var(--pmz-pad) calc(var(--pmz-pad) + 4px);
+}
+
+.pmz-panel-title,
+.pmz-title-bar {
+    font-size: 32px;
+}
+
+.pmz-title-bar {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 16px;
+    padding: 8px 20px;
+}
+
+.pmz-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 96px;
+    min-height: 48px; /* comfortable touch target */
+    padding: 4px 16px;
+    background: var(--pmz-bg);
+    border: 3px solid var(--pmz-border);
+    border-radius: var(--pmz-radius);
+    cursor: pointer;
+}
+
+.pmz-button:active {
+    background: var(--pmz-select);
+}
+
+.pmz-button.is-disabled {
+    color: var(--pmz-muted);
+}
+
+.pmz-back {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+}
+
+.pmz-list {
+    display: grid;
+    grid-template-columns: repeat(var(--pmz-columns, 1), 1fr);
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.pmz-list::-webkit-scrollbar {
+    display: none;
+}
+
+.pmz-item {
+    position: relative;
+    padding: 4px 8px 4px 32px;
+    min-height: var(--pmz-line);
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.pmz-item.is-selected::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    margin-top: -9px;
+    border-left: 14px solid var(--pmz-fg);
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    filter: drop-shadow(2px 2px 0 var(--pmz-fg-shadow));
+}
+
+.pmz-item.is-selected {
+    background: var(--pmz-select);
+}
+
+.pmz-item.is-disabled {
+    color: var(--pmz-muted);
+}
+
+.pmz-image {
+    image-rendering: pixelated;
+    vertical-align: middle;
+}
+
+.pmz-inline-icon {
+    width: 28px !important;
+    height: 28px !important;
+}
+
+/*-------------------------------------------------------------------------
+ * Toasts
+ *-----------------------------------------------------------------------*/
+
+.pmz-toasts {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.pmz-toasts .pmz-toast {
+    position: relative;
+    inset: auto;
+    padding: 4px 18px;
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    background: rgba(32, 40, 56, 0.88);
+    border-radius: 20px;
+}
+
+/*-------------------------------------------------------------------------
+ * Start menu
+ *-----------------------------------------------------------------------*/
+
+.pmz-start {
+    position: absolute;
+    inset: 0;
+}
+
+.pmz-start-menu {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 280px;
+    max-height: calc(100% - 24px);
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pmz-start-item {
+    min-height: 48px;
+    line-height: 40px;
+}
+
+/*-------------------------------------------------------------------------
+ * Placeholder screens
+ *-----------------------------------------------------------------------*/
+
+.pmz-placeholder,
+.pmz-controls,
+.pmz-name-screen {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(#a8d0f0, #e8f0f8);
+}
+
+.pmz-placeholder-body {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 96px;
+    bottom: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*-------------------------------------------------------------------------
+ * Messages
+ *-----------------------------------------------------------------------*/
+
+.pmz-message-area {
+    --pmz-message-height: calc(var(--pmz-message-lines) * var(--pmz-line) + var(--pmz-pad) * 2 + 8px);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.pmz-message-area.is-top {
+    justify-content: flex-start;
+}
+
+.pmz-message-area.is-middle {
+    justify-content: center;
+}
+
+.pmz-message-area.is-bottom {
+    justify-content: flex-end;
+}
+
+.pmz-message {
+    position: relative;
+    box-sizing: border-box;
+    height: var(--pmz-message-height);
+    padding: var(--pmz-pad) 24px;
+    display: flex;
+    gap: 20px;
+    border-radius: var(--pmz-radius);
+}
+
+.pmz-message.is-window {
+    background: var(--pmz-bg);
+    border: 4px solid var(--pmz-border);
+    box-shadow: inset 0 0 0 3px var(--pmz-border-inner);
+}
+
+.pmz-message.is-dim {
+    background: var(--pmz-dim);
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.pmz-message.is-transparent {
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.pmz-message-text {
+    flex: 1;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+.pmz-message-face {
+    flex: none;
+    align-self: center;
+}
+
+.pmz-message-name {
+    position: absolute;
+    left: 12px;
+    top: -46px;
+    padding: 2px 16px;
+    background: var(--pmz-bg);
+    color: var(--pmz-fg);
+    text-shadow: 2px 2px 0 var(--pmz-fg-shadow);
+    border: 4px solid var(--pmz-border);
+    border-radius: var(--pmz-radius);
+}
+
+.pmz-message-arrow {
+    position: absolute;
+    right: 24px;
+    bottom: 14px;
+    border-top: 14px solid var(--pmz-accent);
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    animation: pmz-bounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes pmz-bounce {
+    from {
+        transform: translateY(-3px);
+    }
+    to {
+        transform: translateY(3px);
+    }
+}
+
+.pmz-gold {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    min-width: 180px;
+    text-align: right;
+}
+
+.pmz-message-area.is-top .pmz-gold {
+    top: auto;
+    bottom: 12px;
+}
+
+/* Choices and number input sit beside the message box. */
+.pmz-message-area > .pmz-choices,
+.pmz-message-area > .pmz-number {
+    position: absolute;
+    right: 12px;
+    bottom: calc(var(--pmz-message-height) + 20px);
+    min-width: 200px;
+    padding: 10px 8px;
+}
+
+.pmz-message-area.is-top > .pmz-choices,
+.pmz-message-area.is-top > .pmz-number {
+    bottom: auto;
+    top: calc(var(--pmz-message-height) + 20px);
+}
+
+.pmz-message-area.is-middle > .pmz-choices,
+.pmz-message-area.is-middle > .pmz-number,
+.pmz-message-area.is-input-only > .pmz-choices,
+.pmz-message-area.is-input-only > .pmz-number {
+    bottom: 12px;
+}
+
+.pmz-message-area > .pmz-choices.is-left {
+    right: auto;
+    left: 12px;
+}
+
+.pmz-message-area > .pmz-choices.is-center {
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.pmz-choices .pmz-choices-back {
+    position: static;
+    display: flex;
+    margin-top: 8px;
+    width: 100%;
+}
+
+/* Number input */
+.pmz-number {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pmz-number-cells {
+    display: flex;
+    gap: 4px;
+}
+
+.pmz-number-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pmz-number-digit {
+    width: 40px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 36px;
+    line-height: 44px;
+    cursor: pointer;
+}
+
+.pmz-number-cell.is-selected .pmz-number-digit {
+    background: var(--pmz-select);
+    box-shadow: inset 0 0 0 2px var(--pmz-border);
+}
+
+.pmz-number-up,
+.pmz-number-down {
+    min-width: 40px;
+    min-height: 36px;
+    padding: 0;
+    font-size: 18px;
+    border-width: 2px;
+}
+
+.pmz-number-ok {
+    align-self: stretch;
+}
+
+/*-------------------------------------------------------------------------
+ * On-screen keyboard and name entry
+ *-----------------------------------------------------------------------*/
+
+.pmz-keyboard {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 80px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pmz-keyboard-capture {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    border: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.pmz-keyboard-page {
+    position: absolute;
+    right: 16px;
+    top: -42px;
+    padding: 0 12px;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.pmz-keyboard-row {
+    display: flex;
+    gap: 6px;
+}
+
+.pmz-key {
+    flex: 1;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #fff;
+    border: 2px solid var(--pmz-border-inner);
+    cursor: pointer;
+}
+
+.pmz-key.is-ctrl {
+    font-size: 24px;
+    background: #eef3fa;
+}
+
+.pmz-key.is-selected {
+    background: var(--pmz-select);
+    border-color: var(--pmz-border);
+    box-shadow: inset 0 0 0 2px var(--pmz-border);
+}
+
+.pmz-key:active {
+    background: var(--pmz-border-inner);
+}
+
+.pmz-name-header {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pmz-name-slots {
+    display: flex;
+    gap: 6px;
+}
+
+.pmz-name-slot {
+    width: 30px;
+    text-align: center;
+    border-bottom: 3px solid var(--pmz-fg);
+}
+
+.pmz-name-slot.is-cursor {
+    border-bottom-color: var(--pmz-accent);
+    animation: pmz-blink 0.8s steps(2) infinite;
+}
+
+@keyframes pmz-blink {
+    50% {
+        border-bottom-color: transparent;
+    }
+}
+
+/*-------------------------------------------------------------------------
+ * Controls (remapping)
+ *-----------------------------------------------------------------------*/
+
+.pmz-controls-table {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 96px;
+    bottom: 84px;
+    display: flex;
+    flex-direction: column;
+    font-size: 26px;
+    line-height: 32px;
+}
+
+.pmz-controls-head,
+.pmz-controls-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+}
+
+.pmz-controls-head {
+    color: var(--pmz-muted);
+    padding-bottom: 4px;
+}
+
+.pmz-controls-grid {
+    display: block;
+    overflow-y: auto;
+}
+
+.pmz-controls-row .pmz-item {
+    min-height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pmz-controls-row.is-reset {
+    grid-template-columns: 1fr;
+    margin-top: 8px;
+}
+
+.pmz-capture {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pmz-dim);
+}
+
+.pmz-capture-box {
+    text-align: center;
+    min-width: 360px;
+}
+
+.pmz-capture-timer {
+    color: var(--pmz-muted);
+}
