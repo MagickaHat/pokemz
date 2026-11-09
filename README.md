@@ -69,6 +69,73 @@ Reset (all eased, optionally waiting), Rebuild Terrain.
 
 Remember to ship the `models/` folder: MZ's "Exclude unused files" can't see it.
 
+## Input layer
+
+`PokeMZ_Input` owns every input device. Enable it near the top of the plugin list (right
+after `PS_Sim`), above every other PokeMZ plugin. It rewires MZ's `Input` object onto the
+layer, so MZ windows, event conditions and other plugins keep working and follow rebinding.
+
+- **Semantic actions**: `confirm`, `back`, `menu`, `run`, `pageUp`, `pageDown`, the four
+  directions, and camera actions (`cameraLeft/Right/Up/Down`, `zoomIn/Out`). MZ names
+  (`ok`, `cancel`, `escape`, `shift`, ...) still work. Plugins add their own with
+  `PokeMZ.Input.registerAction(id, {defaults: {keyboard: ["key:KeyA"], gamepad: ["pad:8"]}})`.
+- **Unified devices**: keyboard (by `KeyboardEvent.code`, so layouts don't matter), every
+  connected gamepad (standard mapping, radial stick deadzone), mouse, touch, and virtual
+  sources (touch controls, scripts, replays).
+- **Per-frame snapshot**: one read of every device per frame. `isPressed`, `isTriggered`,
+  `isRepeated`, `isReleased`, `isLongPressed`, `value` and `heldFrames` return the same thing
+  wherever they are called that frame. A key pressed and released between two frames still
+  counts once.
+- **Grid movement**: the last direction pressed wins (hold Up, add Right: Right; let go:
+  Up again). The stick uses angle sectors with hysteresis, so it doesn't flicker on
+  diagonals. Tap to turn: a short tap turns the player in place. On 3D maps with a rotated
+  camera, Up means away from the camera.
+- **Camera input**: `PokeMZ.Input.camera()` returns `{yaw, pitch, zoom}` from the right
+  stick, triggers, middle-drag and the wheel, with invert options. Nothing moves the camera
+  with it yet.
+- **Contexts and consumption**: `pushContext(id, {block, allow})` hides actions from code
+  below it (also available as plugin commands, e.g. for cutscenes). `consume(action)` stops
+  a second system from reacting to the same press. Preact focus owners push a context each.
+- **Focus loss**: blurring or hiding the window, or unplugging a gamepad, releases
+  everything. Keys still held on return must be pressed again.
+- **Buffering**: `isBuffered` / `consumeBuffered` accept recent presses. A confirm pressed
+  during the last frames of a step still talks to what is in front of the player.
+- **Rebinding**: `bind(action, device, source, slot)` swaps with the previous owner, and
+  `captureNext(device)` waits for a key. Bindings and options are saved in `config.rmmzsave`.
+  Remappings saved by older versions are migrated.
+- **Active device and glyphs**: `PokeMZ.Input.device` / `.family` (xbox, playstation,
+  switch, generic) and `glyph(action)`. Preact screens use `<Glyph action>` and
+  `useGlyph`; the Back button shows its key or button. Glyph art is optional: put sheets at
+  `img/system/InputGlyphs_<keyboard|xbox|playstation|switch|generic>.png` (square cells,
+  8 per row by default; the cell layout is in the plugin help). Without them, text badges
+  are shown.
+- **Accessibility** (Options › Controls › Accessibility): toggle run, tap to turn, Nintendo
+  layout, repeat delay/speed, long-press time, stick deadzone, input buffer, invert camera,
+  button prompt style, rumble and strength, touch controls (auto/on/off), size and opacity.
+- **Rumble**: `PokeMZ.Input.rumble(strong, weak, frames)` or the plugin command. Battles
+  rumble when your Pokémon is hit or faints, and when a battle starts.
+- **Text entry**: while a text field has focus, typed letters don't act as game buttons.
+- **Local players**: a second player joins with their own device (each gamepad is one
+  device, the keyboard is one device) from Options › Controls › "Player 2: Join…" or the
+  "Join Local Player" plugin command. Player 1 keeps every device nobody else claimed.
+  `PokeMZ.Input.players.get(2)` reads player 2's input, and Preact screens take it with
+  `useFocus(..., {player: 2})` / `useCursorList(..., {player: 2})`. If player 2's gamepad
+  is unplugged, player 1 stands in until player 2 joins again.
+- **Co-op battles**: in partner (multi) battles, a joined player 2 controls the partner's
+  Pokémon with their own device and sees their own button prompts (Fight and Pokémon; the
+  bag and running stay with player 1). The Trainer Battle command's "Player 2 Controls
+  Partner" argument is auto/on/off; scripts pass `startTrainer(ids, {partner, coop})`.
+
+### Debug tools (playtest)
+
+- **F10** toggles the input overlay: device, contexts, held actions, sticks, buffer and the
+  list of hotkeys.
+- **Shift+F10** starts or stops recording raw input. Recordings are saved to
+  `input-recordings/` (NW.js) or downloaded.
+- **Ctrl+F10** replays the last recording through the whole pipeline.
+- `PokeMZ.Input.registerHotkey({key: "F6", shift: true}, fn)` is how every PokeMZ debug tool
+  adds its keys.
+
 ## Preact UI
 
 Screens can be written as [Preact](https://preactjs.com) components that sit in a DOM
@@ -80,10 +147,10 @@ plugins, in this order:
 |---|---|
 | `PokeMZ_UI_Core` | Overlay host, game-state bridge, scene lifecycle, input actions and focus, MZ asset loading, timing and audio hooks, `ui.csv` strings, transitions, toasts, hot reload |
 | `PokeMZ_UI_Messages` | Show Text, Choices and Input Number in Preact; promise API; on-screen keyboard; name entry (replaces Scene_Name) |
-| `PokeMZ_UI_Controls` | Options › Controls (keyboard and gamepad remapping, saved in config) and a UI Animations on/off option |
+| `PokeMZ_UI_Controls` | Options › Controls (rebinding every input action, accessibility options), on-screen touch controls, and a UI Animations on/off option |
 | `PokeMZ_UI_StartMenu` | Pokémon-style start menu (Pokédex, Party, Trainer, Pokégear, Bag, Save, Options, Exit) that replaces Scene_Menu on the map |
 
-Keyboard, gamepad, mouse and touch all trigger the same actions. Hover moves the cursor,
+Keyboard, gamepad, mouse and touch all trigger the same actions (from `PokeMZ_Input`). Hover moves the cursor,
 a click or tap confirms, and a right-click, two-finger tap or the on-screen Back button
 cancels.
 

@@ -2173,12 +2173,8 @@
 
     /** @brief F7 cycles languages; Shift+F7 returns to the source language. */
     function installDebugKeys() {
-        document.addEventListener("keydown", e => {
-            if (e.keyCode !== 118 || e.ctrlKey || e.altKey) {
-                return;
-            }
-            e.preventDefault();
-            if (e.shiftKey) {
+        const onKey = shift => {
+            if (shift) {
                 setLanguage(engine.source);
             } else {
                 const list = optionLanguages();
@@ -2191,6 +2187,19 @@
             } else {
                 console.info(`[PokeMZ.L10n] ${msg}`);
             }
+        };
+        const PInput = window.PokeMZ && window.PokeMZ.Input;
+        if (PInput) {
+            PInput.registerHotkey({ keyCode: 118, label: "next language" }, () => onKey(false));
+            PInput.registerHotkey({ keyCode: 118, shift: true, label: "source language" }, () => onKey(true));
+            return;
+        }
+        document.addEventListener("keydown", e => {
+            if (e.keyCode !== 118 || e.ctrlKey || e.altKey) {
+                return;
+            }
+            e.preventDefault();
+            onKey(e.shiftKey);
         });
     }
 

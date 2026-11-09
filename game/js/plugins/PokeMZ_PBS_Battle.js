@@ -82,6 +82,14 @@
  * @desc A trainer who fights beside the player (multi battle).
  * @type string
  * @default
+ * @arg coop
+ * @text Player 2 Controls Partner
+ * @desc auto = yes when a second local player has joined (PokeMZ_Input).
+ * @type select
+ * @option auto
+ * @option on
+ * @option off
+ * @default auto
  * @arg canLose
  * @text Can Lose
  * @type boolean
@@ -115,6 +123,12 @@
  *
  * Bag items, Poké Balls and failed escapes use the turn through an
  * invisible "PokeMZ Action" move.
+ *
+ * Co-op: in a partner (multi) battle, a second local player who joined
+ * through PokeMZ_Input controls the partner's Pokémon with their own
+ * device (Fight and Pokémon; the bag and running stay with player 1).
+ * startTrainer(ids, {partner, coop: "auto" | true | false}). If player 2's
+ * controller is unplugged, player 1 makes the partner's choices.
  */
 
 (() => {
@@ -769,6 +783,35 @@
     }
 
     /**
+     * @brief Lets a local player control a side (co-op: player 2 runs the
+     *        partner in a multi battle) through the battle screen's menus.
+     *        Fight and Pokémon only: the bag and running stay with player 1.
+     */
+    class HumanController {
+        /**
+         * @param {Object} [o] {player = 2, gimmicks: ["mega", ...] the side
+         *        may use, fallback: controller used when no presenter can
+         *        ask (tests, headless)}.
+         */
+        constructor(o = {}) {
+            this.human = true;
+            this.player = o.player || 2;
+            this.gimmicks = new Set(o.gimmicks || []);
+            this.fallback = o.fallback || new AIController({ gimmicks: o.gimmicks });
+        }
+
+        /**
+         * @brief Synchronous fallback (used only when the bridge can't ask).
+         * @param {string} sideId Side.
+         * @param {BattleBridge} bridge Bridge.
+         * @return {string} Choice.
+         */
+        choose(sideId, bridge) {
+            return this.fallback.choose(sideId, bridge);
+        }
+    }
+
+    /**
      * @brief Controls a side with the computer. Any object with the same
      *        choose(sideId, bridge) method can control a side (e.g. a
      *        future online player).
@@ -988,11 +1031,11 @@
          * @return {Array<{loc: number, pokemon: Object, side: string}>|null}
          *         Choices, or null when no target is chosen.
          */
-        targetsFor(slot, moveTarget) {
+        targetsFor(slot, moveTarget, sideId = "p1") {
             if (this.format === "singles" || !TARGETED.has(moveTarget)) {
                 return null;
             }
-            const source = this.battle.p1.active[slot];
+            const source = this.battle[sideId].active[slot];
             const out = [];
             for (const loc of [1, 2, -1, -2]) {
                 if (!this.battle.validTargetLoc(loc, source, moveTarget)) {
@@ -1214,6 +1257,13 @@
                 for (const id of this.sideIds().slice(1)) {
                     if (this.needs(id)) {
                         const ctrl = this.sides[id].controller || this.ai || new AIController();
+                        if (ctrl.human && this.presenter && this.presenter.chooseAction) {
+                            await this.chooseForPlayer(id);
+                            if (this.result) {
+                                break;
+                            }
+                            continue;
+                        }
                         const choice = ctrl.choose(id, this);
                         if (!this.battle.choose(id, choice)) {
                             this.battle.choose(id, "default");
@@ -1233,28 +1283,30 @@
         }
 
         /**
-         * @brief Asks the player for every active slot and sends the choice.
+         * @brief Asks a local player for every active slot of a side (p1, or
+         *        a side run by a HumanController) and sends the choice.
          *        Bag items and balls act at once; failed escapes and items use
          *        the slot's turn through the action move.
+         * @param {string} [sideId="p1"] Side to choose for.
          */
-        async chooseForPlayer() {
-            const side = this.battle.p1;
+        async chooseForPlayer(sideId = "p1") {
+            const side = this.battle[sideId];
             const req = side.activeRequest;
             if (req.forceSwitch) {
                 const parts = [];
                 const taken = new Set();
                 for (let slot = 0; slot < req.forceSwitch.length; slot++) {
-                    if (!req.forceSwitch[slot] || this.benchFor("p1", slot, taken) < 0) {
+                    if (!req.forceSwitch[slot] || this.benchFor(sideId, slot, taken) < 0) {
                         parts.push("pass");
                         continue;
                     }
-                    const pkmn = await this.presenter.chooseSwitch(this, true, { slot, taken });
-                    const idx = side.pokemon.findIndex(sp => this.member("p1", sp.name) === pkmn);
+                    const pkmn = await this.presenter.chooseSwitch(this, true, { slot, taken, side: sideId });
+                    const idx = side.pokemon.findIndex(sp => this.member(sideId, sp.name) === pkmn);
                     taken.add(idx);
                     parts.push(`switch ${idx + 1}`);
                 }
-                if (!this.battle.choose("p1", parts.join(", "))) {
-                    this.battle.choose("p1", "default");
+                if (!this.battle.choose(sideId, parts.join(", "))) {
+                    this.battle.choose(sideId, "default");
                 }
                 return;
             }
@@ -1267,7 +1319,7 @@
                     slot++;
                     continue;
                 }
-                const a = await this.presenter.chooseAction(this, slot, ctx);
+                const a = await this.presenter.chooseAction(this, slot, ctx, sideId);
                 if (a.type === "back") {
                     // Undo the previous slot's choice.
                     let prev = slot - 1;
@@ -1286,7 +1338,7 @@
                     }
                     continue;
                 }
-                const choice = await this.perform(a, slot, ctx);
+                const choice = await this.perform(a, slot, ctx, sideId);
                 if (this.result) {
                     return;
                 }
@@ -1302,8 +1354,8 @@
                 }
             }
             const text = actions.map(c => (typeof c === "string" ? c : c.text)).join(", ");
-            if (!this.battle.choose("p1", text)) {
-                this.battle.choose("p1", "default");
+            if (!this.battle.choose(sideId, text)) {
+                this.battle.choose(sideId, "default");
             }
         }
 
@@ -1314,10 +1366,15 @@
          *        {type: "run"}.
          * @param {number} slot Active slot.
          * @param {Object} ctx Choice context of this turn.
+         * @param {string} [sideId="p1"] Side choosing (only p1 may use the
+         *        bag or run).
          * @return {Promise<Object|string|null>} Choice ({text, ...}), or null
          *         to ask again.
          */
-        async perform(a, slot = 0, ctx = { taken: new Set() }) {
+        async perform(a, slot = 0, ctx = { taken: new Set() }, sideId = "p1") {
+            if (sideId !== "p1" && (a.type === "run" || a.type === "item")) {
+                return null;
+            }
             const say = (key, fallback, args) => this.presenter.say(this.presenter.tr(`Battle.${key}`, fallback, args));
             const action = { text: `move ${ACTION_MOVE}` };
             switch (a.type) {
@@ -1333,7 +1390,7 @@
                     return { text, gimmick: a.gimmick || "" };
                 }
                 case "switch": {
-                    const idx = this.battle.p1.pokemon.findIndex(sp => this.member("p1", sp.name) === a.pokemon);
+                    const idx = this.battle[sideId].pokemon.findIndex(sp => this.member(sideId, sp.name) === a.pokemon);
                     if (idx < 0) {
                         return null;
                     }
@@ -1379,6 +1436,7 @@
         FORMATS,
         TARGETED,
         AIController,
+        HumanController,
         aiPickMove,
         TARGET_BY_ID,
         effects,
@@ -1725,6 +1783,19 @@
     const controllerFor = t => new AIController({ skill: t ? t.skill : 0, gimmicks: t ? t.gimmicks : [] });
 
     /**
+     * @brief The partner's controller: local player 2 (co-op) or the AI.
+     * @param {Object} t Partner trainer data.
+     * @param {*} coop "auto" / undefined, true / "on", false / "off".
+     * @return {Object} Controller.
+     */
+    function partnerController(t, coop) {
+        const input = window.PokeMZ.Input;
+        const joined = !!(input && input.players && input.players.get(2));
+        const human = coop === true || coop === "on" || ((coop === undefined || coop === "auto") && joined);
+        return human ? new HumanController({ player: 2, gimmicks: t ? t.gimmicks : [], fallback: controllerFor(t) }) : controllerFor(t);
+    }
+
+    /**
      * @brief Starts a battle in the battle screen.
      * @param {Object} o {format ("singles" | "doubles" | "multi"), wild,
      *        sides ({p2, p3, p4}: {team, name, displayName, owners,
@@ -1740,6 +1811,12 @@
             return Promise.resolve("win");
         }
         const meta = PBS.mapMetadataFor($gameMap.mapId());
+        const input = window.PokeMZ.Input;
+        if (input) {
+            for (const h of input.players ? input.players.list() : [{ index: 1 }]) {
+                input.rumble(o.wild ? 0.3 : 0.5, 0.6, o.wild ? 18 : 24, h.index);
+            }
+        }
         return new Promise(resolve => {
             const sides = Object.assign({}, o.sides || {});
             if (!sides.p2) {
@@ -1869,7 +1946,9 @@
      *          player against one or two trainers.
      *
      * @param {string|Array<string>} ids Trainer ID(s).
-     * @param {Object} [o] {canLose, partner (trainer ID), dynamax}.
+     * @param {Object} [o] {canLose, partner (trainer ID), dynamax, coop:
+     *        "auto" (default: player 2 runs the partner when a second local
+     *        player joined) | true | false}.
      * @return {Promise<string>} Result.
      */
     function startTrainer(ids, o = {}) {
@@ -1888,7 +1967,7 @@
                         sides: {
                             p2: { team: a.team, name: a.name, displayName: a.displayName, controller: controllerFor(a) },
                             p4: { team: foeB.team, name: foeB.name, displayName: foeB.displayName, controller: controllerFor(foeB) },
-                            p3: { team: partner.team, name: partner.name, displayName: partner.displayName, controller: controllerFor(partner) },
+                            p3: { team: partner.team, name: partner.name, displayName: partner.displayName, controller: partnerController(partner, o.coop) },
                         },
                     },
                     o
@@ -1957,6 +2036,7 @@
         const o = { canLose: args.canLose === "true" };
         if (args.partner) {
             o.partner = PBS.toID(args.partner);
+            o.coop = args.coop || "auto";
         }
         const p = startTrainer(ids, o);
         waitFor(this, p, Number(args.variable || 0), RESULTS);
