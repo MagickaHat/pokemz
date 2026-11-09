@@ -1,5 +1,7 @@
 /*
  * PokéMZ UI theme (PokeMZ_UI_Core and friends).
+ * Keep to CSS that the Chromium in MZ's NW.js runtime understands (80+):
+ * no `inset` shorthand and no `gap` on flex containers (grid gap is fine).
  * Sizes are in game pixels: the overlay is scaled with the canvas.
  * Override the variables below (or any class) to restyle or add graphics.
  */
@@ -43,7 +45,10 @@
 .pmz-layer,
 .pmz-mount {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     pointer-events: none;
 }
 
@@ -62,12 +67,18 @@
 
 .pmz-transition {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .pmz-screen {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 /* MZ's (normally empty) error box sits above the overlay; let clicks pass
@@ -198,12 +209,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
 }
 
 .pmz-toasts .pmz-toast {
     position: relative;
-    inset: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
     padding: 4px 18px;
     font-size: 24px;
     color: #fff;
@@ -218,7 +231,10 @@
 
 .pmz-start {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .pmz-start-menu {
@@ -245,7 +261,10 @@
 .pmz-controls,
 .pmz-name-screen {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background: linear-gradient(#a8d0f0, #e8f0f8);
 }
 
@@ -267,7 +286,10 @@
 .pmz-message-area {
     --pmz-message-height: calc(var(--pmz-message-lines) * var(--pmz-line) + var(--pmz-pad) * 2 + 8px);
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     padding: 12px;
@@ -292,7 +314,6 @@
     height: var(--pmz-message-height);
     padding: var(--pmz-pad) 24px;
     display: flex;
-    gap: 20px;
     border-radius: var(--pmz-radius);
 }
 
@@ -412,12 +433,10 @@
 .pmz-number {
     display: flex;
     align-items: center;
-    gap: 16px;
 }
 
 .pmz-number-cells {
     display: flex;
-    gap: 4px;
 }
 
 .pmz-number-cell {
@@ -465,7 +484,6 @@
     padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
 }
 
 .pmz-keyboard-capture {
@@ -491,7 +509,6 @@
 
 .pmz-keyboard-row {
     display: flex;
-    gap: 6px;
 }
 
 .pmz-key {
@@ -528,12 +545,10 @@
     top: 16px;
     display: flex;
     align-items: center;
-    gap: 20px;
 }
 
 .pmz-name-slots {
     display: flex;
-    gap: 6px;
 }
 
 .pmz-name-slot {
@@ -600,7 +615,10 @@
 
 .pmz-capture {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -614,4 +632,31 @@
 
 .pmz-capture-timer {
     color: var(--pmz-muted);
+}
+
+/*-------------------------------------------------------------------------
+ * Spacing between flex children (flex `gap` needs Chromium 84+)
+ *-----------------------------------------------------------------------*/
+
+.pmz-toasts > * + *,
+.pmz-keyboard-row + .pmz-keyboard-row {
+    margin-top: 6px;
+}
+
+.pmz-message-face + .pmz-message-text,
+.pmz-name-header > * + * {
+    margin-left: 20px;
+}
+
+.pmz-number > * + * {
+    margin-left: 16px;
+}
+
+.pmz-number-cells > * + * {
+    margin-left: 4px;
+}
+
+.pmz-keyboard-row > * + *,
+.pmz-name-slots > * + * {
+    margin-left: 6px;
 }
