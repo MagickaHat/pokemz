@@ -355,3 +355,116 @@ PokeMZ.FMOD.playProgrammer("event:/Cry", "Cry025");
 | `node --test tests/fmod.test.js` | Engine tests and boot, budget and profiler tests against the real FMOD wasm (silent output) |
 
 Remember to ship `audio/fmod/`: MZ's "Exclude unused files" can't see it.
+
+## PBS data and Pokémon
+
+Pokémon data lives in `data/pbs/*.json` (Essentials' PBS file names, JSON format). These
+plugins load it and build the game systems on top of it. Enable them in this order: `PS_Sim` at the
+top of the list, the `PokeMZ_PBS_*` plugins right after `PokeMZ_Locale`, and `PokeMZ_UI_Pokemon`
+after `PokeMZ_UI_StartMenu`.
+
+| Plugin | What it does |
+|---|---|
+| `PS_Sim` | The Pokémon Showdown simulator (`@pkmn/sim`), bundled by `npm run build:showdown` |
+| `PokeMZ_PBS_Core` | Async loading, line-accurate JSON parser, schemas, registries, two-pass references, MZ map/item alignment, hot reload |
+| `PokeMZ_PBS_Pokemon` | `Game_Pokemon` actors, party, bag and item handlers, Pokédex, PC boxes, day care and eggs, evolution, wild encounters |
+| `PokeMZ_PBS_Graphics` | pokeemerald-style graphics folders with shiny palette swaps |
+| `PokeMZ_PBS_Battle` | Battle bridge to Showdown, custom content as a Showdown mod, localized battle text |
+| `PokeMZ_UI_Pokemon` | Gen 3 style screens: battle, party, summary, bag, Pokédex, PC, evolution, move reminder, day care |
+
+### Files and IDs
+
+Each file is an object keyed by ID; keys starting with `#` are comments. IDs follow
+Showdown's convention: lower case letters and digits only (`raichualola`, `willowisp`). The tool fills
+the files from Showdown, so species and move IDs match Showdown by construction.
+
+| File | Key | Notes |
+|---|---|---|
+| `types.json`, `natures.json`, `abilities.json`, `moves.json` | ID | Natures and types have their own locale tables |
+| `pokemon.json` | species ID | Stats, abilities, learnsets (level/TM/tutor/egg), evolutions, Pokédex data. Height and weight are in decimetres and hectograms (always shown in metric) |
+| `pokemon_forms.json` | form ID | `baseSpecies` + `forme` + only the fields that differ |
+| `pokemon_metrics.json` | species ID | Battler y offsets and elevation |
+| `items.json` | item ID | Pocket, field/battle use, `effect` (item handler) + `params` |
+| `map_metadata.json`, `encounters.json` | MZ map ID | Checked against `MapInfos.json`; add `"#map": "Route 1"` to be warned when the map is renamed |
+| `trainer_types.json`, `trainers.json`, `regional_dexes.json`, `ribbons.json`, `berry_plants.json`, `town_map.json`, `phone.json`, `battle_tower.json`, `map_connections.json` | ID | |
+
+Errors keep their position, for example `moves.json:120:14  /thunderbolt/type  unknown types "electrik"
+(did you mean "electric"?)`. In playtest the boot stops on errors and lists them; warnings go to the
+console (`PokeMZ.PBS.report()`). Files can refer to each other in any order: IDs are registered
+first and references are resolved in a second pass.
+
+```js
+PokeMZ.PBS.species.get("pikachu").name             // localized (pokemon.csv)
+PokeMZ.PBS.moves.filter(m => m.type === "fire")
+PokeMZ.PBS.encountersFor($gameMap.mapId())
+PokeMZ.PBS.reload()                                // playtest; also on file change and F6
+```
+
+### Items
+
+Every PBS item has an MZ database entry tagged `<PBS: potion>` (and `<L10n: Item.potion>`), so event
+commands such as Change Items and item conditions work. The MZ entry owns the icon and price; the PBS
+entry owns the Pokémon behaviour. Item counts are kept in the bag (`$gameParty.bag()`), sorted into
+pockets. Canon field items (healing, revives, PP, vitamins, candies, mints, ability items, evolution
+stones, TMs, repels, Escape Rope, fishing rods) come with handlers.
+
+### Pokémon
+
+`Game_Pokemon` extends `Game_Actor`. Instances are created at runtime with actor IDs from 100000 up,
+so they need no `Actors.json` slots and MZ's 1000-actor limit doesn't apply. The party is
+`$gameParty.pokemon()`; the trainer stays MZ's party leader. Every move a Pokémon has known is kept in its
+move bank for the move reminder. Evolution works like Pokémon Legends: Arceus: a Pokémon that meets its
+conditions becomes ready to evolve, and the player evolves it from the party menu whenever they like
+(trade evolutions still happen at once). The Pokédex shows full entries only for caught species. Rules
+default to Gen 9 and can be changed in `PokeMZ.Pokemon.rules`.
+
+### Graphics
+
+Like pokeemerald's `graphics/pokemon/`, each species has a folder in `img/pokemon/`:
+- `front.png` and `back.png`: 96×96 battlers. `frontf.png` and `backf.png` are optional female versions.
+- `icon.png`: two 32×32 frames stacked.
+- `normal.pal` and `shiny.pal`: JASC-PAL palettes.
+
+Forms use a sub-folder (`raichu/alola/`). Shiny sprites are made by swapping palette colors at
+load time. Missing files fall back to the base species, then to `question_mark/`. Ship `img/pokemon/`
+by hand: MZ's "Exclude unused files" can't see it.
+
+### Extending
+
+```js
+const { T } = PokeMZ.PBS;
+PokeMZ.PBS.extendSchema("pokemon", { rarity: T.int().opt(0) });        // new field
+PokeMZ.PBS.registerFile({ name: "quests", file: "quests.json", schema: T.struct({ name: T.localized() }) });
+PokeMZ.PBS.enums.add("pockets", "ingredients");                         // open enums
+PokeMZ.Pokemon.ItemHandlers.register("myeffect", { canUse, use });
+PokeMZ.Pokemon.EvolutionMethods.register("mymethod", (pkmn, evo, ctx) => true);
+PokeMZ.Pokemon.FormHandlers.register("castform", pkmn => "castformsunny");
+PokeMZ.Pokemon.FieldMoves.register("cut", { canUse, use });
+PokeMZ.Battle.registerEffect("abilities", "myability", { name: "My Ability", onModifyAtk(a) { return this.chainModify(1.5); } });
+```
+
+Entries marked `"custom": true` (fakemon, new moves) are not checked against Showdown and are loaded
+into the battle simulator as a Showdown mod.
+
+### Plugin commands
+
+`PokeMZ_PBS_Pokemon`: Give Pokémon, Give Egg, Heal Party, Open PC, Open Day Care, Move Reminder,
+Check Evolution, Give Item, Party Has Species.
+`PokeMZ_PBS_Battle`: Wild Battle, Trainer Battle (result in a variable).
+
+### Tools
+
+Run these from `tools/` (run `npm install` there first):
+
+| | |
+|---|---|
+| `npm run pbs import` | Fill the PBS files from Showdown and PokeAPI and merge names (with official translations) into the locale CSVs. Options: `--only pokemon,moves`, `--dry-run`, `--offline` |
+| `npm run pbs check` | Validate the PBS files (exit code 1 on errors) |
+| `npm run pbs items` | Create tagged `Items.json` entries for PBS items. Close the editor first |
+| `npm run pbs gfx` | List species without graphics |
+| `npm run build:showdown` | Rebuild `js/plugins/PS_Sim.js` |
+| `npm test` | All tests |
+
+Showdown has no growth rates, catch rates, base EXP, EV yields, egg cycles or Pokédex text. The
+importer takes those from [PokeAPI's CSV data](https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv),
+which is downloaded once into `tools/.cache/`.
