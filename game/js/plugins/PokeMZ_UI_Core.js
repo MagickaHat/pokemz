@@ -692,10 +692,30 @@
             }
         },
 
-        /** @return {Object|null} The focus entry that receives actions. */
-        top() {
+        /**
+         * @brief The local player whose input an entry receives: its own
+         *        player while that player is here with a device, else
+         *        player 1 (who stands in).
+         * @param {Object} entry Focus entry.
+         * @return {number} Player number.
+         */
+        playerOf(entry) {
+            const P = layer();
+            const h = entry.player > 1 && P ? P.players.get(entry.player) : null;
+            return h && h.connected ? entry.player : 1;
+        },
+
+        /**
+         * @param {number} [player=1] Local player.
+         * @return {Object|null} The focus entry that receives that player's
+         *         actions.
+         */
+        top(player = 1) {
             let best = null;
             for (const e of this.stack) {
+                if (this.playerOf(e) !== player) {
+                    continue;
+                }
                 if (!best || e.priority > best.priority || (e.priority === best.priority && e.seq > best.seq)) {
                     best = e;
                 }
@@ -739,25 +759,40 @@
          */
         update() {
             const P = layer();
+            for (const h of P ? P.players.list() : [null]) {
+                this.updatePlayer(P, h);
+            }
+        },
+
+        /**
+         * @brief Dispatches one local player's actions to their top focus.
+         * @param {Object|null} P The input layer.
+         * @param {Object|null} h The player's handle (null: MZ Input).
+         */
+        updatePlayer(P, h) {
+            const player = h ? h.index : 1;
             const fired = [];
-            const active = this.stack.length && !this.suspended && !SceneManager.isSceneChanging();
+            const top = this.top(player);
+            const active = top && !this.suspended && !SceneManager.isSceneChanging();
             if (active) {
-                const top = this.top();
-                const names = new Set([...Object.keys(this.bindings), ...Object.keys((top && top.handlers.current) || {})]);
+                const names = new Set([...Object.keys(this.bindings), ...Object.keys(top.handlers.current || {})]);
                 for (const action of names) {
                     const sources = this.bindings[action] || [action];
                     const rep = this.repeatable.has(action);
-                    const ctx = top && top.ctx;
+                    const ctx = top.ctx;
                     const hit = sources.some(n =>
-                        P ? (rep ? P.isRepeated(n, ctx) : P.isTriggered(n, ctx)) : rep ? Input.isRepeated(n) : Input.isTriggered(n)
+                        h ? (rep ? h.isRepeated(n, ctx) : h.isTriggered(n, ctx)) : rep ? Input.isRepeated(n) : Input.isTriggered(n)
                     );
                     if (hit) {
                         fired.push(action);
                     }
                 }
             }
-            // Emitted actions wait in the buffer for a focus owner.
-            if (P) {
+            // Emitted actions (pointer, scripts) belong to player 1 and wait
+            // in the buffer for a focus owner.
+            if (player !== 1) {
+                // Nothing to add.
+            } else if (P) {
                 for (const action of [...this.pending]) {
                     if (!P.isBuffered(`ui:${action}`, EMIT_FRAMES)) {
                         this.pending.delete(action);
@@ -772,25 +807,26 @@
                 this.queue = this.queue.filter(q => --q.frames > 0);
             }
             // Keyboard Escape counts as both cancel and menu in MZ; send one.
-            if (fired.includes("cancel") && fired.includes("menu") && (!P || P.state("menu").viaFallback)) {
+            if (fired.includes("cancel") && fired.includes("menu") && (!h || h.state("menu").viaFallback)) {
                 fired.splice(fired.indexOf("menu"), 1);
             }
             for (const action of fired) {
-                if (this.dispatch(action) && P) {
+                if (this.dispatch(action, player) && h) {
                     for (const n of this.bindings[action] || [action]) {
-                        P.consume(n);
+                        h.consume(n);
                     }
                 }
             }
         },
 
         /**
-         * @brief Sends an action to the top focus owner now.
+         * @brief Sends an action to a player's top focus owner now.
          * @param {string} action Action name.
+         * @param {number} [player=1] Local player.
          * @return {boolean} True if it was handled.
          */
-        dispatch(action) {
-            const top = this.top();
+        dispatch(action, player = 1) {
+            const top = this.top(player);
             const fn = top && top.handlers.current[action];
             if (fn) {
                 fn();
@@ -800,15 +836,22 @@
         },
 
         /**
-         * @brief Glyph of a UI action on the active device.
+         * @brief Glyph of a UI action on a player's active device.
          * @param {string} action UI action or input action id.
+         * @param {number} [player=1] Local player.
          * @return {Object|null} PokeMZ.Input.glyph() result.
          */
-        glyph(action) {
+        glyph(action, player = 1) {
             const P = layer();
-            return P ? P.glyph((this.bindings[action] || [action])[0]) : null;
+            const h = P && P.players.get(player);
+            return P ? P.glyph((this.bindings[action] || [action])[0], { player: h && h.connected ? player : 1 }) : null;
         },
     };
+
+    // Focus owners of a player who joins or leaves change hands.
+    if (layer()) {
+        layer().on("playerchange", () => input.notify());
+    }
 
     // Freeze the map while a UI holds focus.
     patch(Scene_Map.prototype, "isMenuEnabled", PLUGIN_NAME, orig =>
@@ -829,7 +872,9 @@
      * @param {Object} handlers {ok, cancel, up, ...} action handlers.
      * @param {Object} [opts] {enabled = true, priority = 0, blockMap = true,
      *        context = "ui", blockInput = false (hide actions from MZ code
-     *        while focused), allow: [actions MZ code still sees]}.
+     *        while focused), allow: [actions MZ code still sees], player = 1
+     *        (local player whose input it takes; player 1 stands in while
+     *        that player isn't here)}.
      * @return {{focused: boolean, isTop: function(): boolean}} Focus state.
      */
     function useFocus(handlers, opts = {}) {
@@ -838,6 +883,7 @@
         const blockMap = opts.blockMap !== false;
         const contextId = opts.context || "ui";
         const blockInput = !!opts.blockInput;
+        const player = opts.player || 1;
         const ref = useRef(handlers);
         ref.current = handlers;
         const entryRef = useRef(null);
@@ -847,8 +893,9 @@
                 return undefined;
             }
             const P = layer();
-            const ctx = P ? P.pushContext(contextId, { block: blockInput, allow: opts.allow }) : null;
-            const entry = { handlers: ref, priority, blockMap, notify: force, ctx };
+            const owner = P && P.players.get(player);
+            const ctx = owner ? owner.pushContext(contextId, { block: blockInput, allow: opts.allow }) : P ? P.pushContext(contextId, { block: blockInput, allow: opts.allow }) : null;
+            const entry = { handlers: ref, priority, blockMap, notify: force, ctx, player };
             entryRef.current = entry;
             input.add(entry);
             return () => {
@@ -858,8 +905,8 @@
                 }
                 entryRef.current = null;
             };
-        }, [enabled, priority, blockMap, contextId, blockInput]);
-        const isTop = useCallback(() => !!entryRef.current && input.top() === entryRef.current, []);
+        }, [enabled, priority, blockMap, contextId, blockInput, player]);
+        const isTop = useCallback(() => !!entryRef.current && input.top(input.playerOf(entryRef.current)) === entryRef.current, []);
         return { focused: isTop(), isTop };
     }
 
@@ -903,7 +950,7 @@
      *        click selects and confirms, the wheel scrolls it.
      * @param {number} count Number of items.
      * @param {Object} [opts] {columns, wrap, initial, onOk(i), onCancel(),
-     *        onChange(i), isEnabled(i), silentOk, enabled, priority,
+     *        onChange(i), isEnabled(i), silentOk, enabled, priority, player,
      *        handlers (extra action handlers)}.
      * @return {{index: number, setIndex: Function, focused: boolean,
      *          itemProps: function(number, string=): Object, listProps: Object}}
@@ -983,7 +1030,7 @@
                 },
                 opts.handlers || {}
             ),
-            { enabled: opts.enabled !== false, priority: opts.priority, blockMap: opts.blockMap }
+            { enabled: opts.enabled !== false, priority: opts.priority, blockMap: opts.blockMap, player: opts.player }
         );
 
         useEffect(() => {
@@ -1130,43 +1177,76 @@
     }
 
     /**
-     * @brief The active input device; re-renders when it, the gamepad
-     *        family, the bindings or the glyph options change.
-     * @return {{device: string, family: string, version: number}} State.
+     * @brief A player's active input device; re-renders when it, the
+     *        gamepad family, the bindings, the glyph options or the local
+     *        players change.
+     * @param {number} [player=1] Local player (player 1 stands in for a
+     *        player who isn't here).
+     * @return {{device: string, family: string, player: number,
+     *          version: number}} State.
      */
-    function useInputDevice() {
+    function useInputDevice(player = 1) {
         const P = layer();
-        const read = v => ({ device: P ? P.device : "keyboard", family: P ? P.family : "generic", version: v });
+        const handle = () => {
+            const h = P && P.players.get(player);
+            return h && h.connected ? h : P ? P.players.get(1) : null;
+        };
+        const read = v => {
+            const h = handle();
+            return { device: h ? h.device : "keyboard", family: h ? h.family : "generic", player: h ? h.index : 1, version: v };
+        };
         const [state, setState] = useState(() => read(0));
         useEffect(() => {
             if (!P) {
                 return undefined;
             }
             const bump = () => setState(s => read(s.version + 1));
-            const offs = [P.on("devicechange", bump), P.on("bindingschange", bump), P.on("optionschange", bump)];
-            return () => offs.forEach(off => off());
-        }, []);
+            let offDevice = null;
+            const watch = () => {
+                if (offDevice) {
+                    offDevice();
+                }
+                const h = handle();
+                offDevice = h ? h.on("devicechange", bump) : null;
+            };
+            watch();
+            const offs = [
+                P.on("bindingschange", bump),
+                P.on("optionschange", bump),
+                P.on("playerchange", () => {
+                    watch();
+                    bump();
+                }),
+            ];
+            return () => {
+                offs.forEach(off => off());
+                if (offDevice) {
+                    offDevice();
+                }
+            };
+        }, [player]);
         return state;
     }
 
     /**
-     * @brief The glyph for an action on the active device.
+     * @brief The glyph for an action on a player's active device.
      * @param {string} action UI action ("ok") or input action ("confirm").
+     * @param {number} [player=1] Local player.
      * @return {Object|null} PokeMZ.Input.glyph() result.
      */
-    function useGlyph(action) {
-        const dev = useInputDevice();
+    function useGlyph(action, player = 1) {
+        const dev = useInputDevice(player);
         useStrings();
-        return useMemo(() => input.glyph(action), [action, dev.version, dev.device, dev.family]);
+        return useMemo(() => input.glyph(action, dev.player), [action, dev.version, dev.device, dev.family, dev.player]);
     }
 
     /**
      * @brief Shows the button/key for an action: a cell of the device's
      *        glyph sheet when one exists, else a text badge.
-     * @param {Object} props {action, size = 24, class}.
+     * @param {Object} props {action, size = 24, class, player = 1}.
      */
-    function Glyph({ action, size = 24, class: cls }) {
-        const g = useGlyph(action);
+    function Glyph({ action, size = 24, class: cls, player = 1 }) {
+        const g = useGlyph(action, player);
         if (!g) {
             return null;
         }
@@ -1844,20 +1924,23 @@
     /**
      * @brief A glyph shown next to an on-screen button while the player uses
      *        keys or a gamepad (hidden for mouse and touch).
-     * @param {Object} props {action, size = 22}.
+     * @param {Object} props {action, size = 22, player = 1}.
      */
-    function ButtonHint({ action, size = 22 }) {
-        const dev = useInputDevice();
+    function ButtonHint({ action, size = 22, player = 1 }) {
+        const dev = useInputDevice(player);
         if (dev.device !== "keyboard" && dev.device !== "gamepad") {
             return null;
         }
-        return html`<${Glyph} action=${action} size=${size} class="pmz-button-hint" /> `;
+        return html`<${Glyph} action=${action} size=${size} player=${player} class="pmz-button-hint" /> `;
     }
 
-    /** @brief The on-screen Back button every screen should show. */
-    function BackButton({ onPress, class: cls }) {
+    /**
+     * @brief The on-screen Back button every screen should show.
+     * @param {Object} props {onPress, class, player = 1 (whose glyph)}.
+     */
+    function BackButton({ onPress, class: cls, player = 1 }) {
         const label = useText("UI.Common.Back", "Back");
-        return html`<${Button} class=${`pmz-back ${cls || ""}`} sound="cancel" onPress=${onPress}><${ButtonHint} action="cancel" />${label}<//>`;
+        return html`<${Button} class=${`pmz-back ${cls || ""}`} sound="cancel" onPress=${onPress}><${ButtonHint} action="cancel" player=${player} />${label}<//>`;
     }
 
     /**

@@ -1925,3 +1925,49 @@
     left: 0;
     top: 8%;
 }
+
+/*-------------------------------------------------------------------------
+ * Local players (co-op)
+ *-----------------------------------------------------------------------*/
+
+.pmz-pk-player-tag {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 0 8px;
+    border-radius: 6px;
+    background: #3870d8;
+    color: #fff;
+    font-size: 0.75em;
+    line-height: 1.4;
+    vertical-align: middle;
+}
+
+.pmz-pk-battle-cmd.is-p2 .pmz-panel,
+.pmz-pk-battle-moves.is-p2 .pmz-panel {
+    border-color: #3870d8;
+}
+
+.pmz-join {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pmz-join-box {
+    max-width: 560px;
+    text-align: center;
+    white-space: normal;
+}
+
+.pmz-join-timer {
+    color: var(--pmz-muted);
+}
+
+.pmz-join-title {
+    color: var(--pmz-accent);
+}

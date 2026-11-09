@@ -473,3 +473,117 @@ test("virtual devices: taps last one frame, holds report touch", () => {
     e.update();
     assert.equal(e.dir4, 0);
 });
+
+test("players: player 2 joins with a free gamepad and gets their own input", async () => {
+    const p1pad = pad("Xbox Wireless Controller (Vendor: 045e)");
+    const p2pad = pad("DualSense Wireless Controller (Vendor: 054c)");
+    p1pad.index = 0;
+    p2pad.index = 1;
+    const e = makeEngine([p1pad, p2pad]);
+    // Player 1 uses pad 0.
+    p1pad.buttons[0].pressed = true;
+    e.update();
+    p1pad.buttons[0].pressed = false;
+    e.update();
+    assert.equal(e.lastDeviceId, "pad#0");
+
+    const joined = e.joinNext({ exclude: e.lastDeviceId });
+    e.update(); // learns what is held
+    p1pad.buttons[0].pressed = true; // player 1's device can't join
+    e.update();
+    assert.equal(e.isTriggered("confirm"), true, "player 1 still gets their press");
+    p1pad.buttons[0].pressed = false;
+    p2pad.buttons[9].pressed = true; // Start on pad 1
+    e.update();
+    assert.deepEqual(await joined, { index: 2, deviceId: "pad#1" });
+    const p2 = e.player(2);
+    assert.equal(p2.device, "gamepad");
+    assert.equal(p2.family, "playstation");
+    assert.equal(p2.isPressed("menu"), false, "the joining press doesn't act");
+    p2pad.buttons[9].pressed = false;
+    e.update();
+
+    // Separate snapshots: pad 1 only reaches player 2.
+    p2pad.buttons[0].pressed = true;
+    p2pad.axes[0] = -1;
+    e.update();
+    assert.equal(p2.isTriggered("confirm"), true);
+    assert.equal(p2.dir4, 4);
+    assert.equal(e.isTriggered("confirm"), false);
+    assert.equal(e.dir4, 0);
+    // Player 1 still has the keyboard and pad 0.
+    e.setRaw("key:KeyZ", 1);
+    e.update();
+    assert.equal(e.isTriggered("confirm"), true);
+    assert.equal(p2.isTriggered("confirm"), false);
+    // Shared bindings and options.
+    assert.equal(p2.bindings, e.bindings);
+    e.setOption("swapConfirmBack", true);
+    assert.equal(p2.options.swapConfirmBack, true);
+});
+
+test("players: unplugging player 2's pad frees the slot; leave returns the device", async () => {
+    const pads = [pad(), pad()];
+    pads[0].index = 0;
+    pads[1].index = 1;
+    const e = makeEngine(pads);
+    const lost = [];
+    e.on("playerlost", (i, id) => lost.push(`${i}:${id}`));
+    const joined = e.joinNext({ exclude: "keyboard" });
+    e.update();
+    pads[1].buttons[0].pressed = true;
+    e.update();
+    await joined;
+    pads[1].buttons[0].pressed = false;
+    e.update();
+    // Unplug pad 1.
+    const unplugged = pads.pop();
+    e.update();
+    assert.deepEqual(lost, ["2:pad#1"]);
+    assert.equal(e.player(2).deviceId, null, "player 2 keeps the slot without a device");
+    // It comes back: it belongs to player 1 until player 2 joins again.
+    pads.push(unplugged);
+    unplugged.buttons[0].pressed = true;
+    e.update();
+    assert.equal(e.isTriggered("confirm"), true);
+    unplugged.buttons[0].pressed = false;
+    e.update();
+    const again = e.joinNext({ exclude: "keyboard" });
+    assert.ok(again instanceof Promise);
+    e.update();
+    unplugged.buttons[0].pressed = true;
+    e.update();
+    assert.deepEqual(await again, { index: 2, deviceId: "pad#1" });
+    e.removePlayer(2);
+    assert.equal(e.player(2), null);
+    unplugged.buttons[0].pressed = false;
+    e.update();
+    unplugged.buttons[0].pressed = true;
+    e.update();
+    assert.equal(e.isTriggered("confirm"), true);
+});
+
+test("players: the keyboard can be player 2's device; joins time out and cap at 2", async () => {
+    const p1pad = pad();
+    p1pad.index = 0;
+    const e = makeEngine([p1pad]);
+    const joined = e.joinNext({ exclude: "pad#0" });
+    e.update();
+    e.setRaw("key:Enter", 1);
+    e.update();
+    assert.deepEqual(await joined, { index: 2, deviceId: "keyboard" });
+    e.setRaw("key:Enter", 0);
+    e.update();
+    e.setRaw("key:ArrowUp", 1);
+    e.update();
+    assert.equal(e.player(2).dir4, 8);
+    assert.equal(e.dir4, 0, "player 1 lost the keyboard");
+
+    assert.equal(await e.joinNext({ index: 3 }), null, "only two players");
+    e.removePlayer(2);
+    const timeout = e.joinNext({ frames: 3 });
+    I.Engine.prototype.update.call(e);
+    e.update();
+    e.update();
+    assert.equal(await timeout, null);
+});

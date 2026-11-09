@@ -143,6 +143,55 @@ test("partner (multi) battle and wild doubles", needsSim, async () => {
     assert.equal(wild.result, "win");
 });
 
+test("co-op: a HumanController lets player 2 choose for the partner side", needsSim, async () => {
+    const dex = B.makeDex(sim, await registries());
+    const asked = [];
+    let refusedRun = false;
+    const presenter = {
+        tr: (k, f) => f,
+        show: async () => {},
+        say: async () => {},
+        chooseAction: async (b, slot, ctx, side = "p1") => {
+            asked.push(side);
+            if (side === "p3" && !refusedRun) {
+                refusedRun = true;
+                return { type: "run" }; // player 2 may not run: asked again
+            }
+            const req = b.battle[side].activeRequest.active[slot];
+            const targets = b.targetsFor(slot, req.moves[0].target, side);
+            return { type: "move", slot: 0, target: targets ? targets[0].loc : null };
+        },
+        chooseSwitch: async (b, forced, x) => {
+            const side = x.side || "p1";
+            return b.member(side, b.battle[side].pokemon[b.benchFor(side, x.slot, x.taken)].name);
+        },
+        refresh() {},
+        ballShakes: async () => {},
+    };
+    const human = new B.HumanController({ player: 2 });
+    const bridge = new B.BattleBridge({
+        sim,
+        dex,
+        presenter,
+        adapter: { exp: async () => {}, seen() {}, useItem: async () => "used" },
+        seed: [1, 2, 3, 4],
+        format: "multi",
+        party: [fake(dex, "charizard", 50, ["flamethrower"])],
+        sides: {
+            p3: { team: [fake(dex, "machamp", 50, ["crosschop"]), fake(dex, "gengar", 50, ["shadowball"])], name: "Player 2", controller: human },
+            p2: { team: [fake(dex, "rattata", 10, ["tackle"])], name: "A" },
+            p4: { team: [fake(dex, "spearow", 10, ["peck"])], name: "B" },
+        },
+    });
+    const result = await bridge.run();
+    assert.equal(result, "win");
+    assert.ok(asked.includes("p3"), "player 2 was asked for the partner side");
+    assert.ok(refusedRun, "running was refused for player 2");
+    assert.equal(asked.filter(x => x === "p3").length >= 2, true);
+    // Without a presenter that can ask, the fallback AI plays the side.
+    assert.equal(typeof human.choose, "function");
+});
+
 test("gimmicks: Mega, Z-Move, Tera and Dynamax", needsSim, async () => {
     const dex = B.makeDex(sim, await registries());
     const foe = () => [fake(dex, "snorlax", 70, ["tackle"])];

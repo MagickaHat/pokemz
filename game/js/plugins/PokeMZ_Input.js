@@ -145,6 +145,34 @@
  * @type string
  * @default cutscene
  *
+ * @command joinPlayer
+ * @text Join Local Player
+ * @desc Waits for player 2 to press A/Start (or Enter) on their own
+ * controller or keyboard (opens a prompt with PokeMZ_UI_Controls).
+ *
+ * @arg player
+ * @text Player
+ * @type number
+ * @min 2
+ * @max 2
+ * @default 2
+ *
+ * @arg switchId
+ * @text Result Switch
+ * @desc Set ON if the player joined, OFF if not (0 = none).
+ * @type switch
+ * @default 0
+ *
+ * @command leavePlayer
+ * @text Remove Local Player
+ *
+ * @arg player
+ * @text Player
+ * @type number
+ * @min 2
+ * @max 2
+ * @default 2
+ *
  * @help
  * ============================================================================
  * PokeMZ_Input
@@ -254,6 +282,24 @@
  * x, y, size). Preact screens use UI.components.Glyph (PokeMZ_UI_Core).
  *
  * ---------------------------------------------------------------------------
+ * Local players
+ * ---------------------------------------------------------------------------
+ * A second local player can join with their own device: each gamepad is
+ * one device and the keyboard is one device. Player 1 uses every device
+ * nobody else claimed (so alone, player 1 uses everything).
+ *   PokeMZ.Input.players.join(2) -> Promise<{index, deviceId} | null>
+ *     waits for Confirm or Start on a device other than player 1's current
+ *     one (plugin command "Join Local Player" shows a prompt).
+ *   PokeMZ.Input.players.get(2) -> isTriggered(a), dir4, glyph(a), ...
+ *   PokeMZ.Input.players.leave(2)
+ * Players share bindings and options. If player 2's gamepad is unplugged
+ * the "playerlost" event fires and player 2 keeps their slot without a
+ * device until they join again. Recordings capture player 1 only.
+ * Preact screens take input from a player with useFocus(..., {player: 2})
+ * and useCursorList(..., {player: 2}). Co-op battles (PokeMZ_PBS_Battle)
+ * let player 2 control the partner in multi battles.
+ *
+ * ---------------------------------------------------------------------------
  * Rumble, recording, debugging
  * ---------------------------------------------------------------------------
  * rumble(strong, weak, frames) vibrates gamepads (plugin command too).
@@ -279,6 +325,9 @@
 
     /** @brief Devices that own sources. */
     const DEVICES = ["keyboard", "gamepad"];
+
+    /** @brief Most local players at once. */
+    const MAX_PLAYERS = 2;
 
     /** @brief Recognized gamepad families (glyph sets). */
     const FAMILIES = ["xbox", "playstation", "switch", "generic"];
@@ -774,14 +823,24 @@
      *        update() turns them into a per-frame action snapshot.
      */
     class Engine {
-        constructor() {
+        /**
+         * @param {Object} [opts] {root, index}: extra local players are
+         *        engines that share the root's actions, bindings and options
+         *        and read only the devices they claimed.
+         */
+        constructor(opts = {}) {
+            /** @brief Player 1's engine (this one for player 1). */
+            this.root = opts.root || this;
+            /** @brief Local player number (1 = player 1). */
+            this.index = opts.index || 1;
+            const root = opts.root;
             /** @brief Action definitions by id, in registration order. */
-            this.actions = new Map();
+            this.actions = root ? root.actions : new Map();
             /** @brief action -> {keyboard: [...], gamepad: [...]}. */
-            this.bindings = {};
-            this.options = Object.assign({}, DEFAULT_OPTIONS);
+            this.bindings = root ? root.bindings : {};
+            this.options = root ? root.options : Object.assign({}, DEFAULT_OPTIONS);
             /** @brief Defaults for options (after plugin parameters). */
-            this.optionDefaults = Object.assign({}, DEFAULT_OPTIONS);
+            this.optionDefaults = root ? root.optionDefaults : Object.assign({}, DEFAULT_OPTIONS);
             /** @brief Base repeat timing (MZ Input.keyRepeatWait/Interval). */
             this.repeatWait = 24;
             this.repeatInterval = 6;
@@ -825,6 +884,26 @@
             this.capture = null;
             this.listeners = {};
             this.recorder = new Recorder(this);
+            /** @brief Device id of the last press ("keyboard", "pad#0"...). */
+            this.lastDeviceId = "keyboard";
+            /** @brief Source -> device id it came from this frame. */
+            this._srcDevice = new Map();
+            /** @brief Device claimed by this player (players 2+). */
+            this.deviceId = null;
+            // Player 1 only: the players and who claimed which device.
+            /** @brief Local players, player 1 first. */
+            this.players = [this];
+            /** @brief Device id -> the player (2+) that claimed it. */
+            this.claims = new Map();
+            /** @brief Device id -> gamepad family. */
+            this.padFamilyOf = new Map();
+            this.joining = null;
+            if (root) {
+                for (const id of this.actions.keys()) {
+                    this.states[id] = newState();
+                }
+                return;
+            }
             for (const def of BUILTIN_ACTIONS) {
                 this.registerAction(def.id, def);
             }
@@ -1340,7 +1419,139 @@
          */
         blur(reason = "blur") {
             this.release();
+            if (this.root === this) {
+                for (const p of this.players.slice(1)) {
+                    p.release();
+                }
+            }
             this.emit("focuschange", false, reason);
+        }
+
+        //---------------------------------------------------------------------
+        // Local players
+        //---------------------------------------------------------------------
+
+        /**
+         * @param {number} index Player number.
+         * @return {Engine|null} That player's engine.
+         */
+        player(index) {
+            return this.root.players.find(p => p.index === index) || null;
+        }
+
+        /**
+         * @brief Adds a local player (no device yet).
+         * @param {number} [index] Player number (default: the next free one).
+         * @return {Engine|null} Its engine, or null when full.
+         */
+        addPlayer(index) {
+            const root = this.root;
+            let n = index;
+            if (!n) {
+                n = 2;
+                while (root.player(n)) {
+                    n++;
+                }
+            }
+            if (root.player(n)) {
+                return root.player(n);
+            }
+            if (n < 2 || n > MAX_PLAYERS) {
+                return null;
+            }
+            const p = new Engine({ root, index: n });
+            p.repeatWait = root.repeatWait;
+            p.repeatInterval = root.repeatInterval;
+            root.players.push(p);
+            root.players.sort((a, b) => a.index - b.index);
+            root.emit("playerchange", n, "added");
+            return p;
+        }
+
+        /**
+         * @brief Removes a local player; its device returns to player 1.
+         * @param {number} index Player number (2+).
+         */
+        removePlayer(index) {
+            const root = this.root;
+            const p = root.player(index);
+            if (!p || p === root) {
+                return;
+            }
+            if (p.deviceId) {
+                root.claims.delete(p.deviceId);
+            }
+            root.players.splice(root.players.indexOf(p), 1);
+            root.emit("playerchange", index, "removed");
+        }
+
+        /**
+         * @brief Gives a device to a player (2+). Player 1 keeps every device
+         *        nobody claimed. Sources held on it must be pressed again.
+         * @param {string} deviceId "keyboard" or "pad#<index>".
+         * @param {number} index Player number.
+         */
+        claim(deviceId, index) {
+            const root = this.root;
+            const p = root.player(index);
+            if (!p || p === root || deviceId === "virtual") {
+                return;
+            }
+            if (p.deviceId) {
+                root.claims.delete(p.deviceId);
+            }
+            const prev = root.claims.get(deviceId);
+            if (prev && prev !== p) {
+                prev.deviceId = null;
+            }
+            root.claims.set(deviceId, p);
+            p.deviceId = deviceId;
+            p.release();
+            const pad = deviceId.startsWith("pad#");
+            p.noteDevice(pad ? "gamepad" : "keyboard", pad ? root.padFamilyOf.get(deviceId) || "generic" : p.family);
+            root.emit("playerchange", index, "device", deviceId);
+        }
+
+        /**
+         * @brief Waits for a player to join: the first device (not
+         *        excluded, not claimed) to press Confirm or Start.
+         * @param {Object} [opts] {index (default: next free), exclude (device
+         *        id, usually player 1's), frames = 600}.
+         * @return {Promise<{index: number, deviceId: string}|null>} Who
+         *         joined, or null (timeout, cancelJoin(), or no free slot).
+         */
+        joinNext(opts = {}) {
+            const root = this.root;
+            root.cancelJoin();
+            let index = opts.index;
+            if (!index) {
+                index = 2;
+                while (index <= MAX_PLAYERS && root.player(index) && root.player(index).deviceId) {
+                    index++;
+                }
+            }
+            if (index < 2 || index > MAX_PLAYERS) {
+                return Promise.resolve(null);
+            }
+            return new Promise(resolve => {
+                root.joining = { index, exclude: opts.exclude || null, frames: opts.frames || 600, resolve, prev: null };
+            });
+        }
+
+        /** @brief Stops waiting for a player to join (resolves null). */
+        cancelJoin() {
+            const j = this.root.joining;
+            if (j) {
+                this.root.joining = null;
+                j.resolve(null);
+            }
+        }
+
+        /**
+         * @return {number} Frames left of a pending join (0 = none).
+         */
+        joinFramesLeft() {
+            return this.root.joining ? this.root.joining.frames : 0;
         }
 
         //---------------------------------------------------------------------
@@ -1499,51 +1710,165 @@
          */
         update() {
             this.frame++;
-            let values;
+            const subs = this.players.slice(1);
+            for (const p of subs) {
+                p.frame = this.frame;
+                p.repeatWait = this.repeatWait;
+                p.repeatInterval = this.repeatInterval;
+            }
             if (this.recorder.playing) {
-                values = this.recorder.next();
-            } else {
-                values = this.collect();
-                if (this.recorder.recording) {
-                    this.recorder.push(values);
+                this._srcDevice = new Map();
+                this.evaluate(this.recorder.next());
+                for (const p of subs) {
+                    p.evaluate(new Map());
                 }
+                return;
+            }
+            const devices = this.readDevices();
+            this._checkClaims(devices);
+            this._updateJoin(devices);
+            const values = this.valuesFor(this, devices);
+            if (this.recorder.recording) {
+                this.recorder.push(values);
             }
             this.evaluate(values);
+            for (const p of subs) {
+                p.evaluate(this.valuesFor(p, devices));
+            }
         }
 
         /**
-         * @brief Gathers source values from raw input and gamepads.
-         * @return {Map<string, number>} Source -> value (non-zero only).
+         * @brief Merges the source values of the devices a player owns.
+         *        Player 1 owns every device nobody claimed.
+         * @param {Engine} player Player engine.
+         * @param {Map<string, Map<string, number>>} devices Per-device values.
+         * @return {Map<string, number>} Source -> value.
          */
-        collect() {
-            const values = new Map(this.raw);
+        valuesFor(player, devices) {
+            const values = new Map();
+            const from = new Map();
+            for (const [id, m] of devices) {
+                if ((this.claims.get(id) || this) !== player) {
+                    continue;
+                }
+                for (const [s, v] of m) {
+                    if (v > (values.get(s) || 0)) {
+                        values.set(s, v);
+                        from.set(s, id);
+                    }
+                }
+            }
+            player._srcDevice = from;
+            return values;
+        }
+
+        /**
+         * @brief A claimed gamepad that disappeared frees its player.
+         * @param {Map<string, Map>} devices This frame's devices.
+         */
+        _checkClaims(devices) {
+            for (const [id, p] of [...this.claims]) {
+                if (!devices.has(id)) {
+                    this.claims.delete(id);
+                    p.deviceId = null;
+                    p.release();
+                    this.emit("playerlost", p.index, id);
+                    this.emit("playerchange", p.index, "lost", id);
+                }
+            }
+        }
+
+        /**
+         * @brief Joins the first free device that presses Confirm or Start
+         *        while a join is pending (edges only: held buttons don't).
+         * @param {Map<string, Map>} devices This frame's devices.
+         */
+        _updateJoin(devices) {
+            const j = this.joining;
+            if (!j) {
+                return;
+            }
+            if (--j.frames <= 0) {
+                this.cancelJoin();
+                return;
+            }
+            const now = new Map();
+            for (const [id, m] of devices) {
+                if (id === "virtual" || id === j.exclude || this.claims.has(id)) {
+                    continue;
+                }
+                const type = id === "keyboard" ? "keyboard" : "gamepad";
+                const sources = this.bindings.confirm[type].concat(type === "gamepad" ? ["pad:9"] : []);
+                now.set(id, sources.some(s => (m.get(s) || 0) >= PRESS_AT));
+            }
+            const prev = j.prev;
+            j.prev = now;
+            if (!prev) {
+                return; // first frame: only learn what is already held
+            }
+            for (const [id, down] of now) {
+                if (down && prev.get(id) === false) {
+                    this.joining = null;
+                    const p = this.addPlayer(j.index);
+                    if (!p) {
+                        j.resolve(null);
+                        return;
+                    }
+                    this.claim(id, j.index);
+                    for (const [s, v] of devices.get(id)) {
+                        if (v > 0) {
+                            p.locked.add(s);
+                        }
+                    }
+                    j.resolve({ index: j.index, deviceId: id });
+                    return;
+                }
+            }
+        }
+
+        /**
+         * @brief Reads every device once (player 1's engine only).
+         * @return {Map<string, Map<string, number>>} Device id ("keyboard",
+         *         "virtual", "pad#<index>") -> source -> value.
+         */
+        readDevices() {
+            const devices = new Map();
+            const keyboard = new Map();
+            const virtual = new Map();
+            const put0 = (s, v) => (s.startsWith("key:") ? keyboard : virtual).set(s, v);
+            for (const [s, v] of this.raw) {
+                put0(s, v);
+            }
             for (const s of this._pulses) {
-                values.set(s, 1);
+                put0(s, 1);
             }
             this._pulses.clear();
             this._fresh.clear();
             for (const [id, n] of this.taps) {
-                values.set(`virtual:${id}`, 1);
+                virtual.set(`virtual:${id}`, 1);
                 if (n <= 1) {
                     this.taps.delete(id);
                 } else {
                     this.taps.set(id, n - 1);
                 }
             }
+            devices.set("keyboard", keyboard);
+            devices.set("virtual", virtual);
             const pads = this.pollPads ? this.pollPads() : [];
             this.padFamilies = [];
-            for (const pad of pads) {
+            pads.forEach((pad, n) => {
                 if (!pad || pad.connected === false) {
-                    continue;
+                    return;
                 }
                 const family = familyOf(pad.id);
+                const deviceId = `pad#${pad.index !== undefined ? pad.index : n}`;
                 this.padFamilies.push(family);
+                this.padFamilyOf.set(deviceId, family);
+                const values = new Map();
+                devices.set(deviceId, values);
                 const put = (s, v) => {
                     if (v > 0 && v > (values.get(s) || 0)) {
                         values.set(s, v);
-                        if (v >= PRESS_AT && !this.digital.get(s)) {
-                            this._padFamilyHint = family;
-                        }
                     }
                 };
                 (pad.buttons || []).forEach((b, i) => {
@@ -1563,10 +1888,10 @@
                     const m = Math.abs(raw) <= this.options.deadzone ? 0 : (Math.abs(raw) - this.options.deadzone) / (1 - this.options.deadzone);
                     put(`axis:${a}${raw < 0 ? "-" : "+"}`, m);
                 }
-            }
+            });
             this._cameraFrame = this.cameraDelta;
             this.cameraDelta = { x: 0, y: 0, wheel: 0 };
-            return values;
+            return devices;
         }
 
         /**
@@ -1602,11 +1927,14 @@
             for (const s of pressedNow) {
                 const dev = deviceOf(s);
                 if (dev !== "virtual") {
-                    this.noteDevice(dev, dev === "gamepad" ? this._padFamilyHint || this.family : this.family);
+                    const id = this._srcDevice.get(s);
+                    if (id) {
+                        this.lastDeviceId = id;
+                    }
+                    this.noteDevice(dev, dev === "gamepad" ? (id && this.root.padFamilyOf.get(id)) || this.family : this.family);
                     this.lastPressDate = Date.now();
                 }
             }
-            this._padFamilyHint = null;
 
             // Rebinding capture swallows everything.
             if (this.capture) {
@@ -2558,15 +2886,17 @@
     /**
      * @brief What to show for an action on the active device.
      * @param {string} action Action id or MZ name.
-     * @param {Object} [opts] {device, family} to force one.
+     * @param {Object} [opts] {player (number), device, family} to force
+     *        one.
      * @return {{action, device, family, source, text, image, keycap}}
      *         image = {url, x, y, size, width, height} when a sheet exists
      *         (keycap: true means draw text over a blank keycap).
      */
     function glyph(action, opts = {}) {
-        const target = engine.glyphTarget();
+        const e = (opts.player && engine.player(opts.player)) || engine;
+        const target = e.glyphTarget();
         const device = opts.device || target.device;
-        const family = opts.family || (device === "keyboard" ? "keyboard" : opts.device ? engine.family : target.family);
+        const family = opts.family || (device === "keyboard" ? "keyboard" : opts.device ? e.family : target.family);
         const source = engine.glyphSource(action, device);
         const text = engine.sourceName(source, family, t);
         let image = null;
@@ -2622,14 +2952,24 @@
      * @param {number} [strong=0.6] Strong motor 0..1.
      * @param {number} [weak=0.6] Weak motor 0..1.
      * @param {number} [frames=15] Duration in frames.
+     * @param {number} [player] Only this local player's gamepads (default:
+     *        player 1's, i.e. every gamepad no other player claimed).
      */
-    function rumble(strong = 0.6, weak = 0.6, frames = 15) {
+    function rumble(strong = 0.6, weak = 0.6, frames = 15, player = 1) {
         if (!engine.options.rumble || engine.options.rumbleStrength <= 0 || engine.recorder.playing) {
             return;
         }
         const k = engine.options.rumbleStrength;
         const duration = Math.round((frames * 1000) / 60);
-        for (const pad of engine.pollPads()) {
+        const target = engine.player(player);
+        if (!target) {
+            return;
+        }
+        engine.pollPads().forEach((pad, n) => {
+            const id = `pad#${pad.index !== undefined ? pad.index : n}`;
+            if ((engine.claims.get(id) || engine) !== target) {
+                return;
+            }
             try {
                 if (pad.vibrationActuator && pad.vibrationActuator.playEffect) {
                     pad.vibrationActuator
@@ -2641,7 +2981,7 @@
             } catch (e) {
                 // Rumble is best effort.
             }
-        }
+        });
     }
 
     //-------------------------------------------------------------------------
@@ -2738,7 +3078,7 @@
             const marks = [...e.marks].filter(([, f]) => e.frame - f <= 30).map(([k, f]) => `${k}@-${e.frame - f}`);
             this.el.textContent = [
                 `Input  frame ${e.frame}  device ${e.device} (${e.family})  glyphs ${e.glyphTarget().family}`,
-                `pads   ${e.padFamilies.join(", ") || "none"}`,
+                `pads   ${e.padFamilies.join(", ") || "none"}   players ${e.players.map(p => `P${p.index}:${p === e ? `${e.lastDeviceId}+` : p.deviceId || "-"}`).join(" ")}${e.joining ? `  joining P${e.joining.index}` : ""}`,
                 `ctx    ${["gameplay", ...e.contexts.map(c => `${c.id}${c.block ? "*" : ""}`)].join(" > ")}${e.textEntry ? "  [text entry]" : ""}`,
                 `held   ${held.join(" ") || "-"}`,
                 `dir    dir4 ${e.dir4} dir8 ${e.dir8} move ${e.moveDirection()} held ${e.dirHeld} rot ${e.rotation}`,
@@ -2790,6 +3130,138 @@
         })
     );
     PluginManager.registerCommand(PLUGIN_NAME, "popContext", args => engine.popContext(String(args.id || "cutscene")));
+
+    //-------------------------------------------------------------------------
+    // Local players
+    //-------------------------------------------------------------------------
+
+    const handles = new Map();
+
+    /**
+     * @brief A stable read API for one local player's input.
+     * @param {Engine} e The player's engine.
+     * @return {Object} Handle.
+     */
+    function playerHandle(e) {
+        if (handles.has(e)) {
+            return handles.get(e);
+        }
+        const h = {
+            engine: e,
+            get index() {
+                return e.index;
+            },
+            /** @brief Claimed device id (player 1: the last one used). */
+            get deviceId() {
+                return e === engine ? e.lastDeviceId : e.deviceId;
+            },
+            /** @brief "keyboard", "gamepad", "touch" or "mouse". */
+            get device() {
+                return e.device;
+            },
+            get family() {
+                return e.family;
+            },
+            /** @brief False for a player whose gamepad was unplugged. */
+            get connected() {
+                return e === engine || !!e.deviceId;
+            },
+            get dir4() {
+                return e.readable("up") ? e.dir4 : 0;
+            },
+            get dir8() {
+                return e.readable("up") ? e.dir8 : 0;
+            },
+            state: a => e.state(a),
+            isPressed: (a, ctx) => e.isPressed(a, ctx),
+            isTriggered: (a, ctx) => e.isTriggered(a, ctx),
+            isRepeated: (a, ctx) => e.isRepeated(a, ctx),
+            isReleased: (a, ctx) => e.isReleased(a, ctx),
+            isLongPressed: a => e.isLongPressed(a),
+            value: a => e.value(a),
+            heldFrames: a => e.heldFrames(a),
+            moveDirection: () => e.moveDirection(),
+            moveVector: () => e.moveVector(),
+            camera: () => e.camera(),
+            pushContext: (id, opts) => e.pushContext(id, opts),
+            popContext: id => e.popContext(id),
+            consume: a => e.consume(a),
+            isBuffered: (tag, frames) => e.isBuffered(tag, frames),
+            consumeBuffered: (tag, frames) => e.consumeBuffered(tag, frames),
+            glyph: (a, opts) => glyph(a, Object.assign({ player: e.index }, opts || {})),
+            on: (name, fn) => e.on(name, fn),
+            off: (name, fn) => e.off(name, fn),
+        };
+        handles.set(e, h);
+        return h;
+    }
+
+    /**
+     * @brief Display name of a device id ("Keyboard", "Gamepad 2 (xbox)").
+     * @param {string} deviceId Device id.
+     * @return {string} Name.
+     */
+    function deviceName(deviceId) {
+        if (!deviceId) {
+            return "—";
+        }
+        if (deviceId === "keyboard") {
+            return t("UI.Controls.Keyboard", "Keyboard");
+        }
+        const m = /^pad#(\d+)$/.exec(deviceId);
+        if (m) {
+            const fam = engine.padFamilyOf.get(deviceId) || "generic";
+            return `${t("UI.Controls.Gamepad", "Gamepad")} ${Number(m[1]) + 1} (${t(`UI.Input.Style.${fam}`, fam)})`;
+        }
+        return deviceId;
+    }
+
+    const players = {
+        max: MAX_PLAYERS,
+        /** @return {number} Players present (player 1 included). */
+        count: () => engine.players.length,
+        /** @return {Array<Object>} Player handles, player 1 first. */
+        list: () => engine.players.map(playerHandle),
+        /**
+         * @param {number} index Player number.
+         * @return {Object|null} Handle, or null if that player isn't here.
+         */
+        get: index => {
+            const e = engine.player(index);
+            return e ? playerHandle(e) : null;
+        },
+        /**
+         * @brief Waits for a player to join with Confirm/Start on a free
+         *        device (not player 1's current one).
+         * @param {number} [index] Player number (default: next free).
+         * @param {Object} [opts] {frames = 600, exclude}.
+         * @return {Promise<Object|null>} {index, deviceId} or null.
+         */
+        join: (index, opts = {}) => engine.joinNext(Object.assign({ index, exclude: engine.lastDeviceId }, opts)),
+        cancelJoin: () => engine.cancelJoin(),
+        joinFramesLeft: () => engine.joinFramesLeft(),
+        /** @return {boolean} True while waiting for a player to join. */
+        isJoining: () => !!engine.joining,
+        /**
+         * @brief Removes a player (their device goes back to player 1).
+         * @param {number} index Player number (2+).
+         */
+        leave: index => engine.removePlayer(index),
+        deviceName,
+    };
+
+    PluginManager.registerCommand(PLUGIN_NAME, "joinPlayer", function(args) {
+        const index = parseNum(args.player, 2);
+        const switchId = parseNum(args.switchId, 0);
+        const UI = window.PokeMZ && window.PokeMZ.UI;
+        const done = r => switchId && $gameSwitches.setValue(switchId, !!r);
+        if (UI && UI.screens && UI.screens.has("joinPlayer")) {
+            UI.openScreen("joinPlayer", { player: index, onDone: done });
+        } else {
+            players.join(index).then(done);
+        }
+    });
+    PluginManager.registerCommand(PLUGIN_NAME, "leavePlayer", args => players.leave(parseNum(args.player, 2)));
 
     //-------------------------------------------------------------------------
     // Public API
@@ -2882,6 +3354,7 @@
         registerHotkey,
         hotkeys: () => hotkeys.map(h => ({ text: hotkeyText(h), label: h.label || "" })),
         overlay,
+        players,
         on: (name, fn) => engine.on(name, fn),
         off: (name, fn) => engine.off(name, fn),
         internals,

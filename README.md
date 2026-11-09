@@ -115,6 +115,16 @@ layer, so MZ windows, event conditions and other plugins keep working and follow
 - **Rumble**: `PokeMZ.Input.rumble(strong, weak, frames)` or the plugin command. Battles
   rumble when your Pokémon is hit or faints, and when a battle starts.
 - **Text entry**: while a text field has focus, typed letters don't act as game buttons.
+- **Local players**: a second player joins with their own device (each gamepad is one
+  device, the keyboard is one device) from Options › Controls › "Player 2: Join…" or the
+  "Join Local Player" plugin command. Player 1 keeps every device nobody else claimed.
+  `PokeMZ.Input.players.get(2)` reads player 2's input, and Preact screens take it with
+  `useFocus(..., {player: 2})` / `useCursorList(..., {player: 2})`. If player 2's gamepad
+  is unplugged, player 1 stands in until player 2 joins again.
+- **Co-op battles**: in partner (multi) battles, a joined player 2 controls the partner's
+  Pokémon with their own device and sees their own button prompts (Fight and Pokémon; the
+  bag and running stay with player 1). The Trainer Battle command's "Player 2 Controls
+  Partner" argument is auto/on/off; scripts pass `startTrainer(ids, {partner, coop})`.
 
 ### Debug tools (playtest)
 

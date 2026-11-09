@@ -188,10 +188,10 @@
     const Level = ({ level }) => html`<span class="pmz-pk-level">${tr("Pkmn.Lv", "Lv. {level}", { level })}</span>`;
 
     /** @brief A bottom help line with a Back button. */
-    function HelpBar({ text, onBack }) {
+    function HelpBar({ text, onBack, player = 1 }) {
         return html`<div class="pmz-panel pmz-pk-help">
             <span>${text}</span>
-            ${onBack ? html`<${BackButton} onPress=${onBack} class="pmz-pk-help-back" />` : null}
+            ${onBack ? html`<${BackButton} onPress=${onBack} class="pmz-pk-help-back" player=${player} />` : null}
         </div>`;
     }
 
@@ -268,6 +268,7 @@
                 right: () => cursor.index === 0 && list.length > 1 && cursor.setIndex(1),
             },
             priority: props.priority,
+            player: props.player,
         });
         UI.useGame(() => list.map(p => `${p.hp}|${p.status}|${p.level}|${p.speciesId}`).join(","));
         const rest = [];
@@ -295,7 +296,7 @@
                     />`
                 )}
             </div>
-            <${HelpBar} text=${props.help} onBack=${props.onCancel} />
+            <${HelpBar} text=${props.help} onBack=${props.onCancel} player=${props.player} />
         </div>`;
     }
 
@@ -316,6 +317,7 @@
                 onOk=${i => done(list[i])}
                 onCancel=${o.cancel === false ? undefined : () => done(null)}
                 priority=${5}
+                player=${o.player}
             />
         </div>`);
     }
@@ -1317,13 +1319,13 @@
      * @param {BattleBridge} bridge Bridge.
      * @return {Promise<number|null>} Target location (null = cancel).
      */
-    function pickTarget(targets, bridge) {
+    function pickTarget(targets, bridge, player = 1) {
         const foes = targets.filter(t => t.loc > 0).sort((a, b) => b.loc - a.loc);
         const allies = targets.filter(t => t.loc < 0).sort((a, b) => a.loc - b.loc);
         const list = foes.concat(allies);
         return modal(done => {
             function TargetPicker() {
-                const cursor = useCursorList(list.length, { columns: 2, onOk: i => done(list[i].loc), onCancel: () => done(null), priority: 6 });
+                const cursor = useCursorList(list.length, { columns: 2, onOk: i => done(list[i].loc), onCancel: () => done(null), priority: 6, player });
                 return html`<div class="pmz-pk-target">
                     <div class="pmz-panel pmz-pk-target-panel" role="listbox" aria-label=${tr("Battle.ChooseTarget", "Choose a target.")}>
                         <div class="pmz-pk-target-title">${tr("Battle.ChooseTarget", "Choose a target.")}</div>
@@ -1417,8 +1419,8 @@
                             update(pos, { anim: ev.type === "damage" && !ev.from ? "hit" : "" });
                             if (ev.type === "damage" && !ev.from) {
                                 SoundManager.playEnemyDamage();
-                                if (ev.side === "p1" && window.PokeMZ.Input) {
-                                    window.PokeMZ.Input.rumble(0.7, 0.4, 12);
+                                if ((ev.side === "p1" || playerOf(bridge, ev.side) > 1) && window.PokeMZ.Input) {
+                                    window.PokeMZ.Input.rumble(0.7, 0.4, 12, playerOf(bridge, ev.side));
                                 }
                             }
                             await wait(24);
@@ -1426,8 +1428,8 @@
                         case "faint":
                             update(pos, { anim: "faint", hp: 0 });
                             SoundManager.playEnemyCollapse();
-                            if (ev.side === "p1" && window.PokeMZ.Input) {
-                                window.PokeMZ.Input.rumble(0.9, 0.9, 24);
+                            if ((ev.side === "p1" || playerOf(bridge, ev.side) > 1) && window.PokeMZ.Input) {
+                                window.PokeMZ.Input.rumble(0.9, 0.9, 24, playerOf(bridge, ev.side));
                             }
                             await wait(30);
                             break;
@@ -1467,20 +1469,23 @@
                         update(pos, { hidden: true });
                     }
                 },
-                chooseAction(b, slot = 0, ctx = {}) {
-                    return new Promise(resolve => setMenu({ kind: "command", slot, ctx, resolve }));
+                chooseAction(b, slot = 0, ctx = {}, side = "p1") {
+                    return new Promise(resolve => setMenu({ kind: "command", slot, ctx, resolve, side, player: playerOf(b, side) }));
                 },
                 async chooseSwitch(b, forced, o = {}) {
                     const taken = o.taken || new Set();
+                    const side = o.side || "p1";
+                    const list = side === "p1" ? $gameParty.pokemon() : b.sides[side].team.filter(x => !x.isEgg());
                     for (;;) {
                         const p = await pickPokemon({
-                            list: $gameParty.pokemon(),
+                            list,
                             help: forced ? tr("Battle.ChooseNext", "Choose a Pokémon to send out.") : tr("Party.Choose", "Choose a Pokémon."),
                             filter: x => {
                                 const sp = b.simOf(x);
-                                return x.isAble() && !!sp && !sp.fainted && !sp.isActive && !taken.has(b.battle.p1.pokemon.indexOf(sp));
+                                return x.isAble() && !!sp && !sp.fainted && !sp.isActive && !taken.has(b.battle[side].pokemon.indexOf(sp));
                             },
                             cancel: !forced,
+                            player: playerOf(b, side),
                         });
                         if (p || !forced) {
                             return p;
@@ -1573,16 +1578,46 @@
         </div>`;
     }
 
+    /**
+     * @brief Local player who makes a side's choices (player 1 for p1, or
+     *        the HumanController's player).
+     * @param {Object} bridge Battle bridge.
+     * @param {string} side Side ID.
+     * @return {number} Player number.
+     */
+    function playerOf(bridge, side) {
+        if (!side || side === "p1") {
+            return 1;
+        }
+        const ctrl = bridge.sides[side] && bridge.sides[side].controller;
+        return (ctrl && ctrl.human && ctrl.player) || 1;
+    }
+
+    /** @brief "Player 2" tag shown on the menus of a co-op player. */
+    function PlayerTag({ player }) {
+        if (!player || player === 1) {
+            return null;
+        }
+        const input = window.PokeMZ.Input;
+        const h = input && input.players && input.players.get(player);
+        const here = !!(h && h.connected);
+        return html`<span class=${`pmz-pk-player-tag is-p${player}`}>
+            ${tr("Battle.PlayerTag", "P{n}", { n: player })}${here ? "" : ` → ${tr("Battle.PlayerTag", "P{n}", { n: 1 })}`}
+        </span>`;
+    }
+
     /** @brief FIGHT / BAG / POKéMON / RUN for one active slot. */
     function CommandMenu({ bridge, menu, setMenu, pick }) {
         const slot = menu.slot || 0;
-        const active = bridge.active("p1", slot);
-        const p = active ? bridge.member("p1", active.name) : null;
+        const side = menu.side || "p1";
+        const player = menu.player || 1;
+        const active = bridge.active(side, slot);
+        const p = active ? bridge.member(side, active.name) : null;
         const items = [
             { label: tr("Battle.Cmd.Fight", "FIGHT"), value: "fight" },
-            { label: tr("Battle.Cmd.Bag", "BAG"), value: "bag" },
+            { label: tr("Battle.Cmd.Bag", "BAG"), value: "bag", disabled: side !== "p1" },
             { label: tr("Battle.Cmd.Pokemon", "POKéMON"), value: "pokemon" },
-            { label: tr("Battle.Cmd.Run", "RUN"), value: "run" },
+            { label: tr("Battle.Cmd.Run", "RUN"), value: "run", disabled: side !== "p1" },
         ];
         const [busy, setBusy] = useState(false);
         const choose = async value => {
@@ -1619,7 +1654,7 @@
                     }
                     pick({ type: "item", item: id, target });
                 } else if (value === "pokemon") {
-                    const pk = await bridge.presenter.chooseSwitch(bridge, false, { slot, taken: menu.ctx && menu.ctx.taken });
+                    const pk = await bridge.presenter.chooseSwitch(bridge, false, { slot, taken: menu.ctx && menu.ctx.taken, side });
                     if (pk) {
                         pick({ type: "switch", pokemon: pk });
                     }
@@ -1632,10 +1667,12 @@
             columns: 2,
             onOk: i => choose(items[i].value),
             onCancel: slot > 0 ? () => pick({ type: "back" }) : undefined,
+            isEnabled: i => !items[i].disabled,
             priority: busy ? -1 : 2,
+            player,
         });
-        return html`<div class="pmz-pk-battle-cmd">
-            <div class="pmz-panel pmz-pk-battle-msg"><span>${tr("Battle.WhatWillDo", "What will {pokemon} do?", { pokemon: p ? p.name() : "" })}</span></div>
+        return html`<div class=${`pmz-pk-battle-cmd is-p${player}`}>
+            <div class="pmz-panel pmz-pk-battle-msg"><${PlayerTag} player=${player} /><span>${tr("Battle.WhatWillDo", "What will {pokemon} do?", { pokemon: p ? p.name() : "" })}</span></div>
             <div class="pmz-panel pmz-pk-battle-commands">
                 <div class="pmz-list" role="menu" style=${{ "--pmz-columns": 2 }} ...${cursor.listProps}>
                     ${items.map((it, i) => html`<div key=${it.value} role="menuitem" ...${cursor.itemProps(i)}>${it.label}</div>`)}
@@ -1650,9 +1687,16 @@
     /**
      * @return {Array<string>} Gimmicks the player may use for a slot now.
      */
-    function gimmicksFor(slotReq, ctx) {
+    function gimmicksFor(slotReq, ctx, bridge, side = "p1") {
         if (ctx && ctx.gimmickUsed) {
             return [];
+        }
+        if (side !== "p1") {
+            // A co-op partner may use what its trainer data allows.
+            const ctrl = bridge && bridge.sides[side] && bridge.sides[side].controller;
+            const allowed = (ctrl && ctrl.gimmicks) || new Set();
+            const can = { mega: slotReq.canMegaEvo, zmove: slotReq.canZMove, dynamax: slotReq.canDynamax, terastallize: slotReq.canTerastallize };
+            return Object.keys(can).filter(g => can[g] && allowed.has(g));
         }
         const bag = $gameParty.bag();
         const out = [];
@@ -1675,10 +1719,12 @@
     /** @brief The move menu with the PP / TYPE panel and gimmick toggle. */
     function MoveMenu({ bridge, menu, back, pick }) {
         const slot = menu.slot || 0;
-        const req = bridge.battle.p1.activeRequest;
+        const side = menu.side || "p1";
+        const player = menu.player || 1;
+        const req = bridge.battle[side].activeRequest;
         const slotReq = (req && req.active && req.active[slot]) || { moves: [] };
         const moves = slotReq.moves.filter(m => m.id !== Engine().ACTION_MOVE);
-        const gimmicks = gimmicksFor(slotReq, menu.ctx);
+        const gimmicks = gimmicksFor(slotReq, menu.ctx, bridge, side);
         const [gimmick, setGimmick] = useState("");
         const [sel, setSel] = useState(0);
         const [busy, setBusy] = useState(false);
@@ -1706,9 +1752,9 @@
             setBusy(true);
             try {
                 let target = null;
-                const targets = bridge.targetsFor(slot, targetOf(i));
+                const targets = bridge.targetsFor(slot, targetOf(i), side);
                 if (targets) {
-                    target = await pickTarget(targets, bridge);
+                    target = await pickTarget(targets, bridge, player);
                     if (target === null) {
                         return;
                     }
@@ -1735,11 +1781,12 @@
             isEnabled: i => !moves[i].disabled && moves[i].pp > 0 && (gimmick !== "zmove" || !!(slotReq.canZMove && slotReq.canZMove[i])),
             handlers: { shift: cycleGimmick },
             priority: busy ? -1 : 2,
+            player,
         });
         const m = moves[sel];
         const data = m ? PBS.moves.tryGet(m.id) : null;
         const gLabel = g => tr(`Battle.Gimmick.${g}`, { mega: "MEGA", zmove: "Z-MOVE", dynamax: "DYNAMAX", terastallize: "TERA" }[g]);
-        return html`<div class="pmz-pk-battle-moves">
+        return html`<div class=${`pmz-pk-battle-moves is-p${player}`}>
             <div class="pmz-panel pmz-pk-battle-movelist">
                 <div class="pmz-list" role="menu" style=${{ "--pmz-columns": 2 }} ...${cursor.listProps}>
                     ${moves.map((mv, i) => html`<div key=${mv.id} role="menuitem" ...${cursor.itemProps(i)}>${labelOf(mv, i)}</div>`)}
@@ -1754,7 +1801,7 @@
                       <//>`
                     : null}
             </div>
-            <${BackButton} onPress=${back} class="pmz-pk-battle-back" />
+            <${BackButton} onPress=${back} class="pmz-pk-battle-back" player=${player} />
         </div>`;
     }
 

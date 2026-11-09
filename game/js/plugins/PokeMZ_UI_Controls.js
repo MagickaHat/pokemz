@@ -48,6 +48,10 @@
  *
  * Everything is saved in config.rmmzsave by PokeMZ_Input.
  *
+ * Player 2: the "Player 2: Join…" row (or the PokeMZ_Input command "Join
+ * Local Player") waits for a second player to press OK/Start on their own
+ * controller or the keyboard. Choose the row again to remove player 2.
+ *
  * Touch controls: an on-screen D-pad with A, B, Menu and Run buttons. In
  * "auto" mode they show while the last input came from a touch screen.
  *
@@ -311,10 +315,16 @@
         const resetKeys = useText("UI.Controls.ResetKeyboard", "Reset keyboard");
         const resetPad = useText("UI.Controls.ResetGamepad", "Reset gamepad");
         const accessLabel = useText("UI.Controls.Accessibility", "Accessibility…");
+        const p2 = P.players.get(2);
+        const playerLabel = !p2
+            ? UI.t("UI.Controls.Player2Join", "Player 2: Join…")
+            : p2.connected
+            ? UI.t("UI.Controls.Player2Leave", "Player 2: Leave ({device})", { device: P.players.deviceName(p2.deviceId) })
+            : UI.t("UI.Controls.Player2Lost", "Player 2: no controller (Join…)");
 
         const list = rows();
-        // Items: each row has a key cell and a pad cell, then three wide rows.
-        const extra = ["resetKeyboard", "resetGamepad", "accessibility"];
+        // Items: each row has a key cell and a pad cell, then wide rows.
+        const extra = ["resetKeyboard", "resetGamepad", "accessibility", "player2"];
         const count = list.length * 2 + extra.length;
         const cursor = useCursorList(count, {
             columns: 2,
@@ -327,6 +337,14 @@
                     const what = extra[i - list.length * 2];
                     if (what === "accessibility") {
                         UI.openScreen("inputOptions");
+                    } else if (what === "player2") {
+                        const cur = P.players.get(2);
+                        if (cur && cur.connected) {
+                            P.players.leave(2);
+                            UI.toast(UI.t("UI.Players.Left", "Player {n} left.", { n: 2 }), 90);
+                        } else {
+                            UI.openScreen("joinPlayer", { player: 2 });
+                        }
                     } else {
                         P.resetBindings(what === "resetKeyboard" ? "keyboard" : "gamepad");
                         UI.toast("UI.Controls.ResetDone", 90);
@@ -378,6 +396,9 @@
                     <div class="pmz-controls-row is-wide">
                         <div ...${cursor.itemProps(base + 2)}>${accessLabel}</div>
                     </div>
+                    <div class="pmz-controls-row is-wide">
+                        <div ...${cursor.itemProps(base + 3)}>${playerLabel}</div>
+                    </div>
                 </div>
             </div>
             <${BackButton} onPress=${close} />
@@ -392,6 +413,57 @@
                   />`
                 : null}
         </div>`;
+    }
+
+    //=========================================================================
+    // Joining a local player
+    //=========================================================================
+
+    /**
+     * @brief Waits for a local player to press OK/Start on their own device.
+     * @param {Object} props {player = 2, onDone(result|null), close}.
+     */
+    function JoinScreen({ player = 2, onDone, close }) {
+        UI.useStrings();
+        const [left, setLeft] = useState(600);
+        const finished = useRef(false);
+        const finish = result => {
+            if (finished.current) {
+                return;
+            }
+            finished.current = true;
+            if (result) {
+                SoundManager.playOk();
+                UI.toast(UI.t("UI.Players.Joined", "Player {n} joined ({device}).", { n: result.index, device: P.players.deviceName(result.deviceId) }), 120);
+                P.rumble(0.5, 0.5, 12, result.index);
+            } else {
+                SoundManager.playCancel();
+            }
+            if (onDone) {
+                onDone(result);
+            }
+            close();
+        };
+        useEffect(() => {
+            P.players.join(player).then(finish);
+            return () => P.players.cancelJoin();
+        }, []);
+        useFrame(() => setLeft(P.players.joinFramesLeft()));
+        // Player 1 can cancel with their own Cancel.
+        UI.useFocus({ cancel: () => P.players.cancelJoin() }, { priority: 10 });
+        return html`<div class="pmz-join">
+            <div class="pmz-panel pmz-join-box">
+                <div class="pmz-join-title">${UI.t("UI.Players.JoinTitle", "Player {n}", { n: player })}</div>
+                <div>${UI.t("UI.Players.JoinPrompt", "Player {n}, press OK or Start on your own controller.", { n: player })}</div>
+                <div class="pmz-join-timer">${Math.ceil(left / 60)}</div>
+            </div>
+            <${BackButton} onPress=${() => P.players.cancelJoin()} />
+        </div>`;
+    }
+
+    // Tell everyone when player 2's controller goes away.
+    if (!UI.controls || !UI.controls.lostHooked) {
+        P.on("playerlost", index => UI.toast(UI.t("UI.Players.Lost", "Player {n}'s controller was disconnected.", { n: index }), 150));
     }
 
     //=========================================================================
@@ -624,7 +696,8 @@
 
     UI.registerScreen("controls", ControlsScreen, { transition: "fade" });
     UI.registerScreen("inputOptions", InputOptionsScreen, { transition: "fade" });
-    Object.assign(UI.components, { ControlsScreen, InputOptionsScreen, CaptureOverlay, TouchControls });
+    UI.registerScreen("joinPlayer", JoinScreen, { transition: "fade" });
+    Object.assign(UI.components, { ControlsScreen, InputOptionsScreen, JoinScreen, CaptureOverlay, TouchControls });
 
     /** @brief Legacy rows (MZ names), kept for scripts written against v0.1. */
     const LEGACY_ROWS = [
@@ -639,5 +712,5 @@
         { id: "left", key: "left", pad: "left" },
         { id: "right", key: "right", pad: "right" },
     ];
-    UI.controls = Object.assign(UI.controls || {}, { rows: LEGACY_ROWS, actionRows: rows, optionRows: OPTION_ROWS, keyName, padName, touchMount: touch.mount });
+    UI.controls = Object.assign(UI.controls || {}, { rows: LEGACY_ROWS, actionRows: rows, optionRows: OPTION_ROWS, keyName, padName, touchMount: touch.mount, lostHooked: true });
 })();
