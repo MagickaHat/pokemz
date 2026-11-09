@@ -47,6 +47,10 @@
  *
  * Ship img/pokemon/ by hand: MZ's "Exclude unused files" can't see it.
  *
+ * Format new sprites with tools/sprites.js ("npm run sprites build" in
+ * tools/): it puts every sprite of a folder on its normal.pal (4bpp,
+ * 15-bit colors, index 0 transparent) so the shiny swap works everywhere.
+ *
  *   ImageManager.loadPokemon("pikachu", { view: "front", shiny: true })
  *   new Sprite_PokemonPic(pokemonOrSpeciesId, "front")
  *   new Sprite_PokemonIcon(pokemon)

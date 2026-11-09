@@ -436,6 +436,14 @@ Forms use a sub-folder (`raichu/alola/`). Shiny sprites are made by swapping pal
 load time. Missing files fall back to the base species, then to `question_mark/`. Ship `img/pokemon/`
 by hand: MZ's "Exclude unused files" can't see it.
 
+After adding or editing sprites, run `npm run sprites build` in `tools/`. Every sprite of a folder
+(battlers, icon and overworld sheet) becomes a 4bpp indexed PNG on that folder's `normal.pal`, so the
+shiny swap works for all of them. GBA rules apply: 16 colors, index 0 is the transparent key, colors
+are 15-bit. A folder without `normal.pal` gets one (a form inherits its base species' palettes when
+its colors fit). Palette slots with the same color but different shiny colors are an error, because
+the runtime swap would merge them (`--fix-dupes` nudges one by a 15-bit step). Canvases of the wrong
+size are padded or cropped around a bottom-center anchor, never rescaled.
+
 ### Extending
 
 ```js
@@ -555,6 +563,10 @@ Run these from `tools/` (run `npm install` there first):
 | `npm run pbs check` | Validate the PBS files (exit code 1 on errors) |
 | `npm run pbs items` | Create tagged `Items.json` entries for PBS items. Close the editor first |
 | `npm run pbs gfx` | List species without graphics (battlers, icons, overworld sheets) |
+| `npm run sprites build` | Format `img/pokemon/` in place: 15-bit 16-color palettes, 4bpp indexed sprites on `normal.pal`, canvas sizes. Skips folders that didn't change since the last run. Options: `--only sylveon,eevee`, `--dry-run`, `--force`, `--fix-dupes`, `--tolerance n`, `--ow-frame 32x32`, `--pbs`, `--report file.json`, `--verbose` |
+| `npm run sprites check` | Validate the sprites without writing (exit code 1 on errors, including folders that still need a build) |
+| `npm run sprites preview` | Contact sheet of every sprite in normal and shiny colors with palettes and issues: `tools/.cache/sprites/preview/index.html` |
+| `npm run sprites watch` | Build, then rebuild each folder when its files change (`--preview` refreshes the contact sheet) |
 | `npm run build:showdown` | Rebuild `js/plugins/PS_Sim.js` |
 | `npm test` | All tests |
 
