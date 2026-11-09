@@ -411,6 +411,29 @@
  * @type string
  * @default
  *
+ * @command preloadSamples
+ * @text Preload Samples
+ * @desc Keeps an event's or a bank's sample data loaded (no first-play
+ * delay). Kept in save files until released.
+ *
+ * @arg target
+ * @text Event Path or Bank
+ * @type string
+ * @default event:/
+ *
+ * @arg wait
+ * @text Wait Until Loaded
+ * @type boolean
+ * @default false
+ *
+ * @command releaseSamples
+ * @text Release Preloaded Samples
+ *
+ * @arg target
+ * @text Event Path or Bank
+ * @type string
+ * @default event:/
+ *
  * @command stopAll
  * @text Stop All Script Events
  * @desc Stops every instance started by commands/scripts (not BGM/BGS/ME).
@@ -436,6 +459,10 @@
  * Map note:
  *   <FMOD Bank: Forest, Caves>   banks loaded while on this map (the map
  *                                waits for them before it starts)
+ *   <FMOD Preload: event:/BGM/Route1, event:/SFX/Grass, Forest>
+ *                                sample data preloaded while on this map
+ *                                (events, or every sample of a bank); the
+ *                                map waits for them too
  *
  * Save files keep the BGM/BGS timeline and parameters, global parameters,
  * snapshots started by command, persistent handles and banks loaded by
@@ -1085,6 +1112,56 @@
     //=========================================================================
 
     let mapBanks = [];
+    let mapPreloads = [];
+
+    /**
+     * @brief Targets named by a map's <FMOD Preload: ...> tags.
+     * @param {Object} data $dataMap.
+     * @return {Array<string>} Event paths and bank names.
+     */
+    function preloadsOfMap(data) {
+        const out = [];
+        for (const arg of E.noteTags(data && data.note, "Preload")) {
+            for (const t of arg.split(",")) {
+                if (t.trim()) {
+                    out.push(t.trim());
+                }
+            }
+        }
+        return out;
+    }
+
+    /**
+     * @brief Preloads the new map's samples, then releases the old map's.
+     * @param {Array<string>} wanted Targets.
+     */
+    function setMapPreloads(wanted) {
+        const old = mapPreloads;
+        mapPreloads = wanted;
+        mapPreloadStart = performance.now();
+        for (const t of wanted) {
+            FMOD.preload(t);
+        }
+        for (const t of old) {
+            FMOD.releasePreload(t);
+        }
+    }
+
+    let mapPreloadStart = 0;
+
+    /**
+     * @return {boolean} True while a map preload is still loading (gives up
+     *         after 10 seconds so a stuck load never blocks the map).
+     */
+    function mapPreloadsBusy() {
+        if (performance.now() - mapPreloadStart > 10000) {
+            return false;
+        }
+        return mapPreloads.some(t => {
+            const e = FMOD.preloads.get(/^(event|snapshot):\//i.test(t) ? t : FMOD.bankFile(t));
+            return !!e && e.state === "loading";
+        });
+    }
 
     /**
      * @brief Banks named by a map's <FMOD Bank: ...> tags.
@@ -1129,6 +1206,14 @@
                 setMapBanks(wanted);
             }
             if (FMOD.banksBusy()) {
+                return false;
+            }
+            // Preloads go after the banks: their events live in those banks.
+            const pre = preloadsOfMap($dataMap);
+            if (pre.join("|") !== mapPreloads.join("|")) {
+                setMapPreloads(pre);
+            }
+            if (mapPreloadsBusy()) {
                 return false;
             }
             finishPendingLoad();
@@ -1499,6 +1584,17 @@
         stopAll(args) {
             FMOD.stopAll(args.immediate === "true");
         },
+        preloadSamples(args) {
+            const p = FMOD.preloadSaved(expand(args.target));
+            if (args.wait === "true") {
+                let done = false;
+                p.then(() => (done = true));
+                waitWhile(this, () => !done);
+            }
+        },
+        releaseSamples(args) {
+            FMOD.releaseSaved(expand(args.target));
+        },
     };
 
     for (const [name, fn] of Object.entries(commands)) {
@@ -1516,6 +1612,7 @@
         FmodBuffer,
         SYSTEM_SOUNDS,
         banksOfMap,
+        preloadsOfMap,
         /** @return {Handle|null} The current FMOD BGM handle. */
         bgm: () => liveHandle("bgm"),
         /** @return {Handle|null} The current FMOD BGS handle. */
