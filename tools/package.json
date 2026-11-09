@@ -1,0 +1,17 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "l10n.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:showdown": "esbuild src/showdown/ps-entry.js --bundle --minify --format=iife --global-name=PSSim --platform=browser --outfile=../game/js/plugins/PS_Sim.js --banner:js=\"/*:\n * @target MZ\n * @plugindesc Pokémon Showdown simulator (bundled). Exposes global PSSim.\n */\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@pkmn/sim": "0.10.15"
+  }
+}
