@@ -1,0 +1,10 @@
+{
+  "#": "Sample encounters for testing battles (see README: Testing battles).",
+  "1": {
+    "#map": "MAP001",
+    "types": {
+      "land": {"density": 8, "doubles": 30, "slots": [[40, "rattata", 3, 5], [35, "pidgey", 3, 6], [25, "sentret", 4, 6]]},
+      "water": {"density": 10, "slots": [[100, "magikarp", 5, 10]]}
+    }
+  }
+}

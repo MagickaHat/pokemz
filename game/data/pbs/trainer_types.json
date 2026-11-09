@@ -1,0 +1,11 @@
+{
+  "#": "Sample trainer types for testing battles (see README: Testing battles).",
+  "youngster": {"name": "Youngster", "gender": "male", "baseMoney": 16},
+  "lass": {"name": "Lass", "gender": "female", "baseMoney": 16},
+  "twins": {"name": "Twins", "gender": "female", "baseMoney": 16},
+  "camper": {"name": "Camper", "gender": "male", "baseMoney": 20},
+  "picnicker": {"name": "Picnicker", "gender": "female", "baseMoney": 20},
+  "pkmntrainer": {"name": "Pokémon Trainer", "gender": "male", "baseMoney": 40, "skill": 1},
+  "acetrainer": {"name": "Ace Trainer", "gender": "mixed", "baseMoney": 60, "skill": 1},
+  "leader": {"name": "Gym Leader", "gender": "mixed", "baseMoney": 100, "skill": 2}
+}

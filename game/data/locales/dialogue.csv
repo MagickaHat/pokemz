@@ -1,1 +1,68 @@
-Key,en,es-es,es-mx,pt-pt,pt-br,fr
+Key,en,es-es,es-mx,pt-pt,pt-br,fr,#Context
+Dlg.8vd9q8,Let me heal your Pokémon!,,,,,,Map001 EV001 Nurse p1
+Dlg.8vd9q8.Speaker,Nurse,,,,,,Map001 EV001 Nurse p1
+Dlg.nv7dao,Your Pokémon are fighting fit!,,,,,,Map001 EV001 Nurse p1
+Dlg.nv7dao.Speaker,Nurse,,,,,,Map001 EV001 Nurse p1
+Dlg.3rchlt,"Welcome to the battle test area!
+Take these Pokémon and items.",,,,,,Map001 EV002 Professor p1
+Dlg.3rchlt.Speaker,Professor,,,,,,Map001 EV002 Professor p1
+Dlg.fc2fgh,"Talk to the trainers here to battle them.
+Walk in the grass for wild Pokémon.
+In a playtest, Shift+F9 opens the Battle Test menu.",,,,,,Map001 EV002 Professor p1
+Dlg.fc2fgh.Speaker,Professor,,,,,,Map001 EV002 Professor p1
+Dlg.5qzcye,"Talk to the trainers here to battle them.
+Walk in the grass for wild Pokémon.
+In a playtest, Shift+F9 opens the Battle Test menu.",,,,,,Map001 EV002 Professor p2
+Dlg.5qzcye.Speaker,Professor,,,,,,Map001 EV002 Professor p2
+Dlg.okqw8j,"My Rattata is in the top percentage!
+Let's battle!",,,,,,Map001 EV003 Youngster Joey p1
+Dlg.okqw8j.Speaker,Youngster Joey,,,,,,Map001 EV003 Youngster Joey p1
+Dlg.tzshv8,You beat me fair and square.,,,,,,Map001 EV003 Youngster Joey p1
+Dlg.tzshv8.Speaker,Youngster Joey,,,,,,Map001 EV003 Youngster Joey p1
+Dlg.tquuz8,Yes! My Rattata did it!,,,,,,Map001 EV003 Youngster Joey p1
+Dlg.tquuz8.Speaker,Youngster Joey,,,,,,Map001 EV003 Youngster Joey p1
+Dlg.iyxftf,We battle together!,,,,,,Map001 EV004 Twins p1
+Dlg.iyxftf.Speaker,Twins,,,,,,Map001 EV004 Twins p1
+Dlg.9l8gwc,We'll practice our teamwork more.,,,,,,Map001 EV004 Twins p1
+Dlg.9l8gwc.Speaker,Twins,,,,,,Map001 EV004 Twins p1
+Dlg.2uol51,Teamwork wins!,,,,,,Map001 EV004 Twins p1
+Dlg.2uol51.Speaker,Twins,,,,,,Map001 EV004 Twins p1
+Dlg.j8j6z3,Two of us against you!,,,,,,Map001 EV005 Camper & Picnicker p1
+Dlg.j8j6z3.Speaker,Camper & Picnicker,,,,,,Map001 EV005 Camper & Picnicker p1
+Dlg.o1l7le,You took us both on!,,,,,,Map001 EV005 Camper & Picnicker p1
+Dlg.o1l7le.Speaker,Camper & Picnicker,,,,,,Map001 EV005 Camper & Picnicker p1
+Dlg.1y8g2x,Two against one was too much for you!,,,,,,Map001 EV005 Camper & Picnicker p1
+Dlg.1y8g2x.Speaker,Camper & Picnicker,,,,,,Map001 EV005 Camper & Picnicker p1
+Dlg.o1hz9g,Let's team up against Tom and Kim!,,,,,,Map001 EV006 Brendan p1
+Dlg.o1hz9g.Speaker,Brendan,,,,,,Map001 EV006 Brendan p1
+Dlg.ssayl5,Great teamwork!,,,,,,Map001 EV006 Brendan p1
+Dlg.ssayl5.Speaker,Brendan,,,,,,Map001 EV006 Brendan p1
+Dlg.kcl32z,We'll get them next time!,,,,,,Map001 EV006 Brendan p1
+Dlg.kcl32z.Speaker,Brendan,,,,,,Map001 EV006 Brendan p1
+Dlg.tjykzo,"Two wild Pokémon jumped out at me!
+Can you handle them?",,,,,,Map001 EV007 Bug Catcher p1
+Dlg.tjykzo.Speaker,Bug Catcher,,,,,,Map001 EV007 Bug Catcher p1
+Dlg.ynu5by,Watch my Venusaur Mega Evolve!,,,,,,Map001 EV008 Ace Trainer Mira p1
+Dlg.ynu5by.Speaker,Ace Trainer Mira,,,,,,Map001 EV008 Ace Trainer Mira p1
+Dlg.xlinsr,Even Mega Evolution wasn't enough!,,,,,,Map001 EV008 Ace Trainer Mira p1
+Dlg.xlinsr.Speaker,Ace Trainer Mira,,,,,,Map001 EV008 Ace Trainer Mira p1
+Dlg.jiv629,Mega power!,,,,,,Map001 EV008 Ace Trainer Mira p1
+Dlg.jiv629.Speaker,Ace Trainer Mira,,,,,,Map001 EV008 Ace Trainer Mira p1
+Dlg.vnfecv,My Dragonite's Tera Type will surprise you!,,,,,,Map001 EV009 Ace Trainer Dex p1
+Dlg.vnfecv.Speaker,Ace Trainer Dex,,,,,,Map001 EV009 Ace Trainer Dex p1
+Dlg.c4a852,My Tera Type plan backfired...,,,,,,Map001 EV009 Ace Trainer Dex p1
+Dlg.c4a852.Speaker,Ace Trainer Dex,,,,,,Map001 EV009 Ace Trainer Dex p1
+Dlg.xnfmgc,Terastallization wins!,,,,,,Map001 EV009 Ace Trainer Dex p1
+Dlg.xnfmgc.Speaker,Ace Trainer Dex,,,,,,Map001 EV009 Ace Trainer Dex p1
+Dlg.mw5wi7,Feel the power of my Z-Move!,,,,,,Map001 EV010 Ace Trainer Kai p1
+Dlg.mw5wi7.Speaker,Ace Trainer Kai,,,,,,Map001 EV010 Ace Trainer Kai p1
+Dlg.bethkp,My Z-Power ran out!,,,,,,Map001 EV010 Ace Trainer Kai p1
+Dlg.bethkp.Speaker,Ace Trainer Kai,,,,,,Map001 EV010 Ace Trainer Kai p1
+Dlg.lksrqu,That's the power of Z!,,,,,,Map001 EV010 Ace Trainer Kai p1
+Dlg.lksrqu.Speaker,Ace Trainer Kai,,,,,,Map001 EV010 Ace Trainer Kai p1
+Dlg.ut58ml,Time to Gigantamax!,,,,,,Map001 EV011 Leader Raihan p1
+Dlg.ut58ml.Speaker,Leader Raihan,,,,,,Map001 EV011 Leader Raihan p1
+Dlg.61bl7p,Gigantamax... beaten!,,,,,,Map001 EV011 Leader Raihan p1
+Dlg.61bl7p.Speaker,Leader Raihan,,,,,,Map001 EV011 Leader Raihan p1
+Dlg.w2xtk3,Dynamax power!,,,,,,Map001 EV011 Leader Raihan p1
+Dlg.w2xtk3.Speaker,Leader Raihan,,,,,,Map001 EV011 Leader Raihan p1

@@ -1,0 +1,63 @@
+{
+  "#": "Sample trainers for testing battles (see README: Testing battles).",
+  "youngsterjoey": {
+    "trainerType": "youngster", "name": "Joey", "loseText": "My Rattata is in the top percentage!",
+    "pokemon": [
+      {"species": "rattata", "level": 8, "moves": ["tackle", "quickattack", "tailwhip"]},
+      {"species": "pidgey", "level": 9}
+    ]
+  },
+  "twinsamyandmay": {
+    "trainerType": "twins", "name": "Amy & May", "battleType": "double", "loseText": "We lost together!",
+    "pokemon": [
+      {"species": "marill", "level": 14},
+      {"species": "psyduck", "level": 14},
+      {"species": "eevee", "level": 15}
+    ]
+  },
+  "campertom": {
+    "trainerType": "camper", "name": "Tom", "loseText": "My campfire went out...",
+    "pokemon": [
+      {"species": "geodude", "level": 16},
+      {"species": "growlithe", "level": 17}
+    ]
+  },
+  "picnickerkim": {
+    "trainerType": "picnicker", "name": "Kim", "loseText": "That ruined my picnic!",
+    "pokemon": [
+      {"species": "oddish", "level": 16},
+      {"species": "vulpix", "level": 17}
+    ]
+  },
+  "partnerbrendan": {
+    "trainerType": "pkmntrainer", "name": "Brendan", "loseText": "We make a good team!",
+    "pokemon": [
+      {"species": "machamp", "level": 35, "moves": ["crosschop", "rockslide", "bulkup"]},
+      {"species": "mareep", "level": 30}
+    ]
+  },
+  "acemega": {
+    "trainerType": "acetrainer", "name": "Mira", "gimmicks": ["mega"], "loseText": "Even Mega Evolution wasn't enough!",
+    "pokemon": [
+      {"species": "venusaur", "level": 50, "item": "venusaurite", "moves": ["gigadrain", "sludgebomb", "earthquake", "synthesis"]}
+    ]
+  },
+  "acetera": {
+    "trainerType": "acetrainer", "name": "Dex", "gimmicks": ["terastallize"], "loseText": "My Tera Type plan backfired...",
+    "pokemon": [
+      {"species": "dragonite", "level": 50, "teraType": "normal", "moves": ["extremespeed", "dragonclaw", "earthquake", "firepunch"]}
+    ]
+  },
+  "acez": {
+    "trainerType": "acetrainer", "name": "Kai", "gimmicks": ["zmove"], "loseText": "My Z-Power ran out!",
+    "pokemon": [
+      {"species": "lucario", "level": 50, "item": "fightiniumz", "moves": ["aurasphere", "closecombat", "flashcannon", "extremespeed"]}
+    ]
+  },
+  "acemax": {
+    "trainerType": "leader", "name": "Raihan", "gimmicks": ["dynamax"], "loseText": "Gigantamax... beaten!",
+    "pokemon": [
+      {"species": "gengar", "level": 50, "gigantamax": true, "dynamaxLevel": 10, "moves": ["shadowball", "sludgebomb", "thunderbolt", "focusblast"]}
+    ]
+  }
+}

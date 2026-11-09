@@ -544,6 +544,38 @@ For online trading later:
 const { received } = await PokeMZ.Trade.tradeWith(transport, $gameParty.pokemon()[0]);
 ```
 
+### Testing battles
+
+MAP001 is a battle test area:
+- **Nurse:** heals your party.
+- **Professor:** gives a test party and items once.
+- **Trainers:**
+  - Joey: singles
+  - the Twins: double battle
+  - the Camper & Picnicker: two trainers at once
+  - Brendan: partner battle against the Camper & Picnicker
+- **Bug Catcher:** wild double battle.
+- **Aces:** a Mega Evolution, Tera, Z-Move and Dynamax trainer each.
+- **Grass:** walking in it starts wild battles (including wild doubles).
+
+Battle results go to variable 1 ("Battle Result").
+
+While playtesting, **Shift+F9** on the map opens the Battle Test menu (`PokeMZ_PBS_Debug`, inactive in deployed games). It can:
+- give the test party and items, or heal the party
+- start any kind of battle, or a wild battle against any species and level
+- toggle shiny wild Pokémon and fast battle messages
+
+From the console (F8):
+
+```js
+PokeMZ.Debug.giveParty(); PokeMZ.Debug.giveItems();
+PokeMZ.Debug.battle("partner");   // wild, wilddouble, single, double, twotrainers, partner, mega, tera, zmove, dynamax
+PokeMZ.Battle.startWild("pikachu", 10, { shiny: true });
+```
+
+The sample entries in `trainer_types.json`, `trainers.json` and `encounters.json` and the MAP001 events are only for testing.
+Delete them (and disable `PokeMZ_PBS_Debug`) when you build your own maps.
+
 ### Plugin commands
 
 `PokeMZ_PBS_Pokemon`: Give Pokémon, Give Egg, Heal Party, Open PC, Open Day Care, Move Reminder,
