@@ -1,1 +1,1671 @@
 Key,en,es-es,es-mx,pt-pt,pt-br,fr
+Move.absorb.Name,Absorb,Absorber,Absorción,,,Vole-Vie
+Move.absorb.Description,User recovers 50% of the damage dealt.,,,,,
+Move.accelerock.Name,Accelerock,Roca Veloz,Roca Veloz,,,Vif Roc
+Move.accelerock.Description,Usually goes first.,,,,,
+Move.acid.Name,Acid,Ácido,Ácido,,,Acide
+Move.acid.Description,10% chance to lower the foe(s) Sp. Def by 1.,,,,,
+Move.acidarmor.Name,Acid Armor,Armadura Ácida,Armadura Ácida,,,Acidarmure
+Move.acidarmor.Description,Raises the user's Defense by 2.,,,,,
+Move.acidspray.Name,Acid Spray,Bomba Ácida,Bomba Ácida,,,Bombe Acide
+Move.acidspray.Description,100% chance to lower the target's Sp. Def by 2.,,,,,
+Move.acrobatics.Name,Acrobatics,Acróbata,Acrobacia,,,Acrobatie
+Move.acrobatics.Description,Power doubles if the user has no held item.,,,,,
+Move.acupressure.Name,Acupressure,Acupresión,Acupresión,,,Acupression
+Move.acupressure.Description,Raises a random stat of the user or an ally by 2.,,,,,
+Move.aerialace.Name,Aerial Ace,Golpe Aéreo,As Aéreo,,,Aéropique
+Move.aerialace.Description,This move does not check accuracy.,,,,,
+Move.aeroblast.Name,Aeroblast,Aerochorro,Aerochorro,,,Aéroblast
+Move.aeroblast.Description,High critical hit ratio.,,,,,
+Move.afteryou.Name,After You,Cede Paso,Ceda el Paso,,,Après Vous
+Move.afteryou.Description,The target makes its move right after the user.,,,,,
+Move.agility.Name,Agility,Agilidad,Agilidad,,,Hâte
+Move.agility.Description,Raises the user's Speed by 2.,,,,,
+Move.aircutter.Name,Air Cutter,Aire Afilado,Aire Cortante,,,Tranch’Air
+Move.aircutter.Description,High critical hit ratio. Hits adjacent foes.,,,,,
+Move.airslash.Name,Air Slash,Tajo Aéreo,Corte Aéreo,,,Lame d’Air
+Move.airslash.Description,30% chance to make the target flinch.,,,,,
+Move.alluringvoice.Name,Alluring Voice,Canto Encantador,Canto Encantador,,,Voix Envoûtante
+Move.alluringvoice.Description,100% confuse target that had a stat rise this turn.,,,,,
+Move.allyswitch.Name,Ally Switch,Cambio de Banda,Cambio de Lado,,,Interversion
+Move.allyswitch.Description,User and ally swap positions; using again can fail.,,,,,
+Move.amnesia.Name,Amnesia,Amnesia,Amnesia,,,Amnésie
+Move.amnesia.Description,Raises the user's Sp. Def by 2.,,,,,
+Move.anchorshot.Name,Anchor Shot,Anclaje,Anclaje,,,Ancrage
+Move.anchorshot.Description,Prevents the target from switching out.,,,,,
+Move.ancientpower.Name,Ancient Power,Poder Pasado,Poder Antiguo,,,Pouvoir Antique
+Move.ancientpower.Description,10% chance to raise all stats by 1 (not acc/eva).,,,,,
+Move.appleacid.Name,Apple Acid,Ácido Málico,Ácido Málico,,,Acide Malique
+Move.appleacid.Description,100% chance to lower the target's Sp. Def by 1.,,,,,
+Move.aquacutter.Name,Aqua Cutter,Tajo Acuático,Corte Acuático,,,Tranch'Aqua
+Move.aquacutter.Description,High critical hit ratio.,,,,,
+Move.aquajet.Name,Aqua Jet,Acua Jet,Acuajet,,,Aqua-Jet
+Move.aquajet.Description,Usually goes first.,,,,,
+Move.aquaring.Name,Aqua Ring,Acua Aro,Acuaanillo,,,Anneau Hydro
+Move.aquaring.Description,User recovers 1/16 max HP per turn.,,,,,
+Move.aquastep.Name,Aqua Step,Danza Acuática,Danza Acuática,,,Danse Aquatique
+Move.aquastep.Description,100% chance to raise the user's Speed by 1.,,,,,
+Move.aquatail.Name,Aqua Tail,Acua Cola,Cola de Agua,,,Hydro-Queue
+Move.aquatail.Description,No additional effect.,,,,,
+Move.armorcannon.Name,Armor Cannon,Cañón Armadura,Cañón Armadura,,,Canon Blindé
+Move.armorcannon.Description,Lowers the user's Defense and Sp. Def by 1.,,,,,
+Move.armthrust.Name,Arm Thrust,Empujón,Empujón,,,Cogne
+Move.armthrust.Description,Hits 2-5 times in one turn.,,,,,
+Move.aromatherapy.Name,Aromatherapy,Aromaterapia,Aromaterapia,,,Aromathérapie
+Move.aromatherapy.Description,Cures the user's party of all status conditions.,,,,,
+Move.aromaticmist.Name,Aromatic Mist,Niebla Aromática,Niebla Aromática,,,Brume Capiteuse
+Move.aromaticmist.Description,Raises an ally's Sp. Def by 1.,,,,,
+Move.assist.Name,Assist,Ayuda,Ayuda,,,Assistance
+Move.assist.Description,Uses a random move known by a team member.,,,,,
+Move.assurance.Name,Assurance,Buena Baza,Garantía,,,Assurance
+Move.assurance.Description,Power doubles if target was damaged this turn.,,,,,
+Move.astonish.Name,Astonish,Impresionar,Impresión,,,Étonnement
+Move.astonish.Description,30% chance to make the target flinch.,,,,,
+Move.astralbarrage.Name,Astral Barrage,Orbes Espectro,Orbes Espectro,,,Éclat Spectral
+Move.astralbarrage.Description,No additional effect. Hits adjacent foes.,,,,,
+Move.attackorder.Name,Attack Order,Al Ataque,Al Ataque,,,Appel Attaque
+Move.attackorder.Description,High critical hit ratio.,,,,,
+Move.attract.Name,Attract,Atracción,Atracción,,,Attraction
+Move.attract.Description,A target of the opposite gender gets infatuated.,,,,,
+Move.aurasphere.Name,Aura Sphere,Esfera Aural,Aura Esfera,,,Aurasphère
+Move.aurasphere.Description,This move does not check accuracy.,,,,,
+Move.aurawheel.Name,Aura Wheel,Rueda Aural,Rueda Aural,,,Roue Libre
+Move.aurawheel.Description,Morpeko: Electric; Hangry: Dark; 100% +1 Spe.,,,,,
+Move.aurorabeam.Name,Aurora Beam,Rayo Aurora,Rayo Aurora,,,Onde Boréale
+Move.aurorabeam.Description,10% chance to lower the target's Attack by 1.,,,,,
+Move.auroraveil.Name,Aurora Veil,Velo Aurora,Velo Aurora,,,Voile Aurore
+Move.auroraveil.Description,"For 5 turns, damage to allies halved. Snow only.",,,,,
+Move.autotomize.Name,Autotomize,Aligerar,Aligerar,,,Allègement
+Move.autotomize.Description,Raises the user's Speed by 2; user loses 100 kg.,,,,,
+Move.avalanche.Name,Avalanche,Alud,Alud,,,Avalanche
+Move.avalanche.Description,Power doubles if user is damaged by the target.,,,,,
+Move.axekick.Name,Axe Kick,Patada Hacha,Patada Hacha,,,Talon-Marteau
+Move.axekick.Description,30% confusion. User loses 50% max HP if miss.,,,,,
+Move.babydolleyes.Name,Baby-Doll Eyes,Ojitos Tiernos,Ojitos Tiernos,,,Regard Touchant
+Move.babydolleyes.Description,Lowers the target's Attack by 1.,,,,,
+Move.banefulbunker.Name,Baneful Bunker,Búnker,Búnker,,,Blockhaus
+Move.banefulbunker.Description,Protects from moves. Contact: poison.,,,,,
+Move.barbbarrage.Name,Barb Barrage,Mil Púas Tóxicas,Mil Púas Tóxicas,,,Multitoxik
+Move.barbbarrage.Description,50% psn. 2× power if target already poisoned.,,,,,
+Move.barrage.Name,Barrage,Bombardeo,Bombardeo,,,Pilonnage
+Move.barrage.Description,Hits 2-5 times in one turn.,,,,,
+Move.barrier.Name,Barrier,Barrera,Barrera,,,Bouclier
+Move.barrier.Description,Raises the user's Defense by 2.,,,,,
+Move.batonpass.Name,Baton Pass,Relevo,Relevo,,,Relais
+Move.batonpass.Description,"User switches, passing stat changes and more.",,,,,
+Move.beakblast.Name,Beak Blast,Pico Cañón,Pico Cañón,,,Bec-Canon
+Move.beakblast.Description,Burns on contact with the user before it moves.,,,,,
+Move.beatup.Name,Beat Up,Paliza,Paliza,,,Baston
+Move.beatup.Description,All healthy allies aid in damaging the target.,,,,,
+Move.behemothbash.Name,Behemoth Bash,Embate Supremo,Golpe Supremo,,,Aegis Maxima
+Move.behemothbash.Description,No additional effect.,,,,,
+Move.behemothblade.Name,Behemoth Blade,Tajo Supremo,Corte Supremo,,,Gladius Maximus
+Move.behemothblade.Description,No additional effect.,,,,,
+Move.belch.Name,Belch,Eructo,Eructo,,,Éructation
+Move.belch.Description,Cannot be selected until the user eats a Berry.,,,,,
+Move.bellydrum.Name,Belly Drum,Tambor,Tambor,,,Cognobidon
+Move.bellydrum.Description,User loses 50% max HP. Maximizes Attack.,,,,,
+Move.bestow.Name,Bestow,Ofrenda,Ofrenda,,,Passe-Cadeau
+Move.bestow.Description,User passes its held item to the target.,,,,,
+Move.bide.Name,Bide,Venganza,Venganza,,,Patience
+Move.bide.Description,Waits 2 turns; deals double the damage taken.,,,,,
+Move.bind.Name,Bind,Atadura,Atadura,,,Étreinte
+Move.bind.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.bite.Name,Bite,Mordisco,Mordida,,,Morsure
+Move.bite.Description,30% chance to make the target flinch.,,,,,
+Move.bitterblade.Name,Bitter Blade,Espada Lamento,Espada Lamento,,,Lame en Peine
+Move.bitterblade.Description,User recovers 50% of the damage dealt.,,,,,
+Move.bittermalice.Name,Bitter Malice,Rencor Reprimido,Rencor Reprimido,,,Cœur de Rancœur
+Move.bittermalice.Description,100% chance to lower the target's Attack by 1.,,,,,
+Move.blastburn.Name,Blast Burn,Anillo Ígneo,Anillo de Fuego,,,Rafale Feu
+Move.blastburn.Description,User cannot move next turn.,,,,,
+Move.blazekick.Name,Blaze Kick,Patada Ígnea,Patada Ígnea,,,Pied Brûleur
+Move.blazekick.Description,High critical hit ratio. 10% chance to burn.,,,,,
+Move.blazingtorque.Name,Blazing Torque,Pirochoque,Pirochoque,,,Crash Brûlant
+Move.blazingtorque.Description,30% chance to burn the target.,,,,,
+Move.bleakwindstorm.Name,Bleakwind Storm,Vendaval Gélido,Vendaval Gélido,,,Typhon Hivernal
+Move.bleakwindstorm.Description,30% to lower foe(s) Speed by 1. Rain: can't miss.,,,,,
+Move.blizzard.Name,Blizzard,Ventisca,Ventisca,,,Blizzard
+Move.blizzard.Description,10% chance to freeze foe(s). Can't miss in Snow.,,,,,
+Move.block.Name,Block,Bloqueo,Bloqueo,,,Barrage
+Move.block.Description,Prevents the target from switching out.,,,,,
+Move.bloodmoon.Name,Blood Moon,Luna Roja,Luna Roja,,,Lune Rouge
+Move.bloodmoon.Description,Cannot be selected the turn after it's used.,,,,,
+Move.blueflare.Name,Blue Flare,Llama Azul,Llama Azul,,,Flamme Bleue
+Move.blueflare.Description,20% chance to burn the target.,,,,,
+Move.bodypress.Name,Body Press,Plancha Corporal,Plancha Corporal,,,Big Splash
+Move.bodypress.Description,Uses user's Def stat as Atk in damage calculation.,,,,,
+Move.bodyslam.Name,Body Slam,Golpe Cuerpo,Golpe de Cuerpo,,,Plaquage
+Move.bodyslam.Description,30% chance to paralyze the target.,,,,,
+Move.boltbeak.Name,Bolt Beak,Electropico,Electropico,,,Prise de Bec
+Move.boltbeak.Description,Power doubles if user moves before the target.,,,,,
+Move.boltstrike.Name,Bolt Strike,Ataque Fulgor,Ataque Fulgor,,,Charge Foudre
+Move.boltstrike.Description,20% chance to paralyze the target.,,,,,
+Move.boneclub.Name,Bone Club,Hueso Palo,Maza de Hueso,,,Massd’Os
+Move.boneclub.Description,10% chance to make the target flinch.,,,,,
+Move.bonemerang.Name,Bonemerang,Huesomerang,Huesomerang,,,Osmerang
+Move.bonemerang.Description,Hits 2 times in one turn.,,,,,
+Move.bonerush.Name,Bone Rush,Ataque Óseo,Hueso Veloz,,,Charge Os
+Move.bonerush.Description,Hits 2-5 times in one turn.,,,,,
+Move.boomburst.Name,Boomburst,Estruendo,Estruendo,,,Bang Sonique
+Move.boomburst.Description,No additional effect. Hits adjacent Pokemon.,,,,,
+Move.bounce.Name,Bounce,Bote,Rebote,,,Rebond
+Move.bounce.Description,Bounces turn 1. Hits turn 2. 30% paralyze.,,,,,
+Move.branchpoke.Name,Branch Poke,Punzada Rama,Ramazo Punzante,,,Tapotige
+Move.branchpoke.Description,No additional effect.,,,,,
+Move.bravebird.Name,Brave Bird,Pájaro Osado,Ave Brava,,,Rapace
+Move.bravebird.Description,Has 33% recoil.,,,,,
+Move.breakingswipe.Name,Breaking Swipe,Vasto Impacto,Vasto Impacto,,,Abattage
+Move.breakingswipe.Description,100% chance to lower the foe(s) Attack by 1.,,,,,
+Move.brickbreak.Name,Brick Break,Demolición,Karatazo,,,Casse-Brique
+Move.brickbreak.Description,"Destroys screens, unless the target is immune.",,,,,
+Move.brine.Name,Brine,Salmuera,Agua Salada,,,Saumure
+Move.brine.Description,Power doubles if the target's HP is 50% or less.,,,,,
+Move.brutalswing.Name,Brutal Swing,Giro Vil,Giro Vil,,,Centrifugifle
+Move.brutalswing.Description,No additional effect. Hits adjacent Pokemon.,,,,,
+Move.bubble.Name,Bubble,Burbuja,Burbuja,,,Écume
+Move.bubble.Description,10% chance to lower the foe(s) Speed by 1.,,,,,
+Move.bubblebeam.Name,Bubble Beam,Rayo Burbuja,Rayo Burbuja,,,Bulles d’O
+Move.bubblebeam.Description,10% chance to lower the target's Speed by 1.,,,,,
+Move.bugbite.Name,Bug Bite,Picadura,Picadura,,,Piqûre
+Move.bugbite.Description,User steals and eats the target's Berry.,,,,,
+Move.bugbuzz.Name,Bug Buzz,Zumbido,Zumbido,,,Bourdon
+Move.bugbuzz.Description,10% chance to lower the target's Sp. Def by 1.,,,,,
+Move.bulkup.Name,Bulk Up,Corpulencia,Corpulencia,,,Gonflette
+Move.bulkup.Description,Raises the user's Attack and Defense by 1.,,,,,
+Move.bulldoze.Name,Bulldoze,Terratemblor,Terratemblor,,,Piétisol
+Move.bulldoze.Description,100% chance lower adjacent Pkmn Speed by 1.,,,,,
+Move.bulletpunch.Name,Bullet Punch,Puño Bala,Puño Bala,,,Pisto-Poing
+Move.bulletpunch.Description,Usually goes first.,,,,,
+Move.bulletseed.Name,Bullet Seed,Semilladora,Bala Semilla,,,Balle Graine
+Move.bulletseed.Description,Hits 2-5 times in one turn.,,,,,
+Move.burningbulwark.Name,Burning Bulwark,Llama Protectora,Llama Protectora,,,Rempart Brûlant
+Move.burningbulwark.Description,Protects from damaging attacks. Contact: burn.,,,,,
+Move.burningjealousy.Name,Burning Jealousy,Envidia Ardiente,Envidia Ardiente,,,Feu Envieux
+Move.burningjealousy.Description,100% burns a target that had a stat rise this turn.,,,,,
+Move.burnup.Name,Burn Up,Llama Final,Llama Final,,,Flamme Ultime
+Move.burnup.Description,User's Fire type becomes typeless; must be Fire.,,,,,
+Move.calmmind.Name,Calm Mind,Paz Mental,Paz Mental,,,Plénitude
+Move.calmmind.Description,Raises the user's Sp. Atk and Sp. Def by 1.,,,,,
+Move.camouflage.Name,Camouflage,Camuflaje,Camuflaje,,,Camouflage
+Move.camouflage.Description,Changes user's type by terrain (default Normal).,,,,,
+Move.captivate.Name,Captivate,Seducción,Seducción,,,Séduction
+Move.captivate.Description,Lowers the foe(s) Sp. Atk by 2 if opposite gender.,,,,,
+Move.ceaselessedge.Name,Ceaseless Edge,Tajo Metralla,Corte Metralla,,,Vagues à Lames
+Move.ceaselessedge.Description,Sets a layer of Spikes on the opposing side.,,,,,
+Move.celebrate.Name,Celebrate,Celebración,Celebración,,,Célébration
+Move.celebrate.Description,No competitive use.,,,,,
+Move.charge.Name,Charge,Carga,Carga,,,Chargeur
+Move.charge.Description,"+1 SpD, user's next Electric move 2× power.",,,,,
+Move.chargebeam.Name,Charge Beam,Rayo Carga,Rayo Carga,,,Rayon Chargé
+Move.chargebeam.Description,70% chance to raise the user's Sp. Atk by 1.,,,,,
+Move.charm.Name,Charm,Encanto,Encanto,,,Charme
+Move.charm.Description,Lowers the target's Attack by 2.,,,,,
+Move.chatter.Name,Chatter,Cháchara,Parloteo,,,Babil
+Move.chatter.Description,100% chance to confuse the target.,,,,,
+Move.chillingwater.Name,Chilling Water,Agua Fría,Agua Fría,,,Douche Froide
+Move.chillingwater.Description,100% chance to lower the target's Attack by 1.,,,,,
+Move.chillyreception.Name,Chilly Reception,Fría Acogida,Respuesta Fría,,,Neigeux de Mots
+Move.chillyreception.Description,Starts Snow. User switches out.,,,,,
+Move.chipaway.Name,Chip Away,Guardia Baja,Guardia Baja,,,Attrition
+Move.chipaway.Description,Ignores the target's stat stage changes.,,,,,
+Move.chloroblast.Name,Chloroblast,Clorofiláser,Clorofiláser,,,Herblast
+Move.chloroblast.Description,User loses 50% max HP.,,,,,
+Move.circlethrow.Name,Circle Throw,Llave Giro,Llave Giro,,,Projection
+Move.circlethrow.Description,Forces the target to switch to a random ally.,,,,,
+Move.clamp.Name,Clamp,Tenaza,Tenaza,,,Claquoir
+Move.clamp.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.clangingscales.Name,Clanging Scales,Fragor Escamas,Fragor Escamas,,,Vibrécaille
+Move.clangingscales.Description,Lowers the user's Defense by 1.,,,,,
+Move.clangoroussoul.Name,Clangorous Soul,Estruendo Escama,Estruendo Escama,,,Dracacophonie
+Move.clangoroussoul.Description,User loses 33% of its max HP. +1 to all stats.,,,,,
+Move.clearsmog.Name,Clear Smog,Niebla Clara,Humo Claro,,,Bain de Smog
+Move.clearsmog.Description,Resets all of the target's stat stages to 0.,,,,,
+Move.closecombat.Name,Close Combat,A Bocajarro,Cuerpo a Cuerpo,,,Close Combat
+Move.closecombat.Description,Lowers the user's Defense and Sp. Def by 1.,,,,,
+Move.coaching.Name,Coaching,Motivación,Motivación,,,Coaching
+Move.coaching.Description,Raises an ally's Attack and Defense by 1.,,,,,
+Move.coil.Name,Coil,Enrosque,Enrosque,,,Enroulement
+Move.coil.Description,"Raises user's Attack, Defense, accuracy by 1.",,,,,
+Move.collisioncourse.Name,Collision Course,Nitrochoque,Nitrochoque,,,Nitro Crash
+Move.collisioncourse.Description,Deals 1.3333× damage with supereffective hits.,,,,,
+Move.combattorque.Name,Combat Torque,Pugnachoque,Pugnachoque,,,Crash Musclé
+Move.combattorque.Description,30% chance to paralyze the target.,,,,,
+Move.cometpunch.Name,Comet Punch,Puño Cometa,Puño Cometa,,,Poing Comète
+Move.cometpunch.Description,Hits 2-5 times in one turn.,,,,,
+Move.comeuppance.Name,Comeuppance,Resarcimiento,Resarcimiento,,,Vindicte
+Move.comeuppance.Description,"If hit by an attack, returns 1.5× damage.",,,,,
+Move.confide.Name,Confide,Confidencia,Confidencia,,,Confidence
+Move.confide.Description,Lowers the target's Sp. Atk by 1.,,,,,
+Move.confuseray.Name,Confuse Ray,Rayo Confuso,Rayo de Confusión,,,Onde Folie
+Move.confuseray.Description,Confuses the target.,,,,,
+Move.confusion.Name,Confusion,Confusión,Confusión,,,Choc Mental
+Move.confusion.Description,10% chance to confuse the target.,,,,,
+Move.constrict.Name,Constrict,Restricción,Restricción,,,Constriction
+Move.constrict.Description,10% chance to lower the target's Speed by 1.,,,,,
+Move.conversion.Name,Conversion,Conversión,Conversión,,,Conversion
+Move.conversion.Description,Changes user's type to match its first move.,,,,,
+Move.conversion2.Name,Conversion 2,Conversión 2,Conversión 2,,,Conversion 2
+Move.conversion2.Description,Changes user's type to resist target's last move.,,,,,
+Move.copycat.Name,Copycat,Copión,Copión,,,Photocopie
+Move.copycat.Description,Uses the last move used in the battle.,,,,,
+Move.coreenforcer.Name,Core Enforcer,Núcleo Castigo,Núcleo Castigo,,,Sanction Suprême
+Move.coreenforcer.Description,Nullifies the foe(s) Ability if the foe(s) move first.,,,,,
+Move.corrosivegas.Name,Corrosive Gas,Gas Corrosivo,Gas Corrosivo,,,Gaz Corrosif
+Move.corrosivegas.Description,Removes adjacent Pokemon's held items.,,,,,
+Move.cosmicpower.Name,Cosmic Power,Masa Cósmica,Masa Cósmica,,,Force Cosmique
+Move.cosmicpower.Description,Raises the user's Defense and Sp. Def by 1.,,,,,
+Move.cottonguard.Name,Cotton Guard,Rizo Algodón,Guardialgodón,,,Cotogarde
+Move.cottonguard.Description,Raises the user's Defense by 3.,,,,,
+Move.cottonspore.Name,Cotton Spore,Esporagodón,Esporagodón,,,Spore Coton
+Move.cottonspore.Description,Lowers the target's Speed by 2.,,,,,
+Move.counter.Name,Counter,Contraataque,Contraataque,,,Riposte
+Move.counter.Description,"If hit by physical attack, returns double damage.",,,,,
+Move.courtchange.Name,Court Change,Cambio de Cancha,Cambio de Cancha,,,Change-Côté
+Move.courtchange.Description,Swaps user's field effects with the opposing side.,,,,,
+Move.covet.Name,Covet,Antojo,Antojo,,,Implore
+Move.covet.Description,"If the user has no item, it steals the target's.",,,,,
+Move.crabhammer.Name,Crabhammer,Martillazo,Martillazo,,,Pince-Masse
+Move.crabhammer.Description,High critical hit ratio.,,,,,
+Move.craftyshield.Name,Crafty Shield,Truco Defensa,Truco Defensa,,,Vigilance
+Move.craftyshield.Description,Protects allies from Status moves this turn.,,,,,
+Move.crosschop.Name,Cross Chop,Tajo Cruzado,Golpe Cruzado,,,Coup Croix
+Move.crosschop.Description,High critical hit ratio.,,,,,
+Move.crosspoison.Name,Cross Poison,Veneno X,Veneno X,,,Poison Croix
+Move.crosspoison.Description,High critical hit ratio. 10% chance to poison.,,,,,
+Move.crunch.Name,Crunch,Triturar,Triturar,,,Mâchouille
+Move.crunch.Description,20% chance to lower the target's Defense by 1.,,,,,
+Move.crushclaw.Name,Crush Claw,Garra Brutal,Garra Brutal,,,Éclate Griffe
+Move.crushclaw.Description,50% chance to lower the target's Defense by 1.,,,,,
+Move.crushgrip.Name,Crush Grip,Agarrón,Garra Aplastante,,,Presse
+Move.crushgrip.Description,More power the more HP the target has left.,,,,,
+Move.curse.Name,Curse,Maldición,Maldición,,,Malédiction
+Move.curse.Description,"Curses if Ghost, else -1 Spe, +1 Atk, +1 Def.",,,,,
+Move.cut.Name,Cut,Corte,Corte,,,Coupe
+Move.cut.Description,No additional effect.,,,,,
+Move.darkestlariat.Name,Darkest Lariat,Lariat Oscuro,Lariat Oscuro,,,Dark Lariat
+Move.darkestlariat.Description,Ignores the target's stat stage changes.,,,,,
+Move.darkpulse.Name,Dark Pulse,Pulso Umbrío,Pulso Oscuro,,,Vibrobscur
+Move.darkpulse.Description,20% chance to make the target flinch.,,,,,
+Move.darkvoid.Name,Dark Void,Brecha Negra,Abismo Negro,,,Trou Noir
+Move.darkvoid.Description,Darkrai: Causes the foe(s) to fall asleep.,,,,,
+Move.dazzlinggleam.Name,Dazzling Gleam,Brillo Mágico,Brillo Mágico,,,Éclat Magique
+Move.dazzlinggleam.Description,No additional effect. Hits adjacent foes.,,,,,
+Move.decorate.Name,Decorate,Decoración,Decoración,,,Nappage
+Move.decorate.Description,Raises the target's Attack and Sp. Atk by 2.,,,,,
+Move.defendorder.Name,Defend Order,A Defender,A Defender,,,Appel Défense
+Move.defendorder.Description,Raises the user's Defense and Sp. Def by 1.,,,,,
+Move.defensecurl.Name,Defense Curl,Rizo Defensa,Hacerse Bolita,,,Boul’Armure
+Move.defensecurl.Description,Raises the user's Defense by 1.,,,,,
+Move.defog.Name,Defog,Despejar,Desempañar,,,Anti-Brume
+Move.defog.Description,-1 evasion; ends user and target hazards/terrain.,,,,,
+Move.destinybond.Name,Destiny Bond,Mismo Destino,Lazo del Destino,,,Lien du Destin
+Move.destinybond.Description,"If an opponent knocks out the user, it also faints.",,,,,
+Move.detect.Name,Detect,Detección,Detección,,,Détection
+Move.detect.Description,Prevents moves from affecting the user this turn.,,,,,
+Move.diamondstorm.Name,Diamond Storm,Tormenta de Diamantes,Tormenta de Diamantes,,,Orage Adamantin
+Move.diamondstorm.Description,50% chance to raise user's Defense by 2.,,,,,
+Move.dig.Name,Dig,Excavar,Excavar,,,Tunnel
+Move.dig.Description,"Digs underground turn 1, strikes turn 2.",,,,,
+Move.direclaw.Name,Dire Claw,Garra Nociva,Garra Nociva,,,Griffes Funestes
+Move.direclaw.Description,"50% chance to sleep, poison, or paralyze target.",,,,,
+Move.disable.Name,Disable,Anulación,Anulación,,,Entrave
+Move.disable.Description,"For 4 turns, disables the target's last move used.",,,,,
+Move.disarmingvoice.Name,Disarming Voice,Voz Cautivadora,Voz Encantadora,,,Voix Enjôleuse
+Move.disarmingvoice.Description,This move does not check accuracy. Hits foes.,,,,,
+Move.discharge.Name,Discharge,Chispazo,Chispazo,,,Coup d’Jus
+Move.discharge.Description,30% chance to paralyze adjacent Pokemon.,,,,,
+Move.dive.Name,Dive,Buceo,Buceo,,,Plongée
+Move.dive.Description,"Dives underwater turn 1, strikes turn 2.",,,,,
+Move.dizzypunch.Name,Dizzy Punch,Puño Mareo,Puño Mareador,,,Uppercut
+Move.dizzypunch.Description,20% chance to confuse the target.,,,,,
+Move.doodle.Name,Doodle,Decalcomanía,Plagio,,,Décalquage
+Move.doodle.Description,User and ally's Abilities become target's Ability.,,,,,
+Move.doomdesire.Name,Doom Desire,Deseo Oculto,Deseo Final,,,Vœu Destructeur
+Move.doomdesire.Description,Hits two turns after being used.,,,,,
+Move.doubleedge.Name,Double-Edge,Doble Filo,Doble Filo,,,Damoclès
+Move.doubleedge.Description,Has 33% recoil.,,,,,
+Move.doublehit.Name,Double Hit,Doble Golpe,Doble Golpe,,,Coup Double
+Move.doublehit.Description,Hits 2 times in one turn.,,,,,
+Move.doubleironbash.Name,Double Iron Bash,Ferropuño Doble,Ferropuño Doble,,,Écrous d’Poing
+Move.doubleironbash.Description,Hits twice. 30% chance to make the target flinch.,,,,,
+Move.doublekick.Name,Double Kick,Doble Patada,Doble Patada,,,Double Pied
+Move.doublekick.Description,Hits 2 times in one turn.,,,,,
+Move.doubleshock.Name,Double Shock,Electropalmas,Electropalmas,,,Double Décharge
+Move.doubleshock.Description,User's Electric type: typeless; must be Electric.,,,,,
+Move.doubleslap.Name,Double Slap,Doble Bofetón,Doble Bofetón,,,Torgnoles
+Move.doubleslap.Description,Hits 2-5 times in one turn.,,,,,
+Move.doubleteam.Name,Double Team,Doble Equipo,Doble Equipo,,,Reflet
+Move.doubleteam.Description,Raises the user's evasiveness by 1.,,,,,
+Move.dracometeor.Name,Draco Meteor,Cometa Draco,Meteoro Dragón,,,Draco-Météore
+Move.dracometeor.Description,Lowers the user's Sp. Atk by 2.,,,,,
+Move.dragonascent.Name,Dragon Ascent,Ascenso Draco,Ascenso Dracónico,,,Draco-Ascension
+Move.dragonascent.Description,Lowers the user's Defense and Sp. Def by 1.,,,,,
+Move.dragonbreath.Name,Dragon Breath,Dragoaliento,Aliento Dragón,,,Draco-Souffle
+Move.dragonbreath.Description,30% chance to paralyze the target.,,,,,
+Move.dragoncheer.Name,Dragon Cheer,Bramido Dragón,Bramido Dragón,,,Cri Draconique
+Move.dragoncheer.Description,"Ally: Crit ratio +1, or +2 if ally is Dragon type.",,,,,
+Move.dragonclaw.Name,Dragon Claw,Garra Dragón,Garra Dragón,,,Draco-Griffe
+Move.dragonclaw.Description,No additional effect.,,,,,
+Move.dragondance.Name,Dragon Dance,Danza Dragón,Danza de Dragón,,,Danse Draco
+Move.dragondance.Description,Raises the user's Attack and Speed by 1.,,,,,
+Move.dragondarts.Name,Dragon Darts,Dracoflechas,Dracoflechas,,,Draco-Flèches
+Move.dragondarts.Description,Hits twice. Doubles: Tries to hit each foe once.,,,,,
+Move.dragonenergy.Name,Dragon Energy,Dracoenergía,Dracoenergía,,,Draco-Énergie
+Move.dragonenergy.Description,Less power as user's HP decreases. Hits foe(s).,,,,,
+Move.dragonhammer.Name,Dragon Hammer,Martillo Dragón,Martillo Dragón,,,Draco-Marteau
+Move.dragonhammer.Description,No additional effect.,,,,,
+Move.dragonpulse.Name,Dragon Pulse,Pulso Dragón,Pulso Dragón,,,Draco-Choc
+Move.dragonpulse.Description,No additional effect.,,,,,
+Move.dragonrage.Name,Dragon Rage,Furia Dragón,Furia Dragón,,,Draco-Rage
+Move.dragonrage.Description,Deals 40 HP of damage to the target.,,,,,
+Move.dragonrush.Name,Dragon Rush,Carga Dragón,Carga Dragón,,,Draco-Charge
+Move.dragonrush.Description,20% chance to make the target flinch.,,,,,
+Move.dragontail.Name,Dragon Tail,Cola Dragón,Cola de Dragón,,,Draco-Queue
+Move.dragontail.Description,Forces the target to switch to a random ally.,,,,,
+Move.drainingkiss.Name,Draining Kiss,Beso Drenaje,Beso Drenador,,,Vampibaiser
+Move.drainingkiss.Description,User recovers 75% of the damage dealt.,,,,,
+Move.drainpunch.Name,Drain Punch,Puño Drenaje,Puño Drenador,,,Vampi-Poing
+Move.drainpunch.Description,User recovers 50% of the damage dealt.,,,,,
+Move.dreameater.Name,Dream Eater,Comesueños,Comesueños,,,Dévorêve
+Move.dreameater.Description,User gains 1/2 HP inflicted. Sleeping target only.,,,,,
+Move.drillpeck.Name,Drill Peck,Pico Taladro,Pico Taladro,,,Bec Vrille
+Move.drillpeck.Description,No additional effect.,,,,,
+Move.drillrun.Name,Drill Run,Taladradora,Taladradora,,,Tunnelier
+Move.drillrun.Description,High critical hit ratio.,,,,,
+Move.drumbeating.Name,Drum Beating,Batería Asalto,Batería Asalto,,,Tambour Battant
+Move.drumbeating.Description,100% chance to lower the target's Speed by 1.,,,,,
+Move.dualchop.Name,Dual Chop,Golpe Bis,Golpe Dual,,,Double Baffe
+Move.dualchop.Description,Hits 2 times in one turn.,,,,,
+Move.dualwingbeat.Name,Dual Wingbeat,Ala Bis,Aletazo Doble,,,Double Volée
+Move.dualwingbeat.Description,Hits 2 times in one turn.,,,,,
+Move.dynamaxcannon.Name,Dynamax Cannon,Cañón Dinamax,Cañón Dinamax,,,Canon Dynamax
+Move.dynamaxcannon.Description,No additional effect.,,,,,
+Move.dynamicpunch.Name,Dynamic Punch,Puño Dinámico,Puño Dinámico,,,Dynamo-Poing
+Move.dynamicpunch.Description,100% chance to confuse the target.,,,,,
+Move.earthpower.Name,Earth Power,Tierra Viva,Poder Terrestre,,,Telluriforce
+Move.earthpower.Description,10% chance to lower the target's Sp. Def by 1.,,,,,
+Move.earthquake.Name,Earthquake,Terremoto,Terremoto,,,Séisme
+Move.earthquake.Description,Hits adjacent Pokemon. Double damage on Dig.,,,,,
+Move.echoedvoice.Name,Echoed Voice,Eco Voz,Eco Voz,,,Écho
+Move.echoedvoice.Description,Power increases when used on consecutive turns.,,,,,
+Move.eerieimpulse.Name,Eerie Impulse,Onda Anómala,Onda Anómala,,,Ondes Étranges
+Move.eerieimpulse.Description,Lowers the target's Sp. Atk by 2.,,,,,
+Move.eeriespell.Name,Eerie Spell,Conjuro Funesto,Conjuro Funesto,,,Sort Sinistre
+Move.eeriespell.Description,Removes 3 PP from the target's last move.,,,,,
+Move.eggbomb.Name,Egg Bomb,Bomba Huevo,Bomba Huevo,,,Bombe Œuf
+Move.eggbomb.Description,No additional effect.,,,,,
+Move.electricterrain.Name,Electric Terrain,Campo Eléctrico,Campo Eléctrico,,,Champ Électrifié
+Move.electricterrain.Description,"5 turns. Grounded: +Electric power, can't sleep.",,,,,
+Move.electrify.Name,Electrify,Electrificación,Electrificación,,,Électrisation
+Move.electrify.Description,Changes the target's move to Electric this turn.,,,,,
+Move.electroball.Name,Electro Ball,Bola Voltio,Electrobola,,,Boule Élek
+Move.electroball.Description,More power the faster the user is than the target.,,,,,
+Move.electrodrift.Name,Electro Drift,Electroderrape,Electroderrape,,,Turbo Volt
+Move.electrodrift.Description,Deals 1.3333× damage with supereffective hits.,,,,,
+Move.electroshot.Name,Electro Shot,Electrorrayo,Electrorrayo,,,Fulgurayon
+Move.electroshot.Description,"Raises Sp. Atk by 1, hits turn 2. Rain: no charge.",,,,,
+Move.electroweb.Name,Electroweb,Electrotela,Electrotela,,,Toile Élek
+Move.electroweb.Description,100% chance to lower the foe(s) Speed by 1.,,,,,
+Move.embargo.Name,Embargo,Embargo,Embargo,,,Embargo
+Move.embargo.Description,"For 5 turns, the target's item has no effect.",,,,,
+Move.ember.Name,Ember,Ascuas,Brasas,,,Flammèche
+Move.ember.Description,10% chance to burn the target.,,,,,
+Move.encore.Name,Encore,Otra Vez,Otra Vez,,,Encore
+Move.encore.Description,Target repeats its last move for its next 3 turns.,,,,,
+Move.endeavor.Name,Endeavor,Esfuerzo,Esfuerzo,,,Effort
+Move.endeavor.Description,Lowers the target's HP to the user's HP.,,,,,
+Move.endure.Name,Endure,Aguante,Aguante,,,Ténacité
+Move.endure.Description,User survives attacks this turn with at least 1 HP.,,,,,
+Move.energyball.Name,Energy Ball,Energibola,Bola de Energía,,,Éco-Sphère
+Move.energyball.Description,10% chance to lower the target's Sp. Def by 1.,,,,,
+Move.entrainment.Name,Entrainment,Danza Amiga,Danza Amiga,,,Ten-Danse
+Move.entrainment.Description,The target's Ability changes to match the user's.,,,,,
+Move.eruption.Name,Eruption,Estallido,Estallido,,,Éruption
+Move.eruption.Description,Less power as user's HP decreases. Hits foe(s).,,,,,
+Move.esperwing.Name,Esper Wing,Ala Aural,Ala Aural,,,Ailes Psycho
+Move.esperwing.Description,100% chance to raise user Speed by 1. High crit.,,,,,
+Move.eternabeam.Name,Eternabeam,Rayo Infinito,Rayo Infinito,,,Laser Infinimax
+Move.eternabeam.Description,User cannot move next turn.,,,,,
+Move.expandingforce.Name,Expanding Force,Vasta Fuerza,Vasta Fuerza,,,Vaste Pouvoir
+Move.expandingforce.Description,"User on Psychic Terrain: 1.5× power, hits foes.",,,,,
+Move.explosion.Name,Explosion,Explosión,Explosión,,,Explosion
+Move.explosion.Description,Hits adjacent Pokemon. The user faints.,,,,,
+Move.extrasensory.Name,Extrasensory,Paranormal,Extrasensorial,,,Extrasenseur
+Move.extrasensory.Description,10% chance to make the target flinch.,,,,,
+Move.extremespeed.Name,Extreme Speed,Velocidad Extrema,Velocidad Extrema,,,Vitesse Extrême
+Move.extremespeed.Description,Nearly always goes first.,,,,,
+Move.facade.Name,Facade,Fachada,Fachada,,,Façade
+Move.facade.Description,Power doubles if user is burn/poison/paralyzed.,,,,,
+Move.fairylock.Name,Fairy Lock,Cerrojo Feérico,Cerrojo Feérico,,,Verrou Enchanté
+Move.fairylock.Description,Prevents all Pokemon from switching next turn.,,,,,
+Move.fairywind.Name,Fairy Wind,Viento Feérico,Viento Feérico,,,Vent Féérique
+Move.fairywind.Description,No additional effect.,,,,,
+Move.fakeout.Name,Fake Out,Sorpresa,Sorpresa,,,Bluff
+Move.fakeout.Description,Hits first. First turn out only. 100% flinch chance.,,,,,
+Move.faketears.Name,Fake Tears,Llanto Falso,Llanto Falso,,,Croco Larme
+Move.faketears.Description,Lowers the target's Sp. Def by 2.,,,,,
+Move.falsesurrender.Name,False Surrender,Irreverencia,Irreverencia,,,Fourbette
+Move.falsesurrender.Description,This move does not check accuracy.,,,,,
+Move.falseswipe.Name,False Swipe,Falso Tortazo,Falsa Bofetada,,,Faux-Chage
+Move.falseswipe.Description,Always leaves the target with at least 1 HP.,,,,,
+Move.featherdance.Name,Feather Dance,Danza Pluma,Danza de Plumas,,,Danse Plumes
+Move.featherdance.Description,Lowers the target's Attack by 2.,,,,,
+Move.feint.Name,Feint,Amago,Amago,,,Ruse
+Move.feint.Description,"Nullifies Detect, Protect, and Quick/Wide Guard.",,,,,
+Move.feintattack.Name,Feint Attack,Finta,Ataque Finta,,,Feinte
+Move.feintattack.Description,This move does not check accuracy.,,,,,
+Move.fellstinger.Name,Fell Stinger,Aguijón Letal,Aguijón Letal,,,Dard Mortel
+Move.fellstinger.Description,Raises user's Attack by 3 if this KOes the target.,,,,,
+Move.ficklebeam.Name,Fickle Beam,Láser Veleidoso,Láser Caprichoso,,,Laser Hasard
+Move.ficklebeam.Description,Has a 30% chance this move's power is doubled.,,,,,
+Move.fierydance.Name,Fiery Dance,Danza Llama,Danza de Llamas,,,Danse du Feu
+Move.fierydance.Description,50% chance to raise the user's Sp. Atk by 1.,,,,,
+Move.fierywrath.Name,Fiery Wrath,Furia Candente,Furia Candente,,,Fureur Ardente
+Move.fierywrath.Description,20% chance to make the foe(s) flinch.,,,,,
+Move.filletaway.Name,Fillet Away,Deslome,Fileteo,,,Décharnement
+Move.filletaway.Description,"+2 Attack, Sp. Atk, Speed for 1/2 user's max HP.",,,,,
+Move.finalgambit.Name,Final Gambit,Sacrificio,Sacrificio,,,Tout ou Rien
+Move.finalgambit.Description,Does damage equal to the user's HP. User faints.,,,,,
+Move.fireblast.Name,Fire Blast,Llamarada,Llamarada,,,Déflagration
+Move.fireblast.Description,10% chance to burn the target.,,,,,
+Move.firefang.Name,Fire Fang,Colmillo Ígneo,Colmillo Fuego,,,Crocs Feu
+Move.firefang.Description,10% chance to burn. 10% chance to flinch.,,,,,
+Move.firelash.Name,Fire Lash,Látigo Ígneo,Látigo Ígneo,,,Fouet de Feu
+Move.firelash.Description,100% chance to lower the target's Defense by 1.,,,,,
+Move.firepledge.Name,Fire Pledge,Voto Fuego,Voto Fuego,,,Aire de Feu
+Move.firepledge.Description,Use with Grass or Water Pledge for added effect.,,,,,
+Move.firepunch.Name,Fire Punch,Puño Fuego,Puño Fuego,,,Poing Feu
+Move.firepunch.Description,10% chance to burn the target.,,,,,
+Move.firespin.Name,Fire Spin,Giro Fuego,Giro Fuego,,,Danse Flammes
+Move.firespin.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.firstimpression.Name,First Impression,Escaramuza,Escaramuza,,,Escarmouche
+Move.firstimpression.Description,Nearly always goes first. First turn out only.,,,,,
+Move.fishiousrend.Name,Fishious Rend,Branquibocado,Branquibocado,,,Branchicrok
+Move.fishiousrend.Description,Power doubles if user moves before the target.,,,,,
+Move.fissure.Name,Fissure,Fisura,Fisura,,,Abîme
+Move.fissure.Description,OHKOs the target. Fails if user is a lower level.,,,,,
+Move.flail.Name,Flail,Azote,Azote,,,Gigotage
+Move.flail.Description,More power the less HP the user has left.,,,,,
+Move.flameburst.Name,Flame Burst,Pirotecnia,Golpe de Fuego,,,Rebondifeu
+Move.flameburst.Description,Damages Pokemon next to the target as well.,,,,,
+Move.flamecharge.Name,Flame Charge,Nitrocarga,Carga de Fuego,,,Nitrocharge
+Move.flamecharge.Description,100% chance to raise the user's Speed by 1.,,,,,
+Move.flamethrower.Name,Flamethrower,Lanzallamas,Lanzallamas,,,Lance-Flammes
+Move.flamethrower.Description,10% chance to burn the target.,,,,,
+Move.flamewheel.Name,Flame Wheel,Rueda Fuego,Rueda Ígnea,,,Roue de Feu
+Move.flamewheel.Description,10% chance to burn the target. Thaws user.,,,,,
+Move.flareblitz.Name,Flare Blitz,Envite Ígneo,Erupción,,,Boutefeu
+Move.flareblitz.Description,Has 33% recoil. 10% chance to burn. Thaws user.,,,,,
+Move.flash.Name,Flash,Destello,Destello,,,Flash
+Move.flash.Description,Lowers the target's accuracy by 1.,,,,,
+Move.flashcannon.Name,Flash Cannon,Cañón Resplandor,Cañón Resplandor,,,Luminocanon
+Move.flashcannon.Description,10% chance to lower the target's Sp. Def by 1.,,,,,
+Move.flatter.Name,Flatter,Camelo,Halago,,,Flatterie
+Move.flatter.Description,Raises the target's Sp. Atk by 1 and confuses it.,,,,,
+Move.fleurcannon.Name,Fleur Cannon,Cañón Floral,Cañón Floral,,,Canon Floral
+Move.fleurcannon.Description,Lowers the user's Sp. Atk by 2.,,,,,
+Move.fling.Name,Fling,Lanzamiento,Lanzamiento,,,Dégommage
+Move.fling.Description,Flings the user's item at the target. Power varies.,,,,,
+Move.flipturn.Name,Flip Turn,Viraje,Viraje,,,Eau Revoir
+Move.flipturn.Description,User switches out after damaging the target.,,,,,
+Move.floralhealing.Name,Floral Healing,Cura Floral,Flores Sanadoras,,,Soin Floral
+Move.floralhealing.Description,Heals the target by 50% of its max HP.,,,,,
+Move.flowershield.Name,Flower Shield,Defensa Floral,Defensa Floral,,,Garde Florale
+Move.flowershield.Description,Raises Defense by 1 of all active Grass types.,,,,,
+Move.flowertrick.Name,Flower Trick,Truco Floral,Truco Floral,,,Magie Florale
+Move.flowertrick.Description,Always results in a critical hit; no accuracy check.,,,,,
+Move.fly.Name,Fly,Vuelo,Vuelo,,,Vol
+Move.fly.Description,"Flies up on first turn, then strikes the next turn.",,,,,
+Move.flyingpress.Name,Flying Press,Plancha Voladora,Plancha Voladora,,,Flying Press
+Move.flyingpress.Description,Combines Flying in its type effectiveness.,,,,,
+Move.focusblast.Name,Focus Blast,Onda Certera,Ataque Centrado,,,Exploforce
+Move.focusblast.Description,10% chance to lower the target's Sp. Def by 1.,,,,,
+Move.focusenergy.Name,Focus Energy,Foco Energía,Centrar Energía,,,Puissance
+Move.focusenergy.Description,Raises the user's critical hit ratio by 2.,,,,,
+Move.focuspunch.Name,Focus Punch,Puño Certero,Puño Centrado,,,Mitra-Poing
+Move.focuspunch.Description,Fails if the user takes damage before it hits.,,,,,
+Move.followme.Name,Follow Me,Señuelo,Señuelo,,,Par Ici
+Move.followme.Description,The foes' moves target the user on the turn used.,,,,,
+Move.forcepalm.Name,Force Palm,Palmeo,Fuerza de Palma,,,Forte-Paume
+Move.forcepalm.Description,30% chance to paralyze the target.,,,,,
+Move.foresight.Name,Foresight,Profecía,Visión,,,Clairvoyance
+Move.foresight.Description,"Fighting, Normal hit Ghost. Evasiveness ignored.",,,,,
+Move.forestscurse.Name,Forest's Curse,Condena Silvana,Condena Silvana,,,Maléfice Sylvain
+Move.forestscurse.Description,Adds Grass to the target's type(s).,,,,,
+Move.foulplay.Name,Foul Play,Juego Sucio,Juego Sucio,,,Tricherie
+Move.foulplay.Description,Uses target's Attack stat in damage calculation.,,,,,
+Move.freezedry.Name,Freeze-Dry,Liofilización,Liofilización,,,Lyophilisation
+Move.freezedry.Description,10% chance to freeze. Super effective on Water.,,,,,
+Move.freezeshock.Name,Freeze Shock,Rayo Gélido,Rayo Gélido,,,Éclair Gelé
+Move.freezeshock.Description,Charges turn 1. Hits turn 2. 30% paralyze.,,,,,
+Move.freezingglare.Name,Freezing Glare,Mirada Heladora,Mirada Glacial,,,Regard Glaçant
+Move.freezingglare.Description,10% chance to freeze the target.,,,,,
+Move.frenzyplant.Name,Frenzy Plant,Planta Feroz,Planta Feroz,,,Végé-Attaque
+Move.frenzyplant.Description,User cannot move next turn.,,,,,
+Move.frostbreath.Name,Frost Breath,Vaho Gélido,Vaho Helado,,,Souffle Glacé
+Move.frostbreath.Description,Always results in a critical hit.,,,,,
+Move.frustration.Name,Frustration,Frustración,Frustración,,,Frustration
+Move.frustration.Description,Max 102 power at minimum Happiness.,,,,,
+Move.furyattack.Name,Fury Attack,Ataque Furia,Ataque Furia,,,Furie
+Move.furyattack.Description,Hits 2-5 times in one turn.,,,,,
+Move.furycutter.Name,Fury Cutter,Corte Furia,Corte Furia,,,Taillade
+Move.furycutter.Description,"Power doubles with each hit, up to 160.",,,,,
+Move.furyswipes.Name,Fury Swipes,Golpes Furia,Garras Furiosas,,,Combo-Griffe
+Move.furyswipes.Description,Hits 2-5 times in one turn.,,,,,
+Move.fusionbolt.Name,Fusion Bolt,Rayo Fusión,Rayo Fusión,,,Éclair Croix
+Move.fusionbolt.Description,Power doubles if used after Fusion Flare this turn.,,,,,
+Move.fusionflare.Name,Fusion Flare,Llama Fusión,Llama Fusión,,,Flamme Croix
+Move.fusionflare.Description,Power doubles if used after Fusion Bolt this turn.,,,,,
+Move.futuresight.Name,Future Sight,Premonición,Premonición,,,Prescience
+Move.futuresight.Description,Hits two turns after being used.,,,,,
+Move.gastroacid.Name,Gastro Acid,Bilis,Ácido Gástrico,,,Suc Digestif
+Move.gastroacid.Description,Nullifies the target's Ability.,,,,,
+Move.geargrind.Name,Gear Grind,Rueda Doble,Rueda Doble,,,Lancécrou
+Move.geargrind.Description,Hits 2 times in one turn.,,,,,
+Move.gearup.Name,Gear Up,Piñón Auxiliar,Engranajes,,,Engrenage
+Move.gearup.Description,"Raises Atk, Sp. Atk of allies with Plus/Minus by 1.",,,,,
+Move.geomancy.Name,Geomancy,Geocontrol,Geocontrol,,,Géo-Contrôle
+Move.geomancy.Description,"Charges, then raises SpA, SpD, Spe by 2 turn 2.",,,,,
+Move.gigadrain.Name,Giga Drain,Gigadrenado,Gigadrenado,,,Giga-Sangsue
+Move.gigadrain.Description,User recovers 50% of the damage dealt.,,,,,
+Move.gigaimpact.Name,Giga Impact,Gigaimpacto,Gigaimpacto,,,Giga Impact
+Move.gigaimpact.Description,User cannot move next turn.,,,,,
+Move.gigatonhammer.Name,Gigaton Hammer,Martillo Colosal,Martillo Colosal,,,Marteau Mastoc
+Move.gigatonhammer.Description,Cannot be selected the turn after it's used.,,,,,
+Move.glaciallance.Name,Glacial Lance,Lanza Glacial,Lanza Glacial,,,Lance de Glace
+Move.glaciallance.Description,No additional effect. Hits adjacent foes.,,,,,
+Move.glaciate.Name,Glaciate,Mundo Gélido,Mundo Gélido,,,Ère Glaciaire
+Move.glaciate.Description,100% chance to lower the foe(s) Speed by 1.,,,,,
+Move.glaiverush.Name,Glaive Rush,Asalto Espadón,Asalto Espadón,,,Charge Glaive
+Move.glaiverush.Description,User takes sure-hit 2× damage until its next turn.,,,,,
+Move.glare.Name,Glare,Deslumbrar,Fulmirada,,,Regard Médusant
+Move.glare.Description,Paralyzes the target.,,,,,
+Move.grassknot.Name,Grass Knot,Hierba Lazo,Nudo de Pasto,,,Nœud Herbe
+Move.grassknot.Description,More power the heavier the target.,,,,,
+Move.grasspledge.Name,Grass Pledge,Voto Planta,Voto Planta,,,Aire d’Herbe
+Move.grasspledge.Description,Use with Fire or Water Pledge for added effect.,,,,,
+Move.grasswhistle.Name,Grass Whistle,Silbato,Silbato de Hoja,,,Siffl’Herbe
+Move.grasswhistle.Description,Causes the target to fall asleep.,,,,,
+Move.grassyglide.Name,Grassy Glide,Fitoimpulso,Fitoimpulso,,,Gliss’Herbe
+Move.grassyglide.Description,User on Grassy Terrain: +1 priority.,,,,,
+Move.grassyterrain.Name,Grassy Terrain,Campo de Hierba,Campo de Césped,,,Champ Herbu
+Move.grassyterrain.Description,"5 turns. Grounded: +Grass power, +1/16 max HP.",,,,,
+Move.gravapple.Name,Grav Apple,Fuerza G,Fuerza G,,,Force G
+Move.gravapple.Description,Target: 100% -1 Def. During Gravity: 1.5× power.,,,,,
+Move.gravity.Name,Gravity,Gravedad,Gravedad,,,Gravité
+Move.gravity.Description,"5 turns: no Ground immunities, 1.67× accuracy.",,,,,
+Move.growl.Name,Growl,Gruñido,Gruñido,,,Rugissement
+Move.growl.Description,Lowers the foe(s) Attack by 1.,,,,,
+Move.growth.Name,Growth,Desarrollo,Crecimiento,,,Croissance
+Move.growth.Description,Raises user's Attack and Sp. Atk by 1; 2 in Sun.,,,,,
+Move.grudge.Name,Grudge,Rabia,Rabia,,,Rancune
+Move.grudge.Description,"If the user faints, the attack used loses all its PP.",,,,,
+Move.guardsplit.Name,Guard Split,Isoguardia,Guardia Dividida,,,Partage Garde
+Move.guardsplit.Description,Averages Defense and Sp. Def stats with target.,,,,,
+Move.guardswap.Name,Guard Swap,Cambiadefensa,Cambiadefensa,,,Permugarde
+Move.guardswap.Description,Swaps Defense and Sp. Def changes with target.,,,,,
+Move.guillotine.Name,Guillotine,Guillotina,Guillotina,,,Guillotine
+Move.guillotine.Description,OHKOs the target. Fails if user is a lower level.,,,,,
+Move.gunkshot.Name,Gunk Shot,Lanzamugre,Lanzamugre,,,Détricanon
+Move.gunkshot.Description,30% chance to poison the target.,,,,,
+Move.gust.Name,Gust,Tornado,Ráfaga de Aire,,,Tornade
+Move.gust.Description,"Power doubles during Bounce, Fly, and Sky Drop.",,,,,
+Move.gyroball.Name,Gyro Ball,Giro Bola,Giro Bola,,,Gyroballe
+Move.gyroball.Description,More power the slower the user than the target.,,,,,
+Move.hail.Name,Hail,Granizo,Granizo,,,Grêle
+Move.hail.Description,"For 5 turns, hail crashes down.",,,,,
+Move.hammerarm.Name,Hammer Arm,Machada,Brazo Martillo,,,Marto-Poing
+Move.hammerarm.Description,Lowers the user's Speed by 1.,,,,,
+Move.happyhour.Name,Happy Hour,Paga Extra,Paga Extra,,,Étrennes
+Move.happyhour.Description,No competitive use.,,,,,
+Move.harden.Name,Harden,Fortaleza,Fortaleza,,,Armure
+Move.harden.Description,Raises the user's Defense by 1.,,,,,
+Move.hardpress.Name,Hard Press,Prensa Metálica,Prensa Metálica,,,Pression Extrême
+Move.hardpress.Description,More power the more HP the target has left.,,,,,
+Move.haze.Name,Haze,Niebla,Niebla,,,Buée Noire
+Move.haze.Description,Eliminates all stat changes.,,,,,
+Move.headbutt.Name,Headbutt,Golpe Cabeza,Golpe Cabeza,,,Coup d’Boule
+Move.headbutt.Description,30% chance to make the target flinch.,,,,,
+Move.headcharge.Name,Head Charge,Ariete,Carga de Cabeza,,,Peignée
+Move.headcharge.Description,Has 1/4 recoil.,,,,,
+Move.headlongrush.Name,Headlong Rush,Arremetida,Asalto Frontal,,,Assaut Frontal
+Move.headlongrush.Description,Lowers the user's Defense and Sp. Def by 1.,,,,,
+Move.headsmash.Name,Head Smash,Testarazo,Topetazo,,,Fracass’Tête
+Move.headsmash.Description,Has 1/2 recoil.,,,,,
+Move.healbell.Name,Heal Bell,Cascabel Cura,Cascabel Sanador,,,Glas de Soin
+Move.healbell.Description,Cures the user's party of all status conditions.,,,,,
+Move.healblock.Name,Heal Block,Anticura,Anticuración,,,Anti-Soin
+Move.healblock.Description,"For 5 turns, the foe(s) is prevented from healing.",,,,,
+Move.healingwish.Name,Healing Wish,Deseo Cura,Deseo Sanador,,,Vœu Soin
+Move.healingwish.Description,User faints. Next hurt Pokemon is fully healed.,,,,,
+Move.healorder.Name,Heal Order,Auxilio,Auxilio,,,Appel Soins
+Move.healorder.Description,Heals the user by 50% of its max HP.,,,,,
+Move.healpulse.Name,Heal Pulse,Pulso Cura,Pulso Sanador,,,Vibra Soin
+Move.healpulse.Description,Heals the target by 50% of its max HP.,,,,,
+Move.heartstamp.Name,Heart Stamp,Arrumaco,Sello de Corazón,,,Crève-Cœur
+Move.heartstamp.Description,30% chance to make the target flinch.,,,,,
+Move.heartswap.Name,Heart Swap,Cambiaalmas,Cambiaalmas,,,Permucœur
+Move.heartswap.Description,Swaps all stat changes with target.,,,,,
+Move.heatcrash.Name,Heat Crash,Golpe Calor,Golpe de Calor,,,Tacle Feu
+Move.heatcrash.Description,More power the heavier the user than the target.,,,,,
+Move.heatwave.Name,Heat Wave,Onda Ígnea,Onda Ígnea,,,Canicule
+Move.heatwave.Description,10% chance to burn the foe(s).,,,,,
+Move.heavyslam.Name,Heavy Slam,Cuerpo Pesado,Golpe Pesado,,,Tacle Lourd
+Move.heavyslam.Description,More power the heavier the user than the target.,,,,,
+Move.helpinghand.Name,Helping Hand,Refuerzo,Refuerzos,,,Coup d’Main
+Move.helpinghand.Description,One adjacent ally's move power is 1.5× this turn.,,,,,
+Move.hex.Name,Hex,Infortunio,Infortunio,,,Châtiment
+Move.hex.Description,Power doubles if the target has a status ailment.,,,,,
+Move.hiddenpower.Name,Hidden Power Water,Poder Oculto,Poder Oculto,,,Puissance Cachée
+Move.hiddenpower.Description,Varies in type based on the user's IVs.,,,,,
+Move.highhorsepower.Name,High Horsepower,Fuerza Equina,Fuerza Equina,,,Cavalerie Lourde
+Move.highhorsepower.Description,No additional effect.,,,,,
+Move.highjumpkick.Name,High Jump Kick,Patada Salto Alta,Patada Salto Alto,,,Pied Voltige
+Move.highjumpkick.Description,User is hurt by 50% of its max HP if it misses.,,,,,
+Move.holdback.Name,Hold Back,Clemencia,Clemencia,,,Retenue
+Move.holdback.Description,Always leaves the target with at least 1 HP.,,,,,
+Move.holdhands.Name,Hold Hands,Manos Juntas,Manos Juntas,,,Mains Jointes
+Move.holdhands.Description,No competitive use.,,,,,
+Move.honeclaws.Name,Hone Claws,Afilagarras,Afilagarras,,,Aiguisage
+Move.honeclaws.Description,Raises the user's Attack and accuracy by 1.,,,,,
+Move.hornattack.Name,Horn Attack,Cornada,Ataque Cuerno,,,Koud’Korne
+Move.hornattack.Description,No additional effect.,,,,,
+Move.horndrill.Name,Horn Drill,Perforador,Cuerno Taladro,,,Empal’Korne
+Move.horndrill.Description,OHKOs the target. Fails if user is a lower level.,,,,,
+Move.hornleech.Name,Horn Leech,Asta Drenaje,Drenacuerno,,,Encornebois
+Move.hornleech.Description,User recovers 50% of the damage dealt.,,,,,
+Move.howl.Name,Howl,Aullido,Aullido,,,Grondement
+Move.howl.Description,Raises the user's and ally's Attack by 1.,,,,,
+Move.hurricane.Name,Hurricane,Vendaval,Huracán,,,Vent Violent
+Move.hurricane.Description,30% chance to confuse target. Can't miss in rain.,,,,,
+Move.hydrocannon.Name,Hydro Cannon,Hidrocañón,Hidrocañón,,,Hydroblast
+Move.hydrocannon.Description,User cannot move next turn.,,,,,
+Move.hydropump.Name,Hydro Pump,Hidrobomba,Hidrobomba,,,Hydrocanon
+Move.hydropump.Description,No additional effect.,,,,,
+Move.hydrosteam.Name,Hydro Steam,Hidrovapor,Hidrovapor,,,Hydrovapeur
+Move.hydrosteam.Description,During Sun: 1.5× damage instead of half.,,,,,
+Move.hyperbeam.Name,Hyper Beam,Hiperrayo,Hiperrayo,,,Ultralaser
+Move.hyperbeam.Description,User cannot move next turn.,,,,,
+Move.hyperdrill.Name,Hyper Drill,Hipertaladro,Hipertaladro,,,Hyperceuse
+Move.hyperdrill.Description,Bypasses protection without breaking it.,,,,,
+Move.hyperfang.Name,Hyper Fang,Hipercolmillo,Hipercolmillo,,,Croc de Mort
+Move.hyperfang.Description,10% chance to make the target flinch.,,,,,
+Move.hyperspacefury.Name,Hyperspace Fury,Cerco Dimensión,Cerco Dimensión,,,Furie Dimension
+Move.hyperspacefury.Description,Hoopa-U: Lowers user's Def by 1; breaks protect.,,,,,
+Move.hyperspacehole.Name,Hyperspace Hole,Paso Dimensional,Paso Dimensional,,,TrouDimensionnel
+Move.hyperspacehole.Description,Breaks the target's protection for this turn.,,,,,
+Move.hypervoice.Name,Hyper Voice,Vozarrón,Hipervoz,,,Mégaphone
+Move.hypervoice.Description,No additional effect. Hits adjacent foes.,,,,,
+Move.hypnosis.Name,Hypnosis,Hipnosis,Hipnosis,,,Hypnose
+Move.hypnosis.Description,Causes the target to fall asleep.,,,,,
+Move.iceball.Name,Ice Ball,Bola Hielo,Bola Hielo,,,Ball’Glace
+Move.iceball.Description,Power doubles with each hit. Repeats for 5 turns.,,,,,
+Move.icebeam.Name,Ice Beam,Rayo Hielo,Rayo de Hielo,,,Laser Glace
+Move.icebeam.Description,10% chance to freeze the target.,,,,,
+Move.iceburn.Name,Ice Burn,Llama Gélida,Llama Gélida,,,Feu Glacé
+Move.iceburn.Description,Charges turn 1. Hits turn 2. 30% burn.,,,,,
+Move.icefang.Name,Ice Fang,Colmillo Hielo,Colmillo Hielo,,,Crocs Givre
+Move.icefang.Description,10% chance to freeze. 10% chance to flinch.,,,,,
+Move.icehammer.Name,Ice Hammer,Martillo Hielo,Martillo Hielo,,,Marteau de Glace
+Move.icehammer.Description,Lowers the user's Speed by 1.,,,,,
+Move.icepunch.Name,Ice Punch,Puño Hielo,Puño Hielo,,,Poing Glace
+Move.icepunch.Description,10% chance to freeze the target.,,,,,
+Move.iceshard.Name,Ice Shard,Esquirla Helada,Esquirla Helada,,,Éclats Glace
+Move.iceshard.Description,Usually goes first.,,,,,
+Move.icespinner.Name,Ice Spinner,Pirueta Helada,Pirueta Helada,,,Cryo-Pirouette
+Move.icespinner.Description,Ends the effects of terrain.,,,,,
+Move.iciclecrash.Name,Icicle Crash,Chuzos,Carámbano,,,Chute Glace
+Move.iciclecrash.Description,30% chance to make the target flinch.,,,,,
+Move.iciclespear.Name,Icicle Spear,Carámbano,Lanza de Hielo,,,Stalactite
+Move.iciclespear.Description,Hits 2-5 times in one turn.,,,,,
+Move.icywind.Name,Icy Wind,Viento Hielo,Viento Helado,,,Vent Glace
+Move.icywind.Description,100% chance to lower the foe(s) Speed by 1.,,,,,
+Move.imprison.Name,Imprison,Sellar,Sellar,,,Possessif
+Move.imprison.Description,No foe can use any move known by the user.,,,,,
+Move.incinerate.Name,Incinerate,Calcinación,Incinerar,,,Calcination
+Move.incinerate.Description,Destroys the foe(s) Berry/Gem.,,,,,
+Move.infernalparade.Name,Infernal Parade,Marcha Espectral,Marcha Espectral,,,Cortège Funèbre
+Move.infernalparade.Description,30% burn. 2× power if target is already statused.,,,,,
+Move.inferno.Name,Inferno,Infierno,Infierno,,,Feu d’Enfer
+Move.inferno.Description,100% chance to burn the target.,,,,,
+Move.infestation.Name,Infestation,Acoso,Infestación,,,Harcèlement
+Move.infestation.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.ingrain.Name,Ingrain,Arraigo,Arraigo,,,Racines
+Move.ingrain.Description,Traps/grounds user; heals 1/16 max HP per turn.,,,,,
+Move.instruct.Name,Instruct,Mandato,Mandato,,,Sommation
+Move.instruct.Description,The target immediately uses its last used move.,,,,,
+Move.iondeluge.Name,Ion Deluge,Cortina Plasma,Cortina Plasma,,,Déluge Plasmique
+Move.iondeluge.Description,Normal moves become Electric type this turn.,,,,,
+Move.irondefense.Name,Iron Defense,Defensa Férrea,Defensa de Hierro,,,Mur de Fer
+Move.irondefense.Description,Raises the user's Defense by 2.,,,,,
+Move.ironhead.Name,Iron Head,Cabeza de Hierro,Cabeza de Hierro,,,Tête de Fer
+Move.ironhead.Description,30% chance to make the target flinch.,,,,,
+Move.irontail.Name,Iron Tail,Cola Férrea,Cola de Hierro,,,Queue de Fer
+Move.irontail.Description,30% chance to lower the target's Defense by 1.,,,,,
+Move.ivycudgel.Name,Ivy Cudgel,Garrote Liana,Garrote Liana,,,Massue Liane
+Move.ivycudgel.Description,High critical hit ratio. Type depends on user's form.,,,,,
+Move.jawlock.Name,Jaw Lock,Presa Maxilar,Presa Maxilar,,,Croque Fort
+Move.jawlock.Description,Prevents both user and target from switching out.,,,,,
+Move.jetpunch.Name,Jet Punch,Puño Jet,Puño Jet,,,Poing Sonique
+Move.jetpunch.Description,Usually goes first.,,,,,
+Move.judgment.Name,Judgment,Sentencia,Juicio Final,,,Jugement
+Move.judgment.Description,Type varies based on the held Plate.,,,,,
+Move.jumpkick.Name,Jump Kick,Patada Salto,Patada Salto,,,Pied Sauté
+Move.jumpkick.Description,User is hurt by 50% of its max HP if it misses.,,,,,
+Move.junglehealing.Name,Jungle Healing,Cura Selvática,Selva Sanadora,,,Selve Salvatrice
+Move.junglehealing.Description,"User and allies: healed 1/4 max HP, status cured.",,,,,
+Move.karatechop.Name,Karate Chop,Golpe Kárate,Golpe Karate,,,Poing Karaté
+Move.karatechop.Description,High critical hit ratio.,,,,,
+Move.kinesis.Name,Kinesis,Kinético,Kinético,,,Télékinésie
+Move.kinesis.Description,Lowers the target's accuracy by 1.,,,,,
+Move.kingsshield.Name,King's Shield,Escudo Real,Escudo Real,,,Bouclier Royal
+Move.kingsshield.Description,Protects from damaging attacks. Contact: -1 Atk.,,,,,
+Move.knockoff.Name,Knock Off,Desarme,Desarme,,,Sabotage
+Move.knockoff.Description,1.5× damage if foe holds an item. Removes item.,,,,,
+Move.kowtowcleave.Name,Kowtow Cleave,Genufendiente,Genufendiente,,,Génusection
+Move.kowtowcleave.Description,This move does not check accuracy.,,,,,
+Move.landswrath.Name,Land's Wrath,Fuerza Telúrica,Fuerza Telúrica,,,Force Chtonienne
+Move.landswrath.Description,No additional effect. Hits adjacent foes.,,,,,
+Move.laserfocus.Name,Laser Focus,Aguzar,Agudizar,,,Affilage
+Move.laserfocus.Description,"Until the end of the next turn, user's moves crit.",,,,,
+Move.lashout.Name,Lash Out,Desahogo,Desahogo,,,Cent Rancunes
+Move.lashout.Description,2× power if the user had a stat lowered this turn.,,,,,
+Move.lastresort.Name,Last Resort,Última Baza,Último Recurso,,,Dernier Recours
+Move.lastresort.Description,Fails unless each known move has been used.,,,,,
+Move.lastrespects.Name,Last Respects,Homenaje Póstumo,Homenaje Póstumo,,,Hommage Posthume
+Move.lastrespects.Description,+50 power for each time a party member fainted.,,,,,
+Move.lavaplume.Name,Lava Plume,Humareda,Bomba de Lava,,,Ébullilave
+Move.lavaplume.Description,30% chance to burn adjacent Pokemon.,,,,,
+Move.leafage.Name,Leafage,Follaje,Follaje,,,Feuillage
+Move.leafage.Description,No additional effect.,,,,,
+Move.leafblade.Name,Leaf Blade,Hoja Aguda,Hoja Aguda,,,Lame Feuille
+Move.leafblade.Description,High critical hit ratio.,,,,,
+Move.leafstorm.Name,Leaf Storm,Lluevehojas,Tormenta de Hojas,,,Tempête Verte
+Move.leafstorm.Description,Lowers the user's Sp. Atk by 2.,,,,,
+Move.leaftornado.Name,Leaf Tornado,Ciclón de Hojas,Ciclón de Hojas,,,Phytomixeur
+Move.leaftornado.Description,50% chance to lower the target's accuracy by 1.,,,,,
+Move.leechlife.Name,Leech Life,Chupavidas,Chupavidas,,,Vampirisme
+Move.leechlife.Description,User recovers 50% of the damage dealt.,,,,,
+Move.leechseed.Name,Leech Seed,Drenadoras,Drenadoras,,,Vampigraine
+Move.leechseed.Description,1/8 of target's HP is restored to user every turn.,,,,,
+Move.leer.Name,Leer,Malicioso,Malicioso,,,Groz’Yeux
+Move.leer.Description,Lowers the foe(s) Defense by 1.,,,,,
+Move.lick.Name,Lick,Lengüetazo,Lengüetazo,,,Léchouille
+Move.lick.Description,30% chance to paralyze the target.,,,,,
+Move.lifedew.Name,Life Dew,Gota Vital,Gota Vital,,,Fontaine de Vie
+Move.lifedew.Description,Heals the user and its allies by 1/4 their max HP.,,,,,
+Move.lightofruin.Name,Light of Ruin,Luz Aniquiladora,Luz Aniquiladora,,,Lumière du Néant
+Move.lightofruin.Description,Has 1/2 recoil.,,,,,
+Move.lightscreen.Name,Light Screen,Pantalla de Luz,Pantalla de Luz,,,Mur Lumière
+Move.lightscreen.Description,"For 5 turns, special damage to allies is halved.",,,,,
+Move.liquidation.Name,Liquidation,Hidroariete,Hidroariete,,,Aqua-Brèche
+Move.liquidation.Description,20% chance to lower the target's Defense by 1.,,,,,
+Move.lockon.Name,Lock-On,Fijar Blanco,Fijar Blanco,,,Verrouillage
+Move.lockon.Description,User's next move will not miss the target.,,,,,
+Move.lovelykiss.Name,Lovely Kiss,Beso Amoroso,Beso Amoroso,,,Grobisou
+Move.lovelykiss.Description,Causes the target to fall asleep.,,,,,
+Move.lowkick.Name,Low Kick,Patada Baja,Patada Baja,,,Balayage
+Move.lowkick.Description,More power the heavier the target.,,,,,
+Move.lowsweep.Name,Low Sweep,Puntapié,Barredora,,,Balayette
+Move.lowsweep.Description,100% chance to lower the target's Speed by 1.,,,,,
+Move.luckychant.Name,Lucky Chant,Conjuro,Cántico Suerte,,,Air Veinard
+Move.luckychant.Description,"For 5 turns, shields user's party from critical hits.",,,,,
+Move.luminacrash.Name,Lumina Crash,Fotocolisión,Fotocolisión,,,Lumino-Impact
+Move.luminacrash.Description,100% chance to lower the target's Sp. Def by 2.,,,,,
+Move.lunarblessing.Name,Lunar Blessing,Plegaria Lunar,Plegaria Lunar,,,Prière Lunaire
+Move.lunarblessing.Description,"User and allies: healed 1/4 max HP, status cured.",,,,,
+Move.lunardance.Name,Lunar Dance,Danza Lunar,Danza de la Luna,,,Danse Lune
+Move.lunardance.Description,"User faints. Next hurt Pkmn is cured, max HP/PP.",,,,,
+Move.lunge.Name,Lunge,Plancha,Plancha,,,Furie-Bond
+Move.lunge.Description,100% chance to lower the target's Attack by 1.,,,,,
+Move.lusterpurge.Name,Luster Purge,Resplandor,Resplandor,,,Lumi-Éclat
+Move.lusterpurge.Description,50% chance to lower the target's Sp. Def by 1.,,,,,
+Move.machpunch.Name,Mach Punch,Ultrapuño,Superpuño,,,Mach Punch
+Move.machpunch.Description,Usually goes first.,,,,,
+Move.magicalleaf.Name,Magical Leaf,Hoja Mágica,Hojas Mágicas,,,Feuille Magik
+Move.magicalleaf.Description,This move does not check accuracy.,,,,,
+Move.magicaltorque.Name,Magical Torque,Feerichoque,Feerichoque,,,Crash Magique
+Move.magicaltorque.Description,30% chance to confuse the target.,,,,,
+Move.magiccoat.Name,Magic Coat,Capa Mágica,Capa Mágica,,,Reflet Magik
+Move.magiccoat.Description,Bounces back certain non-damaging moves.,,,,,
+Move.magicpowder.Name,Magic Powder,Polvo Mágico,Polvo Magia,,,Poudre Magique
+Move.magicpowder.Description,Changes the target's type to Psychic.,,,,,
+Move.magicroom.Name,Magic Room,Zona Mágica,Zona Mágica,,,Zone Magique
+Move.magicroom.Description,"For 5 turns, all held items have no effect.",,,,,
+Move.magmastorm.Name,Magma Storm,Lluvia Ígnea,Lluvia Ígnea,,,Vortex Magma
+Move.magmastorm.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.magnetbomb.Name,Magnet Bomb,Bomba Imán,Magnetobomba,,,Bombe Aimant
+Move.magnetbomb.Description,This move does not check accuracy.,,,,,
+Move.magneticflux.Name,Magnetic Flux,Aura Magnética,Aura Magnética,,,Magné-Contrôle
+Move.magneticflux.Description,"Raises Def, Sp. Def of allies with Plus/Minus by 1.",,,,,
+Move.magnetrise.Name,Magnet Rise,Levitón,Superimán,,,Vol Magnétik
+Move.magnetrise.Description,"For 5 turns, the user has immunity to Ground.",,,,,
+Move.magnitude.Name,Magnitude,Magnitud,Magnitud,,,Ampleur
+Move.magnitude.Description,Hits adjacent Pokemon. Power varies; 2× on Dig.,,,,,
+Move.makeitrain.Name,Make It Rain,Fiebre Dorada,Fiebre Dorada,,,Ruée d'Or
+Move.makeitrain.Description,Lowers the user's Sp. Atk by 1. Hits foe(s).,,,,,
+Move.malignantchain.Name,Malignant Chain,Cadena Virulenta,Cadena Virulenta,,,Chaîne Malsaine
+Move.malignantchain.Description,50% chance to badly poison the target.,,,,,
+Move.matblock.Name,Mat Block,Escudo Tatami,Escudo Tatami,,,Tatamigaeshi
+Move.matblock.Description,Protects allies from damaging attacks. Turn 1 only.,,,,,
+Move.matchagotcha.Name,Matcha Gotcha,Cañón Batidor,Cañón Batidor,,,Mortier Matcha
+Move.matchagotcha.Description,20% burn. Recovers 50% dmg dealt. Thaws foe(s).,,,,,
+Move.meanlook.Name,Mean Look,Mal de Ojo,Mal de Ojo,,,Regard Noir
+Move.meanlook.Description,Prevents the target from switching out.,,,,,
+Move.meditate.Name,Meditate,Meditación,Meditación,,,Yoga
+Move.meditate.Description,Raises the user's Attack by 1.,,,,,
+Move.mefirst.Name,Me First,Yo Primero,Yo Primero,,,Moi d’Abord
+Move.mefirst.Description,Copies a foe at 1.5× power. User must be faster.,,,,,
+Move.megadrain.Name,Mega Drain,Megaagotar,Megadrenado,,,Méga-Sangsue
+Move.megadrain.Description,User recovers 50% of the damage dealt.,,,,,
+Move.megahorn.Name,Megahorn,Megacuerno,Megacuerno,,,Mégacorne
+Move.megahorn.Description,No additional effect.,,,,,
+Move.megakick.Name,Mega Kick,Megapatada,Megapatada,,,Ultimawashi
+Move.megakick.Description,No additional effect.,,,,,
+Move.megapunch.Name,Mega Punch,Megapuño,Megapuño,,,Ultimapoing
+Move.megapunch.Description,No additional effect.,,,,,
+Move.memento.Name,Memento,Legado,Recuerdo,,,Souvenir
+Move.memento.Description,"Lowers target's Attack, Sp. Atk by 2. User faints.",,,,,
+Move.metalburst.Name,Metal Burst,Represión Metal,Expl. Metálica,,,Fulmifer
+Move.metalburst.Description,"If hit by an attack, returns 1.5× damage.",,,,,
+Move.metalclaw.Name,Metal Claw,Garra Metal,Garra de Metal,,,Griffe Acier
+Move.metalclaw.Description,10% chance to raise the user's Attack by 1.,,,,,
+Move.metalsound.Name,Metal Sound,Eco Metálico,Sonido Metálico,,,Strido-Son
+Move.metalsound.Description,Lowers the target's Sp. Def by 2.,,,,,
+Move.meteorassault.Name,Meteor Assault,Asalto Estelar,Asalto Estelar,,,Joute Astrale
+Move.meteorassault.Description,User cannot move next turn.,,,,,
+Move.meteorbeam.Name,Meteor Beam,Rayo Meteórico,Rayo Meteórico,,,Laser Météore
+Move.meteorbeam.Description,Raises user's Sp. Atk by 1 on turn 1. Hits turn 2.,,,,,
+Move.meteormash.Name,Meteor Mash,Puño Meteoro,Puño Meteoro,,,Poing Météore
+Move.meteormash.Description,20% chance to raise the user's Attack by 1.,,,,,
+Move.metronome.Name,Metronome,Metrónomo,Metrónomo,,,Métronome
+Move.metronome.Description,Picks a random move.,,,,,
+Move.mightycleave.Name,Mighty Cleave,Filo Potente,Corte Potente,,,Lame Puissante
+Move.mightycleave.Description,Bypasses protection without breaking it.,,,,,
+Move.milkdrink.Name,Milk Drink,Batido,Licuado,,,Lait à Boire
+Move.milkdrink.Description,Heals the user by 50% of its max HP.,,,,,
+Move.mimic.Name,Mimic,Mimético,Mímica,,,Copie
+Move.mimic.Description,The last move the target used replaces this one.,,,,,
+Move.mindblown.Name,Mind Blown,Cabeza Sorpresa,Cabeza Sorpresa,,,Caboche-Kaboum
+Move.mindblown.Description,User loses 50% max HP. Hits adjacent Pokemon.,,,,,
+Move.mindreader.Name,Mind Reader,Telépata,Telépata,,,Lire-Esprit
+Move.mindreader.Description,User's next move will not miss the target.,,,,,
+Move.minimize.Name,Minimize,Reducción,Reducción,,,Lilliput
+Move.minimize.Description,Raises the user's evasiveness by 2.,,,,,
+Move.miracleeye.Name,Miracle Eye,Gran Ojo,Gran Ojo,,,Œil Miracle
+Move.miracleeye.Description,Psychic hits Dark. Evasiveness ignored.,,,,,
+Move.mirrorcoat.Name,Mirror Coat,Manto Espejo,Escudo Espejo,,,Voile Miroir
+Move.mirrorcoat.Description,"If hit by special attack, returns double damage.",,,,,
+Move.mirrormove.Name,Mirror Move,Espejo,Espejo,,,Mimique
+Move.mirrormove.Description,User uses the target's last used move against it.,,,,,
+Move.mirrorshot.Name,Mirror Shot,Disparo Espejo,Disparo Espejo,,,Miroi-Tir
+Move.mirrorshot.Description,30% chance to lower the target's accuracy by 1.,,,,,
+Move.mist.Name,Mist,Neblina,Neblina,,,Brume
+Move.mist.Description,"For 5 turns, protects user's party from stat drops.",,,,,
+Move.mistball.Name,Mist Ball,Bola Neblina,Bola Neblina,,,Ball’Brume
+Move.mistball.Description,50% chance to lower the target's Sp. Atk by 1.,,,,,
+Move.mistyexplosion.Name,Misty Explosion,Bruma Explosiva,Bruma Explosiva,,,Explo-Brume
+Move.mistyexplosion.Description,User faints. User on Misty Terrain: 1.5× power.,,,,,
+Move.mistyterrain.Name,Misty Terrain,Campo de Niebla,Campo de Niebla,,,Champ Brumeux
+Move.mistyterrain.Description,"5 turns. Can't status,-Dragon power vs grounded.",,,,,
+Move.moonblast.Name,Moonblast,Fuerza Lunar,Fuerza Lunar,,,Pouvoir Lunaire
+Move.moonblast.Description,30% chance to lower the target's Sp. Atk by 1.,,,,,
+Move.moongeistbeam.Name,Moongeist Beam,Rayo Umbrío,Rayo Umbrío,,,Rayon Spectral
+Move.moongeistbeam.Description,Ignores the Abilities of other Pokemon.,,,,,
+Move.moonlight.Name,Moonlight,Luz Lunar,Luz Lunar,,,Rayon Lune
+Move.moonlight.Description,Heals the user by a weather-dependent amount.,,,,,
+Move.morningsun.Name,Morning Sun,Sol Matinal,Sol Matutino,,,Aurore
+Move.morningsun.Description,Heals the user by a weather-dependent amount.,,,,,
+Move.mortalspin.Name,Mortal Spin,Giro Mortífero,Giro Mortífero,,,Toupie Éclat
+Move.mortalspin.Description,"Poisons foes, frees user from hazards/bind/leech.",,,,,
+Move.mountaingale.Name,Mountain Gale,Viento Carámbano,Viento Carámbano,,,Bise Glaciaire
+Move.mountaingale.Description,30% chance to make the target flinch.,,,,,
+Move.mudbomb.Name,Mud Bomb,Bomba Fango,Bomba Fango,,,Boue-Bombe
+Move.mudbomb.Description,30% chance to lower the target's accuracy by 1.,,,,,
+Move.muddywater.Name,Muddy Water,Agua Lodosa,Agua Lodosa,,,Ocroupi
+Move.muddywater.Description,30% chance to lower the foe(s) accuracy by 1.,,,,,
+Move.mudshot.Name,Mud Shot,Disparo Lodo,Disparo de Lodo,,,Tir de Boue
+Move.mudshot.Description,100% chance to lower the target's Speed by 1.,,,,,
+Move.mudslap.Name,Mud-Slap,Bofetón Lodo,Bofetón Lodo,,,Coud’Boue
+Move.mudslap.Description,100% chance to lower the target's accuracy by 1.,,,,,
+Move.mudsport.Name,Mud Sport,Chapoteo Lodo,Chapoteo de Lodo,,,Lance-Boue
+Move.mudsport.Description,"For 5 turns, Electric-type attacks have 1/3 power.",,,,,
+Move.multiattack.Name,Multi-Attack,Multiataque,Multiataque,,,Coup Varia-Type
+Move.multiattack.Description,Type varies based on the held Memory.,,,,,
+Move.mysticalfire.Name,Mystical Fire,Llama Embrujada,Fuego Místico,,,Feu Ensorcelé
+Move.mysticalfire.Description,100% chance to lower the target's Sp. Atk by 1.,,,,,
+Move.mysticalpower.Name,Mystical Power,Poder Místico,Poder Místico,,,Force Mystique
+Move.mysticalpower.Description,100% chance to raise the user's Sp. Atk by 1.,,,,,
+Move.nastyplot.Name,Nasty Plot,Maquinación,Maquinación,,,Machination
+Move.nastyplot.Description,Raises the user's Sp. Atk by 2.,,,,,
+Move.naturalgift.Name,Natural Gift,Don Natural,Don Natural,,,Don Naturel
+Move.naturalgift.Description,Power and type depends on the user's Berry.,,,,,
+Move.naturepower.Name,Nature Power,Adaptación,Adaptación,,,Force Nature
+Move.naturepower.Description,Attack depends on terrain (default Tri Attack).,,,,,
+Move.naturesmadness.Name,Nature's Madness,Furia Natural,Ira Natural,,,Ire de la Nature
+Move.naturesmadness.Description,Does damage equal to 1/2 target's current HP.,,,,,
+Move.needlearm.Name,Needle Arm,Brazo Pincho,Brazo Aguja,,,Poing Dard
+Move.needlearm.Description,30% chance to make the target flinch.,,,,,
+Move.nightdaze.Name,Night Daze,Pulso Noche,Pulso Nocturno,,,Explonuit
+Move.nightdaze.Description,40% chance to lower the target's accuracy by 1.,,,,,
+Move.nightmare.Name,Nightmare,Pesadilla,Pesadilla,,,Cauchemar
+Move.nightmare.Description,A sleeping target is hurt by 1/4 max HP per turn.,,,,,
+Move.nightshade.Name,Night Shade,Tinieblas,Tinieblas,,,Ombre Nocturne
+Move.nightshade.Description,Does damage equal to the user's level.,,,,,
+Move.nightslash.Name,Night Slash,Tajo Umbrío,Corte Umbrío,,,Tranche-Nuit
+Move.nightslash.Description,High critical hit ratio.,,,,,
+Move.nihillight.Name,Nihil Light,,,,,
+Move.nihillight.Description,,,,,,
+Move.nobleroar.Name,Noble Roar,Rugido de Guerra,Rugido de Guerra,,,Râle Mâle
+Move.nobleroar.Description,Lowers the target's Attack and Sp. Atk by 1.,,,,,
+Move.noretreat.Name,No Retreat,Bastión Final,Bastión Final,,,Ultime Bastion
+Move.noretreat.Description,Raises all stats by 1 (not acc/eva). Traps user.,,,,,
+Move.noxioustorque.Name,Noxious Torque,Ponzochoque,Ponzochoque,,,Crash Toxique
+Move.noxioustorque.Description,30% chance to poison the target.,,,,,
+Move.nuzzle.Name,Nuzzle,Moflete Estático,Frote,,,Frotte-Frimousse
+Move.nuzzle.Description,100% chance to paralyze the target.,,,,,
+Move.oblivionwing.Name,Oblivion Wing,Ala Mortífera,Ala del Olvido,,,Mort’Ailes
+Move.oblivionwing.Description,User recovers 75% of the damage dealt.,,,,,
+Move.obstruct.Name,Obstruct,Obstrucción,Obstrucción,,,Blocage
+Move.obstruct.Description,Protects from damaging attacks. Contact: -2 Def.,,,,,
+Move.octazooka.Name,Octazooka,Pulpocañón,Octazuca,,,Octazooka
+Move.octazooka.Description,50% chance to lower the target's accuracy by 1.,,,,,
+Move.octolock.Name,Octolock,Octopresa,Octopresa,,,Octoprise
+Move.octolock.Description,"Traps target, lowers Def and SpD by 1 each turn.",,,,,
+Move.odorsleuth.Name,Odor Sleuth,Rastreo,Rastreo,,,Flair
+Move.odorsleuth.Description,"Fighting, Normal hit Ghost. Evasiveness ignored.",,,,,
+Move.ominouswind.Name,Ominous Wind,Viento Aciago,Viento Ominoso,,,Vent Mauvais
+Move.ominouswind.Description,10% chance to raise all stats by 1 (not acc/eva).,,,,,
+Move.orderup.Name,Order Up,Oído Cocina,Emplatar,,,Plat du Jour
+Move.orderup.Description,Curly|Droopy|Stretchy eaten: +1 Atk|Def|Spe.,,,,,
+Move.originpulse.Name,Origin Pulse,Pulso Primigenio,Pulso Primigenio,,,Onde Originelle
+Move.originpulse.Description,No additional effect. Hits adjacent foes.,,,,,
+Move.outrage.Name,Outrage,Enfado,Enfado,,,Colère
+Move.outrage.Description,Lasts 2-3 turns. Confuses the user afterwards.,,,,,
+Move.overdrive.Name,Overdrive,Amplificador,Amplificador,,,Overdrive
+Move.overdrive.Description,No additional effect. Hits foe(s).,,,,,
+Move.overheat.Name,Overheat,Sofoco,Supercalor,,,Surchauffe
+Move.overheat.Description,Lowers the user's Sp. Atk by 2.,,,,,
+Move.painsplit.Name,Pain Split,Divide Dolor,Dividedolor,,,Balance
+Move.painsplit.Description,Shares HP of user and target equally.,,,,,
+Move.paraboliccharge.Name,Parabolic Charge,Carga Parábola,Carga Parabólica,,,Parabocharge
+Move.paraboliccharge.Description,User recovers 50% of the damage dealt.,,,,,
+Move.partingshot.Name,Parting Shot,Última Palabra,Última Palabra,,,Dernier Mot
+Move.partingshot.Description,"Lowers target's Atk, Sp. Atk by 1. User switches.",,,,,
+Move.payback.Name,Payback,Vendetta,Revancha,,,Représailles
+Move.payback.Description,Power doubles if the user moves after the target.,,,,,
+Move.payday.Name,Pay Day,Día de Pago,Día de Pago,,,Jackpot
+Move.payday.Description,Scatters coins.,,,,,
+Move.peck.Name,Peck,Picotazo,Picotazo,,,Picpic
+Move.peck.Description,No additional effect.,,,,,
+Move.perishsong.Name,Perish Song,Canto Mortal,Canto Mortal,,,Requiem
+Move.perishsong.Description,All active Pokemon will faint in 3 turns.,,,,,
+Move.petalblizzard.Name,Petal Blizzard,Tormenta Floral,Tormenta de Pétalos,,,Tempête Florale
+Move.petalblizzard.Description,No additional effect. Hits adjacent Pokemon.,,,,,
+Move.petaldance.Name,Petal Dance,Danza Pétalo,Danza de Pétalos,,,Danse Fleurs
+Move.petaldance.Description,Lasts 2-3 turns. Confuses the user afterwards.,,,,,
+Move.phantomforce.Name,Phantom Force,Golpe Fantasma,Golpe Fantasma,,,Hantise
+Move.phantomforce.Description,Disappears turn 1. Hits turn 2. Breaks protection.,,,,,
+Move.photongeyser.Name,Photon Geyser,Géiser Fotónico,Géiser Fotónico,,,Photo-Geyser
+Move.photongeyser.Description,Physical if user's Atk > Sp. Atk. Ignores Abilities.,,,,,
+Move.pinmissile.Name,Pin Missile,Pin Misil,Misil Aguja,,,Dard-Nuée
+Move.pinmissile.Description,Hits 2-5 times in one turn.,,,,,
+Move.plasmafists.Name,Plasma Fists,Puños Plasma,Puños Plasma,,,Plasma Punch
+Move.plasmafists.Description,Normal moves become Electric type this turn.,,,,,
+Move.playnice.Name,Play Nice,Camaradería,Camaradería,,,Camaraderie
+Move.playnice.Description,Lowers the target's Attack by 1.,,,,,
+Move.playrough.Name,Play Rough,Carantoña,Juego Rudo,,,Câlinerie
+Move.playrough.Description,10% chance to lower the target's Attack by 1.,,,,,
+Move.pluck.Name,Pluck,Picoteo,Picoteo,,,Picore
+Move.pluck.Description,User steals and eats the target's Berry.,,,,,
+Move.poisonfang.Name,Poison Fang,Colmillo Veneno,Colmillo Veneno,,,Crochet Venin
+Move.poisonfang.Description,50% chance to badly poison the target.,,,,,
+Move.poisongas.Name,Poison Gas,Gas Venenoso,Gas Venenoso,,,Gaz Toxik
+Move.poisongas.Description,Poisons the foe(s).,,,,,
+Move.poisonjab.Name,Poison Jab,Puya Nociva,Golpe Venenoso,,,Direct Toxik
+Move.poisonjab.Description,30% chance to poison the target.,,,,,
+Move.poisonpowder.Name,Poison Powder,Polvo Veneno,Polvo Venenoso,,,Poudre Toxik
+Move.poisonpowder.Description,Poisons the target.,,,,,
+Move.poisonsting.Name,Poison Sting,Picotazo Veneno,Piquete Venenoso,,,Dard-Venin
+Move.poisonsting.Description,30% chance to poison the target.,,,,,
+Move.poisontail.Name,Poison Tail,Cola Veneno,Cola Venenosa,,,Queue-Poison
+Move.poisontail.Description,High critical hit ratio. 10% chance to poison.,,,,,
+Move.pollenpuff.Name,Pollen Puff,Bola de Polen,Bola de Polen,,,Boule Pollen
+Move.pollenpuff.Description,"If the target is an ally, heals 50% of its max HP.",,,,,
+Move.poltergeist.Name,Poltergeist,Poltergeist,Poltergeist,,,Esprit Frappeur
+Move.poltergeist.Description,Fails if the target has no held item.,,,,,
+Move.populationbomb.Name,Population Bomb,Proliferación,Proliferación,,,Prolifération
+Move.populationbomb.Description,Hits 10 times. Each hit can miss.,,,,,
+Move.pounce.Name,Pounce,Brinco,Brinco,,,Bond
+Move.pounce.Description,100% chance to lower the target's Speed by 1.,,,,,
+Move.pound.Name,Pound,Destructor,Destructor,,,Écras’Face
+Move.pound.Description,No additional effect.,,,,,
+Move.powder.Name,Powder,Polvo Explosivo,Pólvora,,,Nuée de Poudre
+Move.powder.Description,"If using a Fire move, target loses 1/4 max HP.",,,,,
+Move.powdersnow.Name,Powder Snow,Nieve Polvo,Polvo de Nieve,,,Poudreuse
+Move.powdersnow.Description,10% chance to freeze the foe(s).,,,,,
+Move.powergem.Name,Power Gem,Joya de Luz,Joya de Luz,,,Rayon Gemme
+Move.powergem.Description,No additional effect.,,,,,
+Move.powershift.Name,Power Shift,Cambiapoder,Cambiapoder,,,Échange Force
+Move.powershift.Description,Switches user's Attack and Defense stats.,,,,,
+Move.powersplit.Name,Power Split,Isofuerza,Fuerza Dividida,,,Partage Force
+Move.powersplit.Description,Averages Attack and Sp. Atk stats with target.,,,,,
+Move.powerswap.Name,Power Swap,Cambiafuerza,Cambiafuerza,,,Permuforce
+Move.powerswap.Description,Swaps Attack and Sp. Atk stat stages with target.,,,,,
+Move.powertrick.Name,Power Trick,Truco Fuerza,Truco Fuerza,,,Astuce Force
+Move.powertrick.Description,Switches user's Attack and Defense stats.,,,,,
+Move.powertrip.Name,Power Trip,Chulería,Arrogancia,,,Arrogance
+Move.powertrip.Description," + 20 power for each of the user's stat boosts.",,,,,
+Move.poweruppunch.Name,Power-Up Punch,Puño Incremento,Puño Incremento,,,Poing Boost
+Move.poweruppunch.Description,100% chance to raise the user's Attack by 1.,,,,,
+Move.powerwhip.Name,Power Whip,Latigazo,Latigazo,,,Mégafouet
+Move.powerwhip.Description,No additional effect.,,,,,
+Move.precipiceblades.Name,Precipice Blades,Filo del Abismo,Filo del Abismo,,,Lame Pangéenne
+Move.precipiceblades.Description,No additional effect. Hits adjacent foes.,,,,,
+Move.present.Name,Present,Presente,Obsequio,,,Cadeau
+Move.present.Description,"40, 80, 120 power, or heals target 1/4 max HP.",,,,,
+Move.prismaticlaser.Name,Prismatic Laser,Láser Prisma,Láser Prisma,,,Laser Prisme
+Move.prismaticlaser.Description,User cannot move next turn.,,,,,
+Move.protect.Name,Protect,Protección,Protección,,,Abri
+Move.protect.Description,Prevents moves from affecting the user this turn.,,,,,
+Move.psybeam.Name,Psybeam,Psicorrayo,Psicorrayo,,,Rafale Psy
+Move.psybeam.Description,10% chance to confuse the target.,,,,,
+Move.psyblade.Name,Psyblade,Psicohojas,Psicohojas,,,Lame Psychique
+Move.psyblade.Description,During Electric Terrain: 1.5× power.,,,,,
+Move.psychic.Name,Psychic,Psíquico,Fuerza Psíquica,,,Psyko
+Move.psychic.Description,10% chance to lower the target's Sp. Def by 1.,,,,,
+Move.psychicfangs.Name,Psychic Fangs,Psicocolmillo,Psicocolmillo,,,Psycho-Croc
+Move.psychicfangs.Description,"Destroys screens, unless the target is immune.",,,,,
+Move.psychicnoise.Name,Psychic Noise,Psicorruido,Psicorruido,,,Dissonance Psy
+Move.psychicnoise.Description,"For 2 turns, the target is prevented from healing.",,,,,
+Move.psychicterrain.Name,Psychic Terrain,Campo Psíquico,Campo Psíquico,,,Champ Psychique
+Move.psychicterrain.Description,"5 turns. Grounded: +Psychic power, priority-safe.",,,,,
+Move.psychoboost.Name,Psycho Boost,Psicoataque,Psicoimpulso,,,Psycho-Boost
+Move.psychoboost.Description,Lowers the user's Sp. Atk by 2.,,,,,
+Move.psychocut.Name,Psycho Cut,Psicocorte,Psicocorte,,,Coupe Psycho
+Move.psychocut.Description,High critical hit ratio.,,,,,
+Move.psychoshift.Name,Psycho Shift,Psicocambio,Psicocambio,,,Échange Psy
+Move.psychoshift.Description,Transfers the user's status ailment to the target.,,,,,
+Move.psychup.Name,Psych Up,Autosugestión,Autosugestión,,,Boost
+Move.psychup.Description,Copies the target's current stat stages.,,,,,
+Move.psyshieldbash.Name,Psyshield Bash,Asalto Barrera,Asalto Barrera,,,Sprint Bouclier
+Move.psyshieldbash.Description,100% chance to raise the user's Defense by 1.,,,,,
+Move.psyshock.Name,Psyshock,Psicocarga,Choque Psíquico,,,Choc Psy
+Move.psyshock.Description,"Damages target based on Defense, not Sp. Def.",,,,,
+Move.psystrike.Name,Psystrike,Onda Mental,Onda Mental,,,Frappe Psy
+Move.psystrike.Description,"Damages target based on Defense, not Sp. Def.",,,,,
+Move.psywave.Name,Psywave,Psicoonda,Psicoonda,,,Vague Psy
+Move.psywave.Description,Random damage equal to 0.5×-1.5× user's level.,,,,,
+Move.punishment.Name,Punishment,Castigo,Castigo,,,Punition
+Move.punishment.Description,60 power +20 for each of the target's stat boosts.,,,,,
+Move.purify.Name,Purify,Purificación,Purificación,,,Purification
+Move.purify.Description,Cures target's status; heals user 1/2 max HP if so.,,,,,
+Move.pursuit.Name,Pursuit,Persecución,Persecución,,,Poursuite
+Move.pursuit.Description,"If a foe is switching out, hits it at 2× power.",,,,,
+Move.pyroball.Name,Pyro Ball,Balón Ígneo,Balón Ígneo,,,Ballon Brûlant
+Move.pyroball.Description,10% chance to burn the target. Thaws user.,,,,,
+Move.quash.Name,Quash,Último Lugar,Último Lugar,,,À la Queue
+Move.quash.Description,Forces the target to move last this turn.,,,,,
+Move.quickattack.Name,Quick Attack,Ataque Rápido,Ataque Rápido,,,Vive-Attaque
+Move.quickattack.Description,Usually goes first.,,,,,
+Move.quickguard.Name,Quick Guard,Anticipo,Defensa Rápida,,,Prévention
+Move.quickguard.Description,Protects allies from priority attacks this turn.,,,,,
+Move.quiverdance.Name,Quiver Dance,Danza Aleteo,Danza del Aleteo,,,Papillodanse
+Move.quiverdance.Description,"Raises the user's Sp. Atk, Sp. Def, Speed by 1.",,,,,
+Move.rage.Name,Rage,Furia,Furia,,,Frénésie
+Move.rage.Description,Raises the user's Attack by 1 if hit during use.,,,,,
+Move.ragefist.Name,Rage Fist,Puño Furia,Puño Furia,,,Poing de Colère
+Move.ragefist.Description,+50 power for each time user was hit. Max 6 hits.,,,,,
+Move.ragepowder.Name,Rage Powder,Polvo Ira,Polvo Ira,,,Poudre Fureur
+Move.ragepowder.Description,The foes' moves target the user on the turn used.,,,,,
+Move.ragingbull.Name,Raging Bull,Furia Taurina,Furia Taurina,,,Taurogne
+Move.ragingbull.Description,Destroys screens. Type depends on user's form.,,,,,
+Move.ragingfury.Name,Raging Fury,Erupción de Ira,Erupción de Ira,,,Grand Courroux
+Move.ragingfury.Description,Lasts 2-3 turns. Confuses the user afterwards.,,,,,
+Move.raindance.Name,Rain Dance,Danza Lluvia,Danza de Lluvia,,,Danse Pluie
+Move.raindance.Description,"For 5 turns, heavy rain powers Water moves.",,,,,
+Move.rapidspin.Name,Rapid Spin,Giro Rápido,Giro Rápido,,,Tour Rapide
+Move.rapidspin.Description,Free user from hazards/bind/Leech Seed; +1 Spe.,,,,,
+Move.razorleaf.Name,Razor Leaf,Hoja Afilada,Hojas Navaja,,,Tranch’Herbe
+Move.razorleaf.Description,High critical hit ratio. Hits adjacent foes.,,,,,
+Move.razorshell.Name,Razor Shell,Concha Filo,Coraza Afilada,,,Coqui-Lame
+Move.razorshell.Description,50% chance to lower the target's Defense by 1.,,,,,
+Move.razorwind.Name,Razor Wind,Viento Cortante,Viento Cortante,,,Coupe-Vent
+Move.razorwind.Description,"Charges, then hits foe(s) turn 2. High crit ratio.",,,,,
+Move.recover.Name,Recover,Recuperación,Recuperación,,,Soin
+Move.recover.Description,Heals the user by 50% of its max HP.,,,,,
+Move.recycle.Name,Recycle,Reciclaje,Reciclaje,,,Recyclage
+Move.recycle.Description,Restores the item the user last used.,,,,,
+Move.reflect.Name,Reflect,Reflejo,Reflejo,,,Protection
+Move.reflect.Description,"For 5 turns, physical damage to allies is halved.",,,,,
+Move.reflecttype.Name,Reflect Type,Clonatipo,Clonatipo,,,Copie-Type
+Move.reflecttype.Description,User becomes the same type as the target.,,,,,
+Move.refresh.Name,Refresh,Alivio,Alivio,,,Régénération
+Move.refresh.Description,"User cures its burn, poison, or paralysis.",,,,,
+Move.relicsong.Name,Relic Song,Canto Arcaico,Canto Arcaico,,,Chant Antique
+Move.relicsong.Description,10% chance to sleep foe(s). Meloetta transforms.,,,,,
+Move.rest.Name,Rest,Descanso,Descanso,,,Repos
+Move.rest.Description,User sleeps 2 turns and restores HP and status.,,,,,
+Move.retaliate.Name,Retaliate,Represalia,Represalia,,,Vengeance
+Move.retaliate.Description,Power doubles if an ally fainted last turn.,,,,,
+Move.return.Name,Return,Retribución,Retribución,,,Retour
+Move.return.Description,Max 102 power at maximum Happiness.,,,,,
+Move.revelationdance.Name,Revelation Dance,Danza Despertar,Danza Revelación,,,Danse Éveil
+Move.revelationdance.Description,Type varies based on the user's primary type.,,,,,
+Move.revenge.Name,Revenge,Desquite,Desquite,,,Vendetta
+Move.revenge.Description,Power doubles if user is damaged by the target.,,,,,
+Move.reversal.Name,Reversal,Inversión,Inversión,,,Contre
+Move.reversal.Description,More power the less HP the user has left.,,,,,
+Move.revivalblessing.Name,Revival Blessing,Plegaria Vital,Plegaria Vital,,,Second Souffle
+Move.revivalblessing.Description,Revives a fainted Pokemon to 50% HP.,,,,,
+Move.risingvoltage.Name,Rising Voltage,Alto Voltaje,Alto Voltaje,,,Monte-Tension
+Move.risingvoltage.Description,2× power if target is grounded in Electric Terrain.,,,,,
+Move.roar.Name,Roar,Rugido,Rugido,,,Hurlement
+Move.roar.Description,Forces the target to switch to a random ally.,,,,,
+Move.roaroftime.Name,Roar of Time,Distorsión,Rugido Temporal,,,Hurle-Temps
+Move.roaroftime.Description,User cannot move next turn.,,,,,
+Move.rockblast.Name,Rock Blast,Pedrada,Pedrada,,,Boule Roc
+Move.rockblast.Description,Hits 2-5 times in one turn.,,,,,
+Move.rockclimb.Name,Rock Climb,Treparrocas,Treparrocas,,,Escalade
+Move.rockclimb.Description,20% chance to confuse the target.,,,,,
+Move.rockpolish.Name,Rock Polish,Pulimento,Pulimento,,,Poliroche
+Move.rockpolish.Description,Raises the user's Speed by 2.,,,,,
+Move.rockslide.Name,Rock Slide,Avalancha,Avalancha,,,Éboulement
+Move.rockslide.Description,30% chance to make the foe(s) flinch.,,,,,
+Move.rocksmash.Name,Rock Smash,Golpe Roca,Golpe Roca,,,Éclate-Roc
+Move.rocksmash.Description,50% chance to lower the target's Defense by 1.,,,,,
+Move.rockthrow.Name,Rock Throw,Lanzarrocas,Lanzarrocas,,,Jet-Pierres
+Move.rockthrow.Description,No additional effect.,,,,,
+Move.rocktomb.Name,Rock Tomb,Tumba Rocas,Tumba de Rocas,,,Tomberoche
+Move.rocktomb.Description,100% chance to lower the target's Speed by 1.,,,,,
+Move.rockwrecker.Name,Rock Wrecker,Romperrocas,Romperrocas,,,Roc-Boulet
+Move.rockwrecker.Description,User cannot move next turn.,,,,,
+Move.roleplay.Name,Role Play,Imitación,Imitación,,,Imitation
+Move.roleplay.Description,User replaces its Ability with the target's.,,,,,
+Move.rollingkick.Name,Rolling Kick,Patada Giro,Patada Giro,,,Mawashi Geri
+Move.rollingkick.Description,30% chance to make the target flinch.,,,,,
+Move.rollout.Name,Rollout,Rodar,Rodada,,,Roulade
+Move.rollout.Description,Power doubles with each hit. Repeats for 5 turns.,,,,,
+Move.roost.Name,Roost,Respiro,Respiro,,,Atterrissage
+Move.roost.Description,Heals 50% HP. Flying-type removed 'til turn ends.,,,,,
+Move.rototiller.Name,Rototiller,Fertilizante,Fertilizante,,,Fertilisation
+Move.rototiller.Description,Raises Atk/Sp. Atk of grounded Grass types by 1.,,,,,
+Move.round.Name,Round,Canon,Canon,,,Chant Canon
+Move.round.Description,Power doubles if others used Round this turn.,,,,,
+Move.ruination.Name,Ruination,Calamidad,Calamidad,,,Cataclysme
+Move.ruination.Description,Does damage equal to 1/2 target's current HP.,,,,,
+Move.sacredfire.Name,Sacred Fire,Fuego Sagrado,Fuego Sagrado,,,Feu Sacré
+Move.sacredfire.Description,50% chance to burn the target. Thaws user.,,,,,
+Move.sacredsword.Name,Sacred Sword,Espada Santa,Espada Sagrada,,,Lame Sainte
+Move.sacredsword.Description,Ignores the target's stat stage changes.,,,,,
+Move.safeguard.Name,Safeguard,Velo Sagrado,Velo Sagrado,,,Rune Protect
+Move.safeguard.Description,"For 5 turns, protects user's party from status.",,,,,
+Move.saltcure.Name,Salt Cure,Salazón,Salación,,,Salaison
+Move.saltcure.Description,"Deals 1/8 max HP each turn; 1/4 on Steel, Water.",,,,,
+Move.sandattack.Name,Sand Attack,Ataque Arena,Ataque Arena,,,Jet de Sable
+Move.sandattack.Description,Lowers the target's accuracy by 1.,,,,,
+Move.sandsearstorm.Name,Sandsear Storm,Simún de Arena,Tifón de Arena,,,Typhon Pyrosable
+Move.sandsearstorm.Description,20% chance to burn foe(s). Can't miss in rain.,,,,,
+Move.sandstorm.Name,Sandstorm,Tormenta de Arena,Tormenta de Arena,,,Tempête de Sable
+Move.sandstorm.Description,"For 5 turns, a sandstorm rages. Rock: 1.5× SpD.",,,,,
+Move.sandtomb.Name,Sand Tomb,Bucle Arena,Tumba de Arena,,,Tourbi-Sable
+Move.sandtomb.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.scald.Name,Scald,Escaldar,Escaldar,,,Ébullition
+Move.scald.Description,30% chance to burn the target. Thaws target.,,,,,
+Move.scaleshot.Name,Scale Shot,Ráfaga Escamas,Disparo Escamas,,,Rafale Écailles
+Move.scaleshot.Description,"Hits 2-5 times. User: -1 Def, +1 Spe after last hit.",,,,,
+Move.scaryface.Name,Scary Face,Cara Susto,Cara Aterradora,,,Grimace
+Move.scaryface.Description,Lowers the target's Speed by 2.,,,,,
+Move.scorchingsands.Name,Scorching Sands,Arenas Ardientes,Arenas Ardientes,,,Sable Ardent
+Move.scorchingsands.Description,30% chance to burn the target. Thaws target.,,,,,
+Move.scratch.Name,Scratch,Arañazo,Arañazo,,,Griffe
+Move.scratch.Description,No additional effect.,,,,,
+Move.screech.Name,Screech,Chirrido,Chillido,,,Grincement
+Move.screech.Description,Lowers the target's Defense by 2.,,,,,
+Move.searingshot.Name,Searing Shot,Bomba Ígnea,Bomba Ígnea,,,Incendie
+Move.searingshot.Description,30% chance to burn adjacent Pokemon.,,,,,
+Move.secretpower.Name,Secret Power,Daño Secreto,Poder Secreto,,,Force Cachée
+Move.secretpower.Description,Effect varies with terrain. (30% paralysis chance),,,,,
+Move.secretsword.Name,Secret Sword,Sable Místico,Espada Secreta,,,Lame Ointe
+Move.secretsword.Description,"Damages target based on Defense, not Sp. Def.",,,,,
+Move.seedbomb.Name,Seed Bomb,Bomba Germen,Bomba Semilla,,,Canon Graine
+Move.seedbomb.Description,No additional effect.,,,,,
+Move.seedflare.Name,Seed Flare,Fulgor Semilla,Fulgor Semilla,,,Fulmigraine
+Move.seedflare.Description,40% chance to lower the target's Sp. Def by 2.,,,,,
+Move.seismictoss.Name,Seismic Toss,Sísmico,Sísmico,,,Frappe Atlas
+Move.seismictoss.Description,Does damage equal to the user's level.,,,,,
+Move.selfdestruct.Name,Self-Destruct,Autodestrucción,Autodestrucción,,,Destruction
+Move.selfdestruct.Description,Hits adjacent Pokemon. The user faints.,,,,,
+Move.shadowball.Name,Shadow Ball,Bola Sombra,Bola Sombra,,,Ball’Ombre
+Move.shadowball.Description,20% chance to lower the target's Sp. Def by 1.,,,,,
+Move.shadowbone.Name,Shadow Bone,Hueso Sombrío,Hueso Sombrío,,,Os Ombre
+Move.shadowbone.Description,20% chance to lower the target's Defense by 1.,,,,,
+Move.shadowclaw.Name,Shadow Claw,Garra Umbría,Garra de Sombra,,,Griffe Ombre
+Move.shadowclaw.Description,High critical hit ratio.,,,,,
+Move.shadowforce.Name,Shadow Force,Golpe Umbrío,Golpe Umbrío,,,Revenant
+Move.shadowforce.Description,Disappears turn 1. Hits turn 2. Breaks protection.,,,,,
+Move.shadowpunch.Name,Shadow Punch,Puño Sombra,Puño Sombra,,,Poing Ombre
+Move.shadowpunch.Description,This move does not check accuracy.,,,,,
+Move.shadowsneak.Name,Shadow Sneak,Sombra Vil,Sombra Vil,,,Ombre Portée
+Move.shadowsneak.Description,Usually goes first.,,,,,
+Move.sharpen.Name,Sharpen,Afilar,Afilar,,,Affûtage
+Move.sharpen.Description,Raises the user's Attack by 1.,,,,,
+Move.shedtail.Name,Shed Tail,Autotomía,Autotomía,,,Queulonage
+Move.shedtail.Description,User takes 1/2 its max HP to pass a substitute.,,,,,
+Move.sheercold.Name,Sheer Cold,Frío Polar,Frío Extremo,,,Glaciation
+Move.sheercold.Description,OHKOs non-Ice targets. Fails if user's lower level.,,,,,
+Move.shellsidearm.Name,Shell Side Arm,Moluscañón,Moluscañón,,,Kokiyarme
+Move.shellsidearm.Description,20% psn. Physical+contact if it would be stronger.,,,,,
+Move.shellsmash.Name,Shell Smash,Rompecoraza,Rompecoraza,,,Exuviation
+Move.shellsmash.Description,"Lowers Def, SpD by 1; raises Atk, SpA, Spe by 2.",,,,,
+Move.shelltrap.Name,Shell Trap,Coraza Trampa,Trampa Coraza,,,Carapiège
+Move.shelltrap.Description,User must take physical damage before moving.,,,,,
+Move.shelter.Name,Shelter,Retracción,Retracción,,,Mur Fumigène
+Move.shelter.Description,Raises the user's Defense by 2.,,,,,
+Move.shiftgear.Name,Shift Gear,Cambio de Marcha,Cambio de Marcha,,,Chgt Vitesse
+Move.shiftgear.Description,Raises the user's Speed by 2 and Attack by 1.,,,,,
+Move.shockwave.Name,Shock Wave,Onda Voltio,Onda de Choque,,,Onde de Choc
+Move.shockwave.Description,This move does not check accuracy.,,,,,
+Move.shoreup.Name,Shore Up,Recogearena,Recogearena,,,Amass’Sable
+Move.shoreup.Description,User restores 1/2 its max HP; 2/3 in Sandstorm.,,,,,
+Move.signalbeam.Name,Signal Beam,Rayo Señal,Rayo Señal,,,Rayon Signal
+Move.signalbeam.Description,10% chance to confuse the target.,,,,,
+Move.silktrap.Name,Silk Trap,Telatrampa,Telatrampa,,,Piège de Fil
+Move.silktrap.Description,Protects from damaging attacks. Contact: -1 Spe.,,,,,
+Move.silverwind.Name,Silver Wind,Viento Plata,Viento Plateado,,,Vent Argenté
+Move.silverwind.Description,10% chance to raise all stats by 1 (not acc/eva).,,,,,
+Move.simplebeam.Name,Simple Beam,Onda Simple,Onda Simple,,,Rayon Simple
+Move.simplebeam.Description,The target's Ability becomes Simple.,,,,,
+Move.sing.Name,Sing,Canto,Canto,,,Berceuse
+Move.sing.Description,Causes the target to fall asleep.,,,,,
+Move.sketch.Name,Sketch,Esquema,Boceto,,,Gribouille
+Move.sketch.Description,Permanently copies the last move target used.,,,,,
+Move.skillswap.Name,Skill Swap,Intercambio,Intercambio,,,Échange
+Move.skillswap.Description,The user and the target trade Abilities.,,,,,
+Move.skittersmack.Name,Skitter Smack,Golpe Rastrero,Golpe Rastrero,,,Ravage Rampant
+Move.skittersmack.Description,100% chance to lower target's Sp. Atk by 1.,,,,,
+Move.skullbash.Name,Skull Bash,Cabezazo,Cabezazo,,,Coud’Krâne
+Move.skullbash.Description,Raises user's Defense by 1 on turn 1. Hits turn 2.,,,,,
+Move.skyattack.Name,Sky Attack,Ataque Aéreo,Ataque Celestial,,,Piqué
+Move.skyattack.Description,"Charges, then hits turn 2. 30% flinch. High crit.",,,,,
+Move.skydrop.Name,Sky Drop,Caída Libre,Caída Libre,,,Chute Libre
+Move.skydrop.Description,User and foe fly up turn 1. Damages on turn 2.,,,,,
+Move.skyuppercut.Name,Sky Uppercut,Gancho Alto,Corte Elevado,,,Stratopercut
+Move.skyuppercut.Description,"Can hit Pokemon using Bounce, Fly, or Sky Drop.",,,,,
+Move.slackoff.Name,Slack Off,Relajo,Relajar,,,Paresse
+Move.slackoff.Description,Heals the user by 50% of its max HP.,,,,,
+Move.slam.Name,Slam,Atizar,Golpazo,,,Souplesse
+Move.slam.Description,No additional effect.,,,,,
+Move.slash.Name,Slash,Cuchillada,Cuchillada,,,Tranche
+Move.slash.Description,High critical hit ratio.,,,,,
+Move.sleeppowder.Name,Sleep Powder,Somnífero,Somnífero,,,Poudre Dodo
+Move.sleeppowder.Description,Causes the target to fall asleep.,,,,,
+Move.sleeptalk.Name,Sleep Talk,Sonámbulo,Sonámbulo,,,Blabla Dodo
+Move.sleeptalk.Description,User must be asleep. Uses another known move.,,,,,
+Move.sludge.Name,Sludge,Residuos,Residuos,,,Détritus
+Move.sludge.Description,30% chance to poison the target.,,,,,
+Move.sludgebomb.Name,Sludge Bomb,Bomba Lodo,Bomba Lodo,,,Bombe Beurk
+Move.sludgebomb.Description,30% chance to poison the target.,,,,,
+Move.sludgewave.Name,Sludge Wave,Onda Tóxica,Ola de Lodo,,,Cradovague
+Move.sludgewave.Description,10% chance to poison adjacent Pokemon.,,,,,
+Move.smackdown.Name,Smack Down,Antiaéreo,Antiaéreo,,,Anti-Air
+Move.smackdown.Description,Removes the target's Ground immunity.,,,,,
+Move.smartstrike.Name,Smart Strike,Cuerno Certero,Cuerno Certero,,,Estocorne
+Move.smartstrike.Description,This move does not check accuracy.,,,,,
+Move.smellingsalts.Name,Smelling Salts,Estímulo,Estímulo,,,Stimulant
+Move.smellingsalts.Description,"Power doubles if target is paralyzed, and cures it.",,,,,
+Move.smog.Name,Smog,Polución,Humo,,,Purédpois
+Move.smog.Description,40% chance to poison the target.,,,,,
+Move.smokescreen.Name,Smokescreen,Pantalla de Humo,Pantalla de Humo,,,Brouillard
+Move.smokescreen.Description,Lowers the target's accuracy by 1.,,,,,
+Move.snaptrap.Name,Snap Trap,Cepo,Trampa Presión,,,Troquenard
+Move.snaptrap.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.snarl.Name,Snarl,Alarido,Alarido,,,Aboiement
+Move.snarl.Description,100% chance to lower the foe(s) Sp. Atk by 1.,,,,,
+Move.snatch.Name,Snatch,Robo,Robo,,,Saisie
+Move.snatch.Description,User steals certain support moves to use itself.,,,,,
+Move.snipeshot.Name,Snipe Shot,Disparo Certero,Disparo Certero,,,Tir de Précision
+Move.snipeshot.Description,High critical hit ratio. Cannot be redirected.,,,,,
+Move.snore.Name,Snore,Ronquido,Ronquido,,,Ronflement
+Move.snore.Description,User must be asleep. 30% chance to flinch target.,,,,,
+Move.snowscape.Name,Snowscape,Paisaje Nevado,Paisaje Nevado,,,Chute de Neige
+Move.snowscape.Description,"For 5 turns, snow falls. Ice: 1.5× Def.",,,,,
+Move.soak.Name,Soak,Empapar,Empapar,,,Détrempage
+Move.soak.Description,Changes the target's type to Water.,,,,,
+Move.softboiled.Name,Soft-Boiled,Ovocuración,Ovocuración,,,E-Coque
+Move.softboiled.Description,Heals the user by 50% of its max HP.,,,,,
+Move.solarbeam.Name,Solar Beam,Rayo Solar,Rayo Solar,,,Lance-Soleil
+Move.solarbeam.Description,Charges turn 1. Hits turn 2. No charge in sunlight.,,,,,
+Move.solarblade.Name,Solar Blade,Cuchilla Solar,Cuchillada Solar,,,Lame Solaire
+Move.solarblade.Description,Charges turn 1. Hits turn 2. No charge in sunlight.,,,,,
+Move.sonicboom.Name,Sonic Boom,Bomba Sónica,Explosión Sónica,,,Sonic Boom
+Move.sonicboom.Description,Always does 20 HP of damage.,,,,,
+Move.spacialrend.Name,Spacial Rend,Corte Vacío,Corte Espacial,,,Spatio-Rift
+Move.spacialrend.Description,High critical hit ratio.,,,,,
+Move.spark.Name,Spark,Chispa,Chispa,,,Étincelle
+Move.spark.Description,30% chance to paralyze the target.,,,,,
+Move.sparklingaria.Name,Sparkling Aria,Aria Burbuja,Aria Burbuja,,,Aria de l’Écume
+Move.sparklingaria.Description,The target is cured of its burn.,,,,,
+Move.spectralthief.Name,Spectral Thief,Robasombra,Robasombra,,,Clepto-Mânes
+Move.spectralthief.Description,Steals target's boosts before dealing damage.,,,,,
+Move.speedswap.Name,Speed Swap,Cambiavelocidad,Cambiavelocidad,,,Permuvitesse
+Move.speedswap.Description,Swaps Speed stat with target.,,,,,
+Move.spicyextract.Name,Spicy Extract,Extracto Picante,Extracto Picante,,,Habanerage
+Move.spicyextract.Description,Raises target's Atk by 2 and lowers its Def by 2.,,,,,
+Move.spiderweb.Name,Spider Web,Telaraña,Telaraña,,,Toile
+Move.spiderweb.Description,Prevents the target from switching out.,,,,,
+Move.spikecannon.Name,Spike Cannon,Clavo Cañón,Cañón de Púas,,,Picanon
+Move.spikecannon.Description,Hits 2-5 times in one turn.,,,,,
+Move.spikes.Name,Spikes,Púas,Púas,,,Picots
+Move.spikes.Description,Hurts grounded foes on switch-in. Max 3 layers.,,,,,
+Move.spikyshield.Name,Spiky Shield,Barrera Espinosa,Barrera Espinosa,,,Pico-Défense
+Move.spikyshield.Description,Protects from moves. Contact: loses 1/8 max HP.,,,,,
+Move.spinout.Name,Spin Out,Quemarrueda,Quemarrueda,,,Dérapage
+Move.spinout.Description,Lowers the user's Speed by 2.,,,,,
+Move.spiritbreak.Name,Spirit Break,Choque Anímico,Choque Anímico,,,Choc Émotionnel
+Move.spiritbreak.Description,100% chance to lower the target's Sp. Atk by 1.,,,,,
+Move.spiritshackle.Name,Spirit Shackle,Puntada Sombría,Puntada Sombría,,,Tisse Ombre
+Move.spiritshackle.Description,Prevents the target from switching out.,,,,,
+Move.spite.Name,Spite,Rencor,Rencor,,,Dépit
+Move.spite.Description,Lowers the PP of the target's last move by 4.,,,,,
+Move.spitup.Name,Spit Up,Escupir,Escupida,,,Relâche
+Move.spitup.Description,More power with more uses of Stockpile.,,,,,
+Move.splash.Name,Splash,Salpicadura,Salpicadura,,,Trempette
+Move.splash.Description,No competitive use.,,,,,
+Move.spore.Name,Spore,Espora,Esporas,,,Spore
+Move.spore.Description,Causes the target to fall asleep.,,,,,
+Move.spotlight.Name,Spotlight,Foco,Foco,,,Projecteur
+Move.spotlight.Description,Target's foes' moves are redirected to it this turn.,,,,,
+Move.springtidestorm.Name,Springtide Storm,Ciclón Primavera,Ciclón Primavera,,,Typhon Passionné
+Move.springtidestorm.Description,30% chance to lower the foe(s) Attack by 1.,,,,,
+Move.stealthrock.Name,Stealth Rock,Trampa Rocas,Trampa de Rocas,,,Piège de Roc
+Move.stealthrock.Description,Hurts foes on switch-in. Factors Rock weakness.,,,,,
+Move.steameruption.Name,Steam Eruption,Chorro de Vapor,Chorro de Vapor,,,Jet de Vapeur
+Move.steameruption.Description,30% chance to burn the target. Thaws target.,,,,,
+Move.steamroller.Name,Steamroller,Rodillo de Púas,Aplanadora,,,Bulldoboule
+Move.steamroller.Description,30% chance to make the target flinch.,,,,,
+Move.steelbeam.Name,Steel Beam,Metaláser,Metaláser,,,Métalaser
+Move.steelbeam.Description,User loses 50% max HP.,,,,,
+Move.steelroller.Name,Steel Roller,Allanador Férreo,Ferroaplanadora,,,Métalliroue
+Move.steelroller.Description,Fails if there is no terrain active. Ends the terrain.,,,,,
+Move.steelwing.Name,Steel Wing,Ala de Acero,Ala de Acero,,,Ailes d’Acier
+Move.steelwing.Description,10% chance to raise the user's Defense by 1.,,,,,
+Move.stickyweb.Name,Sticky Web,Red Viscosa,Red Pegajosa,,,Toile Gluante
+Move.stickyweb.Description,Lowers Speed of grounded foes by 1 on switch-in.,,,,,
+Move.stockpile.Name,Stockpile,Reserva,Reserva,,,Stockage
+Move.stockpile.Description,"Raises user's Defense, Sp. Def by 1. Max 3 uses.",,,,,
+Move.stomp.Name,Stomp,Pisotón,Pisotón,,,Écrasement
+Move.stomp.Description,30% chance to make the target flinch.,,,,,
+Move.stompingtantrum.Name,Stomping Tantrum,Pataleta,Pataleta,,,Trépignement
+Move.stompingtantrum.Description,Power doubles if the user's last move failed.,,,,,
+Move.stoneaxe.Name,Stone Axe,Hachazo Pétreo,Hachazo Pétreo,,,Hache de Pierre
+Move.stoneaxe.Description,Sets Stealth Rock on the target's side.,,,,,
+Move.stoneedge.Name,Stone Edge,Roca Afilada,Roca Afilada,,,Lame de Roc
+Move.stoneedge.Description,High critical hit ratio.,,,,,
+Move.storedpower.Name,Stored Power,Poder Reserva,Poder Acumulado,,,Force Ajoutée
+Move.storedpower.Description," + 20 power for each of the user's stat boosts.",,,,,
+Move.stormthrow.Name,Storm Throw,Llave Corsé,Llave Tempestad,,,Yama Arashi
+Move.stormthrow.Description,Always results in a critical hit.,,,,,
+Move.strangesteam.Name,Strange Steam,Cautivapor,Cautivapor,,,Vapeur Féérique
+Move.strangesteam.Description,20% chance to confuse the target.,,,,,
+Move.strength.Name,Strength,Fuerza,Fuerza,,,Force
+Move.strength.Description,No additional effect.,,,,,
+Move.strengthsap.Name,Strength Sap,Absorbefuerza,Absorbefuerza,,,Vole-Force
+Move.strengthsap.Description,User heals HP=target's Atk stat. Lowers Atk by 1.,,,,,
+Move.stringshot.Name,String Shot,Disparo Demora,Disparo de Seda,,,Sécrétion
+Move.stringshot.Description,Lowers the foe(s) Speed by 2.,,,,,
+Move.struggle.Name,Struggle,Forcejeo,Forcejeo,,,Lutte
+Move.struggle.Description,User loses 1/4 of its max HP.,,,,,
+Move.strugglebug.Name,Struggle Bug,Estoicismo,Lucha Insecto,,,Survinsecte
+Move.strugglebug.Description,100% chance to lower the foe(s) Sp. Atk by 1.,,,,,
+Move.stuffcheeks.Name,Stuff Cheeks,Atiborramiento,Atiborramiento,,,Garde-à-Joues
+Move.stuffcheeks.Description,"Must hold Berry to use. User eats Berry, Def +2.",,,,,
+Move.stunspore.Name,Stun Spore,Paralizador,Paralizador,,,Para-Spore
+Move.stunspore.Description,Paralyzes the target.,,,,,
+Move.submission.Name,Submission,Sumisión,Sumisión,,,Sacrifice
+Move.submission.Description,Has 1/4 recoil.,,,,,
+Move.substitute.Name,Substitute,Sustituto,Sustituto,,,Clonage
+Move.substitute.Description,User takes 1/4 its max HP to put in a substitute.,,,,,
+Move.suckerpunch.Name,Sucker Punch,Golpe Bajo,Golpe Bajo,,,Coup Bas
+Move.suckerpunch.Description,Usually goes first. Fails if target is not attacking.,,,,,
+Move.sunnyday.Name,Sunny Day,Día Soleado,Día Soleado,,,Zénith
+Move.sunnyday.Description,"For 5 turns, intense sunlight powers Fire moves.",,,,,
+Move.sunsteelstrike.Name,Sunsteel Strike,Meteoimpacto,Meteoimpacto,,,Choc Météore
+Move.sunsteelstrike.Description,Ignores the Abilities of other Pokemon.,,,,,
+Move.supercellslam.Name,Supercell Slam,Plancha Voltaica,Golpe Voltaico,,,Volt Assaut
+Move.supercellslam.Description,User is hurt by 50% of its max HP if it misses.,,,,,
+Move.superfang.Name,Super Fang,Superdiente,Supercolmillo,,,Croc Fatal
+Move.superfang.Description,Does damage equal to 1/2 target's current HP.,,,,,
+Move.superpower.Name,Superpower,Fuerza Bruta,Fuerza Bruta,,,Surpuissance
+Move.superpower.Description,Lowers the user's Attack and Defense by 1.,,,,,
+Move.supersonic.Name,Supersonic,Supersónico,Supersónico,,,Ultrason
+Move.supersonic.Description,Causes the target to become confused.,,,,,
+Move.surf.Name,Surf,Surf,Surf,,,Surf
+Move.surf.Description,Hits adjacent Pokemon. Double damage on Dive.,,,,,
+Move.surgingstrikes.Name,Surging Strikes,Azote Torrencial,Golpe Torrencial,,,Torrent de Coups
+Move.surgingstrikes.Description,Always results in a critical hit. Hits 3 times.,,,,,
+Move.swagger.Name,Swagger,Fanfarronear,Fanfarronear,,,Vantardise
+Move.swagger.Description,Raises the target's Attack by 2 and confuses it.,,,,,
+Move.swallow.Name,Swallow,Tragar,Tragar,,,Avale
+Move.swallow.Description,Heals the user based on uses of Stockpile.,,,,,
+Move.sweetkiss.Name,Sweet Kiss,Beso Dulce,Beso Dulce,,,Doux Baiser
+Move.sweetkiss.Description,Causes the target to become confused.,,,,,
+Move.sweetscent.Name,Sweet Scent,Dulce Aroma,Dulce Aroma,,,Doux Parfum
+Move.sweetscent.Description,Lowers the foe(s) evasiveness by 2.,,,,,
+Move.swift.Name,Swift,Meteoros,Meteoros,,,Météores
+Move.swift.Description,This move does not check accuracy. Hits foes.,,,,,
+Move.switcheroo.Name,Switcheroo,Trapicheo,Trueque,,,Passe-Passe
+Move.switcheroo.Description,User switches its held item with the target's.,,,,,
+Move.swordsdance.Name,Swords Dance,Danza Espada,Danza de Espadas,,,Danse Lames
+Move.swordsdance.Description,Raises the user's Attack by 2.,,,,,
+Move.synchronoise.Name,Synchronoise,Sincrorruido,Sincrorruido,,,Synchropeine
+Move.synchronoise.Description,Hits adjacent Pokemon sharing the user's type.,,,,,
+Move.synthesis.Name,Synthesis,Fotosíntesis,Fotosíntesis,,,Synthèse
+Move.synthesis.Description,Heals the user by a weather-dependent amount.,,,,,
+Move.syrupbomb.Name,Syrup Bomb,Bomba Caramelo,Bomba Caramelo,,,Bombe au Sirop
+Move.syrupbomb.Description,Target's Speed is lowered by 1 stage for 3 turns.,,,,,
+Move.tachyoncutter.Name,Tachyon Cutter,Tajo Taquión,Corte Taquión,,,Lame Tachyonique
+Move.tachyoncutter.Description,Hits twice. This move does not check accuracy.,,,,,
+Move.tackle.Name,Tackle,Placaje,Tacleada,,,Charge
+Move.tackle.Description,No additional effect.,,,,,
+Move.tailglow.Name,Tail Glow,Luminicola,Luminicola,,,Lumi-Queue
+Move.tailglow.Description,Raises the user's Sp. Atk by 3.,,,,,
+Move.tailslap.Name,Tail Slap,Plumerazo,Golpe de Cola,,,Plumo-Queue
+Move.tailslap.Description,Hits 2-5 times in one turn.,,,,,
+Move.tailwhip.Name,Tail Whip,Agitacola,Látigo de Cola,,,Mimi-Queue
+Move.tailwhip.Description,Lowers the foe(s) Defense by 1.,,,,,
+Move.tailwind.Name,Tailwind,Viento Afín,Viento Afín,,,Vent Arrière
+Move.tailwind.Description,"For 4 turns, allies' Speed is doubled.",,,,,
+Move.takedown.Name,Take Down,Derribo,Derribo,,,Bélier
+Move.takedown.Description,Has 1/4 recoil.,,,,,
+Move.takeheart.Name,Take Heart,Bálsamo Osado,Bálsamo Osado,,,Extravaillance
+Move.takeheart.Description,"Cures user's status, raises Sp. Atk, Sp. Def by 1.",,,,,
+Move.tarshot.Name,Tar Shot,Alquitranazo,Alquitranazo,,,Goudronnage
+Move.tarshot.Description,Target gets -1 Spe and becomes weaker to Fire.,,,,,
+Move.taunt.Name,Taunt,Mofa,Provocación,,,Provoc
+Move.taunt.Description,Target can't use status moves its next 3 turns.,,,,,
+Move.tearfullook.Name,Tearful Look,Ojos Llorosos,Ojos Llorosos,,,Larme à l’Œil
+Move.tearfullook.Description,Lowers the target's Attack and Sp. Atk by 1.,,,,,
+Move.teatime.Name,Teatime,Hora del Té,Hora del Té,,,Thérémonie
+Move.teatime.Description,All active Pokemon consume held Berries.,,,,,
+Move.technoblast.Name,Techno Blast,Tecno Shock,Tecno Shock,,,Techno-Buster
+Move.technoblast.Description,Type varies based on the held Drive.,,,,,
+Move.teeterdance.Name,Teeter Dance,Danza Caos,Danza del Caos,,,Danse Folle
+Move.teeterdance.Description,Confuses adjacent Pokemon.,,,,,
+Move.telekinesis.Name,Telekinesis,Telequinesis,Telequinesis,,,Lévikinésie
+Move.telekinesis.Description,"For 3 turns, target floats but moves can't miss it.",,,,,
+Move.teleport.Name,Teleport,Teletransporte,Teletransporte,,,Téléport
+Move.teleport.Description,User switches out.,,,,,
+Move.temperflare.Name,Temper Flare,Cólera Ardiente,Furia Ardiente,,,Indignition
+Move.temperflare.Description,Power doubles if the user's last move failed.,,,,,
+Move.terablast.Name,Tera Blast,Teraexplosión,Teraexplosión,,,Téra Explosion
+Move.terablast.Description,"If Terastallized: Phys. if Atk > SpA, type = Tera.",,,,,
+Move.terastarstorm.Name,Tera Starstorm,Teraclúster,Teraclúster,,,Pluie Térastrale
+Move.terastarstorm.Description,"Terapagos-Stellar: Stellar type, hits both foes.",,,,,
+Move.terrainpulse.Name,Terrain Pulse,Pulso de Campo,Pulso de Campo,,,Champlification
+Move.terrainpulse.Description,"User on terrain: power doubles, type varies.",,,,,
+Move.thief.Name,Thief,Ladrón,Ladrón,,,Larcin
+Move.thief.Description,"If the user has no item, it steals the target's.",,,,,
+Move.thousandarrows.Name,Thousand Arrows,Mil Flechas,Mil Flechas,,,Myria-Flèches
+Move.thousandarrows.Description,Grounds adjacent foes. First hit neutral on Flying.,,,,,
+Move.thousandwaves.Name,Thousand Waves,Mil Temblores,Mil Temblores,,,Myria-Vagues
+Move.thousandwaves.Description,Hits adjacent foes. Prevents them from switching.,,,,,
+Move.thrash.Name,Thrash,Saña,Golpiza,,,Mania
+Move.thrash.Description,Lasts 2-3 turns. Confuses the user afterwards.,,,,,
+Move.throatchop.Name,Throat Chop,Golpe Mordaza,Golpe al Cuello,,,Exécu-Son
+Move.throatchop.Description,"For 2 turns, the target cannot use sound moves.",,,,,
+Move.thunder.Name,Thunder,Trueno,Trueno,,,Fatal-Foudre
+Move.thunder.Description,30% chance to paralyze. Can't miss in rain.,,,,,
+Move.thunderbolt.Name,Thunderbolt,Rayo,Atactrueno,,,Tonnerre
+Move.thunderbolt.Description,10% chance to paralyze the target.,,,,,
+Move.thundercage.Name,Thunder Cage,Electrojaula,Electrojaula,,,Voltageôle
+Move.thundercage.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.thunderclap.Name,Thunderclap,Relámpago Súbito,Relámpago Súbito,,,Vif Éclair
+Move.thunderclap.Description,Usually goes first. Fails if target is not attacking.,,,,,
+Move.thunderfang.Name,Thunder Fang,Colmillo Rayo,Colmillo Trueno,,,Crocs Éclair
+Move.thunderfang.Description,10% chance to paralyze. 10% chance to flinch.,,,,,
+Move.thunderouskick.Name,Thunderous Kick,Patada Relámpago,Patada Relámpago,,,Coup Fulgurant
+Move.thunderouskick.Description,100% chance to lower the target's Defense by 1.,,,,,
+Move.thunderpunch.Name,Thunder Punch,Puño Trueno,Puño Trueno,,,Poing Éclair
+Move.thunderpunch.Description,10% chance to paralyze the target.,,,,,
+Move.thundershock.Name,Thunder Shock,Impactrueno,Impactrueno,,,Éclair
+Move.thundershock.Description,10% chance to paralyze the target.,,,,,
+Move.thunderwave.Name,Thunder Wave,Onda Trueno,Onda Trueno,,,Cage Éclair
+Move.thunderwave.Description,Paralyzes the target.,,,,,
+Move.tickle.Name,Tickle,Cosquillas,Cosquillas,,,Chatouille
+Move.tickle.Description,Lowers the target's Attack and Defense by 1.,,,,,
+Move.tidyup.Name,Tidy Up,Limpieza General,Limpieza General,,,Grand Nettoyage
+Move.tidyup.Description,"User +1 Atk, Spe. Clears all substitutes/hazards.",,,,,
+Move.topsyturvy.Name,Topsy-Turvy,Reversión,Reversión,,,Renversement
+Move.topsyturvy.Description,Inverts the target's stat stages.,,,,,
+Move.torchsong.Name,Torch Song,Canto Ardiente,Canto Ígneo,,,Chant Flamboyant
+Move.torchsong.Description,100% chance to raise the user's Sp. Atk by 1.,,,,,
+Move.torment.Name,Torment,Tormento,Tormento,,,Tourmente
+Move.torment.Description,Target can't select the same move twice in a row.,,,,,
+Move.toxic.Name,Toxic,Tóxico,Tóxico,,,Toxik
+Move.toxic.Description,Badly poisons the target. Poison types can't miss.,,,,,
+Move.toxicspikes.Name,Toxic Spikes,Púas Tóxicas,Púas Tóxicas,,,Pics Toxik
+Move.toxicspikes.Description,Poisons grounded foes on switch-in. Max 2 layers.,,,,,
+Move.toxicthread.Name,Toxic Thread,Hilo Venenoso,Hilo Venenoso,,,Fil Toxique
+Move.toxicthread.Description,Lowers the target's Speed by 1 and poisons it.,,,,,
+Move.trailblaze.Name,Trailblaze,Abrecaminos,Abrecaminos,,,Désherbaffe
+Move.trailblaze.Description,100% chance to raise the user's Speed by 1.,,,,,
+Move.transform.Name,Transform,Transformación,Transformación,,,Morphing
+Move.transform.Description,"Copies target's stats, moves, types, and Ability.",,,,,
+Move.triattack.Name,Tri Attack,Triataque,Triataque,,,Triplattaque
+Move.triattack.Description,20% chance to paralyze or burn or freeze target.,,,,,
+Move.trick.Name,Trick,Truco,Truco,,,Tour de Magie
+Move.trick.Description,User switches its held item with the target's.,,,,,
+Move.trickortreat.Name,Trick-or-Treat,Halloween,Halloween,,,Halloween
+Move.trickortreat.Description,Adds Ghost to the target's type(s).,,,,,
+Move.trickroom.Name,Trick Room,Espacio Raro,Espacio Raro,,,Distorsion
+Move.trickroom.Description,"Goes last. For 5 turns, turn order is reversed.",,,,,
+Move.triplearrows.Name,Triple Arrows,Triple Flecha,Triple Flecha,,,Triple Flèche
+Move.triplearrows.Description,"High crit. Target: 50% -1 Defense, 30% flinch.",,,,,
+Move.tripleaxel.Name,Triple Axel,Triple Axel,Triple Axel,,,Triple Axel
+Move.tripleaxel.Description,"Hits 3 times. Each hit can miss, but power rises.",,,,,
+Move.tripledive.Name,Triple Dive,Triple Inmersión,Triple Inmersión,,,Triple Plongeon
+Move.tripledive.Description,Hits 3 times.,,,,,
+Move.triplekick.Name,Triple Kick,Triple Patada,Triple Patada,,,Triple Pied
+Move.triplekick.Description,"Hits 3 times. Each hit can miss, but power rises.",,,,,
+Move.tropkick.Name,Trop Kick,Patada Tropical,Patada Tropical,,,Botte Sucrette
+Move.tropkick.Description,100% chance to lower the target's Attack by 1.,,,,,
+Move.trumpcard.Name,Trump Card,As Oculto,As Oculto,,,Atout
+Move.trumpcard.Description,More power the fewer PP this move has left.,,,,,
+Move.twinbeam.Name,Twin Beam,Láser Doble,Láser Doble,,,Double Laser
+Move.twinbeam.Description,Hits 2 times in one turn.,,,,,
+Move.twineedle.Name,Twineedle,Doble Ataque,Doble Aguijón,,,Double Dard
+Move.twineedle.Description,Hits 2 times. Each hit has 20% chance to poison.,,,,,
+Move.twister.Name,Twister,Ciclón,Tornado,,,Ouragan
+Move.twister.Description,20% chance to make the foe(s) flinch.,,,,,
+Move.upperhand.Name,Upper Hand,Palma Rauda,Palma Rauda,,,Prio-Parade
+Move.upperhand.Description,100% flinch. Fails unless target using priority attack.,,,,,
+Move.uproar.Name,Uproar,Alboroto,Alboroto,,,Brouhaha
+Move.uproar.Description,Lasts 3 turns. Active Pokemon cannot fall asleep.,,,,,
+Move.uturn.Name,U-turn,Ida y Vuelta,Ida y Vuelta,,,Demi-Tour
+Move.uturn.Description,User switches out after damaging the target.,,,,,
+Move.vacuumwave.Name,Vacuum Wave,Onda Vacío,Onda de Vacío,,,Onde Vide
+Move.vacuumwave.Description,Usually goes first.,,,,,
+Move.vcreate.Name,V-create,V de Fuego,V de Fuego,,,Coup Victoire
+Move.vcreate.Description,"Lowers the user's Defense, Sp. Def, Speed by 1.",,,,,
+Move.venomdrench.Name,Venom Drench,Trampa Venenosa,Trampa Venenosa,,,Piège de Venin
+Move.venomdrench.Description,Lowers Atk/Sp. Atk/Speed of poisoned foes by 1.,,,,,
+Move.venoshock.Name,Venoshock,Carga Tóxica,Carga Tóxica,,,Choc Venin
+Move.venoshock.Description,Power doubles if the target is poisoned.,,,,,
+Move.victorydance.Name,Victory Dance,Danza Triunfal,Danza Triunfal,,,Danse Victoire
+Move.victorydance.Description,"Raises the user's Attack, Defense, Speed by 1.",,,,,
+Move.vinewhip.Name,Vine Whip,Látigo Cepa,Látigo Cepa,,,Fouet Lianes
+Move.vinewhip.Description,No additional effect.,,,,,
+Move.visegrip.Name,Vise Grip,,,,,
+Move.visegrip.Description,No additional effect.,,,,,
+Move.vitalthrow.Name,Vital Throw,Llave Vital,Llave Vital,,,Corps Perdu
+Move.vitalthrow.Description,This move does not check accuracy. Goes last.,,,,,
+Move.voltswitch.Name,Volt Switch,Voltiocambio,Cambiavoltaje,,,Change Éclair
+Move.voltswitch.Description,User switches out after damaging the target.,,,,,
+Move.volttackle.Name,Volt Tackle,Placaje Eléctrico,Tacleada de Voltios,,,Électacle
+Move.volttackle.Description,Has 33% recoil. 10% chance to paralyze target.,,,,,
+Move.wakeupslap.Name,Wake-Up Slap,Espabila,Despabilador,,,Réveil Forcé
+Move.wakeupslap.Description,"Power doubles if target is asleep, and wakes it.",,,,,
+Move.waterfall.Name,Waterfall,Cascada,Cascada,,,Cascade
+Move.waterfall.Description,20% chance to make the target flinch.,,,,,
+Move.watergun.Name,Water Gun,Pistola Agua,Chorro de Agua,,,Pistolet à O
+Move.watergun.Description,No additional effect.,,,,,
+Move.waterpledge.Name,Water Pledge,Voto Agua,Voto Agua,,,Aire d’Eau
+Move.waterpledge.Description,Use with Grass or Fire Pledge for added effect.,,,,,
+Move.waterpulse.Name,Water Pulse,Hidropulso,Pulso de Agua,,,Vibraqua
+Move.waterpulse.Description,20% chance to confuse the target.,,,,,
+Move.watershuriken.Name,Water Shuriken,Shuriken de Agua,Shuriken de Agua,,,Sheauriken
+Move.watershuriken.Description,Usually goes first. Hits 2-5 times in one turn.,,,,,
+Move.watersport.Name,Water Sport,Hidrochorro,Chapoteo de Agua,,,Tourniquet
+Move.watersport.Description,"For 5 turns, Fire-type attacks have 1/3 power.",,,,,
+Move.waterspout.Name,Water Spout,Salpicar,Columna de Agua,,,Giclédo
+Move.waterspout.Description,Less power as user's HP decreases. Hits foe(s).,,,,,
+Move.wavecrash.Name,Wave Crash,Envite Acuático,Acuatacleada,,,Aquatacle
+Move.wavecrash.Description,Has 33% recoil.,,,,,
+Move.weatherball.Name,Weather Ball,Meteorobola,Meteorobola,,,Ball’Météo
+Move.weatherball.Description,Power doubles and type varies in each weather.,,,,,
+Move.whirlpool.Name,Whirlpool,Torbellino,Remolino,,,Siphon
+Move.whirlpool.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.whirlwind.Name,Whirlwind,Remolino,Torbellino,,,Cyclone
+Move.whirlwind.Description,Forces the target to switch to a random ally.,,,,,
+Move.wickedblow.Name,Wicked Blow,Golpe Oscuro,Golpe Oscuro,,,Poing Obscur
+Move.wickedblow.Description,Always results in a critical hit.,,,,,
+Move.wickedtorque.Name,Wicked Torque,Ominochoque,Ominochoque,,,Crash Obscur
+Move.wickedtorque.Description,10% chance to cause the target to fall asleep.,,,,,
+Move.wideguard.Name,Wide Guard,Vasta Guardia,Guardia Amplia,,,Garde Large
+Move.wideguard.Description,Protects allies from multi-target moves this turn.,,,,,
+Move.wildboltstorm.Name,Wildbolt Storm,Electormenta,Electormenta,,,Typhon Fulgurant
+Move.wildboltstorm.Description,20% chance to paralyze foe(s). Rain: can't miss.,,,,,
+Move.wildcharge.Name,Wild Charge,Voltio Cruel,Carga Salvaje,,,Éclair Fou
+Move.wildcharge.Description,Has 1/4 recoil.,,,,,
+Move.willowisp.Name,Will-O-Wisp,Fuego Fatuo,Fuego Fatuo,,,Feu Follet
+Move.willowisp.Description,Burns the target.,,,,,
+Move.wingattack.Name,Wing Attack,Ataque Ala,Ataque de Ala,,,Cru-Ailes
+Move.wingattack.Description,No additional effect.,,,,,
+Move.wish.Name,Wish,Deseo,Deseo,,,Vœu
+Move.wish.Description,"Next turn, 50% of the user's max HP is restored.",,,,,
+Move.withdraw.Name,Withdraw,Refugio,Refugio,,,Repli
+Move.withdraw.Description,Raises the user's Defense by 1.,,,,,
+Move.wonderroom.Name,Wonder Room,Zona Extraña,Zona Extraña,,,Zone Étrange
+Move.wonderroom.Description,"For 5 turns, all Defense and Sp. Def stats switch.",,,,,
+Move.woodhammer.Name,Wood Hammer,Mazazo,Mazazo,,,Martobois
+Move.woodhammer.Description,Has 33% recoil.,,,,,
+Move.workup.Name,Work Up,Avivar,Avivar,,,Rengorgement
+Move.workup.Description,Raises the user's Attack and Sp. Atk by 1.,,,,,
+Move.worryseed.Name,Worry Seed,Abatidoras,Abatidoras,,,Soucigraine
+Move.worryseed.Description,The target's Ability becomes Insomnia.,,,,,
+Move.wrap.Name,Wrap,Constricción,Constricción,,,Ligotage
+Move.wrap.Description,Traps and damages the target for 4-5 turns.,,,,,
+Move.wringout.Name,Wring Out,Estrujón,Apretón,,,Essorage
+Move.wringout.Description,More power the more HP the target has left.,,,,,
+Move.xscissor.Name,X-Scissor,Tijera X,Tijera X,,,Plaie Croix
+Move.xscissor.Description,No additional effect.,,,,,
+Move.yawn.Name,Yawn,Bostezo,Bostezo,,,Bâillement
+Move.yawn.Description,Puts the target to sleep after 1 turn.,,,,,
+Move.zapcannon.Name,Zap Cannon,Electrocañón,Electrocañón,,,Élecanon
+Move.zapcannon.Description,100% chance to paralyze the target.,,,,,
+Move.zenheadbutt.Name,Zen Headbutt,Cabezazo Zen,Cabezazo Zen,,,Psykoud’Boul
+Move.zenheadbutt.Description,20% chance to make the target flinch.,,,,,
+Move.zingzap.Name,Zing Zap,Electropunzada,Electropunzada,,,Électrikipik
+Move.zingzap.Description,30% chance to make the target flinch.,,,,,

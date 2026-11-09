@@ -1,1 +1,635 @@
 Key,en,es-es,es-mx,pt-pt,pt-br,fr
+Ability.adaptability.Name,Adaptability,Adaptable,Adaptable,,,Adaptabilité
+Ability.adaptability.Description,This Pokemon's same-type attack bonus (STAB) is 2 instead of 1.5.,,,,,
+Ability.aerilate.Name,Aerilate,Piel Celeste,Piel Celeste,,,Peau Céleste
+Ability.aerilate.Description,This Pokemon's Normal-type moves become Flying type and have 1.2× power.,,,,,
+Ability.aftermath.Name,Aftermath,Detonación,Secuela,,,Boom Final
+Ability.aftermath.Description,"If this Pokemon is KOed with a contact move, that move's user loses 1/4 its max HP.",,,,,
+Ability.airlock.Name,Air Lock,Bucle Aire,Bucle Aire,,,Air Lock
+Ability.airlock.Description,"While this Pokemon is active, the effects of weather conditions are disabled.",,,,,
+Ability.analytic.Name,Analytic,Cálculo Final,Cálculo Final,,,Analyste
+Ability.analytic.Description,This Pokemon's attacks have 1.3× power if it is the last to move in a turn.,,,,,
+Ability.angerpoint.Name,Anger Point,Irascible,Irascible,,,Colérique
+Ability.angerpoint.Description,"If this Pokemon (not its substitute) takes a critical hit, its Attack is raised 12 stages.",,,,,
+Ability.angershell.Name,Anger Shell,Coraza Ira,Coraza Ira,,,Courroupace
+Ability.angershell.Description,"At 1/2 or less of this Pokemon's max HP: +1 Atk, Sp. Atk, Spe, and -1 Def, Sp. Def.",,,,,
+Ability.anticipation.Name,Anticipation,Anticipación,Anticipación,,,Anticipation
+Ability.anticipation.Description,"On switch-in, this Pokemon shudders if any foe has a supereffective or OHKO move.",,,,,
+Ability.arenatrap.Name,Arena Trap,Trampa Arena,Trampa Arena,,,Piège Sable
+Ability.arenatrap.Description,Prevents opposing Pokemon from choosing to switch out unless they are airborne.,,,,,
+Ability.armortail.Name,Armor Tail,Cola Armadura,Cola Armadura,,Cauda de Armadura,Armure Caudale
+Ability.armortail.Description,This Pokemon and its allies are protected from opposing priority moves.,,,,,
+Ability.aromaveil.Name,Aroma Veil,Velo Aroma,Velo Aromático,,,Aroma-Voile
+Ability.aromaveil.Description,"Protects user/allies from Attract, Disable, Encore, Heal Block, Taunt, and Torment.",,,,,
+Ability.asoneglastrier.Name,As One (Glastrier),Unidad Ecuestre,Unidad Ecuestre,,,Osmose Équine
+Ability.asoneglastrier.Description,Combination of the Unnerve and Chilling Neigh Abilities.,,,,,
+Ability.asonespectrier.Name,As One (Spectrier),Unidad Ecuestre,Unidad Ecuestre,,,Osmose Équine
+Ability.asonespectrier.Description,Combination of the Unnerve and Grim Neigh Abilities.,,,,,
+Ability.aurabreak.Name,Aura Break,Rompeaura,Rompeaura,,,Aura Inversée
+Ability.aurabreak.Description,"While this Pokemon is active, the Dark Aura and Fairy Aura power modifier is 0.75×.",,,,,
+Ability.auraguard.Name,Aura Guard,,,,,
+Ability.auraguard.Description,This Pokemon receives 1/2 damage from contact moves.,,,,,
+Ability.baddreams.Name,Bad Dreams,Mal Sueño,Mal Sueño,,,Mauvais Rêve
+Ability.baddreams.Description,Causes sleeping foes to lose 1/8 of their max HP at the end of each turn.,,,,,
+Ability.ballfetch.Name,Ball Fetch,Recogebolas,Recogebolas,,,Ramasse Ball
+Ability.ballfetch.Description,No competitive use.,,,,,
+Ability.battery.Name,Battery,Batería,Batería,,,Batterie
+Ability.battery.Description,This Pokemon's allies have the power of their special attacks multiplied by 1.3.,,,,,
+Ability.battlearmor.Name,Battle Armor,Armadura Batalla,Armadura Batalla,,,Armurbaston
+Ability.battlearmor.Description,This Pokemon cannot be struck by a critical hit.,,,,,
+Ability.battlebond.Name,Battle Bond,Fuerte Afecto,Fuerte Afecto,,,Synergie
+Ability.battlebond.Description,"After KOing a Pokemon: raises Attack, Sp. Atk, Speed by 1 stage. Once per battle.",,,,,
+Ability.beadsofruin.Name,Beads of Ruin,Abalorio Debacle,Abalorio Debacle,,,Perles du Fléau
+Ability.beadsofruin.Description,Active Pokemon without this Ability have their Special Defense multiplied by 0.75.,,,,,
+Ability.beastboost.Name,Beast Boost,Ultraimpulso,Ultraimpulso,,,Boost Chimère
+Ability.beastboost.Description,This Pokemon's highest stat is raised by 1 if it attacks and KOes another Pokemon.,,,,,
+Ability.berserk.Name,Berserk,Cólera,Ira,,,Folle Furie
+Ability.berserk.Description,This Pokemon's Sp. Atk is raised by 1 when it reaches 1/2 or less of its max HP.,,,,,
+Ability.bigpecks.Name,Big Pecks,Sacapecho,Sacapecho,,,Cœur de Coq
+Ability.bigpecks.Description,Prevents other Pokemon from lowering this Pokemon's Defense stat stage.,,,,,
+Ability.blaze.Name,Blaze,Mar Llamas,Mar de Llamas,,,Brasier
+Ability.blaze.Description,"At 1/3 or less of its max HP, this Pokemon's offensive stat is 1.5× with Fire attacks.",,,,,
+Ability.bulletproof.Name,Bulletproof,Antibalas,Antibalas,,,Pare-Balles
+Ability.bulletproof.Description,This Pokemon is immune to bullet moves.,,,,,
+Ability.cheekpouch.Name,Cheek Pouch,Carrillo,Mejillas,,,Bajoues
+Ability.cheekpouch.Description,"If this Pokemon eats a Berry, it restores 1/3 of its max HP after the Berry's effect.",,,,,
+Ability.chillingneigh.Name,Chilling Neigh,Relincho Blanco,Relincho Blanco,,,Blanche Ruade
+Ability.chillingneigh.Description,This Pokemon's Attack is raised by 1 stage if it attacks and KOes another Pokemon.,,,,,
+Ability.chlorophyll.Name,Chlorophyll,Clorofila,Clorofila,,,Chlorophylle
+Ability.chlorophyll.Description,"If Sun is active, this Pokemon's Speed is doubled.",,,,,
+Ability.clearbody.Name,Clear Body,Cuerpo Puro,Cuerpo Puro,,,Corps Sain
+Ability.clearbody.Description,Prevents other Pokemon from lowering this Pokemon's stat stages.,,,,,
+Ability.cloudnine.Name,Cloud Nine,Aclimatación,Aclimatación,,,Ciel Gris
+Ability.cloudnine.Description,"While this Pokemon is active, the effects of weather conditions are disabled.",,,,,
+Ability.colorchange.Name,Color Change,Cambio Color,Cambio Color,,,Homochromie
+Ability.colorchange.Description,"This Pokemon's type changes to the type of a move it's hit by, unless it has the type.",,,,,
+Ability.comatose.Name,Comatose,Letargo Perenne,Letargo Perenne,,,Hypersommeil
+Ability.comatose.Description,"This Pokemon cannot be statused, and is considered to be asleep.",,,,,
+Ability.commander.Name,Commander,Comandar,Comandar,,,Commandant
+Ability.commander.Description,"If ally is Dondozo: this Pokemon cannot act or be hit, +2 to all Dondozo's stats.",,,,,
+Ability.competitive.Name,Competitive,Tenacidad,Tenacidad,,,Battant
+Ability.competitive.Description,This Pokemon's Sp. Atk is raised by 2 for each of its stats that is lowered by a foe.,,,,,
+Ability.compoundeyes.Name,Compound Eyes,Ojo Compuesto,Ojo Compuesto,,,Œil Composé
+Ability.compoundeyes.Description,This Pokemon's moves have their accuracy multiplied by 1.3.,,,,,
+Ability.contrary.Name,Contrary,Respondón,Respondón,,,Contestation
+Ability.contrary.Description,"If this Pokemon has a stat stage raised it is lowered instead, and vice versa.",,,,,
+Ability.corrosion.Name,Corrosion,Corrosión,Corrosión,,,Corrosion
+Ability.corrosion.Description,This Pokemon can poison or badly poison a Pokemon regardless of its typing.,,,,,
+Ability.costar.Name,Costar,Unísono,Unísono,,,Collab
+Ability.costar.Description,"On switch-in, this Pokemon copies all of its ally's stat stage changes.",,,,,
+Ability.cottondown.Name,Cotton Down,Pelusa,Pelusa,,,Effilochage
+Ability.cottondown.Description,"If this Pokemon is hit, it lowers the Speed of all other Pokemon on the field 1 stage.",,,,,
+Ability.cudchew.Name,Cud Chew,Rumia,Rumia,,,Ruminant
+Ability.cudchew.Description,"If this Pokemon eats a Berry, it will eat that Berry again at the end of the next turn.",,,,,
+Ability.curiousmedicine.Name,Curious Medicine,Medicina Extraña,Medicina Extraña,,,Breuvage Suspect
+Ability.curiousmedicine.Description,"On switch-in, this Pokemon's allies have their stat stages reset to 0.",,,,,
+Ability.cursedbody.Name,Cursed Body,Cuerpo Maldito,Cuerpo Maldito,,,Corps Maudit
+Ability.cursedbody.Description,"If this Pokemon is hit by an attack, there is a 30% chance that move gets disabled.",,,,,
+Ability.cutecharm.Name,Cute Charm,Gran Encanto,Gran Encanto,,,Joli Sourire
+Ability.cutecharm.Description,30% chance of infatuating Pokemon of the opposite gender if they make contact.,,,,,
+Ability.damp.Name,Damp,Humedad,Humedad,,,Moiteur
+Ability.damp.Description,Prevents Explosion/Mind Blown/Misty Explosion/Self-Destruct/Aftermath while active.,,,,,
+Ability.dancer.Name,Dancer,Pareja de Baile,Pareja de Baile,,,Danseuse
+Ability.dancer.Description,"After another Pokemon uses a dance move, this Pokemon uses the same move.",,,,,
+Ability.darkaura.Name,Dark Aura,Aura Oscura,Aura Oscura,,,Aura Ténébreuse
+Ability.darkaura.Description,"While this Pokemon is active, a Dark move used by any Pokemon has 1.33× power.",,,,,
+Ability.dauntlessshield.Name,Dauntless Shield,Escudo Recio,Escudo Recio,,,Égide Inflexible
+Ability.dauntlessshield.Description,"On switch-in, this Pokemon's Defense is raised by 1 stage. Once per battle.",,,,,
+Ability.dazzling.Name,Dazzling,Cuerpo Vívido,Cuerpo Vívido,,,Corps Coloré
+Ability.dazzling.Description,This Pokemon and its allies are protected from opposing priority moves.,,,,,
+Ability.defeatist.Name,Defeatist,Flaqueza,Flaqueza,,,Défaitiste
+Ability.defeatist.Description,"While this Pokemon has 1/2 or less of its max HP, its Attack and Sp. Atk are halved.",,,,,
+Ability.defiant.Name,Defiant,Competitivo,Competitivo,,,Acharné
+Ability.defiant.Description,This Pokemon's Attack is raised by 2 for each of its stats that is lowered by a foe.,,,,,
+Ability.deltastream.Name,Delta Stream,Ráfaga Delta,Ráfaga Delta,,,Souffle Delta
+Ability.deltastream.Description,"On switch-in, strong winds begin until this Ability is not active in battle.",,,,,
+Ability.desolateland.Name,Desolate Land,Tierra del Ocaso,Tierra del Ocaso,,,Terre Finale
+Ability.desolateland.Description,"On switch-in, extremely harsh sunlight begins until this Ability is not active in battle.",,,,,
+Ability.disguise.Name,Disguise,Disfraz,Disfraz,,,Fantômasque
+Ability.disguise.Description,"(Mimikyu only) The first hit it takes is blocked, and it takes 1/8 HP damage instead.",,,,,
+Ability.download.Name,Download,Descarga,Descarga,,,Télécharge
+Ability.download.Description,"On switch-in, Attack or Sp. Atk is raised 1 stage based on the foes' weaker Defense.",,,,,
+Ability.dragonize.Name,Dragonize,Piel Dragontina,Piel Dracónica,,,Peau Draconique
+Ability.dragonize.Description,This Pokemon's Normal-type moves become Dragon type and have 1.2× power.,,,,,
+Ability.dragonsmaw.Name,Dragon's Maw,Mandíbula Dragón,Mandíbula Dragón,,,Dent de Dragon
+Ability.dragonsmaw.Description,This Pokemon's offensive stat is multiplied by 1.5 while using a Dragon-type attack.,,,,,
+Ability.drizzle.Name,Drizzle,Llovizna,Llovizna,,,Crachin
+Ability.drizzle.Description,"On switch-in, this Pokemon summons Rain.",,,,,
+Ability.drought.Name,Drought,Sequía,Sequía,,,Sécheresse
+Ability.drought.Description,"On switch-in, this Pokemon summons Sun.",,,,,
+Ability.dryskin.Name,Dry Skin,Piel Seca,Piel Seca,,,Peau Sèche
+Ability.dryskin.Description,"This Pokemon is healed 1/4 by Water, 1/8 by Rain; is hurt 1.25× by Fire, 1/8 by Sun.",,,,,
+Ability.earlybird.Name,Early Bird,Madrugar,Madrugador,,,Matinal
+Ability.earlybird.Description,This Pokemon's sleep counter drops by 2 instead of 1.,,,,,
+Ability.eartheater.Name,Earth Eater,Geofagia,Geofagia,,,Absorbe-Terre
+Ability.eartheater.Description,This Pokemon heals 1/4 of its max HP when hit by Ground moves; Ground immunity.,,,,,
+Ability.eelevate.Name,Eelevate,,,,,
+Ability.eelevate.Description,This Pokemon is immune to Ground; +1 to highest stat if it KOes another Pokemon.,,,,,
+Ability.effectspore.Name,Effect Spore,Efecto Espora,Efecto Espora,,,Pose Spore
+Ability.effectspore.Description,30% chance of poison/paralysis/sleep on others making contact with this Pokemon.,,,,,
+Ability.electricsurge.Name,Electric Surge,Electrogénesis,Electrogénesis,,,Créa-Élec
+Ability.electricsurge.Description,"On switch-in, this Pokemon summons Electric Terrain.",,,,,
+Ability.electromorphosis.Name,Electromorphosis,Dinamo,Dínamo,,Eletromorfose,Grecharge
+Ability.electromorphosis.Description,This Pokemon gains the Charge effect when it takes a hit from an attack.,,,,,
+Ability.embodyaspectcornerstone.Name,Embody Aspect (Cornerstone),,,,,
+Ability.embodyaspectcornerstone.Description,"On switch-in, this Pokemon's Defense is raised by 1 stage.",,,,,
+Ability.embodyaspecthearthflame.Name,Embody Aspect (Hearthflame),,,,,
+Ability.embodyaspecthearthflame.Description,"On switch-in, this Pokemon's Attack is raised by 1 stage.",,,,,
+Ability.embodyaspectteal.Name,Embody Aspect (Teal),,,,,
+Ability.embodyaspectteal.Description,"On switch-in, this Pokemon's Speed is raised by 1 stage.",,,,,
+Ability.embodyaspectwellspring.Name,Embody Aspect (Wellspring),,,,,
+Ability.embodyaspectwellspring.Description,"On switch-in, this Pokemon's Special Defense is raised by 1 stage.",,,,,
+Ability.emergencyexit.Name,Emergency Exit,Retirada,Retirada,,,Repli Tactique
+Ability.emergencyexit.Description,This Pokemon switches out when it reaches 1/2 or less of its maximum HP.,,,,,
+Ability.fairyaura.Name,Fairy Aura,Aura Feérica,Aura Feérica,,,Aura Féérique
+Ability.fairyaura.Description,"While this Pokemon is active, a Fairy move used by any Pokemon has 1.33× power.",,,,,
+Ability.filter.Name,Filter,Filtro,Filtro,,,Filtre
+Ability.filter.Description,This Pokemon receives 3/4 damage from supereffective attacks.,,,,,
+Ability.firemane.Name,Fire Mane,,,,,
+Ability.firemane.Description,This Pokemon's offensive stat is multiplied by 1.5 while using a Fire-type attack.,,,,,
+Ability.flamebody.Name,Flame Body,Cuerpo Llama,Cuerpo de Fuego,,,Corps Ardent
+Ability.flamebody.Description,30% chance a Pokemon making contact with this Pokemon will be burned.,,,,,
+Ability.flareboost.Name,Flare Boost,Ímpetu Ardiente,Ímpetu Ardiente,,,Rage Brûlure
+Ability.flareboost.Description,"While this Pokemon is burned, its special attacks have 1.5× power.",,,,,
+Ability.flashfire.Name,Flash Fire,Absorbe Fuego,Absorbefuego,,,Torche
+Ability.flashfire.Description,This Pokemon's Fire attacks do 1.5× damage if hit by one Fire move; Fire immunity.,,,,,
+Ability.flowergift.Name,Flower Gift,Don Floral,Don Floral,,,Don Floral
+Ability.flowergift.Description,"If user is Cherrim and Sun is active, it and allies' Attack and Sp. Def are 1.5×.",,,,,
+Ability.flowerveil.Name,Flower Veil,Velo Flor,Velo Florido,,,Flora-Voile
+Ability.flowerveil.Description,This side's Grass types can't have stats lowered or status inflicted by other Pokemon.,,,,,
+Ability.fluffy.Name,Fluffy,Peluche,Peluche,,,Boule de Poils
+Ability.fluffy.Description,"This Pokemon takes 1/2 damage from contact moves, 2× damage from Fire moves.",,,,,
+Ability.forecast.Name,Forecast,Predicción,Predicción,,,Météo
+Ability.forecast.Description,"Castform's type changes to the current weather condition's type, except Sandstorm.",,,,,
+Ability.forewarn.Name,Forewarn,Alerta,Alerta,,,Prédiction
+Ability.forewarn.Description,"On switch-in, this Pokemon is alerted to the foes' move with the highest power.",,,,,
+Ability.friendguard.Name,Friend Guard,Compiescolta,Compiescolta,,,Garde-Ami
+Ability.friendguard.Description,This Pokemon's allies receive 3/4 damage from other Pokemon's attacks.,,,,,
+Ability.frisk.Name,Frisk,Cacheo,Inspección,,,Fouille
+Ability.frisk.Description,"On switch-in, this Pokemon identifies the held items of all opposing Pokemon.",,,,,
+Ability.fullmetalbody.Name,Full Metal Body,Guardia Metálica,Guardia Metálica,,,Métallo-Garde
+Ability.fullmetalbody.Description,Prevents other Pokemon from lowering this Pokemon's stat stages.,,,,,
+Ability.furcoat.Name,Fur Coat,Pelaje Recio,Pelaje Recio,,,Toison Épaisse
+Ability.furcoat.Description,This Pokemon's Defense is doubled.,,,,,
+Ability.galewings.Name,Gale Wings,Alas Vendaval,Alas Vendaval,,,Ailes Bourrasque
+Ability.galewings.Description,"If this Pokemon is at full HP, its Flying-type moves have their priority increased by 1.",,,,,
+Ability.galvanize.Name,Galvanize,Piel Eléctrica,Piel Eléctrica,,,Peau Électrique
+Ability.galvanize.Description,This Pokemon's Normal-type moves become Electric type and have 1.2× power.,,,,,
+Ability.gluttony.Name,Gluttony,Gula,Gula,,,Gloutonnerie
+Ability.gluttony.Description,This Pokemon eats Berries at 1/2 max HP or less instead of their usual 1/4 max HP.,,,,,
+Ability.goodasgold.Name,Good as Gold,Cuerpo Áureo,Cuerpo Áureo,,,Corps en Or
+Ability.goodasgold.Description,This Pokemon is immune to Status moves.,,,,,
+Ability.gooey.Name,Gooey,Baba,Baba,,,Poisseux
+Ability.gooey.Description,Pokemon making contact with this Pokemon have their Speed lowered by 1 stage.,,,,,
+Ability.gorillatactics.Name,Gorilla Tactics,Monotema,Monotema,,,Entêtement
+Ability.gorillatactics.Description,"This Pokemon's Attack is 1.5×, but it can only select the first move it executes.",,,,,
+Ability.grasspelt.Name,Grass Pelt,Manto Frondoso,Manto Frondoso,,,Toison Herbue
+Ability.grasspelt.Description,"If Grassy Terrain is active, this Pokemon's Defense is multiplied by 1.5.",,,,,
+Ability.grassysurge.Name,Grassy Surge,Herbogénesis,Herbogénesis,,,Créa-Herbe
+Ability.grassysurge.Description,"On switch-in, this Pokemon summons Grassy Terrain.",,,,,
+Ability.grimneigh.Name,Grim Neigh,Relincho Negro,Relincho Negro,,,Sombre Ruade
+Ability.grimneigh.Description,This Pokemon's Sp. Atk is raised by 1 stage if it attacks and KOes another Pokemon.,,,,,
+Ability.guarddog.Name,Guard Dog,Perro Guardián,Perro Guardián,,Cão de Guarda,Chien de Garde
+Ability.guarddog.Description,Immune to Intimidate. Intimidated: +1 Attack. Cannot be forced to switch out.,,,,,
+Ability.gulpmissile.Name,Gulp Missile,Tragamisil,Tragamisil,,,Dégobage
+Ability.gulpmissile.Description,"When hit after Surf/Dive, attacker takes 1/4 max HP and -1 Defense or paralysis.",,,,,
+Ability.guts.Name,Guts,Agallas,Agallas,,,Cran
+Ability.guts.Description,"If this Pokemon is statused, its Attack is 1.5×; ignores burn halving physical damage.",,,,,
+Ability.hadronengine.Name,Hadron Engine,Motor Hadrónico,Motor Hadrónico,,Motor Hadrônico,Moteur à Hadrons
+Ability.hadronengine.Description,"On switch-in, summons Electric Terrain. During Electric Terrain, Sp. Atk is 1.3333×.",,,,,
+Ability.harvest.Name,Harvest,Cosecha,Cosecha,,,Récolte
+Ability.harvest.Description,"If last item used is a Berry, 50% chance to restore it each end of turn. 100% in Sun.",,,,,
+Ability.healer.Name,Healer,Alma Cura,Alma Sanadora,,,Cœur Soin
+Ability.healer.Description,30% chance this Pokemon's ally has its status cured at the end of each turn.,,,,,
+Ability.heatproof.Name,Heatproof,Ignífugo,Ignífugo,,,Ignifugé
+Ability.heatproof.Description,Fire damage against this Pokemon is dealt with 1/2 offensive stat; 1/2 burn damage.,,,,,
+Ability.heavymetal.Name,Heavy Metal,Metal Pesado,Metal Pesado,,,Heavy Metal
+Ability.heavymetal.Description,This Pokemon's weight is doubled.,,,,,
+Ability.honeygather.Name,Honey Gather,Recogemiel,Recogemiel,,,Cherche Miel
+Ability.honeygather.Description,No competitive use.,,,,,
+Ability.hospitality.Name,Hospitality,Hospitalidad,Hospitalidad,,,Aux Petits Soins
+Ability.hospitality.Description,"On switch-in, this Pokemon restores 1/4 of its ally's maximum HP, rounded down.",,,,,
+Ability.hugepower.Name,Huge Power,Potencia,Potencia,,,Coloforce
+Ability.hugepower.Description,This Pokemon's Attack is doubled.,,,,,
+Ability.hungerswitch.Name,Hunger Switch,Mutapetito,Mutapetito,,,Déclic Fringale
+Ability.hungerswitch.Description,"If Morpeko, it changes between Full Belly and Hangry Mode at the end of each turn.",,,,,
+Ability.hustle.Name,Hustle,Entusiasmo,Entusiasmo,,,Agitation
+Ability.hustle.Description,This Pokemon's Attack is 1.5× and accuracy of its physical attacks is 0.8×.,,,,,
+Ability.hydration.Name,Hydration,Hidratación,Hidratación,,,Hydratation
+Ability.hydration.Description,This Pokemon has its status cured at the end of each turn if Rain is active.,,,,,
+Ability.hypercutter.Name,Hyper Cutter,Corte Fuerte,Corte Fuerte,,,Hyper Cutter
+Ability.hypercutter.Description,Prevents other Pokemon from lowering this Pokemon's Attack stat stage.,,,,,
+Ability.icebody.Name,Ice Body,Gélido,Cuerpo de Hielo,,,Corps Gel
+Ability.icebody.Description,"If Snow is active, this Pokemon heals 1/16 of its max HP each turn.",,,,,
+Ability.iceface.Name,Ice Face,Cara de Hielo,Cara de Hielo,,,Tête de Gel
+Ability.iceface.Description,"If Eiscue, the first physical hit it takes deals 0 damage. Effect is restored in Snow.",,,,,
+Ability.icescales.Name,Ice Scales,Escama de Hielo,Escama de Hielo,,,Écailles Glacées
+Ability.icescales.Description,This Pokemon receives 1/2 damage from special attacks.,,,,,
+Ability.illuminate.Name,Illuminate,Iluminación,Iluminación,,,Lumiattirance
+Ability.illuminate.Description,This Pokemon's accuracy can't be lowered by others; ignores their evasiveness stat.,,,,,
+Ability.illusion.Name,Illusion,Ilusión,Ilusión,,,Illusion
+Ability.illusion.Description,This Pokemon appears as the last Pokemon in the party until it takes direct damage.,,,,,
+Ability.immunity.Name,Immunity,Inmunidad,Inmunidad,,,Vaccin
+Ability.immunity.Description,This Pokemon cannot be poisoned. Gaining this Ability while poisoned cures it.,,,,,
+Ability.imposter.Name,Imposter,Impostor,Impostor,,,Imposteur
+Ability.imposter.Description,"On switch-in, this Pokemon Transforms into the opposing Pokemon that is facing it.",,,,,
+Ability.infiltrator.Name,Infiltrator,Allanamiento,Allanamiento,,,Infiltration
+Ability.infiltrator.Description,Moves ignore substitutes and foe's Reflect/Light Screen/Safeguard/Mist/Aurora Veil.,,,,,
+Ability.innardsout.Name,Innards Out,Revés,Revés,,,Expuls’Organes
+Ability.innardsout.Description,"If this Pokemon is KOed with a move, that move's user loses an equal amount of HP.",,,,,
+Ability.innerfocus.Name,Inner Focus,Fuerza Mental,Fuerza Mental,,,Attention
+Ability.innerfocus.Description,This Pokemon cannot be made to flinch. Immune to Intimidate.,,,,,
+Ability.insomnia.Name,Insomnia,Insomnio,Insomnio,,,Insomnia
+Ability.insomnia.Description,This Pokemon cannot fall asleep. Gaining this Ability while asleep cures it.,,,,,
+Ability.intimidate.Name,Intimidate,Intimidación,Intimidación,,,Intimidation
+Ability.intimidate.Description,"On switch-in, this Pokemon lowers the Attack of opponents by 1 stage.",,,,,
+Ability.intrepidsword.Name,Intrepid Sword,Espada Indómita,Espada Indómita,,,Lame Indomptable
+Ability.intrepidsword.Description,"On switch-in, this Pokemon's Attack is raised by 1 stage. Once per battle.",,,,,
+Ability.ironbarbs.Name,Iron Barbs,Punta Acero,Punta Acero,,,Épine de Fer
+Ability.ironbarbs.Description,Pokemon making contact with this Pokemon lose 1/8 of their max HP.,,,,,
+Ability.ironfist.Name,Iron Fist,Puño Férreo,Puño Férreo,,,Poing de Fer
+Ability.ironfist.Description,This Pokemon's punch-based attacks have 1.2× power. Sucker Punch is not boosted.,,,,,
+Ability.justified.Name,Justified,Justiciero,Justiciero,,,Cœur Noble
+Ability.justified.Description,This Pokemon's Attack is raised by 1 stage after it is damaged by a Dark-type move.,,,,,
+Ability.keeneye.Name,Keen Eye,Vista Lince,Perspicacia,,,Regard Vif
+Ability.keeneye.Description,This Pokemon's accuracy can't be lowered by others; ignores their evasiveness stat.,,,,,
+Ability.klutz.Name,Klutz,Zoquete,Torpeza,,,Maladresse
+Ability.klutz.Description,"This Pokemon's held item has no effect, except Macho Brace. Fling cannot be used.",,,,,
+Ability.leafguard.Name,Leaf Guard,Defensa Hoja,Defensa Hoja,,,Feuille Garde
+Ability.leafguard.Description,"If Sun is active, this Pokemon cannot be statused and Rest will fail for it.",,,,,
+Ability.levitate.Name,Levitate,Levitación,Levitación,,,Lévitation
+Ability.levitate.Description,This Pokemon is immune to Ground; Gravity/Ingrain/Smack Down/Iron Ball nullify it.,,,,,
+Ability.libero.Name,Libero,Líbero,Líbero,,,Libéro
+Ability.libero.Description,This Pokemon's type changes to the type of the move it is using. Once per switch-in.,,,,,
+Ability.lightmetal.Name,Light Metal,Metal Liviano,Metal Liviano,,,Light Metal
+Ability.lightmetal.Description,This Pokemon's weight is halved.,,,,,
+Ability.lightningrod.Name,Lightning Rod,Pararrayos,Pararrayos,,,Paratonnerre
+Ability.lightningrod.Description,This Pokemon draws Electric moves to itself to raise Sp. Atk by 1; Electric immunity.,,,,,
+Ability.limber.Name,Limber,Flexibilidad,Flexibilidad,,,Échauffement
+Ability.limber.Description,This Pokemon cannot be paralyzed. Gaining this Ability while paralyzed cures it.,,,,,
+Ability.lingeringaroma.Name,Lingering Aroma,Olor Persistente,Olor Persistente,,,Odeur Tenace
+Ability.lingeringaroma.Description,Making contact with this Pokemon has the attacker's Ability become Lingering Aroma.,,,,,
+Ability.liquidooze.Name,Liquid Ooze,Lodo Líquido,Lodo Líquido,,,Suintement
+Ability.liquidooze.Description,This Pokemon damages those draining HP from it for as much as they would heal.,,,,,
+Ability.liquidvoice.Name,Liquid Voice,Voz Fluida,Voz Fluida,,,Hydrata-Son
+Ability.liquidvoice.Description,This Pokemon's sound-based moves become Water type.,,,,,
+Ability.longreach.Name,Long Reach,Remoto,Remoto,,,Longue Portée
+Ability.longreach.Description,This Pokemon's attacks do not make contact with the target.,,,,,
+Ability.magicbounce.Name,Magic Bounce,Espejo Mágico,Espejo Mágico,,,Miroir Magik
+Ability.magicbounce.Description,This Pokemon blocks certain Status moves and bounces them back to the user.,,,,,
+Ability.magicguard.Name,Magic Guard,Muro Mágico,Muro Mágico,,,Garde Magik
+Ability.magicguard.Description,This Pokemon can only be damaged by direct attacks.,,,,,
+Ability.magician.Name,Magician,Prestidigitador,Prestidigitador,,,Magicien
+Ability.magician.Description,"If this Pokemon has no item, it steals the item off a Pokemon it hits with an attack.",,,,,
+Ability.magmaarmor.Name,Magma Armor,Escudo Magma,Escudo de Magma,,,Armumagma
+Ability.magmaarmor.Description,This Pokemon cannot be frozen. Gaining this Ability while frozen cures it.,,,,,
+Ability.magnetpull.Name,Magnet Pull,Imán,Imán,,,Magnépiège
+Ability.magnetpull.Description,Prevents opposing Steel-type Pokemon from choosing to switch out.,,,,,
+Ability.marvelscale.Name,Marvel Scale,Escama Especial,Escama Especial,,,Écaille Spéciale
+Ability.marvelscale.Description,"If this Pokemon has a non-volatile status condition, its Defense is multiplied by 1.5.",,,,,
+Ability.megalauncher.Name,Mega Launcher,Megadisparador,Megalanzador,,,Méga Blaster
+Ability.megalauncher.Description,This Pokemon's pulse moves have 1.5× power. Heal Pulse heals 3/4 target's max HP.,,,,,
+Ability.megasol.Name,Mega Sol,Megasolar,Megasolar,,,Méga-Soleil
+Ability.megasol.Description,This Pokemon's moves are used as if the effects of Sun were active.,,,,,
+Ability.merciless.Name,Merciless,Ensañamiento,Ensañamiento,,,Cruauté
+Ability.merciless.Description,This Pokemon's attacks are critical hits if the target is poisoned.,,,,,
+Ability.mimicry.Name,Mimicry,Mimetismo,Mimetismo,,,Mimétisme
+Ability.mimicry.Description,This Pokemon's types change to match the Terrain. Type reverts when Terrain ends.,,,,,
+Ability.mindseye.Name,Mind's Eye,Ojo Mental,Ojo Mental,,,Œil Révélateur
+Ability.mindseye.Description,"Fighting, Normal moves hit Ghost. Accuracy can't be lowered, ignores evasiveness.",,,,,
+Ability.minus.Name,Minus,Menos,Menos,,,Moins
+Ability.minus.Description,"If an active ally has this Ability or the Plus Ability, this Pokemon's Sp. Atk is 1.5×.",,,,,
+Ability.mirrorarmor.Name,Mirror Armor,Coraza Reflejo,Coraza Reflejo,,,Armure Miroir
+Ability.mirrorarmor.Description,"If this Pokemon's stat stages would be lowered, the attacker's are lowered instead.",,,,,
+Ability.mistysurge.Name,Misty Surge,Nebulogénesis,Nebulogénesis,,,Créa-Brume
+Ability.mistysurge.Description,"On switch-in, this Pokemon summons Misty Terrain.",,,,,
+Ability.moldbreaker.Name,Mold Breaker,Rompemoldes,Rompemoldes,,,Brise Moule
+Ability.moldbreaker.Description,This Pokemon's moves and their effects ignore the Abilities of other Pokemon.,,,,,
+Ability.moody.Name,Moody,Veleta,Temperamental,,,Lunatique
+Ability.moody.Description,Boosts a random stat (except accuracy/evasion) +2 and another stat -1 every turn.,,,,,
+Ability.motordrive.Name,Motor Drive,Electromotor,Electromotor,,,Motorisé
+Ability.motordrive.Description,This Pokemon's Speed is raised 1 stage if hit by an Electric move; Electric immunity.,,,,,
+Ability.moxie.Name,Moxie,Autoestima,Autoestima,,,Impudence
+Ability.moxie.Description,This Pokemon's Attack is raised by 1 stage if it attacks and KOes another Pokemon.,,,,,
+Ability.multiscale.Name,Multiscale,Multiescamas,Multiescamas,,,Multiécaille
+Ability.multiscale.Description,"If this Pokemon is at full HP, damage taken from attacks is halved.",,,,,
+Ability.multitype.Name,Multitype,Multitipo,Multitipo,,,Multi-Type
+Ability.multitype.Description,"If this Pokemon is an Arceus, its type changes to match its held Plate.",,,,,
+Ability.mummy.Name,Mummy,Momia,Momia,,,Momie
+Ability.mummy.Description,Pokemon making contact with this Pokemon have their Ability changed to Mummy.,,,,,
+Ability.myceliummight.Name,Mycelium Might,Poder Fúngico,Poder Fúngico,,,Force Fongique
+Ability.myceliummight.Description,This Pokemon's Status moves go last in their priority bracket and ignore Abilities.,,,,,
+Ability.naturalcure.Name,Natural Cure,Cura Natural,Curación Natural,,,Médic Nature
+Ability.naturalcure.Description,This Pokemon has its non-volatile status condition cured when it switches out.,,,,,
+Ability.neuroforce.Name,Neuroforce,Fuerza Cerebral,Fuerza Cerebral,,,Cérébro-Force
+Ability.neuroforce.Description,This Pokemon's attacks that are super effective against the target do 1.25× damage.,,,,,
+Ability.neutralizinggas.Name,Neutralizing Gas,Gas Reactivo,Gas Reactivo,,,Gaz Inhibiteur
+Ability.neutralizinggas.Description,"While this Pokemon is active, Abilities have no effect.",,,,,
+Ability.noguard.Name,No Guard,Indefenso,Indefenso,,,Annule Garde
+Ability.noguard.Description,Every move used by or against this Pokemon will always hit.,,,,,
+Ability.normalize.Name,Normalize,Normalidad,Normalidad,,,Normalise
+Ability.normalize.Description,This Pokemon's moves are changed to be Normal type and have 1.2× power.,,,,,
+Ability.oblivious.Name,Oblivious,Despiste,Despistado,,,Benêt
+Ability.oblivious.Description,This Pokemon cannot be infatuated or taunted. Immune to Intimidate.,,,,,
+Ability.opportunist.Name,Opportunist,Oportunista,Oportunista,,,Opportuniste
+Ability.opportunist.Description,"When an opposing Pokemon has a stat stage raised, this Pokemon copies the effect.",,,,,
+Ability.orichalcumpulse.Name,Orichalcum Pulse,Latido Oricalco,Latido Oricalco,,,Pouls Orichalque
+Ability.orichalcumpulse.Description,"On switch-in, summons Sun. During Sun, Attack is 1.3333×.",,,,,
+Ability.overcoat.Name,Overcoat,Funda,Funda,,,Envelocape
+Ability.overcoat.Description,"This Pokemon is immune to powder moves, Sandstorm damage, and Effect Spore.",,,,,
+Ability.overgrow.Name,Overgrow,Espesura,Espesura,,,Engrais
+Ability.overgrow.Description,"At 1/3 or less of its max HP, this Pokemon's offensive stat is 1.5× with Grass attacks.",,,,,
+Ability.owntempo.Name,Own Tempo,Ritmo Propio,Ritmo Propio,,,Tempo Perso
+Ability.owntempo.Description,This Pokemon cannot be confused. Immune to Intimidate.,,,,,
+Ability.parentalbond.Name,Parental Bond,Amor Filial,Amor Filial,,,Amour Filial
+Ability.parentalbond.Description,This Pokemon's damaging moves hit twice. The second hit has its damage quartered.,,,,,
+Ability.pastelveil.Name,Pastel Veil,Velo Pastel,Velo Pastel,,,Voile Pastel
+Ability.pastelveil.Description,"This Pokemon and its allies cannot be poisoned. On switch-in, cures poisoned allies.",,,,,
+Ability.perishbody.Name,Perish Body,Cuerpo Mortal,Cuerpo Mortal,,,Corps Condamné
+Ability.perishbody.Description,Making contact with this Pokemon starts the Perish Song effect for it and the attacker.,,,,,
+Ability.pickpocket.Name,Pickpocket,Hurto,Hurto,,,Pickpocket
+Ability.pickpocket.Description,"If this Pokemon has no item and is hit by a contact move, it steals the attacker's item.",,,,,
+Ability.pickup.Name,Pickup,Recogida,Recolección,,,Ramassage
+Ability.pickup.Description,"If this Pokemon has no item, it finds one used by an adjacent Pokemon this turn.",,,,,
+Ability.piercingdrill.Name,Piercing Drill,Turbotaladro,Turbotaladro,,Broca Pervasiva,Transperceuse
+Ability.piercingdrill.Description,This Pokemon's contact moves ignore a target's protection and deal 1/4 the usual damage.,,,,,
+Ability.pixilate.Name,Pixilate,Piel Feérica,Piel Feérica,,,Peau Féérique
+Ability.pixilate.Description,This Pokemon's Normal-type moves become Fairy type and have 1.2× power.,,,,,
+Ability.plus.Name,Plus,Más,Más,,,Plus
+Ability.plus.Description,"If an active ally has this Ability or the Minus Ability, this Pokemon's Sp. Atk is 1.5×.",,,,,
+Ability.poisonheal.Name,Poison Heal,Antídoto,Antídoto,,,Soin Poison
+Ability.poisonheal.Description,This Pokemon is healed by 1/8 of its max HP each turn when poisoned; no HP loss.,,,,,
+Ability.poisonpoint.Name,Poison Point,Punto Tóxico,Punto Tóxico,,,Point Poison
+Ability.poisonpoint.Description,30% chance a Pokemon making contact with this Pokemon will be poisoned.,,,,,
+Ability.poisonpuppeteer.Name,Poison Puppeteer,Títere Tóxico,Títere Tóxico,,,Emprise Toxique
+Ability.poisonpuppeteer.Description,"Pecharunt: If this Pokemon poisons a target, the target also becomes confused.",,,,,
+Ability.poisontouch.Name,Poison Touch,Toque Tóxico,Contacto Tóxico,,,Toxitouche
+Ability.poisontouch.Description,This Pokemon's contact moves have a 30% chance of poisoning.,,,,,
+Ability.powerconstruct.Name,Power Construct,Agrupamiento,Agrupamiento,,,Rassemblement
+Ability.powerconstruct.Description,"If Zygarde 10%/50%, changes to Complete if at 1/2 max HP or less at end of turn.",,,,,
+Ability.powerofalchemy.Name,Power of Alchemy,Reacción Química,Reacción Química,,,Osmose
+Ability.powerofalchemy.Description,This Pokemon copies the Ability of an ally that faints.,,,,,
+Ability.powerspot.Name,Power Spot,Fuente Energía,Fuente Energía,,,Cercle d’Énergie
+Ability.powerspot.Description,This Pokemon's allies have the power of their moves multiplied by 1.3.,,,,,
+Ability.prankster.Name,Prankster,Bromista,Timador,,,Farceur
+Ability.prankster.Description,"This Pokemon's Status moves have priority raised by 1, but Dark types are immune.",,,,,
+Ability.pressure.Name,Pressure,Presión,Presión,,,Pression
+Ability.pressure.Description,"If this Pokemon is the target of a foe's move, that move loses one additional PP.",,,,,
+Ability.primordialsea.Name,Primordial Sea,Mar del Albor,Mar del Albor,,,Mer Primaire
+Ability.primordialsea.Description,"On switch-in, heavy rain begins until this Ability is not active in battle.",,,,,
+Ability.prismarmor.Name,Prism Armor,Armadura Prisma,Armadura Prisma,,,Prisme-Armure
+Ability.prismarmor.Description,This Pokemon receives 3/4 damage from supereffective attacks.,,,,,
+Ability.propellertail.Name,Propeller Tail,Hélice Caudal,Hélice Caudal,,,Propulseur
+Ability.propellertail.Description,This Pokemon's moves cannot be redirected to a different target by any effect.,,,,,
+Ability.protean.Name,Protean,Mutatipo,Mutatipo,,,Protéen
+Ability.protean.Description,This Pokemon's type changes to the type of the move it is using. Once per switch-in.,,,,,
+Ability.protosynthesis.Name,Protosynthesis,Paleosíntesis,Paleosíntesis,,Protossíntese,Paléosynthèse
+Ability.protosynthesis.Description,"Sun active or Booster Energy used: highest stat is 1.3×, or 1.5× if Speed.",,,,,
+Ability.psychicsurge.Name,Psychic Surge,Psicogénesis,Psicogénesis,,,Créa-Psy
+Ability.psychicsurge.Description,"On switch-in, this Pokemon summons Psychic Terrain.",,,,,
+Ability.punkrock.Name,Punk Rock,Punk Rock,Punk Rock,,,Punk Rock
+Ability.punkrock.Description,This Pokemon receives 1/2 damage from sound moves. Its own have 1.3× power.,,,,,
+Ability.purepower.Name,Pure Power,Energía Pura,Energía Pura,,,Force Pure
+Ability.purepower.Description,This Pokemon's Attack is doubled.,,,,,
+Ability.purifyingsalt.Name,Purifying Salt,Sal Purificadora,Sal Purificadora,,,Sel Purificateur
+Ability.purifyingsalt.Description,Ghost damage to this Pokemon dealt with a halved offensive stat; can't be statused.,,,,,
+Ability.quarkdrive.Name,Quark Drive,Carga Cuark,Carga Cuark,,,Charge Quantique
+Ability.quarkdrive.Description,"Electric Terrain active or Booster Energy used: highest stat is 1.3×, or 1.5× if Speed.",,,,,
+Ability.queenlymajesty.Name,Queenly Majesty,Regia Presencia,Regia Presencia,,,Prestance Royale
+Ability.queenlymajesty.Description,This Pokemon and its allies are protected from opposing priority moves.,,,,,
+Ability.quickdraw.Name,Quick Draw,Mano Rápida,Mano Rápida,,,Tir Vif
+Ability.quickdraw.Description,This Pokemon has a 30% chance to move first in its priority bracket with attacking moves.,,,,,
+Ability.quickfeet.Name,Quick Feet,Pies Rápidos,Pies Rápidos,,,Pied Véloce
+Ability.quickfeet.Description,"If this Pokemon is statused, its Speed is 1.5×; ignores Speed drop from paralysis.",,,,,
+Ability.raindish.Name,Rain Dish,Cura Lluvia,Curación Pluvial,,,Cuvette
+Ability.raindish.Description,"If Rain is active, this Pokemon heals 1/16 of its max HP each turn.",,,,,
+Ability.rattled.Name,Rattled,Cobardía,Cobardía,,,Phobique
+Ability.rattled.Description,"Speed is raised 1 stage if hit by a Bug-, Dark-, or Ghost-type attack, or Intimidated.",,,,,
+Ability.receiver.Name,Receiver,Receptor,Receptor,,,Receveur
+Ability.receiver.Description,This Pokemon copies the Ability of an ally that faints.,,,,,
+Ability.reckless.Name,Reckless,Audaz,Audaz,,,Téméraire
+Ability.reckless.Description,This Pokemon's attacks with recoil or crash damage have 1.2× power; not Struggle.,,,,,
+Ability.refrigerate.Name,Refrigerate,Piel Helada,Piel Helada,,,Peau Gelée
+Ability.refrigerate.Description,This Pokemon's Normal-type moves become Ice type and have 1.2× power.,,,,,
+Ability.regenerator.Name,Regenerator,Regeneración,Regeneración,,,Régé-Force
+Ability.regenerator.Description,"This Pokemon restores 1/3 of its maximum HP, rounded down, when it switches out.",,,,,
+Ability.ripen.Name,Ripen,Maduración,Maduración,,,Mûrissement
+Ability.ripen.Description,"When this Pokemon eats certain Berries, the effects are doubled.",,,,,
+Ability.rivalry.Name,Rivalry,Rivalidad,Rivalidad,,,Rivalité
+Ability.rivalry.Description,This Pokemon's attacks do 1.25× on same gender targets; 0.75× on opposite gender.,,,,,
+Ability.rkssystem.Name,RKS System,Sistema Alfa,Sistema Alfa,,,Système Alpha
+Ability.rkssystem.Description,"If this Pokemon is a Silvally, its type changes to match its held Memory.",,,,,
+Ability.rockhead.Name,Rock Head,Cabeza Roca,Cabeza Roca,,,Tête de Roc
+Ability.rockhead.Description,This Pokemon does not take recoil damage besides Struggle/Life Orb/crash damage.,,,,,
+Ability.rockypayload.Name,Rocky Payload,Transportarrocas,Transportarrocas,,,Porte-Roche
+Ability.rockypayload.Description,This Pokemon's offensive stat is multiplied by 1.5 while using a Rock-type attack.,,,,,
+Ability.roughskin.Name,Rough Skin,Piel Tosca,Piel Tosca,,,Peau Dure
+Ability.roughskin.Description,Pokemon making contact with this Pokemon lose 1/8 of their max HP.,,,,,
+Ability.runaway.Name,Run Away,Fuga,Fuga,,,Fuite
+Ability.runaway.Description,No competitive use.,,,,,
+Ability.sandforce.Name,Sand Force,Poder Arena,Poder Arenoso,,,Force Sable
+Ability.sandforce.Description,This Pokemon's Ground/Rock/Steel attacks do 1.3× in Sandstorm; immunity to it.,,,,,
+Ability.sandrush.Name,Sand Rush,Ímpetu Arena,Ímpetu Arena,,,Baigne Sable
+Ability.sandrush.Description,"If Sandstorm is active, this Pokemon's Speed is doubled; immunity to Sandstorm.",,,,,
+Ability.sandspit.Name,Sand Spit,Expulsarena,Expulsarena,,,Expul’Sable
+Ability.sandspit.Description,"When this Pokemon is hit by an attack, the effect of Sandstorm begins.",,,,,
+Ability.sandstream.Name,Sand Stream,Chorro Arena,Chorro de Arena,,,Sable Volant
+Ability.sandstream.Description,"On switch-in, this Pokemon summons Sandstorm.",,,,,
+Ability.sandveil.Name,Sand Veil,Velo Arena,Velo de Arena,,,Voile Sable
+Ability.sandveil.Description,"If Sandstorm is active, this Pokemon's evasiveness is 1.25×; immunity to Sandstorm.",,,,,
+Ability.sapsipper.Name,Sap Sipper,Herbívoro,Herbívoro,,,Herbivore
+Ability.sapsipper.Description,This Pokemon's Attack is raised 1 stage if hit by a Grass move; Grass immunity.,,,,,
+Ability.schooling.Name,Schooling,Banco,Banco,,,Banc
+Ability.schooling.Description,"If user is Wishiwashi, changes to School Form if it has > 1/4 max HP, else Solo Form.",,,,,
+Ability.scrappy.Name,Scrappy,Intrépido,Intrépido,,,Querelleur
+Ability.scrappy.Description,"Fighting, Normal moves hit Ghost. Immune to Intimidate.",,,,,
+Ability.screencleaner.Name,Screen Cleaner,Antibarrera,Antibarrera,,,Brise-Barrière
+Ability.screencleaner.Description,"On switch-in, the effects of Aurora Veil, Light Screen, and Reflect end for both sides.",,,,,
+Ability.seedsower.Name,Seed Sower,Disemillar,Disemillar,,Semear,Semencier
+Ability.seedsower.Description,"When this Pokemon is hit by an attack, the effect of Grassy Terrain begins.",,,,,
+Ability.serenegrace.Name,Serene Grace,Dicha,Dicha,,,Sérénité
+Ability.serenegrace.Description,This Pokemon's moves have their secondary effect chance doubled.,,,,,
+Ability.shadowshield.Name,Shadow Shield,Guardia Espectro,Guardia Espectro,,,Spectro-Bouclier
+Ability.shadowshield.Description,"If this Pokemon is at full HP, damage taken from attacks is halved.",,,,,
+Ability.shadowtag.Name,Shadow Tag,Sombra Trampa,Sombra Trampa,,,Marque Ombre
+Ability.shadowtag.Description,Prevents foes from choosing to switch unless they also have this Ability.,,,,,
+Ability.sharpness.Name,Sharpness,Cortante,Cortante,,,Incisif
+Ability.sharpness.Description,This Pokemon's slicing moves have their power multiplied by 1.5.,,,,,
+Ability.shedskin.Name,Shed Skin,Mudar,Mudar,,,Mue
+Ability.shedskin.Description,This Pokemon has a 33% chance to have its status cured at the end of each turn.,,,,,
+Ability.sheerforce.Name,Sheer Force,Potencia Bruta,Potencia Bruta,,,Sans Limite
+Ability.sheerforce.Description,This Pokemon's attacks with secondary effects have 1.3× power; nullifies the effects.,,,,,
+Ability.shellarmor.Name,Shell Armor,Caparazón,Caparazón,,,Coque Armure
+Ability.shellarmor.Description,This Pokemon cannot be struck by a critical hit.,,,,,
+Ability.shielddust.Name,Shield Dust,Polvo Escudo,Polvo Escudo,,,Écran Poudre
+Ability.shielddust.Description,This Pokemon is not affected by the secondary effect of another Pokemon's attack.,,,,,
+Ability.shieldsdown.Name,Shields Down,Escudo Limitado,Escudo Limitado,,,Bouclier-Carcan
+Ability.shieldsdown.Description,"If Minior, switch-in/end of turn it changes to Core at 1/2 max HP or less, else Meteor.",,,,,
+Ability.simple.Name,Simple,Simple,Simple,,,Simple
+Ability.simple.Description,"When one of this Pokemon's stat stages is raised or lowered, the amount is doubled.",,,,,
+Ability.skilllink.Name,Skill Link,Encadenado,Encadenado,,,Multi-Coups
+Ability.skilllink.Description,This Pokemon's multi-hit attacks always hit the maximum number of times.,,,,,
+Ability.slowstart.Name,Slow Start,Inicio Lento,Inicio Lento,,,Début Calme
+Ability.slowstart.Description,"On switch-in, this Pokemon's Attack and Speed are halved for 5 turns.",,,,,
+Ability.slushrush.Name,Slush Rush,Quitanieves,Quitanieves,,,Chasse-Neige
+Ability.slushrush.Description,"If Snow is active, this Pokemon's Speed is doubled.",,,,,
+Ability.sniper.Name,Sniper,Francotirador,Puntería,,,Sniper
+Ability.sniper.Description,"If this Pokemon strikes with a critical hit, the damage is multiplied by 1.5.",,,,,
+Ability.snowcloak.Name,Snow Cloak,Manto Níveo,Manto Níveo,,,Rideau Neige
+Ability.snowcloak.Description,"If Snow is active, this Pokemon's evasiveness is 1.25×.",,,,,
+Ability.snowwarning.Name,Snow Warning,Nevada,Nevada,,,Alerte Neige
+Ability.snowwarning.Description,"On switch-in, this Pokemon summons Snow.",,,,,
+Ability.solarpower.Name,Solar Power,Poder Solar,Poder Solar,,,Force Soleil
+Ability.solarpower.Description,"If Sun is active, this Pokemon's Sp. Atk is 1.5×; loses 1/8 max HP per turn.",,,,,
+Ability.solidrock.Name,Solid Rock,Roca Sólida,Roca Sólida,,,Solide Roc
+Ability.solidrock.Description,This Pokemon receives 3/4 damage from supereffective attacks.,,,,,
+Ability.soulheart.Name,Soul-Heart,Coránima,Coránima,,,Animacœur
+Ability.soulheart.Description,This Pokemon's Special Attack is raised by 1 stage when another Pokemon faints.,,,,,
+Ability.soundproof.Name,Soundproof,Insonorizar,Insonorización,,,Anti-Bruit
+Ability.soundproof.Description,"This Pokemon is immune to sound-based moves, unless it used the move.",,,,,
+Ability.speedboost.Name,Speed Boost,Impulso,Impulso,,,Turbo
+Ability.speedboost.Description,This Pokemon's Speed is raised 1 stage at the end of each full turn on the field.,,,,,
+Ability.spicyspray.Name,Spicy Spray,Salpicante,Salpicante,,,Habanéruption
+Ability.spicyspray.Description,"If this Pokemon is hit by an attack, the attacker becomes burned.",,,,,
+Ability.stakeout.Name,Stakeout,Vigilante,Vigilante,,,Filature
+Ability.stakeout.Description,This Pokemon's offensive stat is doubled against a target that switched in this turn.,,,,,
+Ability.stall.Name,Stall,Rezagado,Rezagado,,,Frein
+Ability.stall.Description,This Pokemon moves last among Pokemon using the same or greater priority moves.,,,,,
+Ability.stalwart.Name,Stalwart,Acérrimo,Acérrimo,,,Nerfs d’Acier
+Ability.stalwart.Description,This Pokemon's moves cannot be redirected to a different target by any effect.,,,,,
+Ability.stamina.Name,Stamina,Firmeza,Firmeza,,,Endurance
+Ability.stamina.Description,This Pokemon's Defense is raised by 1 stage after it is damaged by a move.,,,,,
+Ability.stancechange.Name,Stance Change,Cambio Táctico,Cambio Táctico,,,Déclic Tactique
+Ability.stancechange.Description,"If Aegislash, changes Forme to Blade before attacks and Shield before King's Shield.",,,,,
+Ability.static.Name,Static,Electricidad Estática,Electricidad Estática,,,Statik
+Ability.static.Description,30% chance a Pokemon making contact with this Pokemon will be paralyzed.,,,,,
+Ability.steadfast.Name,Steadfast,Impasible,Impasible,,,Impassible
+Ability.steadfast.Description,"If this Pokemon flinches, its Speed is raised by 1 stage.",,,,,
+Ability.steamengine.Name,Steam Engine,Combustible,Combustible,,,Turbine
+Ability.steamengine.Description,This Pokemon's Speed is raised by 6 stages after it is damaged by Fire/Water moves.,,,,,
+Ability.steelworker.Name,Steelworker,Acero Templado,Acero Templado,,,Expert Acier
+Ability.steelworker.Description,This Pokemon's offensive stat is multiplied by 1.5 while using a Steel-type attack.,,,,,
+Ability.steelyspirit.Name,Steely Spirit,Alma Acerada,Alma Acerada,,,Boost Acier
+Ability.steelyspirit.Description,This Pokemon and its allies' Steel-type moves have their power multiplied by 1.5.,,,,,
+Ability.stench.Name,Stench,Hedor,Hedor,,,Puanteur
+Ability.stench.Description,This Pokemon's attacks without a chance to flinch gain a 10% chance to flinch.,,,,,
+Ability.stickyhold.Name,Sticky Hold,Viscosidad,Viscosidad,,,Glu
+Ability.stickyhold.Description,This Pokemon cannot lose its held item due to another Pokemon's Ability or attack.,,,,,
+Ability.stormdrain.Name,Storm Drain,Colector,Colector,,,Lavabo
+Ability.stormdrain.Description,This Pokemon draws Water moves to itself to raise Sp. Atk by 1; Water immunity.,,,,,
+Ability.strongjaw.Name,Strong Jaw,Mandíbula Fuerte,Mandíbula Fuerte,,,Prognathe
+Ability.strongjaw.Description,This Pokemon's bite-based attacks have 1.5× power. Bug Bite is not boosted.,,,,,
+Ability.sturdy.Name,Sturdy,Robustez,Robustez,,,Fermeté
+Ability.sturdy.Description,"If this Pokemon is at full HP, it survives one hit with at least 1 HP. Immune to OHKO.",,,,,
+Ability.suctioncups.Name,Suction Cups,Ventosas,Ventosas,,,Ventouse
+Ability.suctioncups.Description,This Pokemon cannot be forced to switch out by another Pokemon's attack or item.,,,,,
+Ability.superluck.Name,Super Luck,Afortunado,Supersuerte,,,Chanceux
+Ability.superluck.Description,This Pokemon's critical hit ratio is raised by 1 stage.,,,,,
+Ability.supersweetsyrup.Name,Supersweet Syrup,Néctar Dulce,Néctar Dulce,,,Nectar Mielleux
+Ability.supersweetsyrup.Description,"On switch-in, this Pokemon lowers the evasiveness of opponents 1 stage. Once per battle.",,,,,
+Ability.supremeoverlord.Name,Supreme Overlord,General Supremo,General Supremo,,General Supremo,Général Suprême
+Ability.supremeoverlord.Description,"This Pokemon's moves have 10% more power for each fainted ally, up to 5 allies.",,,,,
+Ability.surgesurfer.Name,Surge Surfer,Cola Surf,Cola Surf,,,Surf Caudal
+Ability.surgesurfer.Description,"If Electric Terrain is active, this Pokemon's Speed is doubled.",,,,,
+Ability.swarm.Name,Swarm,Enjambre,Enjambre,,,Essaim
+Ability.swarm.Description,"At 1/3 or less of its max HP, this Pokemon's offensive stat is 1.5× with Bug attacks.",,,,,
+Ability.sweetveil.Name,Sweet Veil,Velo Dulce,Velo Dulce,,,Gluco-Voile
+Ability.sweetveil.Description,This Pokemon and its allies cannot fall asleep; those already asleep do not wake up.,,,,,
+Ability.swiftswim.Name,Swift Swim,Nado Rápido,Nado Rápido,,,Glissade
+Ability.swiftswim.Description,"If Rain is active, this Pokemon's Speed is doubled.",,,,,
+Ability.swordofruin.Name,Sword of Ruin,Espada Debacle,Espada Debacle,,,Épée du Fléau
+Ability.swordofruin.Description,Active Pokemon without this Ability have their Defense multiplied by 0.75.,,,,,
+Ability.symbiosis.Name,Symbiosis,Simbiosis,Simbiosis,,,Symbiose
+Ability.symbiosis.Description,"If an ally uses its item, this Pokemon gives its item to that ally immediately.",,,,,
+Ability.synchronize.Name,Synchronize,Sincronía,Sincronía,,,Synchro
+Ability.synchronize.Description,"If another Pokemon burns/poisons/paralyzes this Pokemon, it also gets that status.",,,,,
+Ability.tabletsofruin.Name,Tablets of Ruin,Tablilla Debacle,Tablilla Debacle,,,Bois du Fléau
+Ability.tabletsofruin.Description,Active Pokemon without this Ability have their Attack multiplied by 0.75.,,,,,
+Ability.tangledfeet.Name,Tangled Feet,Tumbos,Tambaleo,,,Pieds Confus
+Ability.tangledfeet.Description,This Pokemon's evasiveness is doubled as long as it is confused.,,,,,
+Ability.tanglinghair.Name,Tangling Hair,Rizos Rebeldes,Rizos Rebeldes,,,Mèche Rebelle
+Ability.tanglinghair.Description,Pokemon making contact with this Pokemon have their Speed lowered by 1 stage.,,,,,
+Ability.technician.Name,Technician,Experto,Experto,,,Technicien
+Ability.technician.Description,"This Pokemon's moves of 60 power or less have 1.5× power, including Struggle.",,,,,
+Ability.telepathy.Name,Telepathy,Telepatía,Telepatía,,,Télépathe
+Ability.telepathy.Description,This Pokemon does not take damage from attacks made by its allies.,,,,,
+Ability.teraformzero.Name,Teraform Zero,Teraformación 0,Teraformación 0,,,Téraformation 0
+Ability.teraformzero.Description,Terapagos: Terastallizing ends the effects of weather and terrain. Once per battle.,,,,,
+Ability.terashell.Name,Tera Shell,Teracaparazón,Teracaparazón,,,Téra-Carapace
+Ability.terashell.Description,"Terapagos: If full HP, attacks taken have 0.5× effectiveness unless naturally immune.",,,,,
+Ability.terashift.Name,Tera Shift,Teracambio,Teracambio,,,Téramorphose
+Ability.terashift.Description,"If this Pokemon is a Terapagos, it transforms into its Terastal Form on entry.",,,,,
+Ability.teravolt.Name,Teravolt,Terravoltaje,Terravoltaje,,,Téra-Voltage
+Ability.teravolt.Description,This Pokemon's moves and their effects ignore the Abilities of other Pokemon.,,,,,
+Ability.thermalexchange.Name,Thermal Exchange,Termoconversión,Termoscambio,,Termoconversão,Thermodynamique
+Ability.thermalexchange.Description,This Pokemon's Attack is raised by 1 when damaged by Fire moves; can't be burned.,,,,,
+Ability.thickfat.Name,Thick Fat,Sebo,Sebo,,,Isograisse
+Ability.thickfat.Description,Fire-/Ice-type moves against this Pokemon deal damage with a halved offensive stat.,,,,,
+Ability.tintedlens.Name,Tinted Lens,Cromolente,Cromolente,,,Lentiteintée
+Ability.tintedlens.Description,This Pokemon's attacks that are not very effective on a target deal double damage.,,,,,
+Ability.torrent.Name,Torrent,Torrente,Torrente,,,Torrent
+Ability.torrent.Description,"At 1/3 or less of its max HP, this Pokemon's offensive stat is 1.5× with Water attacks.",,,,,
+Ability.toughclaws.Name,Tough Claws,Garra Dura,Garra Dura,,,Griffe Dure
+Ability.toughclaws.Description,This Pokemon's contact moves have their power multiplied by 1.3.,,,,,
+Ability.toxicboost.Name,Toxic Boost,Ímpetu Tóxico,Ímpetu Tóxico,,,Rage Poison
+Ability.toxicboost.Description,"While this Pokemon is poisoned, its physical attacks have 1.5× power.",,,,,
+Ability.toxicchain.Name,Toxic Chain,Cadena Tóxica,Cadena Tóxica,,,Chaîne Toxique
+Ability.toxicchain.Description,This Pokemon's attacks have a 30% chance of badly poisoning.,,,,,
+Ability.toxicdebris.Name,Toxic Debris,Capa Tóxica,Capa Tóxica,,Detritos Tóxicos,Dépôt Toxique
+Ability.toxicdebris.Description,"If this Pokemon is hit by a physical attack, Toxic Spikes are set on the opposing side.",,,,,
+Ability.trace.Name,Trace,Calco,Calco,,,Calque
+Ability.trace.Description,"On switch-in, or when it can, this Pokemon copies a random adjacent foe's Ability.",,,,,
+Ability.transistor.Name,Transistor,Transistor,Transistor,,,Transistor
+Ability.transistor.Description,This Pokemon's offensive stat is multiplied by 1.3 while using an Electric-type attack.,,,,,
+Ability.triage.Name,Triage,Primer Auxilio,Primer Auxilio,,,Prioguérison
+Ability.triage.Description,This Pokemon's healing moves have their priority increased by 3.,,,,,
+Ability.truant.Name,Truant,Ausente,Ausente,,,Absentéisme
+Ability.truant.Description,This Pokemon skips every other turn instead of using a move.,,,,,
+Ability.turboblaze.Name,Turboblaze,Turbollama,Turbollama,,,Turbo Brasier
+Ability.turboblaze.Description,This Pokemon's moves and their effects ignore the Abilities of other Pokemon.,,,,,
+Ability.unaware.Name,Unaware,Ignorante,Ignorancia,,,Inconscient
+Ability.unaware.Description,This Pokemon ignores other Pokemon's stat stages when taking or doing damage.,,,,,
+Ability.unburden.Name,Unburden,Liviano,Liviano,,,Délestage
+Ability.unburden.Description,"Speed is doubled on held item loss; boost is lost if it switches, gets new item/Ability.",,,,,
+Ability.unnerve.Name,Unnerve,Nerviosismo,Nerviosismo,,,Tension
+Ability.unnerve.Description,"While this Pokemon is active, it prevents opposing Pokemon from using their Berries.",,,,,
+Ability.unseenfist.Name,Unseen Fist,Puño Invisible,Puño Invisible,,,Poing Invisible
+Ability.unseenfist.Description,"This Pokemon's contact moves ignore the target's protection, except Max Guard.",,,,,
+Ability.vesselofruin.Name,Vessel of Ruin,Caldero Debacle,Caldero Debacle,,,Urne du Fléau
+Ability.vesselofruin.Description,Active Pokemon without this Ability have their Special Attack multiplied by 0.75.,,,,,
+Ability.victorystar.Name,Victory Star,Tinovictoria,Tinovictoria,,,Victorieux
+Ability.victorystar.Description,This Pokemon and its allies' moves have their accuracy multiplied by 1.1.,,,,,
+Ability.vitalspirit.Name,Vital Spirit,Espíritu Vital,Espíritu Vital,,,Esprit Vital
+Ability.vitalspirit.Description,This Pokemon cannot fall asleep. Gaining this Ability while asleep cures it.,,,,,
+Ability.voltabsorb.Name,Volt Absorb,Absorbe Electricidad,Absorbevoltios,,,Absorbe-Volt
+Ability.voltabsorb.Description,This Pokemon heals 1/4 of its max HP when hit by Electric moves; Electric immunity.,,,,,
+Ability.wanderingspirit.Name,Wandering Spirit,Alma Errante,Alma Errante,,,Âme Vagabonde
+Ability.wanderingspirit.Description,Pokemon making contact with this Pokemon have their Ability swapped with this one.,,,,,
+Ability.waterabsorb.Name,Water Absorb,Absorbe Agua,Absorbeagua,,,Absorbe-Eau
+Ability.waterabsorb.Description,This Pokemon heals 1/4 of its max HP when hit by Water moves; Water immunity.,,,,,
+Ability.waterbubble.Name,Water Bubble,Pompa,Acuaburbuja,,,Aquabulle
+Ability.waterbubble.Description,This Pokemon's Water power is 2×; it can't be burned; Fire power against it is halved.,,,,,
+Ability.watercompaction.Name,Water Compaction,Hidrorrefuerzo,Hidrorrefuerzo,,,Sable Humide
+Ability.watercompaction.Description,This Pokemon's Defense is raised 2 stages after it is damaged by a Water-type move.,,,,,
+Ability.waterveil.Name,Water Veil,Velo Agua,Velo Agua,,,Ignifu-Voile
+Ability.waterveil.Description,This Pokemon cannot be burned. Gaining this Ability while burned cures it.,,,,,
+Ability.weakarmor.Name,Weak Armor,Armadura Frágil,Armadura Frágil,,,Armurouillée
+Ability.weakarmor.Description,"If a physical attack hits this Pokemon, Defense is lowered by 1, Speed is raised by 2.",,,,,
+Ability.wellbakedbody.Name,Well-Baked Body,Cuerpo Horneado,Cuerpo Horneado,,Corpo Bem-passado,Bien Cuit
+Ability.wellbakedbody.Description,This Pokemon's Defense is raised 2 stages if hit by a Fire move; Fire immunity.,,,,,
+Ability.whitesmoke.Name,White Smoke,Humo Blanco,Humo Blanco,,,Écran Fumée
+Ability.whitesmoke.Description,Prevents other Pokemon from lowering this Pokemon's stat stages.,,,,,
+Ability.wimpout.Name,Wimp Out,Huida,Huida,,,Escampette
+Ability.wimpout.Description,This Pokemon switches out when it reaches 1/2 or less of its maximum HP.,,,,,
+Ability.windpower.Name,Wind Power,Energía Eólica,Energía Eólica,,,Turbine Éolienne
+Ability.windpower.Description,This Pokemon gains the Charge effect when hit by a wind move or Tailwind begins.,,,,,
+Ability.windrider.Name,Wind Rider,Surcavientos,Surcavientos,,,Aéroporté
+Ability.windrider.Description,Attack raised by 1 if hit by a wind move or Tailwind begins. Wind move immunity.,,,,,
+Ability.wonderguard.Name,Wonder Guard,Superguarda,Superguarda,,,Garde Mystik
+Ability.wonderguard.Description,This Pokemon can only be damaged by supereffective moves and indirect damage.,,,,,
+Ability.wonderskin.Name,Wonder Skin,Piel Milagro,Piel Milagro,,,Peau Miracle
+Ability.wonderskin.Description,Status moves with accuracy checks are 50% accurate when used on this Pokemon.,,,,,
+Ability.zenmode.Name,Zen Mode,Modo Daruma,Modo Daruma,,,Mode Transe
+Ability.zenmode.Description,"If Darmanitan, at end of turn changes Mode to Standard if > 1/2 max HP, else Zen.",,,,,
+Ability.zerotohero.Name,Zero to Hero,Cambio Heroico,Cambio Heroico,,Do Abismo ao Heroísmo,Supermutation
+Ability.zerotohero.Description,"If this Pokemon is a Palafin in Zero Form, switching out has it change to Hero Form.",,,,,

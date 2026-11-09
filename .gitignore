@@ -31,3 +31,6 @@ server/yarn-debug.log*
 server/error.log*
 # FMOD profiler recordings
 fmod-profiles/
+
+# PBS tool download cache
+tools/.cache/

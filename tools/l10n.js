@@ -478,7 +478,20 @@ function extract(root, dryRun) {
     const database = new Table(path.join(locDir, "database.csv"), undefined, header);
     const dbRows = databaseRows(root);
     const dbKeys = new Set();
+    // Keys another table already owns (e.g. Item.potion.Name in items.csv for
+    // MZ items linked to PBS items) are not copied into database.csv.
+    const owned = new Set();
+    for (const f of fs.existsSync(locDir) ? fs.readdirSync(locDir) : []) {
+        if (f.endsWith(".csv") && !SPECIAL_FILES.has(f) && f !== "database.csv" && f !== "dialogue.csv") {
+            for (const row of Engine.parseCsv(fs.readFileSync(path.join(locDir, f), "utf8")).slice(1)) {
+                owned.add((row[0] || "").trim());
+            }
+        }
+    }
     for (const [key, text, context] of dbRows.concat(mapRows)) {
+        if (owned.has(key)) {
+            continue;
+        }
         dbKeys.add(key);
         database.setSource(key, text, source, { Context: context });
     }

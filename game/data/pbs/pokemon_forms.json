@@ -1,0 +1,3811 @@
+{
+  "venusaurmega": {
+    "baseSpecies": "venusaur",
+    "forme": "Mega",
+    "formName": "Mega Venusaur",
+    "baseStats": {"hp":80,"atk":100,"def":123,"spa":122,"spd":120,"spe":80},
+    "abilities": {"0":"thickfat"},
+    "height": 24,
+    "weight": 1555,
+    "baseExp": 281,
+    "battleOnly": true,
+    "requiredItem": "venusaurite"
+  },
+  "charizardmegax": {
+    "baseSpecies": "charizard",
+    "forme": "Mega-X",
+    "formName": "Mega Charizard X",
+    "types": ["fire","dragon"],
+    "baseStats": {"hp":78,"atk":130,"def":111,"spa":130,"spd":85,"spe":100},
+    "abilities": {"0":"toughclaws"},
+    "color": "black",
+    "weight": 1105,
+    "baseExp": 285,
+    "battleOnly": true,
+    "requiredItem": "charizarditex"
+  },
+  "charizardmegay": {
+    "baseSpecies": "charizard",
+    "forme": "Mega-Y",
+    "formName": "Mega Charizard Y",
+    "baseStats": {"hp":78,"atk":104,"def":78,"spa":159,"spd":115,"spe":100},
+    "abilities": {"0":"drought"},
+    "weight": 1005,
+    "baseExp": 285,
+    "battleOnly": true,
+    "requiredItem": "charizarditey"
+  },
+  "blastoisemega": {
+    "baseSpecies": "blastoise",
+    "forme": "Mega",
+    "formName": "Mega Blastoise",
+    "baseStats": {"hp":79,"atk":103,"def":120,"spa":135,"spd":115,"spe":78},
+    "abilities": {"0":"megalauncher"},
+    "weight": 1011,
+    "baseExp": 284,
+    "battleOnly": true,
+    "requiredItem": "blastoisinite"
+  },
+  "beedrillmega": {
+    "baseSpecies": "beedrill",
+    "forme": "Mega",
+    "formName": "Mega Beedrill",
+    "baseStats": {"hp":65,"atk":150,"def":40,"spa":15,"spd":80,"spe":145},
+    "abilities": {"0":"adaptability"},
+    "height": 14,
+    "weight": 405,
+    "baseExp": 223,
+    "battleOnly": true,
+    "requiredItem": "beedrillite"
+  },
+  "pidgeotmega": {
+    "baseSpecies": "pidgeot",
+    "forme": "Mega",
+    "formName": "Mega Pidgeot",
+    "baseStats": {"hp":83,"atk":80,"def":80,"spa":135,"spd":80,"spe":121},
+    "abilities": {"0":"noguard"},
+    "height": 22,
+    "weight": 505,
+    "baseExp": 261,
+    "battleOnly": true,
+    "requiredItem": "pidgeotite"
+  },
+  "rattataalola": {
+    "baseSpecies": "rattata",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["dark","normal"],
+    "abilities": {"0":"gluttony","1":"hustle","H":"thickfat"},
+    "color": "black",
+    "weight": 38,
+    "moves": {
+      "level": [
+        [1,"tackle"], [1,"tailwhip"], [4,"quickattack"], [7,"focusenergy"], [10,"bite"], [13,"pursuit"],
+        [16,"hyperfang"], [19,"assurance"], [22,"crunch"], [25,"suckerpunch"], [28,"superfang"],
+        [31,"doubleedge"], [34,"endeavor"]
+      ],
+      "tm": [
+        "attract", "blizzard", "confide", "darkpulse", "doubleteam", "embargo", "facade", "frustration",
+        "grassknot", "hiddenpower", "icebeam", "protect", "quash", "raindance", "rest", "return",
+        "round", "shadowball", "shadowclaw", "sleeptalk", "sludgebomb", "snarl", "substitute",
+        "sunnyday", "swagger", "taunt", "thief", "torment", "toxic", "uturn"
+      ],
+      "tutor": [
+        "covet", "endeavor", "icywind", "irontail", "lastresort", "shockwave", "snatch", "snore",
+        "superfang", "uproar", "zenheadbutt"
+      ],
+      "egg": [
+        "counter", "finalgambit", "furyswipes", "mefirst", "revenge", "reversal", "snatch", "stockpile",
+        "swallow", "switcheroo", "uproar"
+      ]
+    },
+    "evolutions": [{"species":"raticatealola","method":"level","param":20,"condition":{"time":"night"}}]
+  },
+  "raticatealola": {
+    "baseSpecies": "raticate",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["dark","normal"],
+    "baseStats": {"hp":75,"atk":71,"def":70,"spa":40,"spd":80,"spe":77},
+    "abilities": {"0":"gluttony","1":"hustle","H":"thickfat"},
+    "color": "black",
+    "weight": 255,
+    "moves": {
+      "level": [
+        [1,"focusenergy"], [1,"quickattack"], [1,"scaryface"], [1,"swordsdance"], [1,"tackle"],
+        [1,"tailwhip"], [10,"bite"], [13,"pursuit"], [16,"hyperfang"], [19,"assurance"], [24,"crunch"],
+        [29,"suckerpunch"], [34,"superfang"], [39,"doubleedge"], [44,"endeavor"]
+      ],
+      "tm": [
+        "attract", "blizzard", "bulkup", "confide", "darkpulse", "doubleteam", "embargo", "facade",
+        "frustration", "gigaimpact", "grassknot", "hiddenpower", "hyperbeam", "icebeam", "protect",
+        "quash", "raindance", "rest", "return", "roar", "round", "shadowball", "shadowclaw", "sleeptalk",
+        "sludgebomb", "sludgewave", "snarl", "substitute", "sunnyday", "swagger", "swordsdance", "taunt",
+        "thief", "torment", "toxic", "uturn", "venoshock"
+      ],
+      "tutor": [
+        "covet", "endeavor", "icywind", "irontail", "knockoff", "lastresort", "shockwave", "snatch",
+        "snore", "stompingtantrum", "superfang", "throatchop", "uproar", "zenheadbutt"
+      ],
+      "egg": []
+    }
+  },
+  "pikachucosplay": {
+    "baseSpecies": "pikachu",
+    "forme": "Cosplay",
+    "formName": "Cosplay Pikachu",
+    "abilities": {"0":"lightningrod"},
+    "gender": "female",
+    "eggGroups": ["undiscovered"],
+    "moves": {
+      "level": [
+        [1,"tailwhip"], [1,"thundershock"], [5,"growl"], [7,"playnice"], [10,"quickattack"],
+        [13,"electroball"], [18,"thunderwave"], [21,"feint"], [23,"doubleteam"], [26,"spark"],
+        [29,"nuzzle"], [34,"discharge"], [37,"slam"], [42,"thunderbolt"], [45,"agility"],
+        [50,"wildcharge"], [53,"lightscreen"], [58,"thunder"]
+      ],
+      "tm": [
+        "attract", "brickbreak", "chargebeam", "confide", "dig", "doubleteam", "echoedvoice", "facade",
+        "flash", "fling", "frustration", "grassknot", "hiddenpower", "lightscreen", "protect",
+        "raindance", "rest", "return", "rocksmash", "round", "secretpower", "sleeptalk", "strength",
+        "substitute", "swagger", "thunder", "thunderbolt", "thunderwave", "toxic", "voltswitch",
+        "wildcharge"
+      ],
+      "tutor": [
+        "covet", "electroweb", "focuspunch", "helpinghand", "irontail", "knockoff", "magnetrise",
+        "shockwave", "signalbeam", "snore", "thunderpunch"
+      ],
+      "egg": []
+    }
+  },
+  "pikachurockstar": {
+    "baseSpecies": "pikachu",
+    "forme": "Rock-Star",
+    "formName": "Pikachu Rock Star",
+    "abilities": {"0":"lightningrod"},
+    "gender": "female",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachubelle": {
+    "baseSpecies": "pikachu",
+    "forme": "Belle",
+    "formName": "Pikachu Belle",
+    "abilities": {"0":"lightningrod"},
+    "gender": "female",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachupopstar": {
+    "baseSpecies": "pikachu",
+    "forme": "Pop-Star",
+    "formName": "Pikachu Pop Star",
+    "abilities": {"0":"lightningrod"},
+    "gender": "female",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachuphd": {
+    "baseSpecies": "pikachu",
+    "forme": "PhD",
+    "formName": "Pikachu Ph.D.",
+    "abilities": {"0":"lightningrod"},
+    "gender": "female",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachulibre": {
+    "baseSpecies": "pikachu",
+    "forme": "Libre",
+    "formName": "Pikachu Libre",
+    "abilities": {"0":"lightningrod"},
+    "gender": "female",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachuoriginal": {
+    "baseSpecies": "pikachu",
+    "forme": "Original",
+    "formName": "Original",
+    "gender": "male",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachuhoenn": {
+    "baseSpecies": "pikachu",
+    "forme": "Hoenn",
+    "formName": "Hoenn",
+    "gender": "male",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachusinnoh": {
+    "baseSpecies": "pikachu",
+    "forme": "Sinnoh",
+    "formName": "Sinnoh",
+    "gender": "male",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachuunova": {
+    "baseSpecies": "pikachu",
+    "forme": "Unova",
+    "formName": "Unova",
+    "gender": "male",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachukalos": {
+    "baseSpecies": "pikachu",
+    "forme": "Kalos",
+    "formName": "Kalos",
+    "gender": "male",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachualola": {
+    "baseSpecies": "pikachu",
+    "forme": "Alola",
+    "formName": "Alola",
+    "gender": "male",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachupartner": {
+    "baseSpecies": "pikachu",
+    "forme": "Partner",
+    "formName": "Partner",
+    "gender": "male",
+    "eggGroups": ["undiscovered"]
+  },
+  "pikachuworld": {
+    "baseSpecies": "pikachu",
+    "forme": "World",
+    "formName": "World",
+    "gender": "male",
+    "eggGroups": ["undiscovered"],
+    "moves": {
+      "level": [
+        [1,"charm"], [1,"growl"], [1,"nastyplot"], [1,"nuzzle"], [1,"playnice"], [1,"quickattack"],
+        [1,"sweetkiss"], [1,"tailwhip"], [1,"thundershock"], [4,"thunderwave"], [8,"doubleteam"],
+        [12,"electroball"], [16,"feint"], [20,"spark"], [24,"agility"], [28,"irontail"],
+        [32,"discharge"], [36,"thunderbolt"], [40,"lightscreen"], [44,"thunder"]
+      ],
+      "tm": [
+        "agility", "bodyslam", "brickbreak", "chargebeam", "charm", "dig", "disarmingvoice",
+        "drainingkiss", "eerieimpulse", "electricterrain", "electroball", "encore", "endure", "facade",
+        "faketears", "fling", "grassknot", "helpinghand", "lightscreen", "nastyplot", "playrough",
+        "protect", "raindance", "reflect", "rest", "reversal", "sleeptalk", "substitute", "surf",
+        "swift", "takedown", "terablast", "thief", "thunder", "thunderbolt", "thunderpunch",
+        "thunderwave", "trailblaze", "voltswitch", "wildcharge"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "raichualola": {
+    "baseSpecies": "raichu",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["electric","psychic"],
+    "baseStats": {"hp":60,"atk":85,"def":50,"spa":95,"spd":85,"spe":110},
+    "abilities": {"0":"surgesurfer"},
+    "color": "brown",
+    "height": 7,
+    "weight": 210,
+    "baseExp": 243,
+    "moves": {
+      "level": [
+        [0,"psychic"], [1,"agility"], [1,"charm"], [1,"discharge"], [1,"doubleteam"], [1,"electroball"],
+        [1,"feint"], [1,"growl"], [1,"irontail"], [1,"lightscreen"], [1,"nastyplot"], [1,"nuzzle"],
+        [1,"playnice"], [1,"quickattack"], [1,"spark"], [1,"sweetkiss"], [1,"tailwhip"], [1,"thunder"],
+        [1,"thundershock"], [1,"thunderwave"], [5,"thunderbolt"]
+      ],
+      "tm": [
+        "agility", "alluringvoice", "bodyslam", "brickbreak", "calmmind", "charge", "chargebeam",
+        "charm", "dig", "drainingkiss", "eerieimpulse", "electricterrain", "electroball", "electroweb",
+        "encore", "endeavor", "endure", "expandingforce", "facade", "faketears", "fling", "focusblast",
+        "focuspunch", "gigaimpact", "grassknot", "helpinghand", "hyperbeam", "knockoff", "lightscreen",
+        "nastyplot", "playrough", "protect", "psychic", "psychicnoise", "psychicterrain", "psyshock",
+        "raindance", "reflect", "rest", "reversal", "skillswap", "sleeptalk", "storedpower",
+        "substitute", "surf", "swift", "takedown", "terablast", "thief", "thunder", "thunderbolt",
+        "thunderpunch", "thunderwave", "trailblaze", "upperhand", "voltswitch", "wildcharge"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "sandshrewalola": {
+    "baseSpecies": "sandshrew",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["ice","steel"],
+    "baseStats": {"hp":50,"atk":75,"def":90,"spa":10,"spd":35,"spe":40},
+    "abilities": {"0":"snowcloak","H":"slushrush"},
+    "color": "white",
+    "height": 7,
+    "weight": 400,
+    "moves": {
+      "level": [
+        [1,"defensecurl"], [1,"scratch"], [3,"mist"], [6,"powdersnow"], [9,"rollout"], [12,"furycutter"],
+        [15,"rapidspin"], [18,"metalclaw"], [21,"swift"], [24,"furyswipes"], [27,"irondefense"],
+        [30,"slash"], [33,"ironhead"], [36,"gyroball"], [39,"swordsdance"], [42,"snowscape"],
+        [45,"blizzard"]
+      ],
+      "tm": [
+        "aerialace", "amnesia", "avalanche", "blizzard", "bodyslam", "brickbreak", "bulldoze", "curse",
+        "dig", "doubleedge", "earthquake", "endeavor", "endure", "facade", "flashcannon", "fling",
+        "focuspunch", "gyroball", "icebeam", "icepunch", "icespinner", "iciclespear", "icywind",
+        "irondefense", "ironhead", "knockoff", "leechlife", "lowkick", "metalclaw", "poisonjab",
+        "protect", "rest", "rockslide", "rocktomb", "shadowclaw", "sleeptalk", "snowscape",
+        "stealthrock", "steelbeam", "substitute", "superfang", "swift", "swordsdance", "takedown",
+        "terablast", "thief", "throatchop", "tripleaxel", "xscissor"
+      ],
+      "tutor": [],
+      "egg": ["counter","crushclaw","curse","flail","honeclaws","iceshard","mirrorcoat","nightslash"]
+    },
+    "evolutions": [{"species":"sandslashalola","method":"item","param":"icestone","condition":null}]
+  },
+  "sandslashalola": {
+    "baseSpecies": "sandslash",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["ice","steel"],
+    "baseStats": {"hp":75,"atk":100,"def":120,"spa":25,"spd":65,"spe":65},
+    "abilities": {"0":"snowcloak","H":"slushrush"},
+    "color": "blue",
+    "height": 12,
+    "weight": 550,
+    "moves": {
+      "level": [
+        [0,"iciclespear"], [1,"blizzard"], [1,"defensecurl"], [1,"furycutter"], [1,"furyswipes"],
+        [1,"gyroball"], [1,"iciclecrash"], [1,"irondefense"], [1,"ironhead"], [1,"metalburst"],
+        [1,"metalclaw"], [1,"mist"], [1,"powdersnow"], [1,"rapidspin"], [1,"rollout"], [1,"scratch"],
+        [1,"slash"], [1,"snowscape"], [1,"swift"], [1,"swordsdance"]
+      ],
+      "tm": [
+        "aerialace", "agility", "amnesia", "avalanche", "blizzard", "bodyslam", "brickbreak", "bulldoze",
+        "curse", "dig", "doubleedge", "drillrun", "earthquake", "endeavor", "endure", "facade",
+        "falseswipe", "flashcannon", "fling", "focusblast", "focuspunch", "gigaimpact", "gyroball",
+        "hyperbeam", "icebeam", "icepunch", "icespinner", "iciclespear", "icywind", "irondefense",
+        "ironhead", "knockoff", "leechlife", "lowkick", "metalclaw", "poisonjab", "protect", "rest",
+        "rockslide", "rocktomb", "shadowclaw", "sleeptalk", "snowscape", "spikes", "stealthrock",
+        "steelbeam", "substitute", "superfang", "swift", "swordsdance", "takedown", "terablast", "thief",
+        "throatchop", "tripleaxel", "xscissor"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "vulpixalola": {
+    "baseSpecies": "vulpix",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["ice"],
+    "abilities": {"0":"snowcloak","H":"snowwarning"},
+    "color": "white",
+    "moves": {
+      "level": [
+        [1,"powdersnow"], [1,"tailwhip"], [4,"disable"], [8,"iceshard"], [12,"spite"], [16,"icywind"],
+        [20,"confuseray"], [24,"aurorabeam"], [28,"extrasensory"], [32,"icebeam"], [36,"imprison"],
+        [40,"mist"], [44,"auroraveil"], [48,"freezedry"], [52,"blizzard"]
+      ],
+      "tm": [
+        "agility", "batonpass", "blizzard", "bodyslam", "charm", "chillingwater", "confuseray",
+        "darkpulse", "dazzlinggleam", "dig", "disarmingvoice", "doubleedge", "drainingkiss", "encore",
+        "endure", "facade", "faketears", "foulplay", "helpinghand", "hex", "icebeam", "iciclespear",
+        "icywind", "imprison", "mistyterrain", "nastyplot", "painsplit", "playrough", "protect",
+        "psychup", "raindance", "rest", "roar", "sleeptalk", "snowscape", "spite", "storedpower",
+        "substitute", "swift", "takedown", "terablast", "weatherball", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": ["babydolleyes","flail","howl","hypnosis","moonblast","roar"]
+    },
+    "evolutions": [{"species":"ninetalesalola","method":"item","param":"icestone","condition":null}]
+  },
+  "ninetalesalola": {
+    "baseSpecies": "ninetales",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["ice","fairy"],
+    "baseStats": {"hp":73,"atk":67,"def":75,"spa":81,"spd":100,"spe":109},
+    "abilities": {"0":"snowcloak","H":"snowwarning"},
+    "color": "blue",
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":0,"spd":0,"spe":2},
+    "moves": {
+      "level": [
+        [0,"dazzlinggleam"], [1,"aurorabeam"], [1,"auroraveil"], [1,"blizzard"], [1,"confuseray"],
+        [1,"disable"], [1,"extrasensory"], [1,"freezedry"], [1,"icebeam"], [1,"iceshard"], [1,"icywind"],
+        [1,"imprison"], [1,"mist"], [1,"nastyplot"], [1,"powdersnow"], [1,"spite"], [1,"tailwhip"]
+      ],
+      "tm": [
+        "agility", "avalanche", "batonpass", "blizzard", "bodyslam", "calmmind", "charm",
+        "chillingwater", "confuseray", "darkpulse", "dazzlinggleam", "dig", "disarmingvoice",
+        "doubleedge", "drainingkiss", "encore", "endure", "facade", "faketears", "foulplay",
+        "gigaimpact", "helpinghand", "hex", "hyperbeam", "icebeam", "iciclespear", "icywind", "imprison",
+        "mistyterrain", "nastyplot", "painsplit", "playrough", "protect", "psychup", "psyshock",
+        "raindance", "rest", "roar", "sleeptalk", "snowscape", "spite", "storedpower", "substitute",
+        "swift", "takedown", "terablast", "tripleaxel", "weatherball", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "diglettalola": {
+    "baseSpecies": "diglett",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["ground","steel"],
+    "baseStats": {"hp":10,"atk":55,"def":30,"spa":35,"spd":45,"spe":90},
+    "abilities": {"0":"sandveil","1":"tanglinghair","H":"sandforce"},
+    "weight": 10,
+    "moves": {
+      "level": [
+        [1,"metalclaw"], [1,"sandattack"], [4,"growl"], [8,"astonish"], [12,"mudslap"], [16,"bulldoze"],
+        [20,"suckerpunch"], [24,"ironhead"], [28,"sandstorm"], [32,"dig"], [36,"earthpower"],
+        [40,"earthquake"], [44,"fissure"]
+      ],
+      "tm": [
+        "agility", "bodyslam", "bulldoze", "charm", "dig", "earthpower", "earthquake", "endure",
+        "facade", "flashcannon", "foulplay", "helpinghand", "irondefense", "ironhead", "metalclaw",
+        "metalsound", "mudshot", "mudslap", "protect", "rest", "reversal", "rockblast", "rockslide",
+        "rocktomb", "sandstorm", "sandtomb", "scaryface", "scorchingsands", "shadowclaw", "sleeptalk",
+        "sludgebomb", "smackdown", "stealthrock", "steelbeam", "stompingtantrum", "stoneedge",
+        "substitute", "sunnyday", "swordsdance", "takedown", "terablast", "thief"
+      ],
+      "tutor": [],
+      "egg": ["ancientpower","finalgambit","headbutt","honeclaws","memento","metalsound","thrash"]
+    },
+    "evolutions": [{"species":"dugtrioalola","method":"level","param":26,"condition":null}]
+  },
+  "dugtrioalola": {
+    "baseSpecies": "dugtrio",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["ground","steel"],
+    "baseStats": {"hp":35,"atk":100,"def":60,"spa":50,"spd":70,"spe":110},
+    "abilities": {"0":"sandveil","1":"tanglinghair","H":"sandforce"},
+    "weight": 666,
+    "evYield": {"hp":0,"atk":2,"def":0,"spa":0,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [0,"sandtomb"], [1,"astonish"], [1,"growl"], [1,"metalclaw"], [1,"nightslash"], [1,"sandattack"],
+        [1,"triattack"], [12,"mudslap"], [16,"bulldoze"], [20,"suckerpunch"], [24,"ironhead"],
+        [30,"sandstorm"], [36,"dig"], [42,"earthpower"], [48,"earthquake"], [54,"fissure"]
+      ],
+      "tm": [
+        "agility", "bodyslam", "bulldoze", "charm", "curse", "dig", "doubleedge", "earthpower",
+        "earthquake", "endeavor", "endure", "facade", "flashcannon", "foulplay", "gigaimpact",
+        "helpinghand", "hyperbeam", "irondefense", "ironhead", "metalclaw", "metalsound", "mudshot",
+        "mudslap", "protect", "rest", "reversal", "rockblast", "rockslide", "rocktomb", "sandstorm",
+        "sandtomb", "scaryface", "scorchingsands", "shadowclaw", "sleeptalk", "sludgebomb", "sludgewave",
+        "smackdown", "stealthrock", "steelbeam", "stompingtantrum", "stoneedge", "substitute",
+        "sunnyday", "swordsdance", "takedown", "terablast", "thief", "throatchop", "uproar"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "meowthalola": {
+    "baseSpecies": "meowth",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["dark"],
+    "baseStats": {"hp":40,"atk":35,"def":35,"spa":50,"spd":40,"spe":90},
+    "abilities": {"0":"pickup","1":"technician","H":"rattled"},
+    "color": "blue",
+    "moves": {
+      "level": [
+        [1,"fakeout"], [1,"growl"], [4,"feint"], [8,"scratch"], [12,"payday"], [16,"bite"], [20,"taunt"],
+        [24,"assurance"], [29,"furyswipes"], [32,"screech"], [36,"nightslash"], [40,"nastyplot"],
+        [44,"playrough"]
+      ],
+      "tm": [
+        "aerialace", "agility", "amnesia", "bodyslam", "charm", "chillingwater", "confuseray", "curse",
+        "darkpulse", "dig", "doubleedge", "endeavor", "endure", "facade", "faketears", "foulplay",
+        "gunkshot", "helpinghand", "hypervoice", "icywind", "knockoff", "lashout", "metalclaw",
+        "nastyplot", "playrough", "powergem", "protect", "psychup", "raindance", "rest", "seedbomb",
+        "shadowball", "shadowclaw", "sleeptalk", "snarl", "spite", "substitute", "sunnyday", "swift",
+        "takedown", "taunt", "terablast", "thief", "throatchop", "thunder", "thunderbolt", "thunderwave",
+        "trailblaze", "uturn"
+      ],
+      "tutor": [],
+      "egg": ["covet","flail","flatter","hypnosis","partingshot","spite"]
+    },
+    "evolutions": [{"species":"persianalola","method":"friendship","param":null,"condition":null}]
+  },
+  "meowthgalar": {
+    "baseSpecies": "meowth",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["steel"],
+    "baseStats": {"hp":50,"atk":65,"def":55,"spa":40,"spd":40,"spe":40},
+    "abilities": {"0":"pickup","1":"toughclaws","H":"unnerve"},
+    "color": "brown",
+    "weight": 75,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":0,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"fakeout"], [1,"growl"], [4,"honeclaws"], [8,"scratch"], [12,"payday"], [16,"metalclaw"],
+        [20,"taunt"], [24,"swagger"], [29,"furyswipes"], [32,"screech"], [36,"slash"], [40,"metalsound"],
+        [44,"thrash"]
+      ],
+      "tm": [
+        "aerialace", "amnesia", "bodyslam", "brickbreak", "charm", "crunch", "curse", "darkpulse", "dig",
+        "doubleedge", "endeavor", "endure", "facade", "faketears", "falseswipe", "flashcannon", "fling",
+        "foulplay", "gunkshot", "gyroball", "helpinghand", "hypervoice", "irondefense", "ironhead",
+        "knockoff", "lashout", "metalclaw", "metalsound", "metronome", "nastyplot", "playrough",
+        "protect", "raindance", "rest", "seedbomb", "shadowball", "shadowclaw", "sleeptalk", "spite",
+        "stealthrock", "steelbeam", "substitute", "sunnyday", "swordsdance", "takedown", "taunt",
+        "terablast", "thief", "throatchop", "thunder", "thunderbolt", "trailblaze", "uturn", "xscissor"
+      ],
+      "tutor": [],
+      "egg": ["covet","curse","doubleedge","flail","nightslash","spite"]
+    },
+    "evolutions": [{"species":"perrserker","method":"level","param":28,"condition":null}]
+  },
+  "persianalola": {
+    "baseSpecies": "persian",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["dark"],
+    "baseStats": {"hp":65,"atk":60,"def":60,"spa":75,"spd":65,"spe":115},
+    "abilities": {"0":"furcoat","1":"technician","H":"rattled"},
+    "color": "blue",
+    "height": 11,
+    "weight": 330,
+    "moves": {
+      "level": [
+        [0,"powergem"], [1,"fakeout"], [1,"feint"], [1,"growl"], [1,"quash"], [1,"scratch"],
+        [1,"switcheroo"], [12,"payday"], [16,"bite"], [20,"taunt"], [24,"assurance"], [31,"furyswipes"],
+        [36,"screech"], [42,"nightslash"], [48,"nastyplot"], [54,"playrough"]
+      ],
+      "tm": [
+        "aerialace", "agility", "amnesia", "bodyslam", "burningjealousy", "charm", "chillingwater",
+        "confuseray", "curse", "darkpulse", "dig", "doubleedge", "endeavor", "endure", "facade",
+        "faketears", "foulplay", "gigaimpact", "gunkshot", "helpinghand", "hyperbeam", "hypervoice",
+        "icywind", "knockoff", "lashout", "metalclaw", "nastyplot", "playrough", "powergem", "protect",
+        "psychup", "raindance", "rest", "roar", "seedbomb", "shadowball", "shadowclaw", "skittersmack",
+        "sleeptalk", "smackdown", "snarl", "spite", "substitute", "sunnyday", "swift", "takedown",
+        "taunt", "terablast", "thief", "throatchop", "thunder", "thunderbolt", "thunderwave",
+        "trailblaze", "uturn"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "growlithehisui": {
+    "baseSpecies": "growlithe",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["fire","rock"],
+    "baseStats": {"hp":60,"atk":75,"def":45,"spa":65,"spd":50,"spe":55},
+    "abilities": {"0":"intimidate","1":"flashfire","H":"rockhead"},
+    "height": 8,
+    "weight": 227,
+    "moves": {
+      "level": [
+        [1,"ember"], [1,"leer"], [4,"howl"], [8,"bite"], [12,"flamewheel"], [16,"helpinghand"],
+        [24,"firefang"], [28,"retaliate"], [32,"crunch"], [36,"takedown"], [40,"flamethrower"],
+        [44,"roar"], [48,"rockslide"], [52,"reversal"], [56,"flareblitz"]
+      ],
+      "tm": [
+        "agility", "bodyslam", "closecombat", "crunch", "dig", "doubleedge", "endure", "facade",
+        "fireblast", "firefang", "firespin", "flamecharge", "flamethrower", "flareblitz", "heatwave",
+        "helpinghand", "outrage", "overheat", "powergem", "protect", "psychicfangs", "rest", "reversal",
+        "roar", "rockblast", "rockslide", "rocktomb", "sandstorm", "scaryface", "scorchingsands",
+        "sleeptalk", "smackdown", "smartstrike", "stealthrock", "stoneedge", "substitute", "sunnyday",
+        "takedown", "temperflare", "terablast", "thunderfang", "wildcharge", "willowisp"
+      ],
+      "tutor": [],
+      "egg": ["covet","doubleedge","doublekick","headsmash","morningsun","thrash"]
+    },
+    "evolutions": [{"species":"arcaninehisui","method":"item","param":"firestone","condition":null}]
+  },
+  "arcaninehisui": {
+    "baseSpecies": "arcanine",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["fire","rock"],
+    "baseStats": {"hp":95,"atk":115,"def":80,"spa":95,"spd":80,"spe":90},
+    "abilities": {"0":"intimidate","1":"flashfire","H":"rockhead"},
+    "height": 20,
+    "weight": 1680,
+    "moves": {
+      "level": [
+        [0,"extremespeed"], [1,"agility"], [1,"bite"], [1,"crunch"], [1,"ember"], [1,"firefang"],
+        [1,"flamewheel"], [1,"flareblitz"], [1,"helpinghand"], [1,"howl"], [1,"leer"], [1,"retaliate"],
+        [1,"reversal"], [1,"roar"], [1,"rockslide"], [1,"rockthrow"], [1,"takedown"], [5,"flamethrower"],
+        [64,"ragingfury"]
+      ],
+      "tm": [
+        "aerialace", "agility", "bodyslam", "bulldoze", "closecombat", "crunch", "dig", "doubleedge",
+        "dragonpulse", "endure", "facade", "fireblast", "firefang", "firespin", "flamecharge",
+        "flamethrower", "flareblitz", "gigaimpact", "heatcrash", "heatwave", "helpinghand", "hyperbeam",
+        "hypervoice", "ironhead", "outrage", "overheat", "powergem", "protect", "psychicfangs", "rest",
+        "reversal", "roar", "rockblast", "rockslide", "rocktomb", "sandstorm", "scaryface",
+        "scorchingsands", "sleeptalk", "smackdown", "smartstrike", "snarl", "solarbeam", "stealthrock",
+        "stoneedge", "substitute", "sunnyday", "takedown", "temperflare", "terablast", "thief",
+        "thunderfang", "wildcharge", "willowisp"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "alakazammega": {
+    "baseSpecies": "alakazam",
+    "forme": "Mega",
+    "formName": "Mega Alakazam",
+    "baseStats": {"hp":55,"atk":50,"def":65,"spa":175,"spd":105,"spe":150},
+    "abilities": {"0":"trace"},
+    "height": 12,
+    "baseExp": 270,
+    "battleOnly": true,
+    "requiredItem": "alakazite"
+  },
+  "geodudealola": {
+    "baseSpecies": "geodude",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["rock","electric"],
+    "abilities": {"0":"magnetpull","1":"sturdy","H":"galvanize"},
+    "color": "gray",
+    "weight": 203,
+    "moves": {
+      "level": [
+        [1,"defensecurl"], [1,"tackle"], [4,"charge"], [6,"rockpolish"], [10,"rollout"], [12,"spark"],
+        [16,"rockthrow"], [18,"smackdown"], [22,"thunderpunch"], [24,"selfdestruct"], [28,"stealthrock"],
+        [30,"rockblast"], [34,"discharge"], [36,"explosion"], [40,"doubleedge"], [42,"stoneedge"]
+      ],
+      "tm": [
+        "bodyslam", "brickbreak", "bulldoze", "charge", "chargebeam", "curse", "dig", "doubleedge",
+        "earthpower", "earthquake", "electroweb", "endure", "facade", "fireblast", "firepunch",
+        "flamethrower", "fling", "focuspunch", "gyroball", "highhorsepower", "irondefense", "mudshot",
+        "mudslap", "protect", "rest", "rockblast", "rockslide", "rocktomb", "sandstorm", "sleeptalk",
+        "smackdown", "stealthrock", "stoneedge", "substitute", "sunnyday", "supercellslam", "takedown",
+        "terablast", "thunder", "thunderbolt", "thunderpunch", "thunderwave", "voltswitch", "wildcharge"
+      ],
+      "tutor": [],
+      "egg": ["block","counter","curse","endure","flail","screech","wideguard","zapcannon"]
+    },
+    "evolutions": [{"species":"graveleralola","method":"level","param":25,"condition":null}]
+  },
+  "graveleralola": {
+    "baseSpecies": "graveler",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["rock","electric"],
+    "abilities": {"0":"magnetpull","1":"sturdy","H":"galvanize"},
+    "color": "gray",
+    "weight": 1100,
+    "moves": {
+      "level": [
+        [1,"charge"], [1,"defensecurl"], [1,"rockpolish"], [1,"tackle"], [10,"rollout"], [12,"spark"],
+        [16,"rockthrow"], [18,"smackdown"], [22,"thunderpunch"], [24,"selfdestruct"], [30,"stealthrock"],
+        [34,"rockblast"], [40,"discharge"], [44,"explosion"], [50,"doubleedge"], [54,"stoneedge"]
+      ],
+      "tm": [
+        "bodyslam", "brickbreak", "bulldoze", "charge", "chargebeam", "curse", "dig", "doubleedge",
+        "earthpower", "earthquake", "electricterrain", "electroweb", "endure", "facade", "fireblast",
+        "firepunch", "flamethrower", "fling", "focusblast", "focuspunch", "gyroball", "hardpress",
+        "highhorsepower", "irondefense", "metronome", "mudshot", "mudslap", "protect", "rest",
+        "rockblast", "rockslide", "rocktomb", "sandstorm", "scaryface", "sleeptalk", "smackdown",
+        "stealthrock", "stompingtantrum", "stoneedge", "substitute", "sunnyday", "supercellslam",
+        "takedown", "terablast", "thunder", "thunderbolt", "thunderpunch", "thunderwave", "voltswitch",
+        "wildcharge"
+      ],
+      "tutor": [],
+      "egg": []
+    },
+    "evolutions": [{"species":"golemalola","method":"trade","param":null,"condition":null}]
+  },
+  "golemalola": {
+    "baseSpecies": "golem",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["rock","electric"],
+    "abilities": {"0":"magnetpull","1":"sturdy","H":"galvanize"},
+    "color": "gray",
+    "height": 17,
+    "weight": 3160,
+    "moves": {
+      "level": [
+        [1,"charge"], [1,"defensecurl"], [1,"heavyslam"], [1,"rockpolish"], [1,"tackle"], [12,"spark"],
+        [16,"rockthrow"], [18,"smackdown"], [22,"thunderpunch"], [24,"selfdestruct"], [30,"stealthrock"],
+        [34,"rockblast"], [40,"discharge"], [44,"explosion"], [50,"doubleedge"], [54,"stoneedge"]
+      ],
+      "tm": [
+        "bodypress", "bodyslam", "brickbreak", "bulldoze", "charge", "chargebeam", "curse", "dig",
+        "doubleedge", "earthpower", "earthquake", "electricterrain", "electroweb", "endure", "facade",
+        "fireblast", "firepunch", "flamethrower", "fling", "focusblast", "focuspunch", "gigaimpact",
+        "gyroball", "hardpress", "heavyslam", "hyperbeam", "irondefense", "ironhead", "meteorbeam",
+        "metronome", "mudshot", "mudslap", "protect", "rest", "roar", "rockblast", "rockslide",
+        "rocktomb", "sandstorm", "scaryface", "sleeptalk", "smackdown", "stealthrock", "stompingtantrum",
+        "stoneedge", "substitute", "sunnyday", "supercellslam", "takedown", "terablast", "thunder",
+        "thunderbolt", "thunderpunch", "thunderwave", "voltswitch", "wildcharge"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "ponytagalar": {
+    "baseSpecies": "ponyta",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["psychic"],
+    "abilities": {"0":"runaway","1":"pastelveil","H":"anticipation"},
+    "color": "white",
+    "height": 8,
+    "weight": 240,
+    "moves": {
+      "level": [
+        [1,"growl"], [1,"tackle"], [5,"tailwhip"], [10,"confusion"], [15,"fairywind"], [20,"agility"],
+        [25,"psybeam"], [30,"stomp"], [35,"healpulse"], [41,"takedown"], [45,"dazzlinggleam"],
+        [50,"psychic"], [55,"healingwish"]
+      ],
+      "tm": [
+        "agility", "allyswitch", "attract", "bodyslam", "bounce", "calmmind", "charm", "dazzlinggleam",
+        "endure", "facade", "futuresight", "highhorsepower", "imprison", "irontail", "lowkick",
+        "mysticalfire", "playrough", "protect", "psychic", "rest", "round", "sleeptalk", "snore",
+        "storedpower", "substitute", "swift", "wildcharge", "zenheadbutt"
+      ],
+      "tutor": ["expandingforce"],
+      "egg": ["doubleedge","doublekick","horndrill","hypnosis","morningsun","thrash"]
+    },
+    "evolutions": [{"species":"rapidashgalar","method":"level","param":40,"condition":null}]
+  },
+  "rapidashgalar": {
+    "baseSpecies": "rapidash",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["psychic","fairy"],
+    "abilities": {"0":"runaway","1":"pastelveil","H":"anticipation"},
+    "color": "white",
+    "weight": 800,
+    "moves": {
+      "level": [
+        [0,"psychocut"], [1,"confusion"], [1,"growl"], [1,"megahorn"], [1,"quickattack"], [1,"tackle"],
+        [1,"tailwhip"], [15,"fairywind"], [20,"agility"], [25,"psybeam"], [30,"stomp"], [35,"healpulse"],
+        [43,"takedown"], [49,"dazzlinggleam"], [56,"psychic"], [63,"healingwish"]
+      ],
+      "tm": [
+        "agility", "allyswitch", "attract", "batonpass", "bodyslam", "bounce", "calmmind", "charm",
+        "dazzlinggleam", "drillrun", "endure", "facade", "futuresight", "gigaimpact", "highhorsepower",
+        "hyperbeam", "imprison", "irontail", "lowkick", "magicroom", "megahorn", "mistyterrain",
+        "mysticalfire", "payday", "playrough", "protect", "psychic", "psychicterrain", "psychocut",
+        "rest", "round", "sleeptalk", "smartstrike", "snore", "storedpower", "substitute", "swift",
+        "swordsdance", "throatchop", "trickroom", "wildcharge", "wonderroom", "zenheadbutt"
+      ],
+      "tutor": ["expandingforce"],
+      "egg": []
+    }
+  },
+  "slowpokegalar": {
+    "baseSpecies": "slowpoke",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["psychic"],
+    "abilities": {"0":"gluttony","1":"owntempo","H":"regenerator"},
+    "moves": {
+      "level": [
+        [1,"curse"], [1,"tackle"], [3,"growl"], [6,"acid"], [9,"yawn"], [12,"confusion"], [15,"disable"],
+        [18,"waterpulse"], [21,"headbutt"], [24,"zenheadbutt"], [27,"amnesia"], [30,"surf"],
+        [33,"slackoff"], [36,"psychic"], [39,"psychup"], [42,"raindance"], [45,"healpulse"]
+      ],
+      "tm": [
+        "amnesia", "avalanche", "blizzard", "bodyslam", "bulldoze", "calmmind", "chillingwater", "curse",
+        "dig", "earthquake", "endure", "expandingforce", "facade", "fireblast", "flamethrower",
+        "foulplay", "grassknot", "helpinghand", "hydropump", "icebeam", "icywind", "imprison",
+        "lightscreen", "liquidation", "mudshot", "protect", "psybeam", "psychic", "psychicterrain",
+        "psychup", "psyshock", "raindance", "rest", "shadowball", "skillswap", "sleeptalk", "snowscape",
+        "storedpower", "substitute", "sunnyday", "surf", "swift", "takedown", "terablast", "thunderwave",
+        "trick", "trickroom", "waterfall", "waterpulse", "weatherball", "whirlpool", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": ["belch","bellydrum","block","stomp"]
+    },
+    "evolutions": [
+      {"species":"slowbrogalar","method":"item","param":"galaricacuff","condition":null},
+      {"species":"slowkinggalar","method":"item","param":"galaricawreath","condition":null}
+    ]
+  },
+  "slowbromega": {
+    "baseSpecies": "slowbro",
+    "forme": "Mega",
+    "formName": "Mega Slowbro",
+    "baseStats": {"hp":95,"atk":75,"def":180,"spa":130,"spd":80,"spe":30},
+    "abilities": {"0":"shellarmor"},
+    "height": 20,
+    "weight": 1200,
+    "baseExp": 207,
+    "battleOnly": true,
+    "requiredItem": "slowbronite"
+  },
+  "slowbrogalar": {
+    "baseSpecies": "slowbro",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["poison","psychic"],
+    "baseStats": {"hp":95,"atk":100,"def":95,"spa":100,"spd":70,"spe":30},
+    "abilities": {"0":"quickdraw","1":"owntempo","H":"regenerator"},
+    "weight": 705,
+    "evYield": {"hp":0,"atk":2,"def":0,"spa":0,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [0,"shellsidearm"], [1,"acid"], [1,"curse"], [1,"growl"], [1,"tackle"], [1,"withdraw"],
+        [9,"yawn"], [12,"confusion"], [15,"disable"], [18,"waterpulse"], [21,"headbutt"],
+        [24,"zenheadbutt"], [27,"amnesia"], [30,"surf"], [33,"slackoff"], [36,"psychic"], [39,"psychup"],
+        [42,"raindance"], [45,"healpulse"]
+      ],
+      "tm": [
+        "acidspray", "amnesia", "avalanche", "blizzard", "bodypress", "bodyslam", "brickbreak",
+        "bulldoze", "calmmind", "chillingwater", "curse", "dig", "doubleedge", "drainpunch",
+        "earthquake", "endure", "expandingforce", "facade", "fireblast", "flamethrower", "fling",
+        "focusblast", "foulplay", "gigaimpact", "grassknot", "gunkshot", "haze", "helpinghand",
+        "hydropump", "hyperbeam", "icebeam", "icefang", "icepunch", "icywind", "imprison", "irondefense",
+        "lightscreen", "liquidation", "metronome", "muddywater", "mudshot", "nastyplot", "poisonjab",
+        "powergem", "protect", "psybeam", "psychic", "psychicterrain", "psychup", "psyshock",
+        "raindance", "rest", "rockblast", "sandstorm", "scaryface", "shadowball", "skillswap",
+        "sleeptalk", "sludgebomb", "sludgewave", "smackdown", "snowscape", "storedpower", "substitute",
+        "sunnyday", "surf", "swift", "takedown", "terablast", "thunderwave", "toxic", "trick",
+        "trickroom", "venoshock", "waterfall", "waterpulse", "weatherball", "whirlpool", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "farfetchdgalar": {
+    "baseSpecies": "farfetchd",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["fighting"],
+    "baseStats": {"hp":52,"atk":95,"def":55,"spa":58,"spd":62,"spe":55},
+    "abilities": {"0":"steadfast","H":"scrappy"},
+    "weight": 420,
+    "moves": {
+      "level": [
+        [1,"peck"], [1,"sandattack"], [5,"leer"], [10,"furycutter"], [15,"rocksmash"],
+        [20,"brutalswing"], [25,"detect"], [30,"knockoff"], [35,"defog"], [40,"brickbreak"],
+        [45,"swordsdance"], [50,"slam"], [55,"leafblade"], [60,"finalgambit"], [65,"bravebird"]
+      ],
+      "tm": [
+        "assurance", "attract", "bodyslam", "bravebird", "brickbreak", "brutalswing", "closecombat",
+        "endure", "facade", "focusenergy", "helpinghand", "leafblade", "poisonjab", "protect", "rest",
+        "retaliate", "revenge", "round", "sleeptalk", "snore", "solarblade", "steelwing", "substitute",
+        "sunnyday", "superpower", "swordsdance", "throatchop", "workup"
+      ],
+      "tutor": ["dualwingbeat"],
+      "egg": [
+        "counter", "covet", "curse", "doubleedge", "feint", "flail", "nightslash", "quickattack",
+        "quickguard", "simplebeam", "skyattack"
+      ]
+    },
+    "evolutions": [
+      {
+        "species": "sirfetchd",
+        "method": "other",
+        "param": null,
+        "condition": {"text":"Land 3 critical hits in 1 battle"}
+      }
+    ]
+  },
+  "grimeralola": {
+    "baseSpecies": "grimer",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["poison","dark"],
+    "abilities": {"0":"poisontouch","1":"gluttony","H":"powerofalchemy"},
+    "color": "green",
+    "height": 7,
+    "weight": 420,
+    "moves": {
+      "level": [
+        [1,"poisongas"], [1,"pound"], [4,"harden"], [7,"bite"], [12,"disable"], [15,"acidspray"],
+        [18,"poisonfang"], [21,"minimize"], [26,"toxic"], [29,"knockoff"], [32,"crunch"], [37,"screech"],
+        [40,"gunkshot"], [43,"acidarmor"], [46,"belch"], [48,"memento"]
+      ],
+      "tm": [
+        "acidspray", "bodyslam", "brickbreak", "crunch", "curse", "darkpulse", "dig", "drainpunch",
+        "endure", "facade", "fireblast", "firepunch", "flamethrower", "fling", "gigadrain", "gigaimpact",
+        "gunkshot", "helpinghand", "hex", "hyperbeam", "icepunch", "imprison", "knockoff", "metronome",
+        "mudshot", "mudslap", "painsplit", "poisonjab", "protect", "raindance", "rest", "rockslide",
+        "rocktomb", "sandstorm", "scaryface", "shadowball", "sleeptalk", "sludgebomb", "sludgewave",
+        "snarl", "spite", "stoneedge", "substitute", "sunnyday", "swift", "takedown", "taunt",
+        "terablast", "thief", "thunder", "thunderbolt", "thunderpunch", "toxic", "venoshock",
+        "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": [
+        "assurance", "clearsmog", "curse", "meanlook", "recycle", "shadowsneak", "spite", "spitup",
+        "stockpile", "swallow"
+      ]
+    },
+    "evolutions": [{"species":"mukalola","method":"level","param":38,"condition":null}]
+  },
+  "mukalola": {
+    "baseSpecies": "muk",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["poison","dark"],
+    "abilities": {"0":"poisontouch","1":"gluttony","H":"powerofalchemy"},
+    "color": "green",
+    "height": 10,
+    "weight": 520,
+    "moves": {
+      "level": [
+        [1,"bite"], [1,"harden"], [1,"poisongas"], [1,"pound"], [12,"disable"], [15,"acidspray"],
+        [18,"poisonfang"], [21,"minimize"], [26,"toxic"], [29,"knockoff"], [32,"crunch"], [37,"screech"],
+        [40,"gunkshot"], [46,"acidarmor"], [52,"belch"], [57,"memento"]
+      ],
+      "tm": [
+        "acidspray", "bodyslam", "brickbreak", "crunch", "curse", "darkpulse", "dig", "drainpunch",
+        "endure", "facade", "fireblast", "firepunch", "flamethrower", "fling", "focusblast",
+        "focuspunch", "gigadrain", "gigaimpact", "gunkshot", "haze", "helpinghand", "hex", "hyperbeam",
+        "icepunch", "imprison", "knockoff", "lashout", "metronome", "mudshot", "mudslap", "painsplit",
+        "poisonjab", "protect", "raindance", "rest", "rockslide", "rocktomb", "sandstorm", "scaryface",
+        "shadowball", "sleeptalk", "sludgebomb", "sludgewave", "snarl", "spite", "stoneedge",
+        "substitute", "sunnyday", "swift", "takedown", "taunt", "terablast", "thief", "thunder",
+        "thunderbolt", "thunderpunch", "toxic", "venoshock", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "gengarmega": {
+    "baseSpecies": "gengar",
+    "forme": "Mega",
+    "formName": "Mega Gengar",
+    "baseStats": {"hp":60,"atk":65,"def":80,"spa":170,"spd":95,"spe":130},
+    "abilities": {"0":"shadowtag"},
+    "height": 14,
+    "baseExp": 270,
+    "battleOnly": true,
+    "requiredItem": "gengarite"
+  },
+  "voltorbhisui": {
+    "baseSpecies": "voltorb",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["electric","grass"],
+    "weight": 130,
+    "moves": {
+      "level": [
+        [1,"charge"], [1,"tackle"], [4,"thundershock"], [6,"stunspore"], [9,"bulletseed"],
+        [11,"rollout"], [13,"screech"], [16,"chargebeam"], [20,"swift"], [22,"electroball"],
+        [26,"selfdestruct"], [29,"energyball"], [34,"discharge"], [34,"seedbomb"], [41,"explosion"],
+        [46,"gyroball"], [50,"grassyterrain"]
+      ],
+      "tm": [
+        "agility", "bulletseed", "charge", "chargebeam", "doubleedge", "electricterrain", "electroball",
+        "electroweb", "endure", "energyball", "facade", "foulplay", "gigadrain", "grassknot",
+        "grassyglide", "grassyterrain", "gyroball", "leafstorm", "protect", "raindance", "reflect",
+        "rest", "seedbomb", "sleeptalk", "solarbeam", "substitute", "swift", "takedown", "taunt",
+        "terablast", "thief", "thunder", "thunderbolt", "thunderwave", "voltswitch", "wildcharge"
+      ],
+      "tutor": [],
+      "egg": ["leechseed","recycle","worryseed"]
+    },
+    "evolutions": [{"species":"electrodehisui","method":"item","param":"leafstone","condition":null}]
+  },
+  "electrodehisui": {
+    "baseSpecies": "electrode",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["electric","grass"],
+    "weight": 710,
+    "moves": {
+      "level": [
+        [0,"chloroblast"], [1,"charge"], [1,"tackle"], [4,"thundershock"], [6,"stunspore"],
+        [9,"bulletseed"], [11,"rollout"], [13,"screech"], [16,"chargebeam"], [20,"swift"],
+        [22,"electroball"], [26,"selfdestruct"], [29,"energyball"], [34,"discharge"], [34,"seedbomb"],
+        [41,"explosion"], [46,"gyroball"], [50,"grassyterrain"]
+      ],
+      "tm": [
+        "agility", "bulletseed", "charge", "chargebeam", "curse", "doubleedge", "electricterrain",
+        "electroball", "electroweb", "endure", "energyball", "facade", "foulplay", "gigadrain",
+        "gigaimpact", "grassknot", "grassyglide", "grassyterrain", "gyroball", "hyperbeam", "leafstorm",
+        "protect", "raindance", "reflect", "rest", "scaryface", "seedbomb", "sleeptalk", "solarbeam",
+        "substitute", "supercellslam", "swift", "takedown", "taunt", "terablast", "thief", "thunder",
+        "thunderbolt", "thunderwave", "voltswitch", "wildcharge"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "exeggutoralola": {
+    "baseSpecies": "exeggutor",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["grass","dragon"],
+    "baseStats": {"hp":95,"atk":105,"def":85,"spa":125,"spd":75,"spe":45},
+    "abilities": {"0":"frisk","H":"harvest"},
+    "height": 109,
+    "weight": 4156,
+    "moves": {
+      "level": [
+        [0,"dragonhammer"], [1,"absorb"], [1,"bulletseed"], [1,"confusion"], [1,"extrasensory"],
+        [1,"gigadrain"], [1,"growth"], [1,"hypnosis"], [1,"leafstorm"], [1,"leechseed"], [1,"megadrain"],
+        [1,"psyshock"], [1,"reflect"], [1,"seedbomb"], [1,"solarbeam"], [1,"synthesis"], [1,"uproar"],
+        [1,"woodhammer"], [1,"worryseed"]
+      ],
+      "tm": [
+        "bodyslam", "breakingswipe", "brickbreak", "bulldoze", "bulletseed", "calmmind", "curse",
+        "doubleedge", "dracometeor", "dragoncheer", "dragonpulse", "dragontail", "earthquake", "endure",
+        "energyball", "facade", "flamethrower", "gigadrain", "gigaimpact", "grassknot", "grassyglide",
+        "grassyterrain", "gravity", "helpinghand", "hyperbeam", "imprison", "ironhead", "knockoff",
+        "leafstorm", "lightscreen", "lowkick", "magicalleaf", "outrage", "protect", "psybeam", "psychic",
+        "psychicnoise", "psychicterrain", "psychup", "psyshock", "reflect", "rest", "seedbomb",
+        "skillswap", "sleeptalk", "sludgebomb", "solarbeam", "stompingtantrum", "storedpower",
+        "substitute", "sunnyday", "swordsdance", "takedown", "terablast", "thief", "trailblaze", "trick",
+        "trickroom", "uproar", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "marowakalola": {
+    "baseSpecies": "marowak",
+    "forme": "Alola",
+    "formName": "Alolan Form",
+    "types": ["fire","ghost"],
+    "abilities": {"0":"cursedbody","1":"lightningrod","H":"rockhead"},
+    "color": "purple",
+    "weight": 340,
+    "moves": {
+      "level": [
+        [0,"shadowbone"], [1,"doubleedge"], [1,"falseswipe"], [1,"firespin"], [1,"focusenergy"],
+        [1,"growl"], [1,"headbutt"], [1,"mudslap"], [1,"retaliate"], [1,"tailwhip"], [12,"flamewheel"],
+        [16,"hex"], [20,"fling"], [24,"stompingtantrum"], [31,"bonerush"], [36,"willowisp"],
+        [42,"endeavor"], [48,"bonemerang"], [54,"thrash"], [60,"flareblitz"]
+      ],
+      "tm": [
+        "allyswitch", "attract", "blizzard", "bodyslam", "brickbreak", "brutalswing", "bulldoze",
+        "darkpulse", "dig", "earthpower", "earthquake", "endure", "facade", "falseswipe", "fireblast",
+        "firepunch", "firespin", "flamethrower", "flareblitz", "fling", "focusblast", "focusenergy",
+        "gigaimpact", "heatwave", "hex", "hyperbeam", "icebeam", "icywind", "imprison", "irondefense",
+        "ironhead", "irontail", "lowkick", "megakick", "megapunch", "outrage", "protect", "raindance",
+        "rest", "retaliate", "rockslide", "rocktomb", "round", "sandstorm", "screech", "shadowball",
+        "sleeptalk", "snore", "stealthrock", "stompingtantrum", "stoneedge", "substitute", "sunnyday",
+        "swift", "swordsdance", "thief", "throatchop", "thunder", "thunderbolt", "thunderpunch",
+        "uproar", "willowisp"
+      ],
+      "tutor": ["burningjealousy","poltergeist","scorchingsands"],
+      "egg": []
+    }
+  },
+  "weezinggalar": {
+    "baseSpecies": "weezing",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["poison","fairy"],
+    "abilities": {"0":"levitate","1":"neutralizinggas","H":"mistysurge"},
+    "color": "gray",
+    "height": 30,
+    "weight": 160,
+    "moves": {
+      "level": [
+        [0,"doublehit"], [1,"aromaticmist"], [1,"defog"], [1,"haze"], [1,"heatwave"], [1,"poisongas"],
+        [1,"smog"], [1,"smokescreen"], [1,"strangesteam"], [1,"tackle"], [12,"clearsmog"],
+        [16,"assurance"], [20,"sludge"], [24,"fairywind"], [28,"selfdestruct"], [32,"sludgebomb"],
+        [38,"toxic"], [44,"belch"], [50,"explosion"], [56,"memento"], [62,"destinybond"],
+        [68,"mistyterrain"]
+      ],
+      "tm": [
+        "acidspray", "bodyslam", "curse", "darkpulse", "dazzlinggleam", "doubleedge", "endure", "facade",
+        "fireblast", "flamethrower", "gigaimpact", "gunkshot", "gyroball", "haze", "heatwave",
+        "hyperbeam", "mistyexplosion", "mistyterrain", "overheat", "painsplit", "playrough", "protect",
+        "psybeam", "raindance", "rest", "scaryface", "shadowball", "sleeptalk", "sludgebomb",
+        "sludgewave", "spite", "substitute", "sunnyday", "takedown", "taunt", "terablast", "thief",
+        "thunder", "thunderbolt", "toxic", "toxicspikes", "venoshock", "willowisp"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "kangaskhanmega": {
+    "baseSpecies": "kangaskhan",
+    "forme": "Mega",
+    "formName": "Mega Kangaskhan",
+    "baseStats": {"hp":105,"atk":125,"def":100,"spa":60,"spd":100,"spe":100},
+    "abilities": {"0":"parentalbond"},
+    "weight": 1000,
+    "baseExp": 207,
+    "battleOnly": true,
+    "requiredItem": "kangaskhanite"
+  },
+  "mrmimegalar": {
+    "baseSpecies": "mrmime",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["ice","psychic"],
+    "baseStats": {"hp":50,"atk":65,"def":65,"spa":90,"spd":90,"spe":100},
+    "abilities": {"0":"vitalspirit","1":"screencleaner","H":"icebody"},
+    "color": "white",
+    "height": 14,
+    "weight": 568,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":0,"spd":0,"spe":2},
+    "moves": {
+      "level": [
+        [1,"batonpass"], [1,"copycat"], [1,"dazzlinggleam"], [1,"encore"], [1,"iceshard"],
+        [1,"lightscreen"], [1,"mimic"], [1,"mistyterrain"], [1,"pound"], [1,"protect"], [1,"rapidspin"],
+        [1,"recycle"], [1,"reflect"], [1,"roleplay"], [1,"safeguard"], [12,"confusion"],
+        [16,"allyswitch"], [20,"icywind"], [24,"doublekick"], [28,"psybeam"], [32,"hypnosis"],
+        [36,"mirrorcoat"], [40,"suckerpunch"], [44,"freezedry"], [48,"psychic"], [52,"teeterdance"]
+      ],
+      "tm": [
+        "allyswitch", "attract", "avalanche", "batonpass", "blizzard", "bodyslam", "brickbreak",
+        "calmmind", "charm", "dazzlinggleam", "drainpunch", "encore", "endure", "energyball", "facade",
+        "fling", "focusblast", "foulplay", "futuresight", "gigaimpact", "grassknot", "guardswap", "hail",
+        "helpinghand", "hyperbeam", "icebeam", "icepunch", "iciclespear", "icywind", "irondefense",
+        "lightscreen", "magicroom", "megakick", "megapunch", "metronome", "mistyterrain", "nastyplot",
+        "payback", "powerswap", "protect", "psychic", "psychicterrain", "psyshock", "raindance",
+        "reflect", "rest", "round", "safeguard", "screech", "shadowball", "skillswap", "sleeptalk",
+        "snore", "solarbeam", "stompingtantrum", "storedpower", "substitute", "sunnyday", "taunt",
+        "thief", "thunder", "thunderbolt", "thunderwave", "trick", "trickroom", "uproar", "wonderroom",
+        "zenheadbutt"
+      ],
+      "tutor": ["expandingforce","tripleaxel"],
+      "egg": ["confuseray","fakeout","powersplit","tickle"]
+    },
+    "evolutions": [{"species":"mrrime","method":"level","param":42,"condition":null}]
+  },
+  "pinsirmega": {
+    "baseSpecies": "pinsir",
+    "forme": "Mega",
+    "formName": "Mega Pinsir",
+    "types": ["bug","flying"],
+    "baseStats": {"hp":65,"atk":155,"def":120,"spa":65,"spd":90,"spe":105},
+    "abilities": {"0":"aerilate"},
+    "height": 17,
+    "weight": 590,
+    "baseExp": 210,
+    "battleOnly": true,
+    "requiredItem": "pinsirite"
+  },
+  "taurospaldeacombat": {
+    "baseSpecies": "tauros",
+    "forme": "Paldea-Combat",
+    "formName": "Paldea-Combat",
+    "types": ["fighting"],
+    "baseStats": {"hp":75,"atk":110,"def":105,"spa":30,"spd":70,"spe":100},
+    "abilities": {"0":"intimidate","1":"angerpoint","H":"cudchew"},
+    "color": "black",
+    "weight": 1150,
+    "moves": {
+      "level": [
+        [1,"tackle"], [1,"tailwhip"], [5,"workup"], [10,"doublekick"], [15,"assurance"], [20,"headbutt"],
+        [25,"scaryface"], [30,"zenheadbutt"], [35,"ragingbull"], [40,"rest"], [45,"swagger"],
+        [50,"thrash"], [55,"doubleedge"], [60,"closecombat"]
+      ],
+      "tm": [
+        "bodypress", "bodyslam", "bulkup", "bulldoze", "closecombat", "curse", "dig", "doubleedge",
+        "drillrun", "earthquake", "endeavor", "endure", "facade", "gigaimpact", "highhorsepower",
+        "hyperbeam", "ironhead", "lashout", "outrage", "protect", "raindance", "rest", "reversal",
+        "rockslide", "rocktomb", "sandstorm", "scaryface", "sleeptalk", "smartstrike", "stompingtantrum",
+        "stoneedge", "substitute", "sunnyday", "surf", "takedown", "terablast", "thief", "throatchop",
+        "trailblaze", "wildcharge", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": ["curse","endeavor"]
+    }
+  },
+  "taurospaldeablaze": {
+    "baseSpecies": "tauros",
+    "forme": "Paldea-Blaze",
+    "formName": "Paldea-Blaze",
+    "types": ["fighting","fire"],
+    "baseStats": {"hp":75,"atk":110,"def":105,"spa":30,"spd":70,"spe":100},
+    "abilities": {"0":"intimidate","1":"angerpoint","H":"cudchew"},
+    "color": "black",
+    "weight": 850,
+    "moves": {
+      "level": [
+        [1,"tackle"], [1,"tailwhip"], [5,"workup"], [10,"doublekick"], [15,"flamecharge"],
+        [20,"headbutt"], [25,"scaryface"], [30,"zenheadbutt"], [35,"ragingbull"], [40,"rest"],
+        [45,"swagger"], [50,"thrash"], [55,"flareblitz"], [60,"closecombat"]
+      ],
+      "tm": [
+        "bodypress", "bodyslam", "bulkup", "bulldoze", "closecombat", "curse", "dig", "doubleedge",
+        "drillrun", "earthquake", "endeavor", "endure", "facade", "fireblast", "firespin", "flamecharge",
+        "flamethrower", "flareblitz", "gigaimpact", "highhorsepower", "hyperbeam", "ironhead", "lashout",
+        "outrage", "overheat", "protect", "raindance", "rest", "reversal", "rockslide", "rocktomb",
+        "sandstorm", "scaryface", "sleeptalk", "smartstrike", "stompingtantrum", "stoneedge",
+        "substitute", "sunnyday", "takedown", "temperflare", "terablast", "thief", "trailblaze",
+        "wildcharge", "willowisp", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": ["curse","endeavor"]
+    }
+  },
+  "taurospaldeaaqua": {
+    "baseSpecies": "tauros",
+    "forme": "Paldea-Aqua",
+    "formName": "Paldea-Aqua",
+    "types": ["fighting","water"],
+    "baseStats": {"hp":75,"atk":110,"def":105,"spa":30,"spd":70,"spe":100},
+    "abilities": {"0":"intimidate","1":"angerpoint","H":"cudchew"},
+    "color": "black",
+    "weight": 1100,
+    "moves": {
+      "level": [
+        [1,"tackle"], [1,"tailwhip"], [5,"workup"], [10,"doublekick"], [15,"aquajet"], [20,"headbutt"],
+        [25,"scaryface"], [30,"zenheadbutt"], [35,"ragingbull"], [40,"rest"], [45,"swagger"],
+        [50,"thrash"], [55,"wavecrash"], [60,"closecombat"]
+      ],
+      "tm": [
+        "bodypress", "bodyslam", "bulkup", "bulldoze", "chillingwater", "closecombat", "curse", "dig",
+        "doubleedge", "drillrun", "earthquake", "endeavor", "endure", "facade", "gigaimpact",
+        "highhorsepower", "hydropump", "hyperbeam", "ironhead", "lashout", "liquidation", "outrage",
+        "protect", "raindance", "rest", "reversal", "rockslide", "rocktomb", "sandstorm", "scaryface",
+        "sleeptalk", "smartstrike", "stompingtantrum", "stoneedge", "substitute", "surf", "takedown",
+        "terablast", "thief", "trailblaze", "waterpulse", "whirlpool", "wildcharge", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": ["curse","endeavor"]
+    }
+  },
+  "gyaradosmega": {
+    "baseSpecies": "gyarados",
+    "forme": "Mega",
+    "formName": "Mega Gyarados",
+    "types": ["water","dark"],
+    "baseStats": {"hp":95,"atk":155,"def":109,"spa":70,"spd":130,"spe":81},
+    "abilities": {"0":"moldbreaker"},
+    "weight": 3050,
+    "baseExp": 224,
+    "battleOnly": true,
+    "requiredItem": "gyaradosite"
+  },
+  "aerodactylmega": {
+    "baseSpecies": "aerodactyl",
+    "forme": "Mega",
+    "formName": "Mega Aerodactyl",
+    "baseStats": {"hp":80,"atk":135,"def":85,"spa":70,"spd":95,"spe":150},
+    "abilities": {"0":"toughclaws"},
+    "height": 21,
+    "weight": 790,
+    "baseExp": 215,
+    "battleOnly": true,
+    "requiredItem": "aerodactylite"
+  },
+  "articunogalar": {
+    "baseSpecies": "articuno",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["psychic","flying"],
+    "baseStats": {"hp":90,"atk":85,"def":85,"spa":125,"spd":100,"spe":95},
+    "abilities": {"0":"competitive"},
+    "color": "purple",
+    "weight": 509,
+    "baseExp": 290,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":3,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"gust"], [5,"confusion"], [10,"reflect"], [15,"hypnosis"], [20,"agility"],
+        [25,"ancientpower"], [30,"tailwind"], [35,"psychocut"], [40,"recover"], [45,"freezingglare"],
+        [50,"dreameater"], [55,"hurricane"], [60,"doubleteam"], [65,"futuresight"], [70,"trickroom"]
+      ],
+      "tm": [
+        "agility", "aircutter", "airslash", "bravebird", "calmmind", "dualwingbeat", "endure",
+        "expandingforce", "facade", "fly", "futuresight", "gigaimpact", "helpinghand", "hurricane",
+        "hyperbeam", "hypervoice", "imprison", "lightscreen", "protect", "psybeam", "psychic",
+        "psychicnoise", "psyshock", "raindance", "reflect", "rest", "scaryface", "shadowball",
+        "skillswap", "sleeptalk", "snowscape", "storedpower", "substitute", "sunnyday", "swift",
+        "tailwind", "takedown", "terablast", "trick", "trickroom", "uturn"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "zapdosgalar": {
+    "baseSpecies": "zapdos",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["fighting","flying"],
+    "baseStats": {"hp":90,"atk":125,"def":90,"spa":85,"spd":90,"spe":100},
+    "abilities": {"0":"defiant"},
+    "weight": 582,
+    "baseExp": 290,
+    "evYield": {"hp":0,"atk":3,"def":0,"spa":0,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"focusenergy"], [1,"peck"], [5,"rocksmash"], [10,"lightscreen"], [15,"pluck"], [20,"agility"],
+        [25,"ancientpower"], [30,"brickbreak"], [35,"drillpeck"], [40,"quickguard"],
+        [45,"thunderouskick"], [50,"bulkup"], [55,"counter"], [60,"detect"], [65,"closecombat"],
+        [70,"reversal"]
+      ],
+      "tm": [
+        "acrobatics", "aerialace", "agility", "bravebird", "brickbreak", "bulkup", "closecombat",
+        "coaching", "doubleedge", "dualwingbeat", "endeavor", "endure", "facade", "fly", "gigaimpact",
+        "helpinghand", "hurricane", "hyperbeam", "knockoff", "lightscreen", "lowkick", "lowsweep",
+        "protect", "raindance", "rest", "reversal", "sandstorm", "scaryface", "sleeptalk",
+        "stompingtantrum", "substitute", "sunnyday", "swift", "tailwind", "takedown", "taunt",
+        "terablast", "throatchop", "trailblaze", "uturn"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "moltresgalar": {
+    "baseSpecies": "moltres",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["dark","flying"],
+    "baseStats": {"hp":90,"atk":85,"def":90,"spa":100,"spd":125,"spe":90},
+    "abilities": {"0":"berserk"},
+    "color": "red",
+    "weight": 660,
+    "baseExp": 290,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":0,"spd":3,"spe":0},
+    "moves": {
+      "level": [
+        [1,"gust"], [1,"leer"], [5,"payback"], [10,"safeguard"], [15,"wingattack"], [20,"agility"],
+        [25,"ancientpower"], [30,"suckerpunch"], [35,"airslash"], [40,"afteryou"], [45,"fierywrath"],
+        [50,"nastyplot"], [55,"hurricane"], [60,"endure"], [65,"memento"], [70,"skyattack"]
+      ],
+      "tm": [
+        "acrobatics", "aerialace", "agility", "airslash", "bravebird", "darkpulse", "dualwingbeat",
+        "endure", "facade", "fly", "foulplay", "gigaimpact", "helpinghand", "hex", "hurricane",
+        "hyperbeam", "hypervoice", "imprison", "lashout", "nastyplot", "painsplit", "protect",
+        "raindance", "rest", "sandstorm", "scaryface", "shadowball", "sleeptalk", "snarl", "spite",
+        "substitute", "sunnyday", "swift", "tailwind", "takedown", "taunt", "terablast", "thief",
+        "uturn"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "mewtwomegax": {
+    "baseSpecies": "mewtwo",
+    "forme": "Mega-X",
+    "formName": "Mega Mewtwo X",
+    "types": ["psychic","fighting"],
+    "baseStats": {"hp":106,"atk":190,"def":100,"spa":154,"spd":100,"spe":130},
+    "abilities": {"0":"steadfast"},
+    "height": 23,
+    "weight": 1270,
+    "baseExp": 351,
+    "battleOnly": true,
+    "requiredItem": "mewtwonitex"
+  },
+  "mewtwomegay": {
+    "baseSpecies": "mewtwo",
+    "forme": "Mega-Y",
+    "formName": "Mega Mewtwo Y",
+    "baseStats": {"hp":106,"atk":150,"def":70,"spa":194,"spd":120,"spe":140},
+    "abilities": {"0":"insomnia"},
+    "height": 15,
+    "weight": 330,
+    "baseExp": 351,
+    "battleOnly": true,
+    "requiredItem": "mewtwonitey"
+  },
+  "typhlosionhisui": {
+    "baseSpecies": "typhlosion",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["fire","ghost"],
+    "baseStats": {"hp":73,"atk":84,"def":78,"spa":119,"spd":85,"spe":95},
+    "abilities": {"0":"blaze","H":"frisk"},
+    "height": 16,
+    "weight": 698,
+    "moves": {
+      "level": [
+        [0,"infernalparade"], [1,"doubleedge"], [1,"ember"], [1,"eruption"], [1,"gyroball"], [1,"leer"],
+        [1,"smokescreen"], [1,"tackle"], [13,"quickattack"], [20,"flamewheel"], [24,"defensecurl"],
+        [31,"swift"], [35,"flamecharge"], [43,"lavaplume"], [48,"flamethrower"], [56,"inferno"],
+        [61,"rollout"], [74,"overheat"]
+      ],
+      "tm": [
+        "aerialace", "blastburn", "bodyslam", "brickbreak", "bulldoze", "burningjealousy", "calmmind",
+        "confuseray", "curse", "dig", "doubleedge", "earthquake", "endeavor", "endure", "facade",
+        "fireblast", "firefang", "firepledge", "firepunch", "firespin", "flamecharge", "flamethrower",
+        "flareblitz", "focusblast", "focuspunch", "gigaimpact", "gyroball", "heatwave", "hex",
+        "hyperbeam", "ironhead", "lowkick", "nightshade", "overheat", "playrough", "poltergeist",
+        "protect", "rest", "reversal", "roar", "rockslide", "shadowball", "shadowclaw", "sleeptalk",
+        "solarbeam", "spite", "stompingtantrum", "substitute", "sunnyday", "swift", "takedown",
+        "temperflare", "terablast", "thunderpunch", "wildcharge", "willowisp", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "pichuspikyeared": {
+    "baseSpecies": "pichu",
+    "forme": "Spiky-eared",
+    "formName": "Spiky-eared",
+    "abilities": {"0":"static"},
+    "moves": {
+      "level": [
+        [1,"charm"], [1,"thundershock"], [5,"tailwhip"], [10,"thunderwave"], [13,"sweetkiss"],
+        [18,"nastyplot"]
+      ],
+      "tm": [
+        "attract", "captivate", "chargebeam", "doubleteam", "endure", "facade", "flash", "fling",
+        "frustration", "grassknot", "hiddenpower", "irontail", "lightscreen", "naturalgift", "protect",
+        "raindance", "rest", "return", "secretpower", "shockwave", "sleeptalk", "substitute", "swagger",
+        "thunder", "thunderbolt", "thunderwave", "toxic"
+      ],
+      "tutor": [
+        "headbutt", "helpinghand", "magnetrise", "mudslap", "rollout", "signalbeam", "snore", "swift",
+        "uproar"
+      ],
+      "egg": []
+    }
+  },
+  "ampharosmega": {
+    "baseSpecies": "ampharos",
+    "forme": "Mega",
+    "formName": "Mega Ampharos",
+    "types": ["electric","dragon"],
+    "baseStats": {"hp":90,"atk":95,"def":105,"spa":165,"spd":110,"spe":45},
+    "abilities": {"0":"moldbreaker"},
+    "baseExp": 275,
+    "battleOnly": true,
+    "requiredItem": "ampharosite"
+  },
+  "wooperpaldea": {
+    "baseSpecies": "wooper",
+    "forme": "Paldea",
+    "formName": "Paldean Form",
+    "types": ["poison","ground"],
+    "abilities": {"0":"poisonpoint","1":"waterabsorb","H":"unaware"},
+    "color": "brown",
+    "weight": 110,
+    "moves": {
+      "level": [
+        [1,"mudshot"], [1,"tailwhip"], [4,"tackle"], [8,"poisontail"], [12,"toxicspikes"], [16,"slam"],
+        [21,"yawn"], [24,"poisonjab"], [28,"sludgewave"], [32,"amnesia"], [36,"toxic"],
+        [40,"earthquake"]
+      ],
+      "tm": [
+        "acidspray", "amnesia", "bodypress", "bodyslam", "bulldoze", "chillingwater", "curse", "dig",
+        "doubleedge", "earthpower", "earthquake", "endure", "facade", "gunkshot", "haze", "helpinghand",
+        "hydropump", "liquidation", "lowkick", "mudshot", "mudslap", "poisonjab", "poisontail",
+        "protect", "raindance", "rest", "rockslide", "rocktomb", "sandstorm", "sleeptalk", "sludgebomb",
+        "sludgewave", "spikes", "stealthrock", "stompingtantrum", "stoneedge", "substitute", "surf",
+        "takedown", "terablast", "toxic", "toxicspikes", "trailblaze", "venoshock", "waterfall",
+        "waterpulse"
+      ],
+      "tutor": [],
+      "egg": [
+        "acidspray", "afteryou", "ancientpower", "counter", "curse", "doublekick", "haze", "mist",
+        "recover", "spitup", "stockpile", "swallow"
+      ]
+    },
+    "evolutions": [{"species":"clodsire","method":"level","param":20,"condition":null}]
+  },
+  "slowkinggalar": {
+    "baseSpecies": "slowking",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["poison","psychic"],
+    "baseStats": {"hp":95,"atk":65,"def":80,"spa":110,"spd":110,"spe":30},
+    "abilities": {"0":"curiousmedicine","1":"owntempo","H":"regenerator"},
+    "height": 18,
+    "moves": {
+      "level": [
+        [0,"eeriespell"], [1,"acid"], [1,"chillyreception"], [1,"curse"], [1,"futuresight"], [1,"growl"],
+        [1,"nastyplot"], [1,"powergem"], [1,"swagger"], [1,"tackle"], [1,"toxic"], [1,"waterfall"],
+        [9,"yawn"], [12,"confusion"], [15,"disable"], [18,"waterpulse"], [21,"headbutt"],
+        [24,"zenheadbutt"], [27,"amnesia"], [30,"surf"], [33,"slackoff"], [36,"psychic"], [39,"psychup"],
+        [42,"raindance"], [45,"healpulse"]
+      ],
+      "tm": [
+        "acidspray", "amnesia", "avalanche", "blizzard", "bodyslam", "brickbreak", "bulldoze",
+        "calmmind", "chillingwater", "curse", "dig", "drainpunch", "earthquake", "endure",
+        "expandingforce", "facade", "fireblast", "firepunch", "flamethrower", "fling", "focusblast",
+        "foulplay", "futuresight", "gigaimpact", "grassknot", "gunkshot", "helpinghand", "hex",
+        "hydropump", "hyperbeam", "icebeam", "icywind", "imprison", "irondefense", "lightscreen",
+        "liquidation", "lowsweep", "metronome", "muddywater", "mudshot", "nastyplot", "poisonjab",
+        "powergem", "protect", "psybeam", "psychic", "psychicnoise", "psychicterrain", "psychup",
+        "psyshock", "raindance", "rest", "scaryface", "shadowball", "skillswap", "sleeptalk",
+        "sludgebomb", "sludgewave", "snarl", "snowscape", "stompingtantrum", "storedpower", "substitute",
+        "sunnyday", "surf", "swift", "takedown", "taunt", "terablast", "thunderpunch", "thunderwave",
+        "toxic", "toxicspikes", "trick", "trickroom", "venoshock", "waterfall", "waterpulse",
+        "weatherball", "whirlpool", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "steelixmega": {
+    "baseSpecies": "steelix",
+    "forme": "Mega",
+    "formName": "Mega Steelix",
+    "baseStats": {"hp":75,"atk":125,"def":230,"spa":55,"spd":95,"spe":30},
+    "abilities": {"0":"sandforce"},
+    "height": 105,
+    "weight": 7400,
+    "baseExp": 214,
+    "battleOnly": true,
+    "requiredItem": "steelixite"
+  },
+  "qwilfishhisui": {
+    "baseSpecies": "qwilfish",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["dark","poison"],
+    "color": "black",
+    "moves": {
+      "level": [
+        [1,"poisonsting"], [1,"tackle"], [4,"harden"], [8,"bite"], [12,"fellstinger"], [16,"minimize"],
+        [20,"spikes"], [24,"brine"], [28,"barbbarrage"], [32,"pinmissile"], [36,"toxicspikes"],
+        [40,"spitup"], [40,"stockpile"], [44,"toxic"], [48,"crunch"], [52,"acupressure"],
+        [56,"destinybond"]
+      ],
+      "tm": [
+        "acidspray", "agility", "blizzard", "chillingwater", "crunch", "curse", "darkpulse",
+        "doubleedge", "endure", "facade", "gigaimpact", "gunkshot", "gyroball", "haze", "hex",
+        "hydropump", "icebeam", "icywind", "lashout", "liquidation", "mudshot", "painsplit", "poisonjab",
+        "poisontail", "protect", "raindance", "rest", "reversal", "scaleshot", "scaryface", "shadowball",
+        "sleeptalk", "sludgebomb", "spikes", "spite", "substitute", "surf", "swift", "swordsdance",
+        "takedown", "taunt", "terablast", "throatchop", "toxic", "toxicspikes", "venoshock", "waterfall",
+        "waterpulse"
+      ],
+      "tutor": [],
+      "egg": [
+        "acidspray", "aquajet", "aquatail", "astonish", "bubblebeam", "flail", "haze", "selfdestruct",
+        "supersonic", "waterpulse"
+      ]
+    },
+    "evolutions": [
+      {
+        "species": "overqwil",
+        "method": "other",
+        "param": null,
+        "condition": {"text":"Use Strong style Barb Barrage 20 times"}
+      }
+    ]
+  },
+  "scizormega": {
+    "baseSpecies": "scizor",
+    "forme": "Mega",
+    "formName": "Mega Scizor",
+    "baseStats": {"hp":70,"atk":150,"def":140,"spa":65,"spd":100,"spe":75},
+    "abilities": {"0":"technician"},
+    "height": 20,
+    "weight": 1250,
+    "baseExp": 210,
+    "battleOnly": true,
+    "requiredItem": "scizorite"
+  },
+  "heracrossmega": {
+    "baseSpecies": "heracross",
+    "forme": "Mega",
+    "formName": "Mega Heracross",
+    "baseStats": {"hp":80,"atk":185,"def":115,"spa":40,"spd":105,"spe":75},
+    "abilities": {"0":"skilllink"},
+    "height": 17,
+    "weight": 625,
+    "baseExp": 210,
+    "battleOnly": true,
+    "requiredItem": "heracronite"
+  },
+  "sneaselhisui": {
+    "baseSpecies": "sneasel",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["fighting","poison"],
+    "color": "gray",
+    "weight": 270,
+    "moves": {
+      "level": [
+        [1,"leer"], [1,"rocksmash"], [1,"scratch"], [6,"taunt"], [12,"quickattack"], [18,"metalclaw"],
+        [24,"poisonjab"], [30,"brickbreak"], [36,"honeclaws"], [42,"slash"], [48,"agility"],
+        [54,"screech"], [60,"closecombat"]
+      ],
+      "tm": [
+        "acidspray", "aerialace", "agility", "brickbreak", "bulkup", "calmmind", "closecombat",
+        "coaching", "dig", "endure", "facade", "falseswipe", "fling", "focusblast", "focuspunch",
+        "gigaimpact", "grassknot", "gunkshot", "lashout", "lowkick", "lowsweep", "metalclaw",
+        "nastyplot", "poisonjab", "poisontail", "protect", "raindance", "rest", "reversal", "shadowball",
+        "shadowclaw", "sleeptalk", "sludgebomb", "sludgewave", "spite", "substitute", "sunnyday",
+        "swift", "swordsdance", "takedown", "taunt", "terablast", "thief", "throatchop", "toxic",
+        "toxicspikes", "trailblaze", "vacuumwave", "venoshock", "xscissor"
+      ],
+      "tutor": [],
+      "egg": ["counter","doublehit","fakeout","feint","nightslash","quickguard","switcheroo"]
+    },
+    "evolutions": [
+      {
+        "species": "sneasler",
+        "method": "levelhelditem",
+        "param": "razorclaw",
+        "condition": {"time":"day"}
+      }
+    ]
+  },
+  "corsolagalar": {
+    "baseSpecies": "corsola",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["ghost"],
+    "baseStats": {"hp":60,"atk":55,"def":100,"spa":65,"spd":100,"spe":30},
+    "abilities": {"0":"weakarmor","H":"cursedbody"},
+    "color": "white",
+    "weight": 5,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":0,"spd":1,"spe":0},
+    "moves": {
+      "level": [
+        [1,"harden"], [1,"tackle"], [5,"astonish"], [10,"disable"], [15,"spite"], [20,"ancientpower"],
+        [25,"hex"], [30,"curse"], [35,"strengthsap"], [40,"powergem"], [45,"nightshade"], [50,"grudge"],
+        [55,"mirrorcoat"]
+      ],
+      "tm": [
+        "amnesia", "attract", "blizzard", "bodyslam", "brine", "bulldoze", "calmmind", "dig",
+        "earthpower", "earthquake", "endure", "facade", "gigadrain", "hail", "hex", "hydropump",
+        "icebeam", "iciclespear", "icywind", "irondefense", "lightscreen", "liquidation", "powergem",
+        "protect", "psychic", "raindance", "reflect", "rest", "rockblast", "rockslide", "rocktomb",
+        "round", "safeguard", "sandstorm", "scald", "screech", "selfdestruct", "shadowball", "sleeptalk",
+        "snore", "stealthrock", "stompingtantrum", "stoneedge", "substitute", "sunnyday", "surf",
+        "throatchop", "whirlpool", "willowisp"
+      ],
+      "tutor": ["meteorbeam"],
+      "egg": ["confuseray","destinybond","haze","headsmash","naturepower","waterpulse"]
+    },
+    "evolutions": [{"species":"cursola","method":"level","param":38,"condition":null}]
+  },
+  "houndoommega": {
+    "baseSpecies": "houndoom",
+    "forme": "Mega",
+    "formName": "Mega Houndoom",
+    "baseStats": {"hp":75,"atk":90,"def":90,"spa":140,"spd":90,"spe":115},
+    "abilities": {"0":"solarpower"},
+    "height": 19,
+    "weight": 495,
+    "baseExp": 210,
+    "battleOnly": true,
+    "requiredItem": "houndoominite"
+  },
+  "tyranitarmega": {
+    "baseSpecies": "tyranitar",
+    "forme": "Mega",
+    "formName": "Mega Tyranitar",
+    "baseStats": {"hp":100,"atk":164,"def":150,"spa":95,"spd":120,"spe":71},
+    "abilities": {"0":"sandstream"},
+    "height": 25,
+    "weight": 2550,
+    "baseExp": 315,
+    "battleOnly": true,
+    "requiredItem": "tyranitarite"
+  },
+  "sceptilemega": {
+    "baseSpecies": "sceptile",
+    "forme": "Mega",
+    "formName": "Mega Sceptile",
+    "types": ["grass","dragon"],
+    "baseStats": {"hp":70,"atk":110,"def":75,"spa":145,"spd":85,"spe":145},
+    "abilities": {"0":"lightningrod"},
+    "height": 19,
+    "weight": 552,
+    "baseExp": 284,
+    "battleOnly": true,
+    "requiredItem": "sceptilite"
+  },
+  "blazikenmega": {
+    "baseSpecies": "blaziken",
+    "forme": "Mega",
+    "formName": "Mega Blaziken",
+    "baseStats": {"hp":80,"atk":160,"def":80,"spa":130,"spd":80,"spe":100},
+    "abilities": {"0":"speedboost"},
+    "baseExp": 284,
+    "battleOnly": true,
+    "requiredItem": "blazikenite"
+  },
+  "swampertmega": {
+    "baseSpecies": "swampert",
+    "forme": "Mega",
+    "formName": "Mega Swampert",
+    "baseStats": {"hp":100,"atk":150,"def":110,"spa":95,"spd":110,"spe":70},
+    "abilities": {"0":"swiftswim"},
+    "height": 19,
+    "weight": 1020,
+    "baseExp": 286,
+    "battleOnly": true,
+    "requiredItem": "swampertite"
+  },
+  "zigzagoongalar": {
+    "baseSpecies": "zigzagoon",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["dark","normal"],
+    "color": "white",
+    "moves": {
+      "level": [
+        [1,"leer"], [1,"tackle"], [3,"sandattack"], [6,"lick"], [9,"snarl"], [12,"headbutt"],
+        [15,"babydolleyes"], [18,"pinmissile"], [21,"rest"], [24,"takedown"], [27,"scaryface"],
+        [30,"counter"], [33,"taunt"], [36,"doubleedge"]
+      ],
+      "tm": [
+        "assurance", "attract", "blizzard", "bodyslam", "dig", "endure", "facade", "faketears", "fling",
+        "grassknot", "gunkshot", "helpinghand", "hypervoice", "icebeam", "icywind", "irontail",
+        "mudshot", "payback", "pinmissile", "protect", "raindance", "rest", "retaliate", "round",
+        "scaryface", "screech", "seedbomb", "shadowball", "sleeptalk", "snarl", "snore", "substitute",
+        "sunnyday", "surf", "swift", "taunt", "thief", "thunder", "thunderbolt", "thunderwave", "trick",
+        "whirlpool", "workup"
+      ],
+      "tutor": ["lashout"],
+      "egg": ["knockoff","partingshot","quickguard"]
+    },
+    "evolutions": [{"species":"linoonegalar","method":"level","param":20,"condition":null}]
+  },
+  "linoonegalar": {
+    "baseSpecies": "linoone",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["dark","normal"],
+    "moves": {
+      "level": [
+        [0,"nightslash"], [1,"babydolleyes"], [1,"leer"], [1,"lick"], [1,"pinmissile"], [1,"sandattack"],
+        [1,"switcheroo"], [1,"tackle"], [9,"snarl"], [12,"headbutt"], [15,"honeclaws"],
+        [18,"furyswipes"], [23,"rest"], [28,"takedown"], [33,"scaryface"], [38,"counter"], [43,"taunt"],
+        [48,"doubleedge"]
+      ],
+      "tm": [
+        "assurance", "attract", "blizzard", "bodypress", "bodyslam", "dig", "endure", "facade",
+        "faketears", "fling", "gigaimpact", "grassknot", "gunkshot", "helpinghand", "hyperbeam",
+        "hypervoice", "icebeam", "icywind", "irontail", "mudshot", "payback", "pinmissile", "protect",
+        "raindance", "rest", "retaliate", "round", "scaryface", "screech", "seedbomb", "shadowball",
+        "shadowclaw", "sleeptalk", "snarl", "snore", "stompingtantrum", "substitute", "sunnyday", "surf",
+        "swift", "taunt", "thief", "throatchop", "thunder", "thunderbolt", "thunderwave", "trick",
+        "whirlpool", "workup"
+      ],
+      "tutor": ["lashout"],
+      "egg": []
+    },
+    "evolutions": [{"species":"obstagoon","method":"level","param":35,"condition":{"time":"night"}}]
+  },
+  "gardevoirmega": {
+    "baseSpecies": "gardevoir",
+    "forme": "Mega",
+    "formName": "Mega Gardevoir",
+    "baseStats": {"hp":68,"atk":85,"def":65,"spa":165,"spd":135,"spe":100},
+    "abilities": {"0":"pixilate"},
+    "eggGroups": ["amorphous"],
+    "baseExp": 278,
+    "battleOnly": true,
+    "requiredItem": "gardevoirite"
+  },
+  "sableyemega": {
+    "baseSpecies": "sableye",
+    "forme": "Mega",
+    "formName": "Mega Sableye",
+    "baseStats": {"hp":50,"atk":85,"def":125,"spa":85,"spd":115,"spe":20},
+    "abilities": {"0":"magicbounce"},
+    "weight": 1610,
+    "baseExp": 168,
+    "battleOnly": true,
+    "requiredItem": "sablenite"
+  },
+  "mawilemega": {
+    "baseSpecies": "mawile",
+    "forme": "Mega",
+    "formName": "Mega Mawile",
+    "baseStats": {"hp":50,"atk":105,"def":125,"spa":55,"spd":95,"spe":50},
+    "abilities": {"0":"hugepower"},
+    "height": 10,
+    "weight": 235,
+    "baseExp": 168,
+    "battleOnly": true,
+    "requiredItem": "mawilite"
+  },
+  "aggronmega": {
+    "baseSpecies": "aggron",
+    "forme": "Mega",
+    "formName": "Mega Aggron",
+    "types": ["steel"],
+    "baseStats": {"hp":70,"atk":140,"def":230,"spa":60,"spd":80,"spe":50},
+    "abilities": {"0":"filter"},
+    "height": 22,
+    "weight": 3950,
+    "baseExp": 284,
+    "battleOnly": true,
+    "requiredItem": "aggronite"
+  },
+  "medichammega": {
+    "baseSpecies": "medicham",
+    "forme": "Mega",
+    "formName": "Mega Medicham",
+    "baseStats": {"hp":60,"atk":100,"def":85,"spa":80,"spd":85,"spe":100},
+    "abilities": {"0":"purepower"},
+    "baseExp": 179,
+    "battleOnly": true,
+    "requiredItem": "medichamite"
+  },
+  "manectricmega": {
+    "baseSpecies": "manectric",
+    "forme": "Mega",
+    "formName": "Mega Manectric",
+    "baseStats": {"hp":70,"atk":75,"def":80,"spa":135,"spd":80,"spe":135},
+    "abilities": {"0":"intimidate"},
+    "height": 18,
+    "weight": 440,
+    "baseExp": 201,
+    "battleOnly": true,
+    "requiredItem": "manectite"
+  },
+  "sharpedomega": {
+    "baseSpecies": "sharpedo",
+    "forme": "Mega",
+    "formName": "Mega Sharpedo",
+    "baseStats": {"hp":70,"atk":140,"def":70,"spa":110,"spd":65,"spe":105},
+    "abilities": {"0":"strongjaw"},
+    "height": 25,
+    "weight": 1303,
+    "baseExp": 196,
+    "battleOnly": true,
+    "requiredItem": "sharpedonite"
+  },
+  "cameruptmega": {
+    "baseSpecies": "camerupt",
+    "forme": "Mega",
+    "formName": "Mega Camerupt",
+    "baseStats": {"hp":70,"atk":120,"def":100,"spa":145,"spd":105,"spe":20},
+    "abilities": {"0":"sheerforce"},
+    "height": 25,
+    "weight": 3205,
+    "baseExp": 196,
+    "battleOnly": true,
+    "requiredItem": "cameruptite"
+  },
+  "altariamega": {
+    "baseSpecies": "altaria",
+    "forme": "Mega",
+    "formName": "Mega Altaria",
+    "types": ["dragon","fairy"],
+    "baseStats": {"hp":75,"atk":110,"def":110,"spa":110,"spd":105,"spe":80},
+    "abilities": {"0":"pixilate"},
+    "height": 15,
+    "baseExp": 207,
+    "battleOnly": true,
+    "requiredItem": "altarianite"
+  },
+  "castformsunny": {
+    "baseSpecies": "castform",
+    "forme": "Sunny",
+    "formName": "Sunny Form",
+    "types": ["fire"],
+    "color": "red",
+    "battleOnly": true
+  },
+  "castformrainy": {
+    "baseSpecies": "castform",
+    "forme": "Rainy",
+    "formName": "Rainy Form",
+    "types": ["water"],
+    "color": "blue",
+    "battleOnly": true
+  },
+  "castformsnowy": {
+    "baseSpecies": "castform",
+    "forme": "Snowy",
+    "formName": "Snowy Form",
+    "types": ["ice"],
+    "color": "white",
+    "battleOnly": true
+  },
+  "banettemega": {
+    "baseSpecies": "banette",
+    "forme": "Mega",
+    "formName": "Mega Banette",
+    "baseStats": {"hp":64,"atk":165,"def":75,"spa":93,"spd":83,"spe":75},
+    "abilities": {"0":"prankster"},
+    "height": 12,
+    "weight": 130,
+    "baseExp": 194,
+    "battleOnly": true,
+    "requiredItem": "banettite"
+  },
+  "absolmega": {
+    "baseSpecies": "absol",
+    "forme": "Mega",
+    "formName": "Mega Absol",
+    "baseStats": {"hp":65,"atk":150,"def":60,"spa":115,"spd":60,"spe":115},
+    "abilities": {"0":"magicbounce"},
+    "weight": 490,
+    "baseExp": 198,
+    "battleOnly": true,
+    "requiredItem": "absolite"
+  },
+  "glaliemega": {
+    "baseSpecies": "glalie",
+    "forme": "Mega",
+    "formName": "Mega Glalie",
+    "baseStats": {"hp":80,"atk":120,"def":80,"spa":120,"spd":80,"spe":100},
+    "abilities": {"0":"refrigerate"},
+    "height": 21,
+    "weight": 3502,
+    "baseExp": 203,
+    "battleOnly": true,
+    "requiredItem": "glalitite"
+  },
+  "salamencemega": {
+    "baseSpecies": "salamence",
+    "forme": "Mega",
+    "formName": "Mega Salamence",
+    "baseStats": {"hp":95,"atk":145,"def":130,"spa":120,"spd":90,"spe":120},
+    "abilities": {"0":"aerilate"},
+    "height": 18,
+    "weight": 1126,
+    "baseExp": 315,
+    "battleOnly": true,
+    "requiredItem": "salamencite"
+  },
+  "metagrossmega": {
+    "baseSpecies": "metagross",
+    "forme": "Mega",
+    "formName": "Mega Metagross",
+    "baseStats": {"hp":80,"atk":145,"def":150,"spa":105,"spd":110,"spe":110},
+    "abilities": {"0":"toughclaws"},
+    "height": 25,
+    "weight": 9429,
+    "baseExp": 315,
+    "battleOnly": true,
+    "requiredItem": "metagrossite"
+  },
+  "latiasmega": {
+    "baseSpecies": "latias",
+    "forme": "Mega",
+    "formName": "Mega Latias",
+    "baseStats": {"hp":80,"atk":100,"def":120,"spa":140,"spd":150,"spe":110},
+    "color": "purple",
+    "height": 18,
+    "weight": 520,
+    "baseExp": 315,
+    "battleOnly": true,
+    "requiredItem": "latiasite"
+  },
+  "latiosmega": {
+    "baseSpecies": "latios",
+    "forme": "Mega",
+    "formName": "Mega Latios",
+    "baseStats": {"hp":80,"atk":130,"def":100,"spa":160,"spd":120,"spe":110},
+    "color": "purple",
+    "height": 23,
+    "weight": 700,
+    "baseExp": 315,
+    "battleOnly": true,
+    "requiredItem": "latiosite"
+  },
+  "kyogreprimal": {
+    "baseSpecies": "kyogre",
+    "forme": "Primal",
+    "formName": "Primal Reversion",
+    "baseStats": {"hp":100,"atk":150,"def":90,"spa":180,"spd":160,"spe":90},
+    "abilities": {"0":"primordialsea"},
+    "height": 98,
+    "weight": 4300,
+    "baseExp": 347,
+    "battleOnly": true,
+    "requiredItem": "blueorb"
+  },
+  "groudonprimal": {
+    "baseSpecies": "groudon",
+    "forme": "Primal",
+    "formName": "Primal Reversion",
+    "types": ["ground","fire"],
+    "baseStats": {"hp":100,"atk":180,"def":160,"spa":150,"spd":90,"spe":90},
+    "abilities": {"0":"desolateland"},
+    "height": 50,
+    "weight": 9997,
+    "baseExp": 347,
+    "battleOnly": true,
+    "requiredItem": "redorb"
+  },
+  "rayquazamega": {
+    "baseSpecies": "rayquaza",
+    "forme": "Mega",
+    "formName": "Mega Rayquaza",
+    "baseStats": {"hp":105,"atk":180,"def":100,"spa":180,"spd":100,"spe":115},
+    "abilities": {"0":"deltastream"},
+    "height": 108,
+    "weight": 3920,
+    "baseExp": 351,
+    "battleOnly": true
+  },
+  "deoxysattack": {
+    "baseSpecies": "deoxys",
+    "forme": "Attack",
+    "formName": "Attack Forme",
+    "baseStats": {"hp":50,"atk":180,"def":20,"spa":180,"spd":20,"spe":150},
+    "evYield": {"hp":0,"atk":2,"def":0,"spa":1,"spd":0,"spe":0}
+  },
+  "deoxysdefense": {
+    "baseSpecies": "deoxys",
+    "forme": "Defense",
+    "formName": "Defense Forme",
+    "baseStats": {"hp":50,"atk":70,"def":160,"spa":70,"spd":160,"spe":90},
+    "evYield": {"hp":0,"atk":0,"def":2,"spa":0,"spd":1,"spe":0}
+  },
+  "deoxysspeed": {
+    "baseSpecies": "deoxys",
+    "forme": "Speed",
+    "formName": "Speed Forme",
+    "baseStats": {"hp":50,"atk":95,"def":90,"spa":95,"spd":90,"spe":180},
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":0,"spd":0,"spe":3}
+  },
+  "burmysandy": {"baseSpecies":"burmy","forme":"Sandy","formName":"Sandy","color":"brown"},
+  "burmytrash": {"baseSpecies":"burmy","forme":"Trash","formName":"Trash","color":"red"},
+  "wormadamsandy": {
+    "baseSpecies": "wormadam",
+    "forme": "Sandy",
+    "formName": "Sandy Cloak",
+    "types": ["bug","ground"],
+    "baseStats": {"hp":60,"atk":79,"def":105,"spa":59,"spd":85,"spe":36},
+    "color": "brown",
+    "evYield": {"hp":0,"atk":0,"def":2,"spa":0,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"bugbite"], [1,"protect"], [1,"quiverdance"], [1,"suckerpunch"], [1,"tackle"],
+        [20,"hiddenpower"], [23,"confusion"], [26,"rockblast"], [29,"harden"], [32,"psybeam"],
+        [35,"captivate"], [38,"flail"], [41,"attract"], [44,"psychic"], [47,"fissure"], [50,"bugbuzz"]
+      ],
+      "tm": [
+        "attract", "bulldoze", "confide", "doubleteam", "dreameater", "earthquake", "facade",
+        "frustration", "gigaimpact", "hiddenpower", "hyperbeam", "infestation", "protect", "psychic",
+        "psychup", "raindance", "rest", "return", "rocktomb", "round", "safeguard", "sandstorm",
+        "shadowball", "sleeptalk", "substitute", "sunnyday", "swagger", "thief", "toxic", "venoshock"
+      ],
+      "tutor": [
+        "allyswitch", "bugbite", "earthpower", "electroweb", "endeavor", "signalbeam", "skillswap",
+        "snore", "stealthrock", "telekinesis", "uproar"
+      ],
+      "egg": []
+    }
+  },
+  "wormadamtrash": {
+    "baseSpecies": "wormadam",
+    "forme": "Trash",
+    "formName": "Trash Cloak",
+    "types": ["bug","steel"],
+    "baseStats": {"hp":60,"atk":69,"def":95,"spa":69,"spd":95,"spe":36},
+    "color": "red",
+    "evYield": {"hp":0,"atk":0,"def":1,"spa":0,"spd":1,"spe":0},
+    "moves": {
+      "level": [
+        [1,"bugbite"], [1,"metalburst"], [1,"protect"], [1,"quiverdance"], [1,"suckerpunch"],
+        [1,"tackle"], [20,"hiddenpower"], [23,"confusion"], [26,"mirrorshot"], [29,"metalsound"],
+        [32,"psybeam"], [35,"captivate"], [38,"flail"], [41,"attract"], [44,"psychic"], [47,"ironhead"],
+        [50,"bugbuzz"]
+      ],
+      "tm": [
+        "attract", "confide", "doubleteam", "dreameater", "facade", "flashcannon", "frustration",
+        "gigaimpact", "gyroball", "hiddenpower", "hyperbeam", "infestation", "protect", "psychic",
+        "psychup", "raindance", "rest", "return", "round", "safeguard", "shadowball", "sleeptalk",
+        "substitute", "sunnyday", "swagger", "thief", "toxic", "venoshock"
+      ],
+      "tutor": [
+        "allyswitch", "bugbite", "electroweb", "endeavor", "gunkshot", "irondefense", "ironhead",
+        "magnetrise", "signalbeam", "skillswap", "snore", "stealthrock", "telekinesis", "uproar"
+      ],
+      "egg": []
+    }
+  },
+  "cherrimsunshine": {
+    "baseSpecies": "cherrim",
+    "forme": "Sunshine",
+    "formName": "Sunshine",
+    "color": "pink",
+    "battleOnly": true
+  },
+  "shelloseast": {"baseSpecies":"shellos","forme":"East","formName":"East","color":"blue"},
+  "gastrodoneast": {"baseSpecies":"gastrodon","forme":"East","formName":"East","color":"blue"},
+  "lopunnymega": {
+    "baseSpecies": "lopunny",
+    "forme": "Mega",
+    "formName": "Mega Lopunny",
+    "types": ["normal","fighting"],
+    "baseStats": {"hp":65,"atk":136,"def":94,"spa":54,"spd":96,"spe":135},
+    "abilities": {"0":"scrappy"},
+    "height": 13,
+    "weight": 283,
+    "baseExp": 203,
+    "battleOnly": true,
+    "requiredItem": "lopunnite"
+  },
+  "garchompmega": {
+    "baseSpecies": "garchomp",
+    "forme": "Mega",
+    "formName": "Mega Garchomp",
+    "baseStats": {"hp":108,"atk":170,"def":115,"spa":120,"spd":95,"spe":92},
+    "abilities": {"0":"sandforce"},
+    "baseExp": 315,
+    "battleOnly": true,
+    "requiredItem": "garchompite"
+  },
+  "lucariomega": {
+    "baseSpecies": "lucario",
+    "forme": "Mega",
+    "formName": "Mega Lucario",
+    "baseStats": {"hp":70,"atk":145,"def":88,"spa":140,"spd":70,"spe":112},
+    "abilities": {"0":"adaptability"},
+    "height": 13,
+    "weight": 575,
+    "baseExp": 219,
+    "battleOnly": true,
+    "requiredItem": "lucarionite"
+  },
+  "abomasnowmega": {
+    "baseSpecies": "abomasnow",
+    "forme": "Mega",
+    "formName": "Mega Abomasnow",
+    "baseStats": {"hp":90,"atk":132,"def":105,"spa":132,"spd":105,"spe":30},
+    "abilities": {"0":"snowwarning"},
+    "height": 27,
+    "weight": 1850,
+    "baseExp": 208,
+    "battleOnly": true,
+    "requiredItem": "abomasite"
+  },
+  "gallademega": {
+    "baseSpecies": "gallade",
+    "forme": "Mega",
+    "formName": "Mega Gallade",
+    "baseStats": {"hp":68,"atk":165,"def":95,"spa":65,"spd":115,"spe":110},
+    "abilities": {"0":"innerfocus"},
+    "eggGroups": ["amorphous"],
+    "weight": 564,
+    "baseExp": 278,
+    "battleOnly": true,
+    "requiredItem": "galladite"
+  },
+  "rotomheat": {
+    "baseSpecies": "rotom",
+    "forme": "Heat",
+    "formName": "Heat Rotom",
+    "types": ["electric","fire"],
+    "baseStats": {"hp":50,"atk":65,"def":107,"spa":105,"spd":107,"spe":86},
+    "baseExp": 182
+  },
+  "rotomwash": {
+    "baseSpecies": "rotom",
+    "forme": "Wash",
+    "formName": "Wash Rotom",
+    "types": ["electric","water"],
+    "baseStats": {"hp":50,"atk":65,"def":107,"spa":105,"spd":107,"spe":86},
+    "baseExp": 182
+  },
+  "rotomfrost": {
+    "baseSpecies": "rotom",
+    "forme": "Frost",
+    "formName": "Frost Rotom",
+    "types": ["electric","ice"],
+    "baseStats": {"hp":50,"atk":65,"def":107,"spa":105,"spd":107,"spe":86},
+    "baseExp": 182
+  },
+  "rotomfan": {
+    "baseSpecies": "rotom",
+    "forme": "Fan",
+    "formName": "Fan Rotom",
+    "types": ["electric","flying"],
+    "baseStats": {"hp":50,"atk":65,"def":107,"spa":105,"spd":107,"spe":86},
+    "baseExp": 182
+  },
+  "rotommow": {
+    "baseSpecies": "rotom",
+    "forme": "Mow",
+    "formName": "Mow Rotom",
+    "types": ["electric","grass"],
+    "baseStats": {"hp":50,"atk":65,"def":107,"spa":105,"spd":107,"spe":86},
+    "baseExp": 182
+  },
+  "dialgaorigin": {
+    "baseSpecies": "dialga",
+    "forme": "Origin",
+    "formName": "Origin Forme",
+    "baseStats": {"hp":100,"atk":100,"def":120,"spa":150,"spd":120,"spe":90},
+    "color": "blue",
+    "height": 70,
+    "weight": 8487,
+    "requiredItem": "adamantcrystal"
+  },
+  "palkiaorigin": {
+    "baseSpecies": "palkia",
+    "forme": "Origin",
+    "formName": "Origin Forme",
+    "baseStats": {"hp":90,"atk":100,"def":100,"spa":150,"spd":120,"spe":120},
+    "height": 63,
+    "weight": 6590,
+    "requiredItem": "lustrousglobe"
+  },
+  "giratinaorigin": {
+    "baseSpecies": "giratina",
+    "forme": "Origin",
+    "formName": "Origin Forme",
+    "baseStats": {"hp":150,"atk":120,"def":100,"spa":120,"spd":100,"spe":90},
+    "abilities": {"0":"levitate"},
+    "height": 69,
+    "weight": 6500,
+    "baseExp": 340,
+    "requiredItem": "griseouscore"
+  },
+  "shayminsky": {
+    "baseSpecies": "shaymin",
+    "forme": "Sky",
+    "formName": "Sky Forme",
+    "types": ["grass","flying"],
+    "baseStats": {"hp":100,"atk":103,"def":75,"spa":120,"spd":75,"spe":127},
+    "abilities": {"0":"serenegrace"},
+    "height": 4,
+    "weight": 52,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":0,"spd":0,"spe":3}
+  },
+  "arceusbug": {"baseSpecies":"arceus","forme":"Bug","formName":"Bug","types":["bug"]},
+  "arceusdark": {"baseSpecies":"arceus","forme":"Dark","formName":"Dark","types":["dark"]},
+  "arceusdragon": {"baseSpecies":"arceus","forme":"Dragon","formName":"Dragon","types":["dragon"]},
+  "arceuselectric": {"baseSpecies":"arceus","forme":"Electric","formName":"Electric","types":["electric"]},
+  "arceusfairy": {"baseSpecies":"arceus","forme":"Fairy","formName":"Fairy","types":["fairy"]},
+  "arceusfighting": {"baseSpecies":"arceus","forme":"Fighting","formName":"Fighting","types":["fighting"]},
+  "arceusfire": {"baseSpecies":"arceus","forme":"Fire","formName":"Fire","types":["fire"]},
+  "arceusflying": {"baseSpecies":"arceus","forme":"Flying","formName":"Flying","types":["flying"]},
+  "arceusghost": {"baseSpecies":"arceus","forme":"Ghost","formName":"Ghost","types":["ghost"]},
+  "arceusgrass": {"baseSpecies":"arceus","forme":"Grass","formName":"Grass","types":["grass"]},
+  "arceusground": {"baseSpecies":"arceus","forme":"Ground","formName":"Ground","types":["ground"]},
+  "arceusice": {"baseSpecies":"arceus","forme":"Ice","formName":"Ice","types":["ice"]},
+  "arceuspoison": {"baseSpecies":"arceus","forme":"Poison","formName":"Poison","types":["poison"]},
+  "arceuspsychic": {"baseSpecies":"arceus","forme":"Psychic","formName":"Psychic","types":["psychic"]},
+  "arceusrock": {"baseSpecies":"arceus","forme":"Rock","formName":"Rock","types":["rock"]},
+  "arceussteel": {"baseSpecies":"arceus","forme":"Steel","formName":"Steel","types":["steel"]},
+  "arceuswater": {"baseSpecies":"arceus","forme":"Water","formName":"Water","types":["water"]},
+  "samurotthisui": {
+    "baseSpecies": "samurott",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["water","dark"],
+    "baseStats": {"hp":90,"atk":108,"def":80,"spa":100,"spd":65,"spe":85},
+    "abilities": {"0":"torrent","H":"sharpness"},
+    "weight": 582,
+    "moves": {
+      "level": [
+        [0,"ceaselessedge"], [1,"megahorn"], [1,"slash"], [1,"suckerpunch"], [1,"tackle"],
+        [1,"tailwhip"], [1,"watergun"], [13,"focusenergy"], [18,"razorshell"], [21,"furycutter"],
+        [25,"waterpulse"], [29,"aerialace"], [34,"aquajet"], [39,"encore"], [46,"aquatail"],
+        [51,"retaliate"], [58,"swordsdance"], [63,"hydropump"]
+      ],
+      "tm": [
+        "aerialace", "airslash", "avalanche", "blizzard", "bodyslam", "brickbreak", "bulldoze",
+        "chillingwater", "darkpulse", "dig", "drillrun", "encore", "endure", "facade", "falseswipe",
+        "fling", "flipturn", "gigaimpact", "grassknot", "helpinghand", "hydrocannon", "hydropump",
+        "hyperbeam", "icebeam", "icywind", "knockoff", "lashout", "liquidation", "protect", "raindance",
+        "rest", "scaryface", "sleeptalk", "smartstrike", "snarl", "snowscape", "substitute", "surf",
+        "swift", "swordsdance", "takedown", "taunt", "terablast", "thief", "throatchop", "upperhand",
+        "vacuumwave", "waterfall", "waterpledge", "waterpulse", "whirlpool", "xscissor"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "audinomega": {
+    "baseSpecies": "audino",
+    "forme": "Mega",
+    "formName": "Mega Audino",
+    "types": ["normal","fairy"],
+    "baseStats": {"hp":103,"atk":60,"def":126,"spa":80,"spd":126,"spe":50},
+    "abilities": {"0":"healer"},
+    "color": "white",
+    "height": 15,
+    "weight": 320,
+    "baseExp": 425,
+    "battleOnly": true,
+    "requiredItem": "audinite"
+  },
+  "lilliganthisui": {
+    "baseSpecies": "lilligant",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["grass","fighting"],
+    "baseStats": {"hp":70,"atk":105,"def":75,"spa":50,"spd":75,"spe":105},
+    "abilities": {"0":"chlorophyll","1":"hustle","H":"leafguard"},
+    "height": 12,
+    "weight": 192,
+    "moves": {
+      "level": [
+        [0,"victorydance"], [1,"absorb"], [1,"afteryou"], [1,"defog"], [1,"energyball"],
+        [1,"entrainment"], [1,"gigadrain"], [1,"growth"], [1,"helpinghand"], [1,"leafblade"],
+        [1,"leafstorm"], [1,"leechseed"], [1,"magicalleaf"], [1,"megadrain"], [1,"megakick"],
+        [1,"petalblizzard"], [1,"sleeppowder"], [1,"solarblade"], [1,"stunspore"], [1,"sunnyday"],
+        [1,"synthesis"], [1,"teeterdance"], [5,"axekick"]
+      ],
+      "tm": [
+        "acrobatics", "aerialace", "airslash", "brickbreak", "bulletseed", "charm", "closecombat",
+        "coaching", "encore", "endure", "energyball", "facade", "gigadrain", "gigaimpact", "grassknot",
+        "grassyglide", "grassyterrain", "helpinghand", "hurricane", "hyperbeam", "icespinner",
+        "leafstorm", "lowkick", "lowsweep", "magicalleaf", "metronome", "petalblizzard", "poisonjab",
+        "pollenpuff", "protect", "psychup", "raindance", "rest", "seedbomb", "sleeptalk", "solarbeam",
+        "solarblade", "substitute", "sunnyday", "swordsdance", "takedown", "terablast", "trailblaze",
+        "tripleaxel", "upperhand", "vacuumwave", "weatherball"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "basculinbluestriped": {
+    "baseSpecies": "basculin",
+    "forme": "Blue-Striped",
+    "formName": "Blue-Striped Form",
+    "abilities": {"0":"rockhead","1":"adaptability","H":"moldbreaker"}
+  },
+  "basculinwhitestriped": {
+    "baseSpecies": "basculin",
+    "forme": "White-Striped",
+    "formName": "White-Striped Form",
+    "abilities": {"0":"rattled","1":"adaptability","H":"moldbreaker"},
+    "moves": {
+      "level": [
+        [1,"tailwhip"], [1,"watergun"], [4,"tackle"], [8,"flail"], [12,"aquajet"], [16,"bite"],
+        [20,"scaryface"], [24,"headbutt"], [28,"soak"], [32,"crunch"], [36,"takedown"], [40,"uproar"],
+        [44,"wavecrash"], [48,"thrash"], [52,"doubleedge"], [56,"headsmash"]
+      ],
+      "tm": [
+        "agility", "blizzard", "chillingwater", "crunch", "doubleedge", "endeavor", "endure", "facade",
+        "flipturn", "hydropump", "icebeam", "icefang", "icywind", "liquidation", "muddywater", "mudshot",
+        "protect", "psychicfangs", "raindance", "rest", "scaleshot", "scaryface", "sleeptalk",
+        "snowscape", "substitute", "surf", "swift", "takedown", "terablast", "uproar", "waterfall",
+        "waterpulse", "whirlpool", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": ["endeavor","lastrespects"]
+    },
+    "evolutions": [
+      {
+        "species": "basculegion",
+        "method": "other",
+        "param": null,
+        "condition": {"text":"Receive 294+ recoil without fainting"}
+      },
+      {
+        "species": "basculegionf",
+        "method": "other",
+        "param": null,
+        "condition": {"text":"Receive 294+ recoil without fainting"}
+      }
+    ]
+  },
+  "darumakagalar": {
+    "baseSpecies": "darumaka",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["ice"],
+    "color": "white",
+    "height": 7,
+    "weight": 400,
+    "moves": {
+      "level": [
+        [1,"powdersnow"], [1,"tackle"], [4,"taunt"], [8,"bite"], [12,"avalanche"], [16,"workup"],
+        [20,"icefang"], [24,"headbutt"], [28,"icepunch"], [32,"uproar"], [36,"bellydrum"],
+        [40,"blizzard"], [44,"thrash"], [48,"superpower"]
+      ],
+      "tm": [
+        "attract", "avalanche", "blizzard", "brickbreak", "dig", "encore", "endure", "facade",
+        "fireblast", "firefang", "firepunch", "firespin", "flamethrower", "flareblitz", "fling",
+        "focusenergy", "grassknot", "gyroball", "heatwave", "icebeam", "icefang", "icepunch", "megakick",
+        "megapunch", "overheat", "protect", "rest", "rockslide", "rocktomb", "round", "sleeptalk",
+        "snore", "solarbeam", "substitute", "sunnyday", "superpower", "taunt", "thief", "uproar",
+        "uturn", "willowisp", "workup", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": [
+        "flamewheel", "focuspunch", "freezedry", "hammerarm", "incinerate", "poweruppunch", "takedown",
+        "yawn"
+      ]
+    },
+    "evolutions": [{"species":"darmanitangalar","method":"item","param":"icestone","condition":null}]
+  },
+  "darmanitanzen": {
+    "baseSpecies": "darmanitan",
+    "forme": "Zen",
+    "formName": "Zen Mode",
+    "types": ["fire","psychic"],
+    "baseStats": {"hp":105,"atk":30,"def":105,"spa":140,"spd":105,"spe":55},
+    "abilities": {"0":"zenmode"},
+    "color": "blue",
+    "baseExp": 189,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":2,"spd":0,"spe":0},
+    "battleOnly": true
+  },
+  "darmanitangalar": {
+    "baseSpecies": "darmanitan",
+    "forme": "Galar",
+    "formName": "Galar",
+    "types": ["ice"],
+    "abilities": {"0":"gorillatactics","H":"zenmode"},
+    "color": "white",
+    "height": 17,
+    "weight": 1200,
+    "moves": {
+      "level": [
+        [0,"iciclecrash"], [1,"bite"], [1,"powdersnow"], [1,"tackle"], [1,"taunt"], [12,"avalanche"],
+        [16,"workup"], [20,"icefang"], [24,"headbutt"], [28,"icepunch"], [32,"uproar"], [38,"bellydrum"],
+        [44,"blizzard"], [50,"thrash"], [56,"superpower"]
+      ],
+      "tm": [
+        "attract", "avalanche", "blizzard", "bodypress", "bodyslam", "brickbreak", "bulkup", "bulldoze",
+        "dig", "earthquake", "encore", "endure", "facade", "fireblast", "firefang", "firepunch",
+        "firespin", "flamethrower", "flareblitz", "fling", "focusblast", "focusenergy", "gigaimpact",
+        "grassknot", "gyroball", "heatwave", "hyperbeam", "icebeam", "icefang", "icepunch",
+        "irondefense", "ironhead", "megakick", "megapunch", "overheat", "payback", "protect", "psychic",
+        "rest", "reversal", "rockslide", "rocktomb", "round", "sleeptalk", "snore", "solarbeam",
+        "stoneedge", "substitute", "sunnyday", "superpower", "taunt", "thief", "uproar", "uturn",
+        "willowisp", "workup", "zenheadbutt"
+      ],
+      "tutor": ["burningjealousy","lashout"],
+      "egg": []
+    }
+  },
+  "darmanitangalarzen": {
+    "baseSpecies": "darmanitan",
+    "forme": "Galar-Zen",
+    "formName": "Zen Mode",
+    "types": ["ice","fire"],
+    "baseStats": {"hp":105,"atk":160,"def":55,"spa":30,"spd":55,"spe":135},
+    "abilities": {"0":"zenmode"},
+    "color": "white",
+    "height": 17,
+    "weight": 1200,
+    "baseExp": 189,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":2,"spd":0,"spe":0},
+    "battleOnly": true
+  },
+  "yamaskgalar": {
+    "baseSpecies": "yamask",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["ground","ghost"],
+    "baseStats": {"hp":38,"atk":55,"def":85,"spa":30,"spd":65,"spe":30},
+    "abilities": {"0":"wanderingspirit"},
+    "moves": {
+      "level": [
+        [1,"astonish"], [1,"protect"], [4,"haze"], [8,"nightshade"], [12,"disable"], [16,"brutalswing"],
+        [20,"craftyshield"], [24,"hex"], [28,"meanlook"], [32,"slam"], [36,"curse"], [40,"shadowball"],
+        [44,"earthquake"], [48,"guardsplit"], [48,"powersplit"], [52,"destinybond"]
+      ],
+      "tm": [
+        "allyswitch", "attract", "brutalswing", "calmmind", "darkpulse", "earthpower", "earthquake",
+        "endure", "energyball", "facade", "faketears", "hex", "imprison", "irondefense", "nastyplot",
+        "payback", "protect", "psychic", "raindance", "rest", "rockslide", "rocktomb", "round",
+        "safeguard", "sandstorm", "shadowball", "skillswap", "sleeptalk", "snore", "substitute", "thief",
+        "toxicspikes", "trick", "trickroom", "willowisp", "wonderroom", "zenheadbutt"
+      ],
+      "tutor": ["poltergeist"],
+      "egg": ["memento"]
+    },
+    "evolutions": [
+      {
+        "species": "runerigus",
+        "method": "other",
+        "param": null,
+        "condition": {"text":"Have 49+ HP lost and walk under stone sculpture in Dusty Bowl"}
+      }
+    ]
+  },
+  "zoruahisui": {
+    "baseSpecies": "zorua",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["normal","ghost"],
+    "baseStats": {"hp":35,"atk":60,"def":40,"spa":85,"spd":40,"spe":70},
+    "moves": {
+      "level": [
+        [1,"leer"], [1,"scratch"], [4,"torment"], [8,"honeclaws"], [12,"shadowsneak"], [16,"curse"],
+        [20,"taunt"], [24,"knockoff"], [28,"spite"], [32,"agility"], [36,"shadowball"],
+        [40,"bittermalice"], [44,"nastyplot"], [48,"foulplay"]
+      ],
+      "tm": [
+        "agility", "burningjealousy", "calmmind", "confuseray", "curse", "darkpulse", "dig", "endure",
+        "facade", "faketears", "fling", "focuspunch", "foulplay", "gigaimpact", "hex", "hyperbeam",
+        "icywind", "imprison", "knockoff", "lashout", "nastyplot", "nightshade", "painsplit",
+        "phantomforce", "protect", "psychup", "raindance", "rest", "roar", "shadowball", "shadowclaw",
+        "skittersmack", "sleeptalk", "sludgebomb", "snarl", "snowscape", "spite", "substitute", "swift",
+        "takedown", "taunt", "terablast", "thief", "trick", "uturn", "willowisp"
+      ],
+      "tutor": [],
+      "egg": ["comeuppance","detect","extrasensory","memento"]
+    },
+    "evolutions": [{"species":"zoroarkhisui","method":"level","param":30,"condition":null}]
+  },
+  "zoroarkhisui": {
+    "baseSpecies": "zoroark",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["normal","ghost"],
+    "baseStats": {"hp":55,"atk":100,"def":60,"spa":125,"spd":60,"spe":110},
+    "weight": 730,
+    "moves": {
+      "level": [
+        [0,"shadowclaw"], [1,"honeclaws"], [1,"leer"], [1,"scratch"], [1,"torment"], [1,"uturn"],
+        [12,"shadowsneak"], [16,"curse"], [20,"taunt"], [24,"knockoff"], [28,"spite"], [34,"agility"],
+        [40,"shadowball"], [46,"bittermalice"], [52,"nastyplot"], [58,"foulplay"]
+      ],
+      "tm": [
+        "aerialace", "agility", "bodyslam", "brickbreak", "burningjealousy", "calmmind", "confuseray",
+        "crunch", "curse", "darkpulse", "dig", "endure", "facade", "faketears", "flamethrower", "fling",
+        "focusblast", "focuspunch", "foulplay", "gigaimpact", "grassknot", "helpinghand", "hex",
+        "hyperbeam", "hypervoice", "icywind", "imprison", "knockoff", "lashout", "lowkick", "lowsweep",
+        "nastyplot", "nightshade", "painsplit", "phantomforce", "poltergeist", "protect", "psychic",
+        "psychup", "raindance", "rest", "roar", "scaryface", "shadowball", "shadowclaw", "skittersmack",
+        "sleeptalk", "sludgebomb", "snarl", "snowscape", "spite", "substitute", "swift", "swordsdance",
+        "takedown", "taunt", "terablast", "thief", "throatchop", "trick", "uturn", "willowisp"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "deerlingsummer": {"baseSpecies":"deerling","forme":"Summer","formName":"Summer","color":"green"},
+  "deerlingautumn": {"baseSpecies":"deerling","forme":"Autumn","formName":"Autumn","color":"red"},
+  "deerlingwinter": {"baseSpecies":"deerling","forme":"Winter","formName":"Winter","color":"brown"},
+  "stunfiskgalar": {
+    "baseSpecies": "stunfisk",
+    "forme": "Galar",
+    "formName": "Galarian Form",
+    "types": ["ground","steel"],
+    "baseStats": {"hp":109,"atk":81,"def":99,"spa":66,"spd":84,"spe":32},
+    "abilities": {"0":"mimicry"},
+    "color": "green",
+    "weight": 205,
+    "moves": {
+      "level": [
+        [1,"metalclaw"], [1,"mudslap"], [1,"tackle"], [1,"watergun"], [5,"endure"], [10,"mudshot"],
+        [15,"revenge"], [20,"metalsound"], [25,"suckerpunch"], [30,"irondefense"], [35,"bounce"],
+        [40,"muddywater"], [45,"snaptrap"], [50,"flail"], [55,"fissure"]
+      ],
+      "tm": [
+        "attract", "bounce", "bulldoze", "crunch", "dig", "earthpower", "earthquake", "endure", "facade",
+        "flashcannon", "foulplay", "icefang", "irondefense", "muddywater", "mudshot", "payback",
+        "protect", "raindance", "rest", "revenge", "rockslide", "rocktomb", "round", "sandstorm",
+        "scald", "screech", "sleeptalk", "sludgebomb", "sludgewave", "snore", "stealthrock",
+        "stompingtantrum", "stoneedge", "substitute", "surf", "thunderwave", "uproar"
+      ],
+      "tutor": ["lashout","steelbeam","terrainpulse"],
+      "egg": ["astonish","bind","counter","curse","painsplit","reflecttype","spite","yawn"]
+    }
+  },
+  "braviaryhisui": {
+    "baseSpecies": "braviary",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["psychic","flying"],
+    "baseStats": {"hp":110,"atk":83,"def":70,"spa":112,"spd":70,"spe":65},
+    "abilities": {"0":"keeneye","1":"sheerforce","H":"tintedlens"},
+    "color": "white",
+    "height": 17,
+    "weight": 434,
+    "moves": {
+      "level": [
+        [0,"esperwing"], [1,"honeclaws"], [1,"leer"], [1,"peck"], [1,"skyattack"], [1,"superpower"],
+        [1,"wingattack"], [18,"tailwind"], [24,"scaryface"], [30,"aerialace"], [36,"slash"],
+        [42,"whirlwind"], [48,"crushclaw"], [57,"airslash"], [64,"defog"], [72,"thrash"],
+        [80,"hurricane"]
+      ],
+      "tm": [
+        "acrobatics", "aerialace", "agility", "aircutter", "airslash", "bodyslam", "bravebird", "bulkup",
+        "calmmind", "closecombat", "confuseray", "dazzlinggleam", "doubleedge", "dualwingbeat", "endure",
+        "expandingforce", "facade", "featherdance", "fly", "futuresight", "gigaimpact", "heatwave",
+        "helpinghand", "hurricane", "hyperbeam", "hypervoice", "icywind", "metalclaw", "nightshade",
+        "protect", "psybeam", "psychic", "psychicnoise", "psychicterrain", "psychup", "psyshock",
+        "raindance", "rest", "reversal", "rockslide", "rocktomb", "scaryface", "shadowball",
+        "shadowclaw", "sleeptalk", "snarl", "storedpower", "substitute", "sunnyday", "swift", "tailwind",
+        "takedown", "terablast", "uturn", "vacuumwave", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "tornadustherian": {
+    "baseSpecies": "tornadus",
+    "forme": "Therian",
+    "formName": "Therian Forme",
+    "baseStats": {"hp":79,"atk":100,"def":80,"spa":110,"spd":90,"spe":121},
+    "abilities": {"0":"regenerator"},
+    "height": 14,
+    "baseExp": 290,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":0,"spd":0,"spe":3}
+  },
+  "thundurustherian": {
+    "baseSpecies": "thundurus",
+    "forme": "Therian",
+    "formName": "Therian Forme",
+    "baseStats": {"hp":79,"atk":105,"def":70,"spa":145,"spd":80,"spe":101},
+    "abilities": {"0":"voltabsorb"},
+    "height": 30,
+    "baseExp": 290,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":3,"spd":0,"spe":0}
+  },
+  "landorustherian": {
+    "baseSpecies": "landorus",
+    "forme": "Therian",
+    "formName": "Therian Forme",
+    "baseStats": {"hp":89,"atk":145,"def":90,"spa":105,"spd":80,"spe":91},
+    "abilities": {"0":"intimidate"},
+    "height": 13,
+    "baseExp": 300,
+    "evYield": {"hp":0,"atk":3,"def":0,"spa":0,"spd":0,"spe":0}
+  },
+  "kyuremblack": {
+    "baseSpecies": "kyurem",
+    "forme": "Black",
+    "formName": "Black Kyurem",
+    "baseStats": {"hp":125,"atk":170,"def":100,"spa":120,"spd":90,"spe":95},
+    "abilities": {"0":"teravolt"},
+    "height": 33,
+    "baseExp": 350,
+    "evYield": {"hp":0,"atk":3,"def":0,"spa":0,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"ancientpower"], [1,"dragonbreath"], [1,"freezedry"], [1,"nobleroar"], [8,"slash"],
+        [16,"endeavor"], [24,"dragonpulse"], [32,"icebeam"], [40,"hypervoice"], [48,"fusionbolt"],
+        [56,"blizzard"], [64,"imprison"], [72,"outrage"], [80,"freezeshock"], [88,"sheercold"]
+      ],
+      "tm": [
+        "aerialace", "avalanche", "blizzard", "bodypress", "bodyslam", "breakingswipe", "dracometeor",
+        "dragoncheer", "dragonclaw", "dragondance", "dragonpulse", "dragontail", "dualwingbeat",
+        "earthpower", "endeavor", "endure", "facade", "flashcannon", "fling", "fly", "focusblast",
+        "gigaimpact", "helpinghand", "hyperbeam", "hypervoice", "icebeam", "icefang", "iciclespear",
+        "icywind", "imprison", "ironhead", "lightscreen", "outrage", "protect", "psychic", "raindance",
+        "reflect", "rest", "roar", "rockslide", "rocktomb", "scaleshot", "scaryface", "shadowball",
+        "shadowclaw", "sleeptalk", "snowscape", "stoneedge", "substitute", "sunnyday", "swift",
+        "takedown", "terablast", "weatherball", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "kyuremwhite": {
+    "baseSpecies": "kyurem",
+    "forme": "White",
+    "formName": "White Kyurem",
+    "baseStats": {"hp":125,"atk":120,"def":90,"spa":170,"spd":100,"spe":95},
+    "abilities": {"0":"turboblaze"},
+    "height": 36,
+    "baseExp": 350,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":3,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"ancientpower"], [1,"dragonbreath"], [1,"freezedry"], [1,"nobleroar"], [8,"slash"],
+        [16,"endeavor"], [24,"dragonpulse"], [32,"icebeam"], [40,"hypervoice"], [48,"fusionflare"],
+        [56,"blizzard"], [64,"imprison"], [72,"outrage"], [80,"iceburn"], [88,"sheercold"]
+      ],
+      "tm": [
+        "aerialace", "avalanche", "blizzard", "bodypress", "bodyslam", "breakingswipe", "dracometeor",
+        "dragoncheer", "dragonclaw", "dragondance", "dragonpulse", "dragontail", "dualwingbeat",
+        "earthpower", "endeavor", "endure", "facade", "flashcannon", "fling", "fly", "focusblast",
+        "gigaimpact", "helpinghand", "hyperbeam", "hypervoice", "icebeam", "icefang", "iciclespear",
+        "icywind", "imprison", "ironhead", "lightscreen", "outrage", "protect", "psychic", "raindance",
+        "reflect", "rest", "roar", "rockslide", "rocktomb", "scaleshot", "scaryface", "shadowball",
+        "shadowclaw", "sleeptalk", "snowscape", "stoneedge", "substitute", "sunnyday", "swift",
+        "takedown", "terablast", "weatherball", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "keldeoresolute": {"baseSpecies":"keldeo","forme":"Resolute","formName":"Resolute Form","baseExp":290},
+  "meloettapirouette": {
+    "baseSpecies": "meloetta",
+    "forme": "Pirouette",
+    "formName": "Pirouette Forme",
+    "types": ["normal","fighting"],
+    "baseStats": {"hp":100,"atk":128,"def":90,"spa":77,"spd":77,"spe":128},
+    "evYield": {"hp":0,"atk":1,"def":1,"spa":0,"spd":0,"spe":1},
+    "battleOnly": true
+  },
+  "genesectdouse": {"baseSpecies":"genesect","forme":"Douse","formName":"Douse","requiredItem":"dousedrive"},
+  "genesectshock": {"baseSpecies":"genesect","forme":"Shock","formName":"Shock","requiredItem":"shockdrive"},
+  "genesectburn": {"baseSpecies":"genesect","forme":"Burn","formName":"Burn","requiredItem":"burndrive"},
+  "genesectchill": {"baseSpecies":"genesect","forme":"Chill","formName":"Chill","requiredItem":"chilldrive"},
+  "greninjabond": {
+    "baseSpecies": "greninja",
+    "forme": "Bond",
+    "formName": "Bond",
+    "abilities": {"0":"battlebond"},
+    "gender": "male",
+    "eggGroups": ["undiscovered"],
+    "moves": {
+      "level": [
+        [0,"watershuriken"], [1,"growl"], [1,"haze"], [1,"nightslash"], [1,"pound"], [1,"quickattack"],
+        [1,"roleplay"], [1,"watergun"], [10,"lick"], [14,"waterpulse"], [19,"smokescreen"],
+        [23,"shadowsneak"], [28,"spikes"], [33,"aerialace"], [42,"substitute"], [49,"extrasensory"],
+        [56,"doubleteam"], [68,"hydropump"]
+      ],
+      "tm": [
+        "acrobatics", "aerialace", "blizzard", "brickbreak", "chillingwater", "darkpulse", "dig",
+        "endure", "facade", "falseswipe", "fling", "gigaimpact", "grassknot", "gunkshot", "haze",
+        "helpinghand", "hydrocannon", "hydropump", "hyperbeam", "icebeam", "icepunch", "icywind",
+        "liquidation", "lowkick", "lowsweep", "mudshot", "mudslap", "protect", "raindance", "rest",
+        "rockslide", "rocktomb", "sleeptalk", "sludgewave", "smackdown", "snowscape", "spikes",
+        "substitute", "surf", "swift", "swordsdance", "takedown", "taunt", "terablast", "thief",
+        "toxicspikes", "trailblaze", "upperhand", "uturn", "waterfall", "waterpledge", "waterpulse",
+        "weatherball"
+      ],
+      "tutor": [],
+      "egg": ["switcheroo"]
+    }
+  },
+  "greninjaash": {
+    "baseSpecies": "greninja",
+    "forme": "Ash",
+    "formName": "Ash-Greninja",
+    "baseStats": {"hp":72,"atk":145,"def":67,"spa":153,"spd":71,"spe":132},
+    "abilities": {"0":"battlebond"},
+    "gender": "male",
+    "eggGroups": ["undiscovered"],
+    "baseExp": 288,
+    "battleOnly": true
+  },
+  "vivillonicysnow": {"baseSpecies":"vivillon","forme":"Icy Snow","formName":"Icy Snow","color":"white"},
+  "vivillonpolar": {"baseSpecies":"vivillon","forme":"Polar","formName":"Polar","color":"blue"},
+  "vivillontundra": {"baseSpecies":"vivillon","forme":"Tundra","formName":"Tundra","color":"blue"},
+  "vivilloncontinental": {"baseSpecies":"vivillon","forme":"Continental","formName":"Continental","color":"yellow"},
+  "vivillongarden": {"baseSpecies":"vivillon","forme":"Garden","formName":"Garden","color":"green"},
+  "vivillonelegant": {"baseSpecies":"vivillon","forme":"Elegant","formName":"Elegant","color":"purple"},
+  "vivillonmodern": {"baseSpecies":"vivillon","forme":"Modern","formName":"Modern","color":"red"},
+  "vivillonmarine": {"baseSpecies":"vivillon","forme":"Marine","formName":"Marine","color":"blue"},
+  "vivillonarchipelago": {"baseSpecies":"vivillon","forme":"Archipelago","formName":"Archipelago","color":"brown"},
+  "vivillonhighplains": {"baseSpecies":"vivillon","forme":"High Plains","formName":"High Plains","color":"brown"},
+  "vivillonsandstorm": {"baseSpecies":"vivillon","forme":"Sandstorm","formName":"Sandstorm","color":"brown"},
+  "vivillonriver": {"baseSpecies":"vivillon","forme":"River","formName":"River","color":"brown"},
+  "vivillonmonsoon": {"baseSpecies":"vivillon","forme":"Monsoon","formName":"Monsoon","color":"gray"},
+  "vivillonsavanna": {"baseSpecies":"vivillon","forme":"Savanna","formName":"Savanna","color":"green"},
+  "vivillonsun": {"baseSpecies":"vivillon","forme":"Sun","formName":"Sun","color":"red"},
+  "vivillonocean": {"baseSpecies":"vivillon","forme":"Ocean","formName":"Ocean","color":"red"},
+  "vivillonjungle": {"baseSpecies":"vivillon","forme":"Jungle","formName":"Jungle","color":"green"},
+  "vivillonfancy": {
+    "baseSpecies": "vivillon",
+    "forme": "Fancy",
+    "formName": "Fancy",
+    "moves": {
+      "level": [
+        [0,"gust"], [1,"poisonpowder"], [1,"sleeppowder"], [1,"strugglebug"], [1,"stunspore"],
+        [12,"lightscreen"], [17,"psybeam"], [21,"supersonic"], [25,"drainingkiss"], [31,"safeguard"],
+        [35,"bugbuzz"], [45,"quiverdance"], [50,"hurricane"]
+      ],
+      "tm": [
+        "acrobatics", "aircutter", "airslash", "bugbuzz", "confuseray", "drainingkiss", "endure",
+        "energyball", "facade", "gigadrain", "gigaimpact", "hurricane", "hyperbeam", "irondefense",
+        "lightscreen", "pollenpuff", "pounce", "protect", "psybeam", "psychic", "raindance", "rest",
+        "sleeptalk", "solarbeam", "strugglebug", "substitute", "sunnyday", "swift", "tailwind",
+        "terablast", "thief", "uturn"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "vivillonpokeball": {
+    "baseSpecies": "vivillon",
+    "forme": "Pokeball",
+    "formName": "Pokeball",
+    "color": "red",
+    "moves": {
+      "level": [
+        [0,"gust"], [1,"poisonpowder"], [1,"sleeppowder"], [1,"strugglebug"], [1,"stunspore"],
+        [12,"lightscreen"], [17,"psybeam"], [21,"supersonic"], [25,"drainingkiss"], [31,"safeguard"],
+        [35,"bugbuzz"], [45,"quiverdance"], [50,"hurricane"]
+      ],
+      "tm": [
+        "acrobatics", "aircutter", "airslash", "bugbuzz", "confuseray", "drainingkiss", "endure",
+        "energyball", "facade", "gigadrain", "gigaimpact", "hurricane", "hyperbeam", "irondefense",
+        "lightscreen", "pollenpuff", "pounce", "protect", "psybeam", "psychic", "raindance", "rest",
+        "sleeptalk", "solarbeam", "strugglebug", "substitute", "sunnyday", "swift", "tailwind",
+        "terablast", "thief", "uturn"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "floetteeternal": {
+    "baseSpecies": "floette",
+    "forme": "Eternal",
+    "formName": "Eternal Flower",
+    "baseStats": {"hp":74,"atk":65,"def":67,"spa":125,"spd":128,"spe":92},
+    "eggGroups": ["undiscovered"],
+    "baseExp": 243,
+    "moves": {
+      "level": [
+        [1,"fairywind"], [1,"tackle"], [1,"vinewhip"], [10,"luckychant"], [15,"razorleaf"], [20,"wish"],
+        [25,"magicalleaf"], [27,"grassyterrain"], [33,"petalblizzard"], [38,"aromatherapy"],
+        [43,"mistyterrain"], [46,"moonblast"], [50,"lightofruin"], [51,"petaldance"], [58,"solarbeam"]
+      ],
+      "tm": [
+        "calmmind", "dazzlinggleam", "endure", "energyball", "facade", "gigadrain", "grassknot",
+        "grassyterrain", "helpinghand", "magicalleaf", "mistyterrain", "protect", "psychic", "raindance",
+        "rest", "seedbomb", "sleeptalk", "solarbeam", "substitute", "sunnyday"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "meowsticf": {
+    "baseSpecies": "meowstic",
+    "forme": "F",
+    "formName": "F",
+    "abilities": {"0":"keeneye","1":"infiltrator","H":"competitive"},
+    "gender": "female",
+    "color": "white",
+    "moves": {
+      "level": [
+        [1,"disarmingvoice"], [1,"fakeout"], [1,"leer"], [1,"magicalleaf"], [1,"scratch"],
+        [9,"confusion"], [12,"storedpower"], [15,"chargebeam"], [18,"covet"], [21,"psybeam"],
+        [24,"suckerpunch"], [29,"roleplay"], [34,"lightscreen"], [34,"reflect"], [39,"psyshock"],
+        [44,"extrasensory"], [49,"shadowball"], [54,"psychic"], [59,"futuresight"]
+      ],
+      "tm": [
+        "alluringvoice", "batonpass", "calmmind", "chargebeam", "charm", "darkpulse", "dig",
+        "disarmingvoice", "endure", "energyball", "expandingforce", "facade", "faketears", "futuresight",
+        "gigaimpact", "gravity", "helpinghand", "hyperbeam", "lightscreen", "magicalleaf", "nastyplot",
+        "playrough", "protect", "psybeam", "psychic", "psychicnoise", "psychicterrain", "psychup",
+        "psyshock", "raindance", "reflect", "rest", "shadowball", "skillswap", "sleeptalk",
+        "storedpower", "substitute", "sunnyday", "swift", "terablast", "thunderbolt", "thunderwave",
+        "trailblaze", "trick", "trickroom", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "aegislashblade": {
+    "baseSpecies": "aegislash",
+    "forme": "Blade",
+    "formName": "Blade Forme",
+    "baseStats": {"hp":60,"atk":140,"def":50,"spa":140,"spd":50,"spe":60},
+    "baseExp": 250,
+    "evYield": {"hp":0,"atk":2,"def":0,"spa":1,"spd":0,"spe":0},
+    "battleOnly": true
+  },
+  "sliggoohisui": {
+    "baseSpecies": "sliggoo",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["steel","dragon"],
+    "baseStats": {"hp":58,"atk":75,"def":83,"spa":83,"spd":113,"spe":40},
+    "abilities": {"0":"sapsipper","1":"shellarmor","H":"gooey"},
+    "height": 7,
+    "weight": 685,
+    "moves": {
+      "level": [
+        [0,"shelter"], [1,"absorb"], [1,"acidarmor"], [1,"dragonbreath"], [1,"tackle"], [1,"watergun"],
+        [15,"protect"], [20,"flail"], [25,"waterpulse"], [30,"raindance"], [35,"dragonpulse"],
+        [43,"curse"], [49,"ironhead"], [56,"muddywater"]
+      ],
+      "tm": [
+        "acidspray", "blizzard", "bodyslam", "charm", "chillingwater", "curse", "dracometeor",
+        "dragonpulse", "endure", "facade", "flashcannon", "gyroball", "heavyslam", "icebeam",
+        "icespinner", "ironhead", "muddywater", "mudshot", "outrage", "protect", "raindance", "rest",
+        "rockslide", "rocktomb", "sandstorm", "skittersmack", "sleeptalk", "sludgebomb", "sludgewave",
+        "steelbeam", "substitute", "sunnyday", "takedown", "terablast", "thunder", "thunderbolt",
+        "waterpulse"
+      ],
+      "tutor": [],
+      "egg": []
+    },
+    "evolutions": [{"species":"goodrahisui","method":"level","param":50,"condition":{"text":"during rain"}}]
+  },
+  "goodrahisui": {
+    "baseSpecies": "goodra",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["steel","dragon"],
+    "baseStats": {"hp":80,"atk":100,"def":100,"spa":110,"spd":150,"spe":60},
+    "abilities": {"0":"sapsipper","1":"shellarmor","H":"gooey"},
+    "height": 17,
+    "weight": 3341,
+    "moves": {
+      "level": [
+        [0,"irontail"], [1,"absorb"], [1,"acidspray"], [1,"dragonbreath"], [1,"feint"], [1,"shelter"],
+        [1,"tackle"], [1,"tearfullook"], [1,"watergun"], [15,"protect"], [20,"flail"], [25,"waterpulse"],
+        [30,"raindance"], [35,"dragonpulse"], [43,"curse"], [49,"bodyslam"], [49,"ironhead"],
+        [58,"muddywater"], [67,"heavyslam"]
+      ],
+      "tm": [
+        "acidspray", "blizzard", "bodypress", "bodyslam", "breakingswipe", "bulldoze", "charm",
+        "chillingwater", "curse", "dracometeor", "dragoncheer", "dragonclaw", "dragonpulse",
+        "dragontail", "earthquake", "endure", "facade", "fireblast", "firepunch", "flamethrower",
+        "flashcannon", "gigaimpact", "gyroball", "heavyslam", "hydropump", "hyperbeam", "icebeam",
+        "icespinner", "ironhead", "knockoff", "lashout", "muddywater", "mudshot", "outrage", "protect",
+        "raindance", "rest", "rockslide", "rocktomb", "sandstorm", "scaryface", "skittersmack",
+        "sleeptalk", "sludgebomb", "sludgewave", "steelbeam", "stompingtantrum", "substitute",
+        "sunnyday", "surf", "takedown", "terablast", "thunder", "thunderbolt", "thunderpunch",
+        "waterpulse", "weatherball"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "pumpkaboosmall": {
+    "baseSpecies": "pumpkaboo",
+    "forme": "Small",
+    "formName": "Small Size",
+    "baseStats": {"hp":44,"atk":66,"def":70,"spa":44,"spd":55,"spe":56},
+    "height": 3,
+    "weight": 35,
+    "evolutions": [{"species":"gourgeistsmall","method":"trade","param":null,"condition":null}]
+  },
+  "pumpkaboolarge": {
+    "baseSpecies": "pumpkaboo",
+    "forme": "Large",
+    "formName": "Large Size",
+    "baseStats": {"hp":54,"atk":66,"def":70,"spa":44,"spd":55,"spe":46},
+    "height": 5,
+    "weight": 75,
+    "evolutions": [{"species":"gourgeistlarge","method":"trade","param":null,"condition":null}]
+  },
+  "pumpkaboosuper": {
+    "baseSpecies": "pumpkaboo",
+    "forme": "Super",
+    "formName": "Super Size",
+    "baseStats": {"hp":59,"atk":66,"def":70,"spa":44,"spd":55,"spe":41},
+    "height": 8,
+    "weight": 150,
+    "evolutions": [{"species":"gourgeistsuper","method":"trade","param":null,"condition":null}]
+  },
+  "gourgeistsmall": {
+    "baseSpecies": "gourgeist",
+    "forme": "Small",
+    "formName": "Small Size",
+    "baseStats": {"hp":55,"atk":85,"def":122,"spa":58,"spd":75,"spe":99},
+    "height": 7,
+    "weight": 95
+  },
+  "gourgeistlarge": {
+    "baseSpecies": "gourgeist",
+    "forme": "Large",
+    "formName": "Large Size",
+    "baseStats": {"hp":75,"atk":95,"def":122,"spa":58,"spd":75,"spe":69},
+    "height": 11,
+    "weight": 140
+  },
+  "gourgeistsuper": {
+    "baseSpecies": "gourgeist",
+    "forme": "Super",
+    "formName": "Super Size",
+    "baseStats": {"hp":85,"atk":100,"def":122,"spa":58,"spd":75,"spe":54},
+    "height": 17,
+    "weight": 390
+  },
+  "avalugghisui": {
+    "baseSpecies": "avalugg",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["ice","rock"],
+    "baseStats": {"hp":95,"atk":127,"def":184,"spa":34,"spd":36,"spe":38},
+    "abilities": {"0":"strongjaw","1":"icebody","H":"sturdy"},
+    "height": 14,
+    "weight": 2624,
+    "moves": {
+      "level": [
+        [0,"rockslide"], [1,"harden"], [1,"powdersnow"], [1,"rapidspin"], [1,"tackle"], [1,"wideguard"],
+        [9,"curse"], [12,"icywind"], [15,"protect"], [18,"avalanche"], [21,"bite"], [24,"icefang"],
+        [27,"irondefense"], [30,"recover"], [33,"crunch"], [36,"takedown"], [41,"blizzard"],
+        [46,"doubleedge"], [51,"stoneedge"], [61,"mountaingale"]
+      ],
+      "tm": [
+        "avalanche", "blizzard", "bodypress", "bodyslam", "bulldoze", "chillingwater", "crunch", "curse",
+        "dig", "doubleedge", "earthquake", "endure", "facade", "gigaimpact", "gyroball", "hardpress",
+        "heavyslam", "highhorsepower", "hyperbeam", "icebeam", "icefang", "icespinner", "iciclespear",
+        "icywind", "irondefense", "ironhead", "meteorbeam", "protect", "raindance", "rest", "rockblast",
+        "rockslide", "rocktomb", "sandstorm", "scaryface", "sleeptalk", "snowscape", "stealthrock",
+        "stompingtantrum", "stoneedge", "substitute", "takedown", "terablast"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "zygarde10": {
+    "baseSpecies": "zygarde",
+    "forme": "10%",
+    "formName": "10% Forme",
+    "baseStats": {"hp":54,"atk":100,"def":71,"spa":61,"spd":85,"spe":115},
+    "color": "black",
+    "height": 12,
+    "weight": 335,
+    "baseExp": 243
+  },
+  "zygardecomplete": {
+    "baseSpecies": "zygarde",
+    "forme": "Complete",
+    "formName": "Complete Forme",
+    "baseStats": {"hp":216,"atk":100,"def":121,"spa":91,"spd":95,"spe":85},
+    "abilities": {"0":"powerconstruct"},
+    "color": "black",
+    "height": 45,
+    "weight": 6100,
+    "baseExp": 354,
+    "battleOnly": true
+  },
+  "dianciemega": {
+    "baseSpecies": "diancie",
+    "forme": "Mega",
+    "formName": "Mega Diancie",
+    "baseStats": {"hp":50,"atk":160,"def":110,"spa":160,"spd":110,"spe":110},
+    "abilities": {"0":"magicbounce"},
+    "height": 11,
+    "weight": 278,
+    "baseExp": 315,
+    "battleOnly": true,
+    "requiredItem": "diancite"
+  },
+  "hoopaunbound": {
+    "baseSpecies": "hoopa",
+    "forme": "Unbound",
+    "formName": "Hoopa Unbound",
+    "types": ["psychic","dark"],
+    "baseStats": {"hp":80,"atk":160,"def":60,"spa":170,"spd":130,"spe":80},
+    "height": 65,
+    "weight": 4900,
+    "baseExp": 306
+  },
+  "decidueyehisui": {
+    "baseSpecies": "decidueye",
+    "forme": "Hisui",
+    "formName": "Hisuian Form",
+    "types": ["grass","fighting"],
+    "baseStats": {"hp":88,"atk":112,"def":80,"spa":95,"spd":95,"spe":60},
+    "abilities": {"0":"overgrow","H":"scrappy"},
+    "weight": 370,
+    "moves": {
+      "level": [
+        [0,"triplearrows"], [1,"growl"], [1,"leafage"], [1,"leafstorm"], [1,"tackle"], [1,"uturn"],
+        [9,"peck"], [12,"shadowsneak"], [15,"razorleaf"], [20,"synthesis"], [25,"pluck"], [30,"bulkup"],
+        [37,"suckerpunch"], [44,"leafblade"], [51,"featherdance"], [58,"bravebird"]
+      ],
+      "tm": [
+        "aerialace", "aircutter", "airslash", "aurasphere", "batonpass", "bravebird", "brickbreak",
+        "bulkup", "bulletseed", "closecombat", "coaching", "confuseray", "dualwingbeat", "endure",
+        "energyball", "facade", "falseswipe", "featherdance", "focusblast", "focuspunch", "frenzyplant",
+        "gigadrain", "gigaimpact", "grassknot", "grasspledge", "grassyglide", "grassyterrain", "haze",
+        "helpinghand", "hyperbeam", "knockoff", "leafstorm", "lightscreen", "lowkick", "lowsweep",
+        "magicalleaf", "nastyplot", "nightshade", "protect", "raindance", "rest", "reversal", "rocktomb",
+        "scaryface", "seedbomb", "shadowclaw", "sleeptalk", "smackdown", "solarbeam", "substitute",
+        "sunnyday", "swift", "swordsdance", "tailwind", "takedown", "taunt", "terablast", "trailblaze",
+        "upperhand", "uturn"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "oricoriopompom": {
+    "baseSpecies": "oricorio",
+    "forme": "Pom-Pom",
+    "formName": "Pom-Pom Style",
+    "types": ["electric","flying"],
+    "color": "yellow"
+  },
+  "oricoriopau": {
+    "baseSpecies": "oricorio",
+    "forme": "Pa'u",
+    "formName": "Pa’u Style",
+    "types": ["psychic","flying"],
+    "color": "pink"
+  },
+  "oricoriosensu": {
+    "baseSpecies": "oricorio",
+    "forme": "Sensu",
+    "formName": "Sensu Style",
+    "types": ["ghost","flying"],
+    "color": "purple"
+  },
+  "rockruffdusk": {
+    "baseSpecies": "rockruff",
+    "forme": "Dusk",
+    "formName": "Dusk",
+    "abilities": {"0":"owntempo"},
+    "evolutions": [{"species":"lycanrocdusk","method":"level","param":25,"condition":{"time":"evening"}}]
+  },
+  "lycanrocmidnight": {
+    "baseSpecies": "lycanroc",
+    "forme": "Midnight",
+    "formName": "Midnight Form",
+    "baseStats": {"hp":85,"atk":115,"def":75,"spa":55,"spd":75,"spe":82},
+    "abilities": {"0":"keeneye","1":"vitalspirit","H":"noguard"},
+    "color": "red",
+    "height": 11,
+    "moves": {
+      "level": [
+        [0,"counter"], [1,"doubleteam"], [1,"endure"], [1,"leer"], [1,"reversal"], [1,"sandattack"],
+        [1,"tackle"], [1,"taunt"], [12,"rockthrow"], [16,"howl"], [20,"bite"], [24,"rocktomb"],
+        [30,"roar"], [36,"rockslide"], [42,"crunch"], [48,"scaryface"], [54,"stealthrock"],
+        [60,"stoneedge"]
+      ],
+      "tm": [
+        "bodyslam", "brickbreak", "bulkup", "bulldoze", "charm", "closecombat", "crunch", "dig",
+        "doubleedge", "earthpower", "endeavor", "endure", "facade", "firefang", "firepunch", "fling",
+        "focuspunch", "foulplay", "gigaimpact", "helpinghand", "hypervoice", "irondefense", "ironhead",
+        "knockoff", "lashout", "lowsweep", "mudslap", "outrage", "playrough", "protect", "psychicfangs",
+        "rest", "reversal", "roar", "rockblast", "rockslide", "rocktomb", "sandstorm", "scaryface",
+        "shadowclaw", "sleeptalk", "snarl", "stealthrock", "stompingtantrum", "stoneedge", "substitute",
+        "sunnyday", "swordsdance", "takedown", "taunt", "terablast", "throatchop", "thunderfang",
+        "thunderpunch", "trailblaze", "upperhand", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "lycanrocdusk": {
+    "baseSpecies": "lycanroc",
+    "forme": "Dusk",
+    "formName": "Dusk Form",
+    "baseStats": {"hp":75,"atk":117,"def":65,"spa":55,"spd":65,"spe":110},
+    "abilities": {"0":"toughclaws"},
+    "moves": {
+      "level": [
+        [0,"crushclaw"], [1,"accelerock"], [1,"counter"], [1,"doubleteam"], [1,"endure"], [1,"leer"],
+        [1,"quickattack"], [1,"quickguard"], [1,"reversal"], [1,"sandattack"], [1,"suckerpunch"],
+        [1,"tackle"], [1,"taunt"], [12,"rockthrow"], [16,"howl"], [20,"bite"], [24,"rocktomb"],
+        [30,"roar"], [36,"rockslide"], [42,"crunch"], [48,"scaryface"], [54,"stealthrock"],
+        [60,"stoneedge"]
+      ],
+      "tm": [
+        "bodyslam", "brickbreak", "bulkup", "bulldoze", "charm", "closecombat", "crunch", "dig",
+        "doubleedge", "drillrun", "earthpower", "endeavor", "endure", "facade", "firefang", "gigaimpact",
+        "helpinghand", "hypervoice", "irondefense", "ironhead", "mudslap", "outrage", "playrough",
+        "protect", "psychicfangs", "rest", "reversal", "roar", "rockblast", "rockslide", "rocktomb",
+        "sandstorm", "scaryface", "sleeptalk", "snarl", "stealthrock", "stompingtantrum", "stoneedge",
+        "substitute", "swordsdance", "takedown", "taunt", "terablast", "throatchop", "thunderfang",
+        "trailblaze", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "wishiwashischool": {
+    "baseSpecies": "wishiwashi",
+    "forme": "School",
+    "formName": "School Form",
+    "baseStats": {"hp":45,"atk":140,"def":130,"spa":140,"spd":135,"spe":30},
+    "height": 82,
+    "weight": 786,
+    "baseExp": 217,
+    "battleOnly": true
+  },
+  "silvallybug": {
+    "baseSpecies": "silvally",
+    "forme": "Bug",
+    "formName": "Bug",
+    "types": ["bug"],
+    "requiredItem": "bugmemory"
+  },
+  "silvallydark": {
+    "baseSpecies": "silvally",
+    "forme": "Dark",
+    "formName": "Dark",
+    "types": ["dark"],
+    "requiredItem": "darkmemory"
+  },
+  "silvallydragon": {
+    "baseSpecies": "silvally",
+    "forme": "Dragon",
+    "formName": "Dragon",
+    "types": ["dragon"],
+    "requiredItem": "dragonmemory"
+  },
+  "silvallyelectric": {
+    "baseSpecies": "silvally",
+    "forme": "Electric",
+    "formName": "Electric",
+    "types": ["electric"],
+    "requiredItem": "electricmemory"
+  },
+  "silvallyfairy": {
+    "baseSpecies": "silvally",
+    "forme": "Fairy",
+    "formName": "Fairy",
+    "types": ["fairy"],
+    "requiredItem": "fairymemory"
+  },
+  "silvallyfighting": {
+    "baseSpecies": "silvally",
+    "forme": "Fighting",
+    "formName": "Fighting",
+    "types": ["fighting"],
+    "requiredItem": "fightingmemory"
+  },
+  "silvallyfire": {
+    "baseSpecies": "silvally",
+    "forme": "Fire",
+    "formName": "Fire",
+    "types": ["fire"],
+    "requiredItem": "firememory"
+  },
+  "silvallyflying": {
+    "baseSpecies": "silvally",
+    "forme": "Flying",
+    "formName": "Flying",
+    "types": ["flying"],
+    "requiredItem": "flyingmemory"
+  },
+  "silvallyghost": {
+    "baseSpecies": "silvally",
+    "forme": "Ghost",
+    "formName": "Ghost",
+    "types": ["ghost"],
+    "requiredItem": "ghostmemory"
+  },
+  "silvallygrass": {
+    "baseSpecies": "silvally",
+    "forme": "Grass",
+    "formName": "Grass",
+    "types": ["grass"],
+    "requiredItem": "grassmemory"
+  },
+  "silvallyground": {
+    "baseSpecies": "silvally",
+    "forme": "Ground",
+    "formName": "Ground",
+    "types": ["ground"],
+    "requiredItem": "groundmemory"
+  },
+  "silvallyice": {
+    "baseSpecies": "silvally",
+    "forme": "Ice",
+    "formName": "Ice",
+    "types": ["ice"],
+    "requiredItem": "icememory"
+  },
+  "silvallypoison": {
+    "baseSpecies": "silvally",
+    "forme": "Poison",
+    "formName": "Poison",
+    "types": ["poison"],
+    "requiredItem": "poisonmemory"
+  },
+  "silvallypsychic": {
+    "baseSpecies": "silvally",
+    "forme": "Psychic",
+    "formName": "Psychic",
+    "types": ["psychic"],
+    "requiredItem": "psychicmemory"
+  },
+  "silvallyrock": {
+    "baseSpecies": "silvally",
+    "forme": "Rock",
+    "formName": "Rock",
+    "types": ["rock"],
+    "requiredItem": "rockmemory"
+  },
+  "silvallysteel": {
+    "baseSpecies": "silvally",
+    "forme": "Steel",
+    "formName": "Steel",
+    "types": ["steel"],
+    "requiredItem": "steelmemory"
+  },
+  "silvallywater": {
+    "baseSpecies": "silvally",
+    "forme": "Water",
+    "formName": "Water",
+    "types": ["water"],
+    "requiredItem": "watermemory"
+  },
+  "miniororange": {
+    "baseSpecies": "minior",
+    "forme": "Orange",
+    "formName": "Orange Core",
+    "weight": 3,
+    "baseExp": 175,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":1,"spd":0,"spe":0}
+  },
+  "minioryellow": {
+    "baseSpecies": "minior",
+    "forme": "Yellow",
+    "formName": "Yellow Core",
+    "color": "yellow",
+    "weight": 3,
+    "baseExp": 175,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":1,"spd":0,"spe":0}
+  },
+  "miniorgreen": {
+    "baseSpecies": "minior",
+    "forme": "Green",
+    "formName": "Green Core",
+    "color": "green",
+    "weight": 3,
+    "baseExp": 175,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":1,"spd":0,"spe":0}
+  },
+  "miniorblue": {
+    "baseSpecies": "minior",
+    "forme": "Blue",
+    "formName": "Blue Core",
+    "color": "blue",
+    "weight": 3,
+    "baseExp": 175,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":1,"spd":0,"spe":0}
+  },
+  "miniorindigo": {
+    "baseSpecies": "minior",
+    "forme": "Indigo",
+    "formName": "Indigo Core",
+    "color": "blue",
+    "weight": 3,
+    "baseExp": 175,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":1,"spd":0,"spe":0}
+  },
+  "miniorviolet": {
+    "baseSpecies": "minior",
+    "forme": "Violet",
+    "formName": "Violet Core",
+    "color": "purple",
+    "weight": 3,
+    "baseExp": 175,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":1,"spd":0,"spe":0}
+  },
+  "miniormeteor": {
+    "baseSpecies": "minior",
+    "forme": "Meteor",
+    "formName": "Meteor",
+    "baseStats": {"hp":60,"atk":60,"def":100,"spa":60,"spd":100,"spe":60},
+    "color": "brown",
+    "battleOnly": true
+  },
+  "mimikyubusted": {"baseSpecies":"mimikyu","forme":"Busted","formName":"Busted Form","battleOnly":true},
+  "necrozmaduskmane": {
+    "baseSpecies": "necrozma",
+    "forme": "Dusk-Mane",
+    "formName": "Dusk-Mane",
+    "types": ["psychic","steel"],
+    "baseStats": {"hp":97,"atk":157,"def":127,"spa":113,"spd":109,"spe":77},
+    "color": "yellow",
+    "height": 38,
+    "weight": 4600
+  },
+  "necrozmadawnwings": {
+    "baseSpecies": "necrozma",
+    "forme": "Dawn-Wings",
+    "formName": "Dawn-Wings",
+    "types": ["psychic","ghost"],
+    "baseStats": {"hp":97,"atk":113,"def":109,"spa":157,"spd":127,"spe":77},
+    "color": "blue",
+    "height": 42,
+    "weight": 3500
+  },
+  "necrozmaultra": {
+    "baseSpecies": "necrozma",
+    "forme": "Ultra",
+    "formName": "Ultra Necrozma",
+    "types": ["psychic","dragon"],
+    "baseStats": {"hp":97,"atk":167,"def":97,"spa":167,"spd":97,"spe":129},
+    "abilities": {"0":"neuroforce"},
+    "color": "yellow",
+    "height": 75,
+    "baseExp": 339,
+    "evYield": {"hp":0,"atk":1,"def":0,"spa":1,"spd":0,"spe":1},
+    "battleOnly": true,
+    "requiredItem": "ultranecroziumz"
+  },
+  "magearnaoriginal": {
+    "baseSpecies": "magearna",
+    "forme": "Original",
+    "formName": "Original Color",
+    "color": "red",
+    "baseExp": 300
+  },
+  "cramorantgulping": {"baseSpecies":"cramorant","forme":"Gulping","formName":"Gulping Form","battleOnly":true},
+  "cramorantgorging": {"baseSpecies":"cramorant","forme":"Gorging","formName":"Gorging Form","battleOnly":true},
+  "toxtricitylowkey": {
+    "baseSpecies": "toxtricity",
+    "forme": "Low-Key",
+    "formName": "Low Key Form",
+    "abilities": {"0":"punkrock","1":"minus","H":"technician"},
+    "moves": {
+      "level": [
+        [0,"spark"], [1,"acid"], [1,"acidspray"], [1,"belch"], [1,"flail"], [1,"growl"], [1,"leer"],
+        [1,"nobleroar"], [1,"nuzzle"], [1,"tearfullook"], [1,"thundershock"], [4,"charge"],
+        [8,"shockwave"], [12,"scaryface"], [16,"taunt"], [24,"screech"], [28,"swagger"], [32,"toxic"],
+        [36,"discharge"], [40,"poisonjab"], [44,"overdrive"], [48,"boomburst"], [52,"magneticflux"]
+      ],
+      "tm": [
+        "acidspray", "brickbreak", "charge", "chargebeam", "charm", "drainpunch", "eerieimpulse",
+        "electricterrain", "electroball", "electroweb", "encore", "endeavor", "endure", "facade",
+        "firepunch", "fling", "gigaimpact", "gunkshot", "helpinghand", "hex", "hyperbeam", "hypervoice",
+        "metalsound", "metronome", "poisonjab", "poisontail", "protect", "psychicnoise", "raindance",
+        "rest", "scaryface", "sleeptalk", "sludgebomb", "sludgewave", "snarl", "storedpower",
+        "substitute", "sunnyday", "swift", "takedown", "taunt", "terablast", "thief", "throatchop",
+        "thunder", "thunderbolt", "thunderfang", "thunderpunch", "thunderwave", "toxic", "toxicspikes",
+        "trailblaze", "uproar", "venoshock", "voltswitch", "wildcharge"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "sinisteaantique": {
+    "baseSpecies": "sinistea",
+    "forme": "Antique",
+    "formName": "Antique",
+    "eggGroups": ["undiscovered"],
+    "evolutions": [{"species":"polteageistantique","method":"item","param":"chippedpot","condition":null}]
+  },
+  "polteageistantique": {
+    "baseSpecies": "polteageist",
+    "forme": "Antique",
+    "formName": "Antique",
+    "eggGroups": ["undiscovered"]
+  },
+  "alcremierubycream": {"baseSpecies":"alcremie","forme":"Ruby-Cream","formName":"Ruby-Cream","color":"pink"},
+  "alcremiematchacream": {
+    "baseSpecies": "alcremie",
+    "forme": "Matcha-Cream",
+    "formName": "Matcha-Cream",
+    "color": "green"
+  },
+  "alcremiemintcream": {"baseSpecies":"alcremie","forme":"Mint-Cream","formName":"Mint-Cream","color":"blue"},
+  "alcremielemoncream": {"baseSpecies":"alcremie","forme":"Lemon-Cream","formName":"Lemon-Cream","color":"yellow"},
+  "alcremierubyswirl": {"baseSpecies":"alcremie","forme":"Ruby-Swirl","formName":"Ruby-Swirl","color":"yellow"},
+  "alcremiecaramelswirl": {
+    "baseSpecies": "alcremie",
+    "forme": "Caramel-Swirl",
+    "formName": "Caramel-Swirl",
+    "color": "yellow"
+  },
+  "alcremierainbowswirl": {
+    "baseSpecies": "alcremie",
+    "forme": "Rainbow-Swirl",
+    "formName": "Rainbow-Swirl",
+    "color": "yellow"
+  },
+  "eiscuenoice": {
+    "baseSpecies": "eiscue",
+    "forme": "Noice",
+    "formName": "Noice Face",
+    "baseStats": {"hp":75,"atk":80,"def":70,"spa":65,"spd":50,"spe":130},
+    "battleOnly": true
+  },
+  "indeedeef": {
+    "baseSpecies": "indeedee",
+    "forme": "F",
+    "formName": "F",
+    "baseStats": {"hp":70,"atk":55,"def":65,"spa":95,"spd":105,"spe":85},
+    "abilities": {"0":"owntempo","1":"synchronize","H":"psychicsurge"},
+    "gender": "female",
+    "moves": {
+      "level": [
+        [1,"playnice"], [1,"storedpower"], [5,"batonpass"], [10,"disarmingvoice"], [15,"psybeam"],
+        [20,"helpinghand"], [25,"followme"], [30,"healingwish"], [35,"psychic"], [40,"calmmind"],
+        [45,"guardsplit"], [50,"psychicterrain"]
+      ],
+      "tm": [
+        "alluringvoice", "batonpass", "bodyslam", "calmmind", "charm", "dazzlinggleam", "disarmingvoice",
+        "drainingkiss", "drainpunch", "endure", "energyball", "facade", "helpinghand", "hypervoice",
+        "imprison", "lightscreen", "magicalleaf", "metronome", "playrough", "protect", "psybeam",
+        "psychic", "psychicterrain", "psychup", "psyshock", "reflect", "rest", "shadowball", "skillswap",
+        "sleeptalk", "storedpower", "substitute", "swift", "takedown", "terablast", "trick", "trickroom",
+        "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": ["fakeout","healpulse","psychup"]
+    }
+  },
+  "morpekohangry": {
+    "baseSpecies": "morpeko",
+    "forme": "Hangry",
+    "formName": "Hangry Mode",
+    "color": "purple",
+    "battleOnly": true
+  },
+  "zaciancrowned": {
+    "baseSpecies": "zacian",
+    "forme": "Crowned",
+    "formName": "Crowned Sword",
+    "types": ["fairy","steel"],
+    "baseStats": {"hp":92,"atk":150,"def":115,"spa":80,"spd":115,"spe":148},
+    "weight": 3550,
+    "baseExp": 360,
+    "battleOnly": true,
+    "requiredItem": "rustedsword"
+  },
+  "zamazentacrowned": {
+    "baseSpecies": "zamazenta",
+    "forme": "Crowned",
+    "formName": "Crowned Shield",
+    "types": ["fighting","steel"],
+    "baseStats": {"hp":92,"atk":120,"def":140,"spa":80,"spd":140,"spe":128},
+    "weight": 7850,
+    "baseExp": 360,
+    "battleOnly": true,
+    "requiredItem": "rustedshield"
+  },
+  "urshifurapidstrike": {
+    "baseSpecies": "urshifu",
+    "forme": "Rapid-Strike",
+    "formName": "Rapid Strike Style",
+    "types": ["fighting","water"],
+    "moves": {
+      "level": [
+        [0,"surgingstrikes"], [1,"aquajet"], [1,"endure"], [1,"focusenergy"], [1,"leer"],
+        [1,"rocksmash"], [12,"aerialace"], [16,"scaryface"], [20,"headbutt"], [24,"brickbreak"],
+        [28,"detect"], [32,"bulkup"], [36,"ironhead"], [40,"dynamicpunch"], [44,"counter"],
+        [48,"closecombat"], [52,"focuspunch"]
+      ],
+      "tm": [
+        "acrobatics", "aerialace", "aurasphere", "bodypress", "bodyslam", "brickbreak", "bulkup",
+        "chillingwater", "closecombat", "coaching", "dig", "doubleedge", "drainpunch", "endure",
+        "facade", "falseswipe", "firepunch", "fling", "focusblast", "focuspunch", "gigaimpact",
+        "helpinghand", "icepunch", "icespinner", "irondefense", "ironhead", "liquidation", "lowkick",
+        "lowsweep", "poisonjab", "protect", "raindance", "rest", "reversal", "rockslide", "rocktomb",
+        "scaryface", "sleeptalk", "stoneedge", "substitute", "swift", "swordsdance", "takedown", "taunt",
+        "terablast", "thunderpunch", "trailblaze", "uturn", "waterfall", "whirlpool", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "zarudedada": {"baseSpecies":"zarude","forme":"Dada","formName":"Dada"},
+  "calyrexice": {
+    "baseSpecies": "calyrex",
+    "forme": "Ice",
+    "formName": "Ice Rider",
+    "types": ["psychic","ice"],
+    "baseStats": {"hp":100,"atk":165,"def":150,"spa":85,"spd":130,"spe":50},
+    "abilities": {"0":"asoneglastrier"},
+    "color": "white",
+    "height": 24,
+    "weight": 8091,
+    "baseExp": 340,
+    "evYield": {"hp":0,"atk":3,"def":0,"spa":0,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"avalanche"], [1,"confusion"], [1,"doubleedge"], [1,"doublekick"], [1,"glaciallance"],
+        [1,"growth"], [1,"iciclecrash"], [1,"irondefense"], [1,"megadrain"], [1,"mist"], [1,"pound"],
+        [1,"stomp"], [1,"swordsdance"], [1,"tackle"], [1,"tailwhip"], [1,"takedown"], [1,"taunt"],
+        [1,"thrash"], [1,"torment"], [8,"lifedew"], [16,"gigadrain"], [24,"psyshock"],
+        [32,"helpinghand"], [40,"grassyterrain"], [40,"psychicterrain"], [48,"energyball"],
+        [56,"psychic"], [64,"leechseed"], [72,"healpulse"], [80,"solarbeam"], [88,"futuresight"]
+      ],
+      "tm": [
+        "agility", "avalanche", "batonpass", "blizzard", "bodypress", "bodyslam", "bulldoze",
+        "bulletseed", "calmmind", "closecombat", "crunch", "curse", "doubleedge", "drainingkiss",
+        "encore", "endure", "energyball", "expandingforce", "facade", "futuresight", "gigadrain",
+        "gigaimpact", "grassknot", "grassyterrain", "gravity", "heavyslam", "helpinghand",
+        "highhorsepower", "hyperbeam", "icebeam", "iciclespear", "icywind", "imprison", "irondefense",
+        "lashout", "leafstorm", "lightscreen", "magicalleaf", "metronome", "mudshot", "outrage",
+        "pollenpuff", "protect", "psybeam", "psychic", "psychicterrain", "psychup", "psyshock",
+        "reflect", "rest", "roar", "scaryface", "seedbomb", "skillswap", "sleeptalk", "smartstrike",
+        "snarl", "snowscape", "solarbeam", "solarblade", "stompingtantrum", "storedpower", "substitute",
+        "sunnyday", "swift", "swordsdance", "takedown", "taunt", "terablast", "throatchop", "trailblaze",
+        "trick", "trickroom", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "calyrexshadow": {
+    "baseSpecies": "calyrex",
+    "forme": "Shadow",
+    "formName": "Shadow Rider",
+    "types": ["psychic","ghost"],
+    "baseStats": {"hp":100,"atk":85,"def":80,"spa":165,"spd":100,"spe":150},
+    "abilities": {"0":"asonespectrier"},
+    "color": "black",
+    "height": 24,
+    "weight": 536,
+    "baseExp": 340,
+    "evYield": {"hp":0,"atk":0,"def":0,"spa":3,"spd":0,"spe":0},
+    "moves": {
+      "level": [
+        [1,"agility"], [1,"astralbarrage"], [1,"confuseray"], [1,"confusion"], [1,"disable"],
+        [1,"doubleedge"], [1,"doublekick"], [1,"growth"], [1,"haze"], [1,"hex"], [1,"megadrain"],
+        [1,"nastyplot"], [1,"pound"], [1,"shadowball"], [1,"stomp"], [1,"tackle"], [1,"tailwhip"],
+        [1,"takedown"], [1,"thrash"], [8,"lifedew"], [16,"gigadrain"], [24,"psyshock"],
+        [32,"helpinghand"], [40,"grassyterrain"], [40,"psychicterrain"], [48,"energyball"],
+        [56,"psychic"], [64,"leechseed"], [72,"healpulse"], [80,"solarbeam"], [88,"futuresight"]
+      ],
+      "tm": [
+        "agility", "batonpass", "bodyslam", "bulldoze", "bulletseed", "calmmind", "confuseray", "crunch",
+        "curse", "darkpulse", "doubleedge", "drainingkiss", "encore", "endure", "energyball",
+        "expandingforce", "facade", "foulplay", "futuresight", "gigadrain", "gigaimpact", "grassknot",
+        "grassyterrain", "gravity", "haze", "helpinghand", "hex", "hyperbeam", "imprison", "lashout",
+        "leafstorm", "lightscreen", "magicalleaf", "metronome", "mudshot", "nastyplot", "nightshade",
+        "painsplit", "phantomforce", "pollenpuff", "protect", "psybeam", "psychic", "psychicterrain",
+        "psychup", "psyshock", "reflect", "rest", "scaryface", "seedbomb", "shadowball", "skillswap",
+        "sleeptalk", "snarl", "solarbeam", "solarblade", "stompingtantrum", "storedpower", "substitute",
+        "sunnyday", "swift", "takedown", "taunt", "terablast", "trick", "trickroom", "willowisp",
+        "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "ursalunabloodmoon": {
+    "baseSpecies": "ursaluna",
+    "forme": "Bloodmoon",
+    "formName": "Bloodmoon",
+    "baseStats": {"hp":113,"atk":70,"def":120,"spa":135,"spd":65,"spe":52},
+    "abilities": {"0":"mindseye"},
+    "gender": "male",
+    "moves": {
+      "level": [
+        [1,"headlongrush"], [1,"leer"], [1,"lick"], [1,"moonlight"], [1,"scratch"], [8,"furyswipes"],
+        [13,"payback"], [17,"harden"], [22,"slash"], [25,"playnice"], [35,"scaryface"], [41,"rest"],
+        [41,"snore"], [48,"earthpower"], [56,"moonblast"], [64,"hammerarm"], [70,"bloodmoon"]
+      ],
+      "tm": [
+        "avalanche", "bodypress", "bodyslam", "brickbreak", "bulldoze", "calmmind", "crunch", "dig",
+        "doubleedge", "earthpower", "earthquake", "endure", "facade", "firepunch", "fling", "focusblast",
+        "focuspunch", "gigaimpact", "gunkshot", "hardpress", "heavyslam", "helpinghand",
+        "highhorsepower", "hyperbeam", "hypervoice", "icepunch", "lowkick", "metalclaw", "mudshot",
+        "protect", "raindance", "rest", "roar", "rockslide", "rocktomb", "scaryface", "seedbomb",
+        "shadowclaw", "sleeptalk", "smackdown", "snarl", "stompingtantrum", "stoneedge", "substitute",
+        "sunnyday", "swift", "swordsdance", "takedown", "taunt", "terablast", "thief", "thunderpunch",
+        "trailblaze", "uproar", "vacuumwave"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "basculegionf": {
+    "baseSpecies": "basculegion",
+    "forme": "F",
+    "formName": "F",
+    "baseStats": {"hp":120,"atk":92,"def":65,"spa":100,"spd":75,"spe":78},
+    "gender": "female"
+  },
+  "enamorustherian": {
+    "baseSpecies": "enamorus",
+    "forme": "Therian",
+    "formName": "Therian Forme",
+    "baseStats": {"hp":74,"atk":115,"def":110,"spa":135,"spd":100,"spe":46},
+    "abilities": {"0":"overcoat"}
+  },
+  "oinkolognef": {
+    "baseSpecies": "oinkologne",
+    "forme": "F",
+    "formName": "F",
+    "baseStats": {"hp":115,"atk":90,"def":70,"spa":59,"spd":90,"spe":65},
+    "abilities": {"0":"aromaveil","1":"gluttony","H":"thickfat"},
+    "gender": "female",
+    "color": "brown",
+    "moves": {
+      "level": [
+        [1,"tackle"], [1,"tailwhip"], [3,"disarmingvoice"], [6,"echoedvoice"], [9,"mudshot"],
+        [12,"covet"], [15,"dig"], [17,"headbutt"], [23,"yawn"], [28,"takedown"], [30,"workup"],
+        [34,"uproar"], [39,"doubleedge"], [45,"earthpower"], [51,"belch"]
+      ],
+      "tm": [
+        "bodypress", "bodyslam", "bulldoze", "bulletseed", "chillingwater", "curse", "dig",
+        "disarmingvoice", "doubleedge", "earthpower", "endeavor", "endure", "energyball", "facade",
+        "gigaimpact", "helpinghand", "highhorsepower", "hyperbeam", "hypervoice", "ironhead", "lashout",
+        "mudshot", "mudslap", "playrough", "protect", "raindance", "rest", "seedbomb", "sleeptalk",
+        "stompingtantrum", "substitute", "sunnyday", "superfang", "takedown", "terablast", "thief",
+        "trailblaze", "uproar", "zenheadbutt"
+      ],
+      "tutor": [],
+      "egg": []
+    }
+  },
+  "mausholdfour": {"baseSpecies":"maushold","forme":"Four","formName":"Four"},
+  "squawkabillyblue": {"baseSpecies":"squawkabilly","forme":"Blue","formName":"Blue","color":"blue"},
+  "squawkabillyyellow": {
+    "baseSpecies": "squawkabilly",
+    "forme": "Yellow",
+    "formName": "Yellow",
+    "abilities": {"0":"intimidate","1":"hustle","H":"sheerforce"},
+    "color": "yellow"
+  },
+  "squawkabillywhite": {
+    "baseSpecies": "squawkabilly",
+    "forme": "White",
+    "formName": "White",
+    "abilities": {"0":"intimidate","1":"hustle","H":"sheerforce"},
+    "color": "white"
+  },
+  "palafinhero": {
+    "baseSpecies": "palafin",
+    "forme": "Hero",
+    "formName": "Hero Form",
+    "baseStats": {"hp":100,"atk":160,"def":97,"spa":106,"spd":87,"spe":100},
+    "height": 18,
+    "weight": 974,
+    "battleOnly": true
+  },
+  "tatsugiridroopy": {"baseSpecies":"tatsugiri","forme":"Droopy","formName":"Droopy Form","color":"pink"},
+  "tatsugiristretchy": {"baseSpecies":"tatsugiri","forme":"Stretchy","formName":"Stretchy Form","color":"yellow"},
+  "dudunsparcethreesegment": {
+    "baseSpecies": "dudunsparce",
+    "forme": "Three-Segment",
+    "formName": "Three-Segment Form",
+    "height": 45,
+    "weight": 474
+  },
+  "gimmighoulroaming": {
+    "baseSpecies": "gimmighoul",
+    "forme": "Roaming",
+    "formName": "Roaming Form",
+    "baseStats": {"hp":45,"atk":30,"def":25,"spa":75,"spd":45,"spe":80},
+    "abilities": {"0":"runaway"},
+    "color": "gray",
+    "height": 1,
+    "weight": 10
+  },
+  "poltchageistartisan": {
+    "baseSpecies": "poltchageist",
+    "forme": "Artisan",
+    "formName": "Artisan",
+    "eggGroups": ["undiscovered"],
+    "evolutions": [
+      {
+        "species": "sinistchamasterpiece",
+        "method": "item",
+        "param": "masterpieceteacup",
+        "condition": null
+      }
+    ]
+  },
+  "sinistchamasterpiece": {
+    "baseSpecies": "sinistcha",
+    "forme": "Masterpiece",
+    "formName": "Masterpiece",
+    "eggGroups": ["undiscovered"]
+  },
+  "ogerponwellspring": {
+    "baseSpecies": "ogerpon",
+    "forme": "Wellspring",
+    "formName": "Wellspring",
+    "types": ["grass","water"],
+    "abilities": {"0":"waterabsorb"},
+    "color": "blue",
+    "requiredItem": "wellspringmask"
+  },
+  "ogerponhearthflame": {
+    "baseSpecies": "ogerpon",
+    "forme": "Hearthflame",
+    "formName": "Hearthflame",
+    "types": ["grass","fire"],
+    "abilities": {"0":"moldbreaker"},
+    "color": "red",
+    "requiredItem": "hearthflamemask"
+  },
+  "ogerponcornerstone": {
+    "baseSpecies": "ogerpon",
+    "forme": "Cornerstone",
+    "formName": "Cornerstone",
+    "types": ["grass","rock"],
+    "abilities": {"0":"sturdy"},
+    "color": "gray",
+    "requiredItem": "cornerstonemask"
+  },
+  "ogerpontealtera": {
+    "baseSpecies": "ogerpon",
+    "forme": "Teal-Tera",
+    "formName": "Teal-Tera",
+    "abilities": {"0":"embodyaspectteal"},
+    "battleOnly": true
+  },
+  "ogerponwellspringtera": {
+    "baseSpecies": "ogerpon",
+    "forme": "Wellspring-Tera",
+    "formName": "Wellspring-Tera",
+    "types": ["grass","water"],
+    "abilities": {"0":"embodyaspectwellspring"},
+    "color": "blue",
+    "battleOnly": true,
+    "requiredItem": "wellspringmask"
+  },
+  "ogerponhearthflametera": {
+    "baseSpecies": "ogerpon",
+    "forme": "Hearthflame-Tera",
+    "formName": "Hearthflame-Tera",
+    "types": ["grass","fire"],
+    "abilities": {"0":"embodyaspecthearthflame"},
+    "color": "red",
+    "battleOnly": true,
+    "requiredItem": "hearthflamemask"
+  },
+  "ogerponcornerstonetera": {
+    "baseSpecies": "ogerpon",
+    "forme": "Cornerstone-Tera",
+    "formName": "Cornerstone-Tera",
+    "types": ["grass","rock"],
+    "abilities": {"0":"embodyaspectcornerstone"},
+    "color": "gray",
+    "battleOnly": true,
+    "requiredItem": "cornerstonemask"
+  },
+  "terapagosterastal": {
+    "baseSpecies": "terapagos",
+    "forme": "Terastal",
+    "formName": "Terastal Form",
+    "baseStats": {"hp":95,"atk":95,"def":110,"spa":105,"spd":110,"spe":85},
+    "abilities": {"0":"terashell"},
+    "height": 3,
+    "weight": 160,
+    "evYield": {"hp":0,"atk":0,"def":2,"spa":0,"spd":2,"spe":0},
+    "battleOnly": true
+  },
+  "terapagosstellar": {
+    "baseSpecies": "terapagos",
+    "forme": "Stellar",
+    "formName": "Stellar Form",
+    "baseStats": {"hp":160,"atk":105,"def":110,"spa":130,"spd":110,"spe":85},
+    "abilities": {"0":"teraformzero"},
+    "height": 17,
+    "weight": 770,
+    "evYield": {"hp":3,"atk":0,"def":0,"spa":0,"spd":0,"spe":0},
+    "battleOnly": true
+  }
+}
