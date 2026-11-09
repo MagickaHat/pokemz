@@ -11,6 +11,7 @@ const os = require("os");
 const path = require("path");
 const vm = require("vm");
 const E = require("../js/plugins/PokeMZ_FMOD_Core.js");
+const P = require("../js/plugins/PokeMZ_FMOD_Profiler.js");
 
 const ROOT = path.join(__dirname, "..");
 
@@ -174,6 +175,72 @@ test("save state keeps only persistent named handles", () => {
     assert.doesNotThrow(() => JSON.stringify(s));
 });
 
+test("platform overrides replace only filled-in fields", () => {
+    const base = { budgetMb: 0, maxChannels: 128, preloadSampleData: false, folder: "audio/fmod/" };
+    const out = E.resolvePlatformConfig(base, { budgetMb: "64", maxChannels: "", preloadSampleData: "true", bogus: "1", folder: "x/" });
+    assert.deepEqual(out, { budgetMb: 64, maxChannels: 128, preloadSampleData: true, folder: "x/" });
+    assert.deepEqual(E.resolvePlatformConfig(base, undefined), base);
+    assert.equal(E.resolvePlatformConfig(base, { maxChannels: "abc" }).maxChannels, 128);
+});
+
+test("budget eviction picks unpinned, idle, loaded preloads oldest first", () => {
+    const entries = [
+        { key: "a", state: "loaded", pinned: false, lastUsed: 5000 },
+        { key: "b", state: "loaded", pinned: false, lastUsed: 1000 },
+        { key: "c", state: "loaded", pinned: true, lastUsed: 0 },
+        { key: "d", state: "loading", pinned: false, lastUsed: 0 },
+        { key: "e", state: "loaded", pinned: false, lastUsed: 9500 },
+        { key: "f", state: "evicted", pinned: false, lastUsed: 0 },
+    ];
+    assert.deepEqual(E.pickEvictions(entries, 10000, 1000).map(e => e.key), ["b", "a"]);
+    assert.deepEqual(E.pickEvictions(entries, 10000, 0).map(e => e.key), ["b", "a", "e"]);
+});
+
+test("budget state has hysteresis", () => {
+    assert.deepEqual(E.budgetState(50, 0, false), { over: false, started: false, ended: false });
+    assert.deepEqual(E.budgetState(101, 100, false), { over: true, started: true, ended: false });
+    assert.deepEqual(E.budgetState(95, 100, true), { over: true, started: false, ended: false }, "stays over above 90%");
+    assert.deepEqual(E.budgetState(89, 100, true), { over: false, started: false, ended: true });
+    assert.deepEqual(E.budgetState(95, 100, false), { over: false, started: false, ended: false });
+});
+
+test("profiler ring buffer keeps the newest values", () => {
+    const r = P.createRing(3);
+    assert.equal(r.last(), undefined);
+    [1, 2, 3, 4, 5].forEach(v => r.push(v));
+    assert.deepEqual(r.toArray(), [3, 4, 5]);
+    assert.equal(r.length, 3);
+    assert.equal(r.last(), 5);
+});
+
+test("profiler summary averages and peaks numeric fields", () => {
+    const sum = P.summarize([
+        { t: 0, cpu: 1, mem: 10, name: "x" },
+        { t: 16, cpu: 3, mem: 30 },
+    ]);
+    assert.deepEqual(sum, { cpu: { avg: 2, peak: 3 }, mem: { avg: 20, peak: 30 } });
+    assert.deepEqual(P.summarize([]), {});
+});
+
+test("profiler event statistics track plays, overlap and time", () => {
+    const st = P.createEventStats();
+    st.start("event:/A", 0);
+    st.start("event:/A", 100);
+    st.stop("event:/A", 200);
+    st.stop("event:/A", 500);
+    st.stop("event:/A", 600); // extra stop is ignored
+    st.start("event:/B", 1000);
+    const t = st.table(1300);
+    assert.deepEqual(t[0], { path: "event:/A", plays: 2, active: 0, peak: 2, totalMs: 500 });
+    assert.deepEqual(t[1], { path: "event:/B", plays: 1, active: 1, peak: 1, totalMs: 300 });
+});
+
+test("profiler rates handle first samples and counter resets", () => {
+    assert.equal(P.rate(undefined, 100, 16), 0);
+    assert.equal(P.rate(100, 1100, 500), 2000);
+    assert.equal(P.rate(500, 100, 16), 0);
+});
+
 //=============================================================================
 // Runtime against the real FMOD wasm (silent output)
 //=============================================================================
@@ -193,7 +260,7 @@ function loadFmodModule() {
  * @param {Object} params Plugin parameters.
  * @return {Object} {api, context}.
  */
-function bootCore(params) {
+function bootCore(params, extra) {
     const real = loadFmodModule();
     const wasmBinary = fs.readFileSync(path.join(ROOT, "js/libs/fmodstudio.wasm"));
     const noop = () => {};
@@ -235,6 +302,7 @@ function bootCore(params) {
         Scene_Boot: { prototype: { isReady: () => true } },
         FMODModule: m => real(Object.assign(m, { wasmBinary })),
     };
+    Object.assign(context, extra || {});
     context.window = context;
     vm.createContext(context);
     vm.runInContext(fs.readFileSync(path.join(ROOT, "js/plugins/PokeMZ_FMOD_Core.js"), "utf8"), context);
@@ -332,4 +400,82 @@ test("runtime: falls back to MZ audio when the library is missing", async () => 
 test("the vendored library has the NW.js fix applied", () => {
     const src = fs.readFileSync(path.join(ROOT, "js/libs/fmodstudio.js"), "utf8");
     assert.match(src, /var ENVIRONMENT_IS_NODE=false&&/);
+});
+
+test("runtime: memory budget, preloads and the profiler on real FMOD", async () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pokemz-fmod-"));
+    const downloads = [];
+    const params = {
+        PokeMZ_FMOD_Core: {
+            folder: dir + "/",
+            startupBanks: "[]",
+            budgetMb: "4",
+            idlePoolKb: "0",
+            platforms: JSON.stringify({ browser: JSON.stringify({ budgetMb: "0.1", maxChannels: "32" }) }),
+        },
+        PokeMZ_FMOD_Profiler: { commandCapture: "true" },
+    };
+    const { api, context } = bootCore(null, {
+        PluginManager: { parameters: name => params[name] || {} },
+        Utils: { isOptionValid: () => true, isNwjs: () => false, isMobileDevice: () => false },
+        Blob,
+        URL,
+    });
+    await until(api, () => api.ready || api.failed);
+    assert.equal(api.platform, "browser");
+    assert.equal(api.config.budgetMb, 0.1, "platform override applied");
+    assert.equal(api.config.maxChannels, 32);
+
+    const mem = api.memory();
+    assert.ok(mem.current > 0 && mem.peak >= mem.current, "FMOD memory stats");
+    assert.equal(mem.budget, 0.1 * 1048576);
+    assert.ok(mem.heap >= 16 * 1048576);
+
+    // Over budget with nothing to evict: one warning, no exception.
+    let budgetEvents = 0;
+    api.on("budget", () => budgetEvents++);
+    api.enforceBudget();
+    api.enforceBudget();
+    assert.equal(api.memory().over, true);
+    assert.equal(budgetEvents, 1);
+    assert.equal(api.errors.entries.filter(e => e.what === "memory budget").length, 1);
+
+    // Preloading something that doesn't exist resolves false.
+    assert.equal(await api.preload("event:/Nope"), false);
+    let bankResult = null;
+    api.preload("Missing").then(r => (bankResult = r));
+    await until(api, () => bankResult !== null);
+    assert.equal(bankResult, false);
+    api.releasePreload("event:/Nope");
+    api.releasePreload("Missing");
+    assert.equal(api.preloads.size, 0);
+
+    // Profiler: samples from the real system and a command capture.
+    context.SceneManager._scene = null;
+    context.document.createElement = () => ({ click() { downloads.push(this.download); }, remove() {} });
+    context.document.body = { appendChild() {} };
+    vm.runInContext(fs.readFileSync(path.join(ROOT, "js/plugins/PokeMZ_FMOD_Profiler.js"), "utf8"), context);
+    const prof = api.profiler;
+    const sample = prof.takeSample();
+    for (const k of ["cpuStudio", "cpuDsp", "memory", "memoryPeak", "heap", "channels", "channelsReal", "instances", "handles", "updateMs"]) {
+        assert.equal(typeof sample[k], "number", k);
+    }
+    assert.equal(prof.start(), true);
+    assert.equal(prof.recording, true);
+    api.setGlobalParameter("TimeOfDay", 6);
+    for (let i = 0; i < 5; i++) {
+        api.update();
+    }
+    const result = await prof.stop();
+    assert.equal(prof.recording, false);
+    assert.equal(result.data.format, "pokemz-fmod-profile");
+    assert.equal(result.data.samples.length, 5);
+    assert.ok(result.data.log.some(l => l.type === "globalParameter" && l.name === "TimeOfDay"));
+    assert.ok(result.capture && result.capture.length > 0, "command capture bytes");
+    assert.equal(downloads.length, 2, "json + command capture downloaded");
+    assert.match(downloads[0], /^fmod-profile-.*\.json$/);
+    assert.doesNotThrow(() => JSON.stringify(result.data));
+
+    api.shutdown();
+    fs.rmSync(dir, { recursive: true, force: true });
 });

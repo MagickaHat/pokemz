@@ -29,3 +29,5 @@ node_modules/
 server/npm-debug.log*
 server/yarn-debug.log*
 server/error.log*
+# FMOD profiler recordings
+fmod-profiles/
