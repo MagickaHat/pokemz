@@ -9,7 +9,7 @@ const assert = require("node:assert/strict");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const E = require("../js/plugins/PokeMZ_Locale.js");
+const E = require("../game/js/plugins/PokeMZ_Locale.js");
 const tool = require("../tools/l10n.js");
 
 /**
@@ -195,7 +195,7 @@ test("wrap: Thai (no spaces) breaks between words, never inside a cluster", () =
 
 test("keyboards.csv: layouts, pages and rows", () => {
     const e = E.createEngine();
-    e.setKeyboardsCsv(fs.readFileSync(path.join(__dirname, "../data/locales/keyboards.csv"), "utf8"));
+    e.setKeyboardsCsv(fs.readFileSync(path.join(__dirname, "../game/data/locales/keyboards.csv"), "utf8"));
     assert.deepEqual(Object.keys(e.layouts).sort(), ["abc", "azerty", "cyrillic", "greek", "pt", "qwerty", "qwertz", "es"].sort());
     assert.equal(e.layouts.azerty[0].rows[0], "AZERTYUIOP");
     assert.equal(e.layouts.abc.length, 4);
@@ -208,12 +208,12 @@ test("keyboards.csv: layouts, pages and rows", () => {
 });
 
 test("project tables pass check()", () => {
-    const { errors } = tool.loadEngine(path.join(__dirname, "..")).check();
+    const { errors } = tool.loadEngine(path.join(__dirname, "..", "game")).check();
     assert.deepEqual(errors, []);
 });
 
 test("MZ JSON writer round-trips the project's files", () => {
-    const dir = path.join(__dirname, "../data");
+    const dir = path.join(__dirname, "../game/data");
     for (const f of fs.readdirSync(dir).filter(n => n.endsWith(".json"))) {
         const text = fs.readFileSync(path.join(dir, f), "utf8");
         assert.equal(tool.writeMzJson(f, JSON.parse(text)), text, f);
@@ -229,12 +229,12 @@ function fixtureProject() {
     const data = path.join(root, "data");
     fs.mkdirSync(path.join(data, "locales"), { recursive: true });
     for (const f of ["System.json", "Actors.json", "Items.json"]) {
-        fs.copyFileSync(path.join(__dirname, "../data", f), path.join(data, f));
+        fs.copyFileSync(path.join(__dirname, "../game/data", f), path.join(data, f));
     }
-    fs.copyFileSync(path.join(__dirname, "../data/locales/languages.csv"), path.join(data, "locales/languages.csv"));
+    fs.copyFileSync(path.join(__dirname, "../game/data/locales/languages.csv"), path.join(data, "locales/languages.csv"));
     const cmd = (code, parameters, indent = 0) => ({ code, indent, parameters });
     const page = list => ({ list: list.concat([cmd(0, [])]) });
-    const map = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/Map001.json"), "utf8"));
+    const map = JSON.parse(fs.readFileSync(path.join(__dirname, "../game/data/Map001.json"), "utf8"));
     map.displayName = "Pallet Town";
     map.events = [
         null,
@@ -339,8 +339,8 @@ test("tag: readable note tags, CSV rows renamed with translations, idempotent", 
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "pmz-tag-"));
     const data = path.join(root, "data");
     fs.mkdirSync(path.join(data, "locales"), { recursive: true });
-    fs.copyFileSync(path.join(__dirname, "../data/System.json"), path.join(data, "System.json"));
-    fs.copyFileSync(path.join(__dirname, "../data/locales/languages.csv"), path.join(data, "locales/languages.csv"));
+    fs.copyFileSync(path.join(__dirname, "../game/data/System.json"), path.join(data, "System.json"));
+    fs.copyFileSync(path.join(__dirname, "../game/data/locales/languages.csv"), path.join(data, "locales/languages.csv"));
     const item = (id, name, note = "") => ({ id, name, note, description: name ? `${name} desc` : "" });
     const items = [
         null,
@@ -355,7 +355,7 @@ test("tag: readable note tags, CSV rows renamed with translations, idempotent", 
     write("CommonEvents.json", [null]);
     write("Troops.json", [null]);
     write("MapInfos.json", [null, { id: 1, name: "Pallet Town" }]);
-    const map = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/Map001.json"), "utf8"));
+    const map = JSON.parse(fs.readFileSync(path.join(__dirname, "../game/data/Map001.json"), "utf8"));
     map.displayName = "Pallet";
     write("Map001.json", map);
 

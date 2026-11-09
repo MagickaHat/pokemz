@@ -10,10 +10,10 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const vm = require("vm");
-const E = require("../js/plugins/PokeMZ_FMOD_Core.js");
-const P = require("../js/plugins/PokeMZ_FMOD_Profiler.js");
+const E = require("../game/js/plugins/PokeMZ_FMOD_Core.js");
+const P = require("../game/js/plugins/PokeMZ_FMOD_Profiler.js");
 
-const ROOT = path.join(__dirname, "..");
+const ROOT = path.join(__dirname, "..", "game");
 
 //=============================================================================
 // Engine

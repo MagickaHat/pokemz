@@ -23,7 +23,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const Engine = require("../js/plugins/PokeMZ_Locale.js");
+const Engine = require("../game/js/plugins/PokeMZ_Locale.js");
 
 const SPECIAL_FILES = new Set(["languages.csv", "keyboards.csv"]);
 
@@ -624,7 +624,7 @@ function tag(root, dryRun) {
  */
 function main(argv) {
     const args = argv.slice();
-    let root = path.join(__dirname, "..");
+    let root = path.join(__dirname, "..", "game");
     const r = args.indexOf("--root");
     if (r >= 0) {
         root = path.resolve(args[r + 1]);
