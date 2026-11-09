@@ -34,6 +34,9 @@
  *   img/pokemon/<species>/frontf.png    optional female front
  *   img/pokemon/<species>/backf.png     optional female back
  *   img/pokemon/<species>/icon.png      party icon, two 32x32 frames stacked
+ *   img/pokemon/<species>/overworld.png following Pokémon: an MZ single
+ *                                       character sheet (3 x 4 frames, any
+ *                                       frame size); overworldf.png optional
  *   img/pokemon/<species>/normal.pal    JASC-PAL palette of the sprites
  *   img/pokemon/<species>/shiny.pal     shiny palette (same order)
  *
@@ -142,7 +145,7 @@
      * @param {boolean} egg Egg graphics.
      * @return {Array<string>} Folder names relative to the graphics folder.
      */
-    function folders(species, egg) {
+    function folders(species, egg, noFallback) {
         if (egg) {
             return species ? [`${species.baseSpecies || species.id}/egg`, "egg"] : ["egg"];
         }
@@ -155,13 +158,15 @@
         } else {
             out.push(species.id);
         }
-        out.push("question_mark");
+        if (!noFallback) {
+            out.push("question_mark");
+        }
         return out;
     }
 
     /**
      * @brief Image files for a view, most specific first.
-     * @param {string} view "front" | "back" | "icon".
+     * @param {string} view "front" | "back" | "icon" | "overworld".
      * @param {boolean} female Female variant first.
      * @return {Array<string>} File names (without .png).
      */
@@ -258,13 +263,16 @@
 
     async function loadUncached(speciesId, view, o) {
         const species = speciesId ? PBS.species.tryGet(speciesId) : null;
-        for (const folder of folders(species, o.egg)) {
+        // Overworld sheets have no "?" fallback: no art means no sprite.
+        for (const folder of folders(species, o.egg, view === "overworld")) {
             for (const file of files(view, o.female)) {
                 const src = await tryLoad(`${FOLDER}${folder}/${file}.png`);
                 if (!src) {
                     continue;
                 }
-                return finish(src, folder, o);
+                const out = await finish(src, folder, o);
+                out._pmzFound = true;
+                return out;
             }
         }
         return new Bitmap(view === "icon" ? 32 : 96, view === "icon" ? 64 : 96);
@@ -404,6 +412,11 @@
     window.PokeMZ.Graphics = Object.assign(Engine, {
         folder: FOLDER,
         load,
+        /**
+         * @brief Whether a species has its own image for a view.
+         * @return {Promise<boolean>} True if a file was found.
+         */
+        exists: (speciesId, o = {}) => load(speciesId, o).then(b => !!b._pmzFound),
         optsOf,
         /** @brief Forgets cached images (after replacing files). */
         clearCache() {
