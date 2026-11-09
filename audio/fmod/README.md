@@ -54,6 +54,17 @@ time.
 - **Snapshots** for menus and battles can be set in `PokeMZ_FMOD_Audio`
   (*Menu Snapshot*, *Battle Snapshot*).
 
+## Memory
+
+- Put large, rarely used content (cutscene music, region ambience) in separate banks and
+  load them per map with `<FMOD Bank: ...>`. Keep `Master.bank` small.
+- Set music and long ambience to **Stream** in Studio: they then use little memory, at the cost
+  of file I/O. Short, frequent sounds (footsteps, UI) should be decompressed or
+  compressed samples, and preloaded where the first-play delay matters.
+- Watch the profiler's memory graph against your budget on each platform (try
+  `&fmodPlatform=mobile` in a playtest), then tune *Platform Overrides* in
+  `PokeMZ_FMOD_Core`.
+
 ## Upgrading the FMOD library
 
 Download the **FMOD Engine HTML5** package and copy `api/studio/lib/upstream/wasm/fmodstudio.js`

@@ -271,6 +271,7 @@ the UI plugins, in this order:
 | `PokeMZ_FMOD_Audio` | Takes over MZ's BGM/BGS/ME/SE and system sounds (name mapping, `.ogg` fallback), ME behaviour, Master Volume option and VCA sliders, per-map banks, save/load, scene snapshots, plugin commands |
 | `PokeMZ_FMOD_Spatial` | Listener (3D camera or player), handedness, event emitters, ambient emitters (point or region) |
 | `PokeMZ_FMOD_Debug` | F6 overlay and `PokeMZ.FMOD.debug` console tools (playtest only) |
+| `PokeMZ_FMOD_Profiler` | Shift+F6 graphs and event stats, Ctrl+F6 recordings (JSON + FMOD command capture) (playtest only) |
 
 Bank layout, Studio naming conventions and upgrade notes: [`audio/fmod/README.md`](audio/fmod/README.md).
 
@@ -282,6 +283,7 @@ Map note:
 <FMOD Ambient: event:/Amb/Waterfall x=12 y=4>      point ambience
 <FMOD Ambient: event:/Amb/Sea region=30>           area ambience (nearest region tile)
 <FMOD Ambient: event:/Amb/Wind volume=0.5>         2D ambience
+<FMOD Preload: event:/BGM/Route1, Forest>          sample data kept loaded on this map
 
 Event page comment / event note:
 <FMOD Emitter: event:/SFX/Fountain params="Flow:0.5">
@@ -291,8 +293,44 @@ Event page comment / event note:
 
 `PokeMZ_FMOD_Audio`: Play Event, Play One-Shot, Play Programmer Sound, Stop, Pause/Resume,
 Set Parameter (a handle, or `bgm` / `bgs`), Set Global Parameter, Start/Stop Snapshot,
-Load/Unload Bank, Set Bus/VCA Volume, Key Off, Set Timeline Position, Wait For Event End,
-Wait For Marker, Stop All.
+Load/Unload Bank, Preload/Release Samples, Set Bus/VCA Volume, Key Off, Set Timeline Position,
+Wait For Event End, Wait For Marker, Stop All.
+
+### Memory budgets
+
+An event's samples load when it first plays and unload when its last instance ends.
+**Preloading** (`<FMOD Preload: ...>` map note, the *Preload Samples* command,
+`PokeMZ.FMOD.preload(target, {pinned})`) keeps an event's or a whole bank's samples loaded, so
+there is no delay on first play. With a **Memory Budget** (MB) set in `PokeMZ_FMOD_Core`:
+- While FMOD uses more than the budget, preloads that haven't been used for
+  *Evict After* seconds are unloaded, least recently used first. They reload the next time
+  the event plays.
+- Pinned preloads stay loaded.
+- If nothing is left to unload, a warning goes to the console, the F6 overlay and the profiler.
+
+*Platform Overrides* set the budget, max channels, initial heap, idle sample pool, DSP buffer
+and startup preloading separately for **desktop** (NW.js), **browser** and **mobile**. Mobile
+defaults to a 64 MB budget, 48 channels and no idle pool. Add `&fmodPlatform=mobile` to a
+playtest URL to try another platform's settings.
+
+### Profiler
+
+FMOD's Live Update profiler can't connect to HTML5 builds, so `PokeMZ_FMOD_Profiler` records
+inside the game:
+- **Graphs** (Shift+F6): CPU (Studio, DSP, streams), FMOD memory against the budget, channels
+  (total/real) and FMOD update time. Below them are the busiest events (plays, peak
+  simultaneous instances, playing time) and the latest log lines.
+- **Recordings** (Ctrl+F6 to start and stop):
+  - Each frame records CPU, memory and peak, wasm heap, channels, instances, file I/O
+    rates, Studio command queue and handle usage, and update time.
+  - The log covers instance starts and stops, banks, preloads, evictions, budget warnings,
+    snapshots, global parameters, markers, scene and map changes, update spikes and errors.
+  - Recordings save to `fmod-profiles/fmod-profile-<date>.json` in NW.js, or download in a
+    browser.
+- **Command capture**: with *FMOD Command Capture* on, a `.fmodcmd` file is saved next to the
+  recording. This is FMOD's own capture of every API call, which
+  `Studio::System::loadCommandReplay` can replay.
+- **Console**: `PokeMZ.FMOD.profiler.start()`, `.stop()`, `.summary()`, `.eventStats()`.
 
 ### Script
 
@@ -310,9 +348,10 @@ PokeMZ.FMOD.playProgrammer("event:/Cry", "Cry025");
 
 | | |
 |---|---|
-| F6 | Overlay: CPU, memory, banks, live instances with parameters and distance, listener, globals, snapshots, errors |
+| F6 | Overlay: CPU, memory against the budget, preloads, banks, live instances with parameters and distance, listener, globals, snapshots, errors |
+| Shift+F6 / Ctrl+F6 | Profiler panel / start-stop a recording |
 | `PokeMZ.FMOD.debug.listEvents()` | Every event path in the loaded banks |
 | `PokeMZ.FMOD.debug.info(path)` / `.play(path)` | Inspect / audition an event |
-| `node --test tests/fmod.test.js` | Engine tests and a boot test against the real FMOD wasm (silent output) |
+| `node --test tests/fmod.test.js` | Engine tests and boot, budget and profiler tests against the real FMOD wasm (silent output) |
 
 Remember to ship `audio/fmod/`: MZ's "Exclude unused files" can't see it.
