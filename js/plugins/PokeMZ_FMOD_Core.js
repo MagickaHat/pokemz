@@ -135,6 +135,44 @@
  * @min 1
  * @default 15
  *
+ * @param memory
+ * @text Memory
+ *
+ * @param budgetMb
+ * @text Memory Budget (MB)
+ * @parent memory
+ * @desc FMOD memory (samples, streams, instances) above which preloaded
+ * sample data is unloaded, least recently used first. 0 = no budget.
+ * @type number
+ * @decimals 1
+ * @min 0
+ * @default 0
+ *
+ * @param evictAfter
+ * @text Evict After (seconds unused)
+ * @parent memory
+ * @desc Preloads used more recently than this are never unloaded.
+ * @type number
+ * @min 0
+ * @default 10
+ *
+ * @param idlePoolKb
+ * @text Idle Sample Pool (KB)
+ * @parent memory
+ * @desc Recently released sample data FMOD keeps for quick replay
+ * (FMOD default 256). 0 = free at once.
+ * @type number
+ * @min 0
+ * @default 256
+ *
+ * @param platforms
+ * @text Platform Overrides
+ * @parent memory
+ * @desc Per-platform values; empty fields keep the settings above.
+ * Desktop = NW.js, Mobile = phones/tablets, Browser = everything else.
+ * @type struct<Platforms>
+ * @default {"desktop":"{}","browser":"{}","mobile":"{\"budgetMb\":\"64\",\"maxChannels\":\"48\",\"idlePoolKb\":\"0\"}"}
+ *
  * @help
  * ============================================================================
  * PokeMZ_FMOD_Core
@@ -161,6 +199,17 @@
  *   playProgrammer(path, key, opts)
  *   on(type, fn): ready, bankLoaded, bankError, marker, beat, stopped, error
  *
+ * Memory:
+ *   preload(target, {pinned}) -> Promise<boolean>   (event path or bank)
+ *   releasePreload(target)  memory() -> {current, peak, budget, ...}
+ *   platform -> "desktop" | "browser" | "mobile"  (?fmodPlatform=mobile
+ *   in playtest pretends to be another platform)
+ * Sample data of an event loads when an instance is created and unloads
+ * when the last one is released. Preloading keeps it (no first-play
+ * delay). With a Memory Budget, preloads unused for "Evict After" seconds
+ * are dropped, oldest first, while FMOD uses more than the budget; they
+ * come back the next time the event plays. Pinned preloads stay.
+ *
  * Handle opts: name, scope (global | map | scene), persistent, volume,
  * pitch, params {Name: value}, position {x,y,z}, follow () => {position,
  * velocity, forward, up}, programmerKey, timeline (ms), fadeIn (seconds).
@@ -168,6 +217,62 @@
  * getParameter keyOff setTimeline timeline isPlaying on(type, fn) release.
  *
  * FMOD Studio by Firelight Technologies Pty Ltd.
+ */
+
+/*~struct~Platforms:
+ * @param desktop
+ * @text Desktop (NW.js)
+ * @type struct<Platform>
+ * @default {}
+ *
+ * @param browser
+ * @text Browser
+ * @type struct<Platform>
+ * @default {}
+ *
+ * @param mobile
+ * @text Mobile
+ * @type struct<Platform>
+ * @default {"budgetMb":"64","maxChannels":"48","idlePoolKb":"0"}
+ */
+
+/*~struct~Platform:
+ * @param budgetMb
+ * @text Memory Budget (MB)
+ * @type number
+ * @decimals 1
+ * @min 0
+ *
+ * @param maxChannels
+ * @text Max Channels
+ * @type number
+ * @min 16
+ *
+ * @param memoryMb
+ * @text Initial Memory (MB)
+ * @type number
+ * @min 16
+ *
+ * @param idlePoolKb
+ * @text Idle Sample Pool (KB)
+ * @type number
+ * @min 0
+ *
+ * @param dspBufferLength
+ * @text DSP Buffer Length
+ * @type select
+ * @option
+ * @option 512
+ * @option 1024
+ * @option 2048
+ * @option 4096
+ *
+ * @param preloadSampleData
+ * @text Preload Startup Samples
+ * @type select
+ * @option
+ * @option true
+ * @option false
  */
 
 /*~struct~EventDefault:
@@ -554,7 +659,7 @@
     /**
      * @brief Copies the saveable FMOD state into a plain object.
      * @param {Object} s {globals, snapshots: Map|Object, handles: Iterable,
-     *        banks: Array<string>}.
+     *        banks: Array<string>, preloads: Array<string>}.
      * @return {Object} JSON-safe state.
      */
     function serializeState(s) {
@@ -586,10 +691,69 @@
             snapshots,
             handles,
             banks: (s.banks || []).slice(),
+            preloads: (s.preloads || []).slice(),
         };
     }
 
+    /**
+     * @brief Applies a platform's overrides; empty fields keep the base value.
+     * @param {Object} base Base config.
+     * @param {Object} overrides {field: string} from the plugin parameters.
+     * @return {Object} New config.
+     */
+    function resolvePlatformConfig(base, overrides) {
+        const out = Object.assign({}, base);
+        for (const [key, raw] of Object.entries(overrides || {})) {
+            if (raw === undefined || raw === null || raw === "" || !(key in base)) {
+                continue;
+            }
+            if (typeof base[key] === "boolean") {
+                out[key] = raw === true || raw === "true";
+            } else if (typeof base[key] === "number") {
+                if (Number.isFinite(Number(raw))) {
+                    out[key] = Number(raw);
+                }
+            } else {
+                out[key] = String(raw);
+            }
+        }
+        return out;
+    }
+
+    /**
+     * @brief Preloads that may be unloaded to get under the budget, best
+     *        candidates (least recently used) first.
+     * @param {Iterable<Object>} entries {key, state, pinned, lastUsed}.
+     * @param {number} now Current time (ms).
+     * @param {number} minIdleMs Entries used more recently are kept.
+     * @return {Array<Object>} Candidates.
+     */
+    function pickEvictions(entries, now, minIdleMs) {
+        return Array.from(entries)
+            .filter(e => e.state === "loaded" && !e.pinned && now - e.lastUsed >= minIdleMs)
+            .sort((a, b) => a.lastUsed - b.lastUsed);
+    }
+
+    /**
+     * @brief Budget state with hysteresis: "over" starts above the budget and
+     *        ends below 90% of it, so warnings don't flicker.
+     * @param {number} usage Bytes in use.
+     * @param {number} budget Budget in bytes (0 = none).
+     * @param {boolean} wasOver Previous state.
+     * @return {{over: boolean, started: boolean, ended: boolean}} State.
+     */
+    function budgetState(usage, budget, wasOver) {
+        if (!(budget > 0)) {
+            return { over: false, started: false, ended: wasOver };
+        }
+        const over = wasOver ? usage > budget * 0.9 : usage > budget;
+        return { over, started: over && !wasOver, ended: !over && wasOver };
+    }
+
     const Engine = {
+        resolvePlatformConfig,
+        pickEvictions,
+        budgetState,
         parseArgs,
         parseParamList,
         noteTags,
@@ -647,7 +811,36 @@
         whenHidden: params.whenHidden || "mute",
         whenUnfocused: params.whenUnfocused || "none",
         bootTimeout: num(params.bootTimeout, 15),
+        budgetMb: num(params.budgetMb, 0),
+        evictAfter: num(params.evictAfter, 10),
+        idlePoolKb: num(params.idlePoolKb, 256),
     };
+
+    /**
+     * @brief Which platform profile applies.
+     * @return {string} desktop, browser or mobile.
+     */
+    function detectPlatform() {
+        const forced = /[?&]fmodPlatform=(desktop|browser|mobile)/.exec(typeof location === "object" ? location.search : "");
+        if (forced && typeof Utils !== "undefined" && Utils.isOptionValid("test")) {
+            return forced[1];
+        }
+        if (typeof Utils !== "undefined") {
+            if (Utils.isNwjs()) {
+                return "desktop";
+            }
+            if (Utils.isMobileDevice()) {
+                return "mobile";
+            }
+        }
+        return "browser";
+    }
+
+    const PLATFORM = detectPlatform();
+    Object.assign(
+        CONFIG,
+        resolvePlatformConfig(CONFIG, parseJson(parseJson(params.platforms, {})[PLATFORM], {}))
+    );
 
     /** @brief The FMOD Emscripten module (constants, classes, FS). */
     let F = null;
@@ -1008,6 +1201,7 @@
             this.instance = null;
             this.desc = getEvent(path);
             this.listeners = new Map();
+            touchPreload(path);
             this.callbackMask = 0;
             if (!this.desc) {
                 this.stopped = true;
@@ -1061,6 +1255,7 @@
             this.update3D(0);
             check(this.instance.start(), `start(${this.path})`);
             this.started = true;
+            emit("instanceStarted", this);
             this.stopped = false;
             if (this.autoRelease) {
                 check(this.instance.release(), `release(${this.path})`);
@@ -1538,6 +1733,7 @@
      */
     function setGlobalParameter(name, value) {
         globals[name] = value;
+        emit("globalParameter", { name, value });
         if (!studio) {
             return false;
         }
@@ -1588,6 +1784,7 @@
             h.start();
             snap = { handle: h, intensity: 100 };
             snapshots.set(path, snap);
+            emit("snapshotStarted", path);
         }
         snap.intensity = intensity;
         if (intensity !== 100) {
@@ -1606,6 +1803,7 @@
         if (snap) {
             snap.handle.stop(!!immediate);
             snapshots.delete(path);
+            emit("snapshotStopped", path);
         }
     }
 
@@ -1828,12 +2026,13 @@
             check(studio.getCoreSystem(out), "getCoreSystem");
             core = out.val;
             check(core.setDSPBufferSize(CONFIG.dspBufferLength, CONFIG.dspBufferCount), "setDSPBufferSize");
+            const adv = F.STUDIO_ADVANCEDSETTINGS();
+            check(studio.getAdvancedSettings(adv), "getAdvancedSettings");
+            adv.idlesampledatapoolsize = Math.floor(CONFIG.idlePoolKb * 1024);
             if (CONFIG.encryptionKey) {
-                const adv = F.STUDIO_ADVANCEDSETTINGS();
-                check(studio.getAdvancedSettings(adv), "getAdvancedSettings");
                 adv.encryptionkey = CONFIG.encryptionKey;
-                check(studio.setAdvancedSettings(adv), "setAdvancedSettings");
             }
+            check(studio.setAdvancedSettings(adv), "setAdvancedSettings");
             if (api.outputType !== undefined) {
                 check(core.setOutput(api.outputType), "setOutput");
             }
@@ -1915,6 +2114,7 @@
             return;
         }
         const now = performance.now();
+        api.timing.frames++;
         const dt = Math.min(250, now - lastTime);
         lastTime = now;
         for (const hook of hooks) {
@@ -1928,7 +2128,9 @@
             }
             h.update3D(dt);
         }
+        const t0 = performance.now();
         check(studio.update(), "studio update");
+        api.timing.studioUpdateMs = performance.now() - t0;
         flushCallbacks();
         // STOPPED normally arrives through the callback; poll as a safety net
         // (a destroyed one-shot reports an invalid handle, read as stopped).
@@ -1938,11 +2140,16 @@
             }
         }
         pollBanks();
+        pollPreloads();
+        if (api.timing.frames % 30 === 0) {
+            enforceBudget();
+        }
         for (const hook of hooks) {
             if (hook.onUpdate) {
                 hook.onUpdate(dt);
             }
         }
+        api.timing.updateMs = performance.now() - now;
         emit("update", dt);
     }
 
@@ -1971,6 +2178,245 @@
     }
 
     //-------------------------------------------------------------------------
+    // Sample data preloading and memory budget
+    //-------------------------------------------------------------------------
+
+    /** @brief key -> {key, kind, path, file, refs, pinned, state, lastUsed, waiters}. */
+    const preloads = new Map();
+    let overBudget = false;
+
+    /**
+     * @brief Normalises a preload target.
+     * @param {string} target "event:/..." / "snapshot:/..." or a bank name.
+     * @return {{key: string, kind: string}} Key and kind (event or bank).
+     */
+    function preloadKey(target) {
+        const t = String(target || "").trim();
+        return /^(event|snapshot):\//i.test(t) || /^\{.*\}$/.test(t) ? { key: t, kind: "event" } : { key: bankFile(t), kind: "bank" };
+    }
+
+    /**
+     * @brief Asks FMOD to load (or unload) the sample data of an entry.
+     * @param {Object} e Preload entry.
+     * @param {boolean} load Load or unload.
+     * @return {boolean} True if the request was accepted.
+     */
+    function requestSamples(e, load) {
+        let target = null;
+        if (e.kind === "event") {
+            target = getEvent(e.key);
+        } else {
+            const b = bankManager.banks.get(e.key);
+            target = b && b.state === "loaded" ? b.bank : null;
+        }
+        if (!target) {
+            return false;
+        }
+        return check(load ? target.loadSampleData() : target.unloadSampleData(), `${load ? "load" : "unload"}SampleData(${e.key})`);
+    }
+
+    /**
+     * @brief Settles waiters of an entry.
+     * @param {Object} e Preload entry.
+     * @param {boolean} ok Result.
+     */
+    function settlePreload(e, ok) {
+        for (const fn of e.waiters.splice(0)) {
+            fn(ok);
+        }
+    }
+
+    /**
+     * @brief Keeps an event's (or a bank's) sample data in memory.
+     *        Reference counted: call releasePreload() once per preload().
+     * @param {string} target Event path or bank name.
+     * @param {Object} [opts] {pinned: never evicted by the budget}.
+     * @return {Promise<boolean>} True once the samples are loaded.
+     */
+    function preload(target, opts = {}) {
+        if (!api.available) {
+            return Promise.resolve(false);
+        }
+        const { key, kind } = preloadKey(target);
+        let e = preloads.get(key);
+        if (!e) {
+            e = { key, kind, refs: 0, pinned: false, state: "loading", lastUsed: performance.now(), waiters: [] };
+            preloads.set(key, e);
+            const begin = () => {
+                if (!preloads.has(key)) {
+                    return;
+                }
+                if (requestSamples(e, true)) {
+                    e.state = "loading";
+                } else {
+                    e.state = "error";
+                    settlePreload(e, false);
+                }
+            };
+            if (kind === "bank") {
+                loadBank(key).then(ok => (ok ? begin() : ((e.state = "error"), settlePreload(e, false))));
+            } else {
+                begin();
+            }
+        }
+        e.refs++;
+        e.pinned = e.pinned || !!opts.pinned;
+        e.lastUsed = performance.now();
+        emit("preload", { key, refs: e.refs });
+        if (e.state === "loaded") {
+            return Promise.resolve(true);
+        }
+        if (e.state === "error") {
+            return Promise.resolve(false);
+        }
+        return new Promise(resolve => e.waiters.push(resolve));
+    }
+
+    /**
+     * @brief Drops one preload reference; unloads the samples at zero.
+     * @param {string} target Event path or bank name.
+     */
+    function releasePreload(target) {
+        const { key, kind } = preloadKey(target);
+        const e = preloads.get(key);
+        if (!e || --e.refs > 0) {
+            return;
+        }
+        preloads.delete(key);
+        if (e.state === "loaded" || e.state === "loading") {
+            requestSamples(e, false);
+        }
+        settlePreload(e, false);
+        if (kind === "bank") {
+            unloadBank(key);
+        }
+    }
+
+    /**
+     * @brief Notes that an event was used; reloads it if it was evicted.
+     * @param {string} path Event path.
+     */
+    function touchPreload(path) {
+        const e = preloads.get(path);
+        if (!e) {
+            return;
+        }
+        e.lastUsed = performance.now();
+        if (e.state === "evicted" && requestSamples(e, true)) {
+            e.state = "loading";
+        }
+    }
+
+    /** @brief Checks the sample loading state of pending preloads. */
+    function pollPreloads() {
+        for (const e of preloads.values()) {
+            if (e.state !== "loading") {
+                continue;
+            }
+            let target = null;
+            if (e.kind === "event") {
+                target = getEvent(e.key);
+            } else {
+                const b = bankManager.banks.get(e.key);
+                target = b && b.bank;
+            }
+            const o = {};
+            if (!target || target.getSampleLoadingState(o) !== F.OK) {
+                e.state = "error";
+                settlePreload(e, false);
+            } else if (o.val === F.STUDIO_LOADING_STATE_LOADED) {
+                e.state = "loaded";
+                settlePreload(e, true);
+            } else if (o.val === F.STUDIO_LOADING_STATE_ERROR) {
+                e.state = "error";
+                check(F.ERR_FILE_BAD, `sample data ${e.key}`);
+                settlePreload(e, false);
+            }
+        }
+    }
+
+    /**
+     * @brief FMOD memory usage and the budget.
+     * @return {Object} {current, peak, heap, budget, over, platform} in bytes.
+     */
+    function memory() {
+        const out = { current: 0, peak: 0, heap: 0, budget: CONFIG.budgetMb * 1048576, over: overBudget, platform: PLATFORM };
+        if (F) {
+            const cur = {};
+            const max = {};
+            if (F.Memory_GetStats(cur, max, false) === F.OK) {
+                out.current = cur.val;
+                out.peak = max.val;
+            }
+            out.heap = F.HEAP8 ? F.HEAP8.length : 0;
+        }
+        return out;
+    }
+
+    /**
+     * @brief Over budget: unloads the least recently used preload (one per
+     *        check, as FMOD frees memory over the next updates). Warns once
+     *        per episode when nothing more can be unloaded.
+     */
+    function enforceBudget() {
+        const mem = memory();
+        const state = budgetState(mem.current, mem.budget, overBudget);
+        overBudget = state.over;
+        if (state.ended) {
+            emit("budget", { over: false, memory: mem });
+            budgetWarned = false;
+        }
+        if (!state.over) {
+            return;
+        }
+        if (state.started) {
+            emit("budget", { over: true, memory: mem });
+        }
+        const victim = pickEvictions(preloads.values(), performance.now(), CONFIG.evictAfter * 1000)[0];
+        if (victim) {
+            requestSamples(victim, false);
+            victim.state = "evicted";
+            emit("evicted", { key: victim.key, memory: mem });
+        } else if (!budgetWarned) {
+            budgetWarned = true;
+            const mb = n => (n / 1048576).toFixed(1);
+            const text = `${mb(mem.current)} MB in use, budget ${mb(mem.budget)} MB, nothing left to unload`;
+            errors.add("memory budget", -4, text);
+            console.warn(`PokeMZ_FMOD: over memory budget: ${text}`);
+        }
+    }
+
+    let budgetWarned = false;
+    const extraPreloads = [];
+
+    /**
+     * @brief Preload kept across saves (plugin command preloads).
+     * @param {string} target Event path or bank name.
+     * @return {Promise<boolean>} Loaded.
+     */
+    function preloadSaved(target) {
+        const { key } = preloadKey(target);
+        if (extraPreloads.includes(key)) {
+            return Promise.resolve(true);
+        }
+        extraPreloads.push(key);
+        return preload(key);
+    }
+
+    /**
+     * @brief Releases a preloadSaved() target.
+     * @param {string} target Event path or bank name.
+     */
+    function releaseSaved(target) {
+        const { key } = preloadKey(target);
+        const i = extraPreloads.indexOf(key);
+        if (i >= 0) {
+            extraPreloads.splice(i, 1);
+            releasePreload(key);
+        }
+    }
+
+    //-------------------------------------------------------------------------
     // Save data (extended by PokeMZ_FMOD_Audio)
     //-------------------------------------------------------------------------
 
@@ -1984,6 +2430,7 @@
             snapshots,
             handles: live,
             banks: extraBanks.slice(),
+            preloads: extraPreloads.slice(),
         });
     }
 
@@ -2029,6 +2476,9 @@
         for (const file of extraBanks.splice(0)) {
             unloadBank(file);
         }
+        for (const key of extraPreloads.splice(0)) {
+            releasePreload(key);
+        }
         for (const k of Object.keys(globals)) {
             delete globals[k];
         }
@@ -2038,6 +2488,9 @@
             return Promise.resolve();
         }
         Object.assign(globals, state.globals || {});
+        for (const key of state.preloads || []) {
+            preloadSaved(key);
+        }
         return Promise.all((state.banks || []).map(loadSavedBank)).then(() => {
             applyGlobals();
             for (const [path, intensity] of Object.entries(state.snapshots || {})) {
@@ -2132,6 +2585,16 @@
         resetState,
         /** @return {Object} Focus state (debug). */
         focusState: () => Object.assign({}, focusState),
+        platform: PLATFORM,
+        /** @brief Frame timing: updateMs (whole FMOD update), studioUpdateMs, frames. */
+        timing: { updateMs: 0, studioUpdateMs: 0, frames: 0 },
+        preloads,
+        preload,
+        releasePreload,
+        preloadSaved,
+        releaseSaved,
+        memory,
+        enforceBudget,
     };
 
     window.PokeMZ = window.PokeMZ || {};
