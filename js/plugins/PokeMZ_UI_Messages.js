@@ -94,7 +94,25 @@
     //=========================================================================
 
     /**
-     * @brief A typewriter message box that understands MZ's text codes.
+     * @brief Index of the page break at or after a token (or the end).
+     * @param {Array<Object>} tokens Tokens.
+     * @param {number} from Start index.
+     * @return {number} End of the page.
+     */
+    function pageEnd(tokens, from) {
+        for (let i = from; i < tokens.length; i++) {
+            if (tokens[i].t === "page") {
+                return i;
+            }
+        }
+        return tokens.length;
+    }
+
+    /**
+     * @brief A typewriter message box that understands MZ's text codes. The
+     *        rest of the page is laid out invisibly, so the browser's line
+     *        breaking (correct for every script, from the page's lang) never
+     *        moves a word to the next line halfway through typing it.
      * @param {Object} props {text, face, faceIndex, name, position (0-2),
      *        background (0-2), keepOpen (true when choices/number follow),
      *        onDone(), children (shown when the text has finished)}.
@@ -204,7 +222,10 @@
             <div class=${`pmz-message is-${bgClass}`}>
                 ${nameText ? html`<div class="pmz-message-name">${nameText}</div>` : null}
                 ${face ? html`<${Face} name=${face} index=${faceIndex} class="pmz-message-face" />` : null}
-                <div class="pmz-message-text">${UI.richNodes(s.tokens, s.pageStart, s.pos)}</div>
+                <div class="pmz-message-text">
+                    ${UI.richNodes(s.tokens, s.pageStart, s.pos)}
+                    <span class="pmz-unrevealed" aria-hidden="true">${UI.richNodes(s.tokens, s.pos, pageEnd(s.tokens, s.pos))}</span>
+                </div>
                 ${showArrow ? html`<div class="pmz-message-arrow" />` : null}
             </div>
         </div>`;
@@ -523,11 +544,26 @@
     //=========================================================================
 
     /**
-     * @brief Keyboard pages. Each page: {labelKey, fallback, rows: [string]}.
-     *        Every character in a row string is one key. Replace or extend
-     *        to add layouts (e.g. per language).
+     * @brief Splits text into user-perceived characters (PokeMZ_Locale's
+     *        grapheme clusters when available, else code points).
+     * @param {string} text Text.
+     * @return {Array<string>} Characters.
+     */
+    const chars = text => (window.PokeMZ.L10n ? window.PokeMZ.L10n.graphemes(text) : [...text]);
+
+    /**
+     * @brief Keyboard pages. With PokeMZ_Locale they come from
+     *        data/locales/keyboards.csv (the language's layout, mirroring the
+     *        physical keyboard when detected); these are the fallback. Each
+     *        page: {labelKey, fallback, rows: [string]}, or {label, rows:
+     *        [[key]]}. Every character in a row string is one key.
      */
     const keyboard = {
+        /** @return {Array<Object>} Pages for the current language. */
+        currentPages() {
+            const fromLocale = window.PokeMZ.L10n && window.PokeMZ.L10n.keyboardPages();
+            return fromLocale && fromLocale.length ? fromLocale : this.pages;
+        },
         pages: [
             { labelKey: "UI.Keyboard.Upper", fallback: "ABC", rows: ["ABCDEFGHIJ", "KLMNOPQRST", "UVWXYZ.,'-"] },
             { labelKey: "UI.Keyboard.Lower", fallback: "abc", rows: ["abcdefghij", "klmnopqrst", "uvwxyz.,'-"] },
@@ -553,8 +589,10 @@
         UI.useStrings();
         const [pageIndex, setPage] = useState(0);
         const [cur, setCur] = useState({ r: 0, c: 0 });
-        const page = keyboard.pages[pageIndex % keyboard.pages.length];
-        const rows = page.rows.map(r => [...r].map(ch => ({ ch })));
+        const pages = keyboard.currentPages();
+        const page = pages[pageIndex % pages.length];
+        const pageLabel = page.label !== undefined ? page.label : UI.t(page.labelKey, page.fallback);
+        const rows = page.rows.map(r => (Array.isArray(r) ? r : chars(r)).map(ch => ({ ch })));
         rows.push(keyboard.controls.map(k => ({ ctrl: k.id, label: UI.t(k.labelKey, k.fallback) })));
         const r = Math.min(cur.r, rows.length - 1);
         const c = Math.min(cur.c, rows[r].length - 1);
@@ -569,7 +607,7 @@
                 p.onChar(key.ch);
             } else if (key.ctrl === "page") {
                 SoundManager.playCursor();
-                setPage(i => (i + 1) % keyboard.pages.length);
+                setPage(i => (i + 1) % keyboard.currentPages().length);
             } else if (key.ctrl === "space") {
                 SoundManager.playOk();
                 p.onChar(" ");
@@ -639,7 +677,7 @@
                 if (e.isComposing) {
                     return;
                 }
-                for (const ch of el.value) {
+                for (const ch of chars(el.value)) {
                     propsRef.current.onChar(ch);
                 }
                 el.value = "";
@@ -659,7 +697,7 @@
 
         return html`<div class="pmz-panel pmz-keyboard">
             <input ref=${inputRef} class="pmz-keyboard-capture" type="text" autocomplete="off" aria-hidden="true" />
-            <div class="pmz-keyboard-page">${UI.t(page.labelKey, page.fallback)}</div>
+            <div class="pmz-keyboard-page">${pageLabel}</div>
             ${rows.map(
                 (row, ri) => html`<div key=${`${pageIndex}-${ri}`} class=${`pmz-keyboard-row${ri === rows.length - 1 ? " is-controls" : ""}`}>
                     ${row.map((key, ci) => {
@@ -705,7 +743,7 @@
         const actor = props.actorId ? $gameActors.actor(props.actorId) : null;
         const maxLength = Math.max(1, props.maxLength || 8);
         const initial = props.initial !== undefined ? props.initial : actor ? actor.name() : "";
-        const [name, setName] = useState([...initial].slice(0, maxLength).join(""));
+        const [name, setName] = useState(chars(initial).slice(0, maxLength).join(""));
         const nameRef = useRef(name);
         nameRef.current = name;
         const title = useText("UI.Name.Title", "Enter a name");
@@ -727,13 +765,15 @@
 
         const onChar = ch =>
             setName(n => {
-                if ([...n].length >= maxLength) {
+                // A combining accent typed after a letter joins it.
+                const next = (n + ch).normalize("NFC");
+                if (chars(next).length > maxLength) {
                     SoundManager.playBuzzer();
                     return n;
                 }
-                return n + ch;
+                return next;
             });
-        const onBack = () => setName(n => [...n].slice(0, -1).join(""));
+        const onBack = () => setName(n => chars(n).slice(0, -1).join(""));
         const onOk = () => {
             const value = nameRef.current.trim();
             if (!value) {
@@ -754,10 +794,10 @@
             }
         };
 
-        const chars = [...name];
+        const typed = chars(name);
         const slots = [];
         for (let i = 0; i < maxLength; i++) {
-            slots.push(html`<span key=${i} class=${`pmz-name-slot${i === chars.length ? " is-cursor" : ""}`}>${chars[i] || ""}</span>`);
+            slots.push(html`<span key=${i} class=${`pmz-name-slot${i === typed.length ? " is-cursor" : ""}`}>${typed[i] || ""}</span>`);
         }
         return html`<div class="pmz-name-screen">
             <div class="pmz-panel pmz-name-header">

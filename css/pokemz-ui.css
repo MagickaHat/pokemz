@@ -7,7 +7,8 @@
  */
 
 #pokemz-ui {
-    --pmz-font: "pokemz-ui-font", rmmz-mainfont, Verdana, sans-serif;
+    /* --pmz-locale-font is set by PokeMZ_Locale for languages with their own font. */
+    --pmz-font: var(--pmz-locale-font, "pokemz-ui-font"), rmmz-mainfont, Verdana, sans-serif;
     --pmz-font-size: 30px;
     --pmz-line: 36px;
     --pmz-fg: #404040;
@@ -338,6 +339,15 @@
     flex: 1;
     white-space: pre-wrap;
     overflow: hidden;
+    /* Break long words rather than overflow; keep CJK punctuation rules. */
+    overflow-wrap: break-word;
+    word-break: normal;
+    line-break: strict;
+}
+
+/* Untyped rest of the page: takes its space so lines never reflow. */
+.pmz-unrevealed {
+    visibility: hidden;
 }
 
 .pmz-message-face {
@@ -659,4 +669,12 @@
 .pmz-keyboard-row > * + *,
 .pmz-name-slots > * + * {
     margin-left: 6px;
+}
+
+/*
+ * Localization debug (PokeMZ_Locale, playtest): text that doesn't fit its box.
+ */
+.pmz-l10n-overflow {
+    outline: 2px dashed #e000c0;
+    outline-offset: -2px;
 }

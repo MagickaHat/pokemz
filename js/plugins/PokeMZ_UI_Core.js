@@ -109,7 +109,8 @@
  *   useGame(selector)                 Re-render when game state changes
  *   useFocus / useAction / useCursorList   Input for keyboard, gamepad,
  *                                     mouse and touch alike
- *   t(key) / useText(key)             Strings from data/locales/ui.csv
+ *   t(key, fb, args) / useText(...)   Strings from data/locales (see
+ *                                     PokeMZ_Locale for languages/ICU)
  *   assets, audio, sound, transitions, toast, wait, useFrame, useTween
  *
  * String keys use the pattern Area.Screen.Item, e.g. Start.Menu.Bag.
@@ -1221,10 +1222,19 @@
         warned: new Set(),
 
         /**
-         * @brief Loads the CSV string table.
+         * @brief Loads the CSV string table (or asks the provider to).
          * @param {function()} [done] Called when finished.
          */
         load(done) {
+            if (this.provider && this.provider.load) {
+                this.provider.load(() => {
+                    this.bump();
+                    if (done) {
+                        done();
+                    }
+                });
+                return;
+            }
             const xhr = new XMLHttpRequest();
             xhr.open("GET", `data/${CONFIG.stringsFile}${this.loaded ? `?v=${Date.now()}` : ""}`);
             xhr.overrideMimeType("text/plain; charset=utf-8");
@@ -1298,6 +1308,9 @@
 
         /** @return {boolean} True once loaded (or failed). */
         isReady() {
+            if (this.provider && this.provider.isReady) {
+                return this.provider.isReady();
+            }
             return this.loaded || this.failed;
         },
 
@@ -1322,16 +1335,35 @@
          * @param {string} lang Language column.
          */
         setLanguage(lang) {
-            this.language = this.resolveLanguage(lang);
             if (this.provider && this.provider.setLanguage) {
                 this.provider.setLanguage(lang);
+                this.language = this.provider.language || lang;
+            } else {
+                this.language = this.resolveLanguage(lang);
             }
             this.bump();
         },
 
         /**
-         * @brief Hands string lookup to another system (e.g. the future
-         *        localization plugin): {get(key), setLanguage?(lang)}.
+         * @brief Formats a looked-up string with arguments. The provider's
+         *        format (ICU MessageFormat in PokeMZ_Locale) is used when
+         *        available; otherwise "%1", "%2"... are replaced.
+         * @param {string} text Raw string.
+         * @param {Array} args Arguments (a single plain object = named).
+         * @return {string} Formatted text.
+         */
+        format(text, args) {
+            if (this.provider && this.provider.format) {
+                const named = args.length === 1 && args[0] && typeof args[0] === "object" && !Array.isArray(args[0]);
+                return this.provider.format(text, named ? args[0] : args);
+            }
+            return args.length ? text.format(...args) : text;
+        },
+
+        /**
+         * @brief Hands string lookup to another system (PokeMZ_Locale):
+         *        {get(key), has?(key), format?(text, args), setLanguage?(lang),
+         *        load?(done), isReady?(), expand?(text)}.
          * @param {Object|null} provider The provider, or null for the CSV.
          */
         setProvider(provider) {
@@ -1366,6 +1398,9 @@
      * @return {string} Converted text.
      */
     function convertEscapes(text) {
+        if (strings.provider && strings.provider.expand) {
+            text = strings.provider.expand(String(text));
+        }
         try {
             return Window_Base.prototype.convertEscapeCharacters.call(escapeWindow, String(text));
         } catch (e) {
@@ -1382,8 +1417,10 @@
     const stripCodes = text => text.replace(/\x1b([$.|^!><{}\\]|[A-Z]+(\[\d+\])?)/gi, "");
 
     /**
-     * @brief Looks up a UI string. Order: current language, en, fallback, key.
-     *        "%1", "%2"... are replaced with args; escape codes are applied.
+     * @brief Looks up a UI string. Order: current language (and its
+     *        fallbacks), en, fallback, key. Arguments fill "%1", "%2"... or,
+     *        with PokeMZ_Locale, ICU placeholders ({name}, plurals...); pass
+     *        one object for named arguments. Escape codes are applied.
      * @param {string} key String key, e.g. "Start.Menu.Bag".
      * @param {string} [fallback] Text used when the key is missing.
      * @param {...*} args Format arguments.
@@ -1392,15 +1429,13 @@
     function t(key, fallback, ...args) {
         let text = strings.get(key);
         if (text === undefined) {
-            if (strings.isReady() && !strings.warned.has(key)) {
+            if (!strings.provider && strings.isReady() && !strings.warned.has(key)) {
                 strings.warned.add(key);
                 console.warn(`[PokeMZ.UI] missing string "${key}" in data/${CONFIG.stringsFile}`);
             }
             text = fallback !== undefined ? fallback : key;
         }
-        if (args.length) {
-            text = text.format(...args);
-        }
+        text = strings.format(text, args);
         return stripCodes(convertEscapes(text));
     }
 
@@ -1411,9 +1446,12 @@
      * @param {string} [fallback] Fallback text.
      * @return {string} The text.
      */
-    function useText(key, fallback) {
+    function useText(key, fallback, ...args) {
         useStore(stringsStore, s => s.version);
-        return useGame(() => t(key, fallback));
+        // useGame re-renders when game state used by codes (\N[1]) changes;
+        // the text itself is read fresh so a language change shows at once.
+        useGame(() => t(key, fallback, ...args));
+        return t(key, fallback, ...args);
     }
 
     /** @brief Subscribes a component to string table changes. */
@@ -1729,7 +1767,8 @@
             return;
         }
         const id = ++toastId;
-        const shown = strings.get(text) !== undefined ? t(text) : String(text);
+        const isKey = strings.provider && strings.provider.has ? strings.provider.has(text) : strings.get(text) !== undefined;
+        const shown = isKey ? t(text) : String(text);
         toastStore.set(s => ({ items: [...s.items, { id, text: shown }] }));
         setTimeout(() => toastStore.set(s => ({ items: s.items.filter(i => i.id !== id) })), framesToMs(frames));
     }
