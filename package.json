@@ -8,5 +8,9 @@
         "height": 624,
         "position": "center",
         "icon": "icon/icon.png"
+    },
+    "scripts": {
+        "test": "node --test tests/l10n.test.js",
+        "l10n": "node tools/l10n.js"
     }
 }
