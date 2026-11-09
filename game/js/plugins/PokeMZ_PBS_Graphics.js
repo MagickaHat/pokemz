@@ -412,6 +412,8 @@
     window.PokeMZ.Graphics = Object.assign(Engine, {
         folder: FOLDER,
         load,
+        /** @brief Loads any image without MZ's error screen (null if missing). */
+        tryLoad,
         /**
          * @brief Whether a species has its own image for a view.
          * @return {Promise<boolean>} True if a file was found.

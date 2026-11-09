@@ -1633,3 +1633,90 @@
     bottom: -4px;
     display: none;
 }
+
+/* Town Map ---------------------------------------------------------------*/
+
+.pmz-pk-townmap {
+    background: linear-gradient(#58a0d0, #a8d8f0);
+}
+
+.pmz-pk-townmap-head {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 8px;
+    padding: 2px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pmz-pk-townmap-area {
+    position: absolute;
+    left: 24px;
+    top: 62px;
+    overflow: hidden;
+    border: 3px solid var(--pmz-border);
+    border-radius: 8px;
+    background: #b8e0a0;
+}
+
+.pmz-pk-townmap-image,
+.pmz-pk-townmap-grid {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pmz-pk-townmap-grid {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+}
+
+.pmz-pk-townmap-point,
+.pmz-pk-townmap-player,
+.pmz-pk-townmap-cursor {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.pmz-pk-townmap-point::after {
+    content: "";
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    width: 40%;
+    height: 40%;
+    border-radius: 3px;
+    background: #f8f0a0;
+    box-shadow: 0 0 0 2px #604820;
+}
+
+.pmz-pk-townmap-point.is-town::after {
+    left: 15%;
+    top: 15%;
+    width: 70%;
+    height: 70%;
+    background: #f86848;
+}
+
+.is-fly .pmz-pk-townmap-point:not(.can-fly)::after {
+    opacity: 0.45;
+}
+
+.pmz-pk-townmap-player {
+    border-radius: 50%;
+    background: radial-gradient(#3878e0 40%, transparent 45%);
+}
+
+.pmz-pk-townmap-cursor {
+    border: 3px solid var(--pmz-accent);
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.pmz-pk-townmap-bar small {
+    margin-left: 12px;
+    color: var(--pmz-muted);
+}

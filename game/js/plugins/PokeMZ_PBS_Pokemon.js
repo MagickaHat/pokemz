@@ -2805,6 +2805,10 @@
         if (meta && meta.healSpot && window.$gamePokemon) {
             $gamePokemon.lastHealSpot = meta.healSpot.slice();
         }
+        if (window.$gamePokemon) {
+            $gamePokemon.visitedMaps = $gamePokemon.visitedMaps || {};
+            $gamePokemon.visitedMaps[$gameMap.mapId()] = 1;
+        }
         if (window.$gameParty) {
             for (const p of $gameParty.pokemon()) {
                 p.checkForm();

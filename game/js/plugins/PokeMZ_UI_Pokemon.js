@@ -1753,6 +1753,163 @@
     }
 
     //=========================================================================
+    // Town Map (and Fly)
+    //=========================================================================
+
+    /**
+     * @brief Where a map is on the Town Map: its own map_metadata townMap,
+     *        else its parent map's (MapInfos tree).
+     * @param {number} mapId MZ map ID.
+     * @return {Array|null} [regionId, x, y].
+     */
+    function townMapPosition(mapId) {
+        let id = mapId;
+        const seen = new Set();
+        while (id && !seen.has(id)) {
+            seen.add(id);
+            const meta = PBS.mapMetadataFor(id);
+            if (meta && meta.townMap) {
+                return meta.townMap;
+            }
+            id = $dataMapInfos[id] ? $dataMapInfos[id].parentId : 0;
+        }
+        return null;
+    }
+
+    /**
+     * @brief Whether a Town Map point can be flown to.
+     * @param {Object} point Town map point.
+     * @return {boolean} True if Fly can go there.
+     */
+    function canFlyTo(point) {
+        if (!point || !point.flyTo) {
+            return false;
+        }
+        if (point.switch) {
+            return $gameSwitches.value(point.switch);
+        }
+        return !!($gamePokemon.visitedMaps || {})[point.flyTo[0]];
+    }
+
+    /** @brief The Town Map screen; props {mode: "view" | "fly"}. */
+    function TownMapScreen({ close, mode = "view" }) {
+        UI.useStrings();
+        const regions = PBS.townMap.ids();
+        const here = townMapPosition($gameMap.mapId());
+        const [regionIndex, setRegionIndex] = useState(() => Math.max(0, here ? regions.indexOf(here[0]) : 0));
+        const region = regions.length ? PBS.townMap.get(regions[regionIndex]) : null;
+        const [cur, setCur] = useState(() => (here && region && here[0] === region.id ? { x: here[1], y: here[2] } : { x: 0, y: 0 }));
+        const [image, setImage] = useState(null);
+        const [busy, setBusy] = useState(false);
+        const count = UI.useFrameCount();
+        const imgRef = useRef(null);
+        useEffect(() => {
+            let alive = true;
+            setImage(null);
+            if (region && region.image && window.PokeMZ.Graphics) {
+                window.PokeMZ.Graphics.tryLoad(`img/townmap/${encodeURIComponent(region.image)}.png`).then(b => alive && setImage(b));
+            }
+            return () => (alive = false);
+        }, [region && region.id]);
+        useLayoutEffect(() => {
+            const canvas = imgRef.current;
+            if (canvas && image) {
+                const ctx = canvas.getContext("2d");
+                ctx.imageSmoothingEnabled = false;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(image.canvas, 0, 0, canvas.width, canvas.height);
+            }
+        }, [image]);
+        if (!region) {
+            return html`<div class="pmz-pk-screen pmz-pk-townmap">
+                <${HelpBar} text=${tr("TownMap.None", "There is no map data.")} onBack=${close} />
+            </div>`;
+        }
+        const [cols, rows] = region.size;
+        const cell = Math.floor(Math.min(768 / cols, 456 / rows));
+        const pointAt = (x, y) => region.points.findIndex(p => p.x === x && p.y === y);
+        const pi = pointAt(cur.x, cur.y);
+        const point = pi >= 0 ? region.points[pi] : null;
+        const move = (dx, dy) => {
+            setCur({ x: Math.max(0, Math.min(cols - 1, cur.x + dx)), y: Math.max(0, Math.min(rows - 1, cur.y + dy)) });
+            SoundManager.playCursor();
+        };
+        const fly = async () => {
+            if (mode !== "fly") {
+                return;
+            }
+            if (!canFlyTo(point)) {
+                SoundManager.playBuzzer();
+                return;
+            }
+            setBusy(true);
+            const ok = await UI.confirm(tr("TownMap.FlyConfirm", "Fly to {place}?", { place: region.pointName(pi) }));
+            setBusy(false);
+            if (ok) {
+                const [mapId, x, y] = point.flyTo;
+                close();
+                $gamePlayer.reserveTransfer(mapId, x, y, 2, 0);
+            }
+        };
+        useFocus(
+            {
+                left: () => move(-1, 0),
+                right: () => move(1, 0),
+                up: () => move(0, -1),
+                down: () => move(0, 1),
+                ok: fly,
+                shift: () => regions.length > 1 && (SoundManager.playCursor(), setRegionIndex((regionIndex + 1) % regions.length)),
+                cancel: () => (SoundManager.playCancel(), close()),
+            },
+            { priority: busy ? -1 : 0 }
+        );
+        const style = (x, y) => ({ left: `${x * cell}px`, top: `${y * cell}px`, width: `${cell}px`, height: `${cell}px` });
+        const label = point ? region.pointName(pi) : "";
+        return html`<div class=${`pmz-pk-screen pmz-pk-townmap ${mode === "fly" ? "is-fly" : ""}`}>
+            <div class="pmz-panel pmz-pk-townmap-head">
+                <span>${region.name}</span>
+                <span>${mode === "fly" ? tr("TownMap.FlyTitle", "Where do you want to fly?") : tr("TownMap.Title", "Town Map")}</span>
+            </div>
+            <div class="pmz-pk-townmap-area" style=${{ width: `${cols * cell}px`, height: `${rows * cell}px` }} role="grid" aria-label=${region.name}>
+                ${image ? html`<canvas ref=${imgRef} class="pmz-image pmz-pk-townmap-image" width=${cols * cell} height=${rows * cell} />` : html`<div class="pmz-pk-townmap-grid" style=${{ backgroundSize: `${cell}px ${cell}px` }}></div>`}
+                ${region.points.map(
+                    (p, i) => html`<div
+                        key=${i}
+                        class=${`pmz-pk-townmap-point ${p.flyTo ? "is-town" : ""} ${mode === "fly" && canFlyTo(p) ? "can-fly" : ""}`}
+                        style=${style(p.x, p.y)}
+                        onPointerUp=${() => setCur({ x: p.x, y: p.y })}
+                    ></div>`
+                )}
+                ${here && here[0] === region.id && Math.floor(count / 20) % 2 === 0 ? html`<div class="pmz-pk-townmap-player" style=${style(here[1], here[2])} aria-label=${tr("TownMap.You", "You are here")}></div>` : null}
+                <div class="pmz-pk-townmap-cursor" style=${style(cur.x, cur.y)}></div>
+            </div>
+            <div class="pmz-panel pmz-pk-help pmz-pk-townmap-bar" aria-live="polite">
+                <span>
+                    <b>${label}</b>
+                    ${point && point.poi ? html` — ${tr(`TownMap.Poi.${PBS.toID(point.poi)}`, point.poi)}` : null}
+                    ${regions.length > 1 ? html` <small>${tr("TownMap.SwitchRegion", "Shift: region")}</small>` : null}
+                </span>
+                <${BackButton} onPress=${close} />
+            </div>
+        </div>`;
+    }
+
+    // Fly: from the party menu, outdoors.
+    Pkmn.FieldMoves.register("fly", {
+        canUse: () => {
+            const meta = PBS.mapMetadataFor($gameMap.mapId());
+            return !!(meta && meta.outdoor) && PBS.townMap.size > 0;
+        },
+        async use() {
+            // Wait until the map is back before opening the Town Map.
+            while (!(SceneManager._scene instanceof Scene_Map) || SceneManager.isSceneChanging()) {
+                await UI.wait(1);
+            }
+            UI.openScreen("townMap", { mode: "fly" });
+        },
+    });
+
+    //=========================================================================
     // Registration
     //=========================================================================
 
@@ -1762,6 +1919,8 @@
     UI.registerScreen("pc", PcScreen, { transition: "fade" });
     UI.registerScreen("moveReminder", MoveReminderScreen, { transition: "none", backgroundOpacity: 255, blur: false });
     UI.registerScreen("dayCare", DayCareScreen, { transition: "none", backgroundOpacity: 255, blur: false });
+    UI.registerScreen("townMap", TownMapScreen, { transition: "fade" });
+    UI.registerScreen("pokegear", TownMapScreen, { transition: "fade" });
     UI.registerScreen("battle", BattleScreen, { transition: "fade", blur: false, backgroundOpacity: 0 });
 
     window.PokeMZ.PokemonUI = {
@@ -1772,6 +1931,8 @@
         pickCommand,
         showSummary,
         pickTarget,
+        townMapPosition,
+        canFlyTo,
         components: { PokemonImage, PokemonIcon, HpBar, ExpBar, TypeBadge, Gender, StatusBadge, PartyView, BagView, SummaryView },
     };
 })();

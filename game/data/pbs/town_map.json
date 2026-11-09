@@ -1,0 +1,14 @@
+{
+  "#": "Sample region. Add img/townmap/region.png (any size; it is scaled to the grid).",
+  "region": {
+    "name": "Sample Region",
+    "image": "region",
+    "size": [24, 16],
+    "pointSize": [16, 16],
+    "points": [
+      {"x": 5, "y": 8, "name": "MAP001", "poi": "", "flyTo": [1, 8, 6]},
+      {"x": 6, "y": 8, "name": "Route 1"},
+      {"x": 7, "y": 8, "name": "Route 1"}
+    ]
+  }
+}

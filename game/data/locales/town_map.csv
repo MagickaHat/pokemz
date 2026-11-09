@@ -1,1 +1,5 @@
 Key,en,es-es,es-mx,pt-pt,pt-br,fr
+TownMap.region.Name,Sample Region,,,,,
+TownMap.region.Point0,MAP001,,,,,
+TownMap.region.Point1,Route 1,,,,,
+TownMap.region.Point2,Route 1,,,,,
