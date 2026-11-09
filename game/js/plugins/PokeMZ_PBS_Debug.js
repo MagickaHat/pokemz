@@ -239,12 +239,16 @@
         return _isDebugCalled.apply(this, arguments) && !(KEY === 120 && Input.isPressed("shift"));
     };
 
-    document.addEventListener("keydown", e => {
-        if (e.keyCode === KEY && e.shiftKey && !e.ctrlKey && !e.altKey) {
-            e.preventDefault();
-            Debug.open();
-        }
-    });
+    if (window.PokeMZ && window.PokeMZ.Input) {
+        window.PokeMZ.Input.registerHotkey({ keyCode: KEY, shift: true, label: "battle test" }, () => Debug.open());
+    } else {
+        document.addEventListener("keydown", e => {
+            if (e.keyCode === KEY && e.shiftKey && !e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+                Debug.open();
+            }
+        });
+    }
 
     window.PokeMZ = window.PokeMZ || {};
     window.PokeMZ.Debug = Debug;

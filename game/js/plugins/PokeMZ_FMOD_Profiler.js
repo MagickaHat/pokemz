@@ -772,22 +772,31 @@
     if (!enabled) {
         return;
     }
-    document.addEventListener("keydown", e => {
-        if (e.repeat) {
-            return;
+    const toggleRecording = () => {
+        if (recording) {
+            stop();
+        } else {
+            start();
         }
-        if (e.key === CONFIG.panelKey && e.shiftKey) {
-            toggle();
-            e.preventDefault();
-            e.stopImmediatePropagation();
-        } else if (e.key === CONFIG.recordKey && e.ctrlKey) {
-            if (recording) {
-                stop();
-            } else {
-                start();
+    };
+    const PInput = window.PokeMZ && window.PokeMZ.Input;
+    if (PInput) {
+        PInput.registerHotkey({ key: CONFIG.panelKey, shift: true, label: "FMOD profiler" }, () => toggle());
+        PInput.registerHotkey({ key: CONFIG.recordKey, ctrl: true, label: "FMOD record" }, toggleRecording);
+    } else {
+        document.addEventListener("keydown", e => {
+            if (e.repeat) {
+                return;
             }
-            e.preventDefault();
-            e.stopImmediatePropagation();
-        }
-    }, true);
+            if (e.key === CONFIG.panelKey && e.shiftKey) {
+                toggle();
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            } else if (e.key === CONFIG.recordKey && e.ctrlKey) {
+                toggleRecording();
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            }
+        }, true);
+    }
 })();

@@ -250,12 +250,17 @@
     if (!enabled) {
         return;
     }
-    document.addEventListener("keydown", e => {
-        if (e.key === CONFIG.key && !e.repeat && !e.shiftKey && !e.ctrlKey) {
-            toggle();
-            e.preventDefault();
-        }
-    });
+    const PInput = window.PokeMZ && window.PokeMZ.Input;
+    if (PInput) {
+        PInput.registerHotkey({ key: CONFIG.key, label: "FMOD debug" }, () => toggle());
+    } else {
+        document.addEventListener("keydown", e => {
+            if (e.key === CONFIG.key && !e.repeat && !e.shiftKey && !e.ctrlKey) {
+                toggle();
+                e.preventDefault();
+            }
+        });
+    }
     if (CONFIG.showOnStart) {
         const start = () => (document.body ? toggle() : setTimeout(start, 100));
         start();

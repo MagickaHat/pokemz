@@ -335,7 +335,7 @@
         }
         return html`<div class="pmz-panel pmz-number" onPointerUp=${e => e.stopPropagation()}>
             <div class="pmz-number-cells">${cells}</div>
-            <${Button} class="pmz-number-ok" sound="" onPress=${confirm}>${ok}<//>
+            <${Button} class="pmz-number-ok" sound="" onPress=${confirm}><${UI.components.ButtonHint} action="ok" />${ok}<//>
         </div>`;
     }
 
@@ -649,6 +649,8 @@
         );
 
         // Typing on a physical keyboard (desktop only; mobile uses the grid).
+        // While the field has focus PokeMZ_Input treats it as text entry, so
+        // typed letters (Z, X, Space...) don't also act as game buttons.
         useEffect(() => {
             const el = inputRef.current;
             if (!el || Utils.isMobileDevice()) {
@@ -669,8 +671,6 @@
                     e.preventDefault();
                     e.stopPropagation();
                     propsRef.current.onOk();
-                } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
-                    e.stopPropagation(); // typed text, not MZ's Z/X/Space
                 }
             };
             const onInput = e => {
@@ -682,10 +682,8 @@
                 }
                 el.value = "";
             };
-            const keyup = e => e.key.length === 1 && e.stopPropagation();
             const refocus = () => setTimeout(() => el.isConnected && el.focus({ preventScroll: true }), 0);
             el.addEventListener("keydown", keydown);
-            el.addEventListener("keyup", keyup);
             el.addEventListener("input", onInput);
             el.addEventListener("compositionend", onInput);
             el.addEventListener("blur", refocus);

@@ -108,7 +108,10 @@
  *   attach(SceneClass, id, opts)      Overlay a component on an MZ scene
  *   useGame(selector)                 Re-render when game state changes
  *   useFocus / useAction / useCursorList   Input for keyboard, gamepad,
- *                                     mouse and touch alike
+ *                                     mouse and touch alike (actions come
+ *                                     from PokeMZ_Input)
+ *   useInputDevice / useGlyph / <Glyph action>   Active device and the
+ *                                     button glyph of an action
  *   t(key, fb, args) / useText(...)   Strings from data/locales (see
  *                                     PokeMZ_Locale for languages/ICU)
  *   assets, audio, sound, transitions, toast, wait, useFrame, useTween
@@ -640,8 +643,18 @@
 
     let focusSeq = 0;
 
+    /** @return {Object|null} The PokeMZ_Input layer, if loaded. */
+    const layer = () => (window.PokeMZ && window.PokeMZ.Input) || null;
+
+    /** @brief How long an emitted action waits for a focus owner (frames). */
+    const EMIT_FRAMES = 15;
+
     const input = {
-        /** @brief Action -> MZ Input button names. Replace to rebind sources. */
+        /**
+         * @brief UI action -> input actions (PokeMZ_Input ids or MZ names).
+         *        Handlers may also use any registered PokeMZ_Input action id
+         *        directly (e.g. {cameraLeft() {...}}).
+         */
         bindings: {
             up: ["up"],
             down: ["down"],
@@ -658,16 +671,25 @@
         repeatable: new Set(["up", "down", "left", "right", "pageup", "pagedown"]),
         stack: [],
         queue: [],
+        /** @brief UI actions emitted and waiting in the input buffer. */
+        pending: new Set(),
         /** @brief Set by tools (e.g. key capture) to pause action dispatch. */
         suspended: 0,
 
         /**
-         * @brief Queues an action from any source (pointer, future input
-         *        system, scripts). It is dispatched on the next frame.
+         * @brief Queues an action from any source (pointer, scripts). It is
+         *        buffered and dispatched once a focus owner exists (within
+         *        15 frames), so a tap made while a screen mounts isn't lost.
          * @param {string} action Action name.
          */
         emit(action) {
-            this.queue.push({ action, frames: 15 });
+            const P = layer();
+            if (P) {
+                P.mark(`ui:${action}`);
+                this.pending.add(action);
+            } else {
+                this.queue.push({ action, frames: EMIT_FRAMES });
+            }
         },
 
         /** @return {Object|null} The focus entry that receives actions. */
@@ -711,31 +733,54 @@
             }
         },
 
-        /** @brief Reads MZ Input and dispatches actions to the top focus. */
+        /**
+         * @brief Reads the input layer and dispatches actions to the top
+         *        focus. Handled actions are consumed.
+         */
         update() {
+            const P = layer();
             const fired = [];
-            if (this.stack.length && !this.suspended && !SceneManager.isSceneChanging()) {
-                for (const action of Object.keys(this.bindings)) {
+            const active = this.stack.length && !this.suspended && !SceneManager.isSceneChanging();
+            if (active) {
+                const top = this.top();
+                const names = new Set([...Object.keys(this.bindings), ...Object.keys((top && top.handlers.current) || {})]);
+                for (const action of names) {
+                    const sources = this.bindings[action] || [action];
                     const rep = this.repeatable.has(action);
-                    const hit = this.bindings[action].some(n => (rep ? Input.isRepeated(n) : Input.isTriggered(n)));
+                    const ctx = top && top.ctx;
+                    const hit = sources.some(n =>
+                        P ? (rep ? P.isRepeated(n, ctx) : P.isTriggered(n, ctx)) : rep ? Input.isRepeated(n) : Input.isTriggered(n)
+                    );
                     if (hit) {
                         fired.push(action);
                     }
                 }
             }
-            // Queued actions wait (up to 15 frames) for a focus owner, so a
-            // tap made while a screen is still mounting isn't lost.
-            if (!this.suspended && this.stack.length) {
+            // Emitted actions wait in the buffer for a focus owner.
+            if (P) {
+                for (const action of [...this.pending]) {
+                    if (!P.isBuffered(`ui:${action}`, EMIT_FRAMES)) {
+                        this.pending.delete(action);
+                    } else if (active && P.consumeBuffered(`ui:${action}`, EMIT_FRAMES)) {
+                        this.pending.delete(action);
+                        fired.push(action);
+                    }
+                }
+            } else if (active) {
                 fired.push(...this.queue.splice(0).map(q => q.action));
             } else {
                 this.queue = this.queue.filter(q => --q.frames > 0);
             }
             // Keyboard Escape counts as both cancel and menu in MZ; send one.
-            if (fired.includes("cancel") && fired.includes("menu")) {
+            if (fired.includes("cancel") && fired.includes("menu") && (!P || P.state("menu").viaFallback)) {
                 fired.splice(fired.indexOf("menu"), 1);
             }
             for (const action of fired) {
-                this.dispatch(action);
+                if (this.dispatch(action) && P) {
+                    for (const n of this.bindings[action] || [action]) {
+                        P.consume(n);
+                    }
+                }
             }
         },
 
@@ -753,6 +798,16 @@
             }
             return false;
         },
+
+        /**
+         * @brief Glyph of a UI action on the active device.
+         * @param {string} action UI action or input action id.
+         * @return {Object|null} PokeMZ.Input.glyph() result.
+         */
+        glyph(action) {
+            const P = layer();
+            return P ? P.glyph((this.bindings[action] || [action])[0]) : null;
+        },
     };
 
     // Freeze the map while a UI holds focus.
@@ -769,15 +824,20 @@
 
     /**
      * @brief Claims input focus while mounted. The newest owner with the
-     *        highest priority receives actions.
+     *        highest priority receives actions. Each owner also pushes an
+     *        input context (PokeMZ_Input), shown in the input overlay.
      * @param {Object} handlers {ok, cancel, up, ...} action handlers.
-     * @param {Object} [opts] {enabled = true, priority = 0, blockMap = true}.
+     * @param {Object} [opts] {enabled = true, priority = 0, blockMap = true,
+     *        context = "ui", blockInput = false (hide actions from MZ code
+     *        while focused), allow: [actions MZ code still sees]}.
      * @return {{focused: boolean, isTop: function(): boolean}} Focus state.
      */
     function useFocus(handlers, opts = {}) {
         const enabled = opts.enabled !== false;
         const priority = opts.priority || 0;
         const blockMap = opts.blockMap !== false;
+        const contextId = opts.context || "ui";
+        const blockInput = !!opts.blockInput;
         const ref = useRef(handlers);
         ref.current = handlers;
         const entryRef = useRef(null);
@@ -786,14 +846,19 @@
             if (!enabled) {
                 return undefined;
             }
-            const entry = { handlers: ref, priority, blockMap, notify: force };
+            const P = layer();
+            const ctx = P ? P.pushContext(contextId, { block: blockInput, allow: opts.allow }) : null;
+            const entry = { handlers: ref, priority, blockMap, notify: force, ctx };
             entryRef.current = entry;
             input.add(entry);
             return () => {
                 input.remove(entry);
+                if (ctx) {
+                    ctx.pop();
+                }
                 entryRef.current = null;
             };
-        }, [enabled, priority, blockMap]);
+        }, [enabled, priority, blockMap, contextId, blockInput]);
         const isTop = useCallback(() => !!entryRef.current && input.top() === entryRef.current, []);
         return { focused: isTop(), isTop };
     }
@@ -1062,6 +1127,64 @@
         const hh = ImageManager.iconHeight;
         const rect = [(index % 16) * w, Math.floor(index / 16) * hh, w, hh];
         return html`<${MzImage} folder="system" name="IconSet" rect=${rect} scale=${scale} class=${`pmz-icon ${cls || ""}`} />`;
+    }
+
+    /**
+     * @brief The active input device; re-renders when it, the gamepad
+     *        family, the bindings or the glyph options change.
+     * @return {{device: string, family: string, version: number}} State.
+     */
+    function useInputDevice() {
+        const P = layer();
+        const read = v => ({ device: P ? P.device : "keyboard", family: P ? P.family : "generic", version: v });
+        const [state, setState] = useState(() => read(0));
+        useEffect(() => {
+            if (!P) {
+                return undefined;
+            }
+            const bump = () => setState(s => read(s.version + 1));
+            const offs = [P.on("devicechange", bump), P.on("bindingschange", bump), P.on("optionschange", bump)];
+            return () => offs.forEach(off => off());
+        }, []);
+        return state;
+    }
+
+    /**
+     * @brief The glyph for an action on the active device.
+     * @param {string} action UI action ("ok") or input action ("confirm").
+     * @return {Object|null} PokeMZ.Input.glyph() result.
+     */
+    function useGlyph(action) {
+        const dev = useInputDevice();
+        useStrings();
+        return useMemo(() => input.glyph(action), [action, dev.version, dev.device, dev.family]);
+    }
+
+    /**
+     * @brief Shows the button/key for an action: a cell of the device's
+     *        glyph sheet when one exists, else a text badge.
+     * @param {Object} props {action, size = 24, class}.
+     */
+    function Glyph({ action, size = 24, class: cls }) {
+        const g = useGlyph(action);
+        if (!g) {
+            return null;
+        }
+        const base = `pmz-glyph is-${g.device} is-${g.family} ${cls || ""}`;
+        if (g.image) {
+            const k = size / g.image.size;
+            const style = {
+                width: `${size}px`,
+                height: `${size}px`,
+                backgroundImage: `url("${g.image.url}")`,
+                backgroundPosition: `-${g.image.x * k}px -${g.image.y * k}px`,
+                backgroundSize: `${g.image.width * k}px ${g.image.height * k}px`,
+            };
+            return html`<span class=${`${base} is-image${g.keycap ? " is-keycap" : ""}`} style=${style} title=${g.text}>
+                ${g.keycap ? html`<span class="pmz-glyph-text">${g.text}</span>` : null}
+            </span>`;
+        }
+        return html`<span class=${`${base} is-text`} style=${{ minWidth: `${size}px`, height: `${size}px` }}>${g.text}</span>`;
     }
 
     /** @brief A face from img/faces. */
@@ -1718,10 +1841,23 @@
         </div>`;
     }
 
+    /**
+     * @brief A glyph shown next to an on-screen button while the player uses
+     *        keys or a gamepad (hidden for mouse and touch).
+     * @param {Object} props {action, size = 22}.
+     */
+    function ButtonHint({ action, size = 22 }) {
+        const dev = useInputDevice();
+        if (dev.device !== "keyboard" && dev.device !== "gamepad") {
+            return null;
+        }
+        return html`<${Glyph} action=${action} size=${size} class="pmz-button-hint" /> `;
+    }
+
     /** @brief The on-screen Back button every screen should show. */
     function BackButton({ onPress, class: cls }) {
         const label = useText("UI.Common.Back", "Back");
-        return html`<${Button} class=${`pmz-back ${cls || ""}`} sound="cancel" onPress=${onPress}>${label}<//>`;
+        return html`<${Button} class=${`pmz-back ${cls || ""}`} sound="cancel" onPress=${onPress}><${ButtonHint} action="cancel" />${label}<//>`;
     }
 
     /**
@@ -2114,12 +2250,17 @@
             if (!this.enabled) {
                 return;
             }
-            document.addEventListener("keydown", e => {
-                if (e.keyCode === 117 && !e.ctrlKey && !e.altKey) {
-                    e.preventDefault();
-                    this.reload();
-                }
-            });
+            const P = layer();
+            if (P) {
+                P.registerHotkey({ keyCode: 117, label: "UI reload" }, () => this.reload());
+            } else {
+                document.addEventListener("keydown", e => {
+                    if (e.keyCode === 117 && !e.ctrlKey && !e.altKey) {
+                        e.preventDefault();
+                        this.reload();
+                    }
+                });
+            }
             this.watch();
         },
     };
@@ -2188,6 +2329,8 @@
         useAction,
         useCursorList,
         usePress,
+        useInputDevice,
+        useGlyph,
         // Assets, timing, audio
         assets,
         useBitmap,
@@ -2227,6 +2370,8 @@
             CharacterFrame,
             Transition,
             Toasts,
+            Glyph,
+            ButtonHint,
         },
         toast,
         dev,

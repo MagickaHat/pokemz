@@ -32,5 +32,8 @@ server/error.log*
 # FMOD profiler recordings
 fmod-profiles/
 
+# Input recordings (PokeMZ_Input, Shift+F10)
+input-recordings/
+
 # PBS tool download cache
 tools/.cache/

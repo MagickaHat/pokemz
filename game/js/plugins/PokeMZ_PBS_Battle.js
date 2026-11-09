@@ -1740,6 +1740,10 @@
             return Promise.resolve("win");
         }
         const meta = PBS.mapMetadataFor($gameMap.mapId());
+        const input = window.PokeMZ.Input;
+        if (input) {
+            input.rumble(o.wild ? 0.3 : 0.5, 0.6, o.wild ? 18 : 24);
+        }
         return new Promise(resolve => {
             const sides = Object.assign({}, o.sides || {});
             if (!sides.p2) {

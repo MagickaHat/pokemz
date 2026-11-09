@@ -1417,12 +1417,18 @@
                             update(pos, { anim: ev.type === "damage" && !ev.from ? "hit" : "" });
                             if (ev.type === "damage" && !ev.from) {
                                 SoundManager.playEnemyDamage();
+                                if (ev.side === "p1" && window.PokeMZ.Input) {
+                                    window.PokeMZ.Input.rumble(0.7, 0.4, 12);
+                                }
                             }
                             await wait(24);
                             break;
                         case "faint":
                             update(pos, { anim: "faint", hp: 0 });
                             SoundManager.playEnemyCollapse();
+                            if (ev.side === "p1" && window.PokeMZ.Input) {
+                                window.PokeMZ.Input.rumble(0.9, 0.9, 24);
+                            }
                             await wait(30);
                             break;
                         case "status":
