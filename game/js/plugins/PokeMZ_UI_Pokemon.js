@@ -1910,6 +1910,47 @@
     });
 
     //=========================================================================
+    // Trade overlay
+    //=========================================================================
+
+    /**
+     * @brief Plays the trade sequence: the sent Pokémon leaves, the
+     *        received one arrives.
+     * @param {Game_Pokemon} sent Pokémon sent (already removed).
+     * @param {Game_Pokemon} got Pokémon received.
+     * @param {Object} o {npc, sent (name)}.
+     * @return {Promise<void>} Done.
+     */
+    function showTrade(sent, got, o) {
+        return modal(done => {
+            function TradeView() {
+                const [phase, setPhase] = useState("send");
+                useEffect(() => {
+                    (async () => {
+                        const player = $gameParty.leader() ? $gameParty.leader().name() : "";
+                        await UI.message(tr("Trade.Msg.Sending", "{player} sent over {name}.", { player, name: o.sent }));
+                        setPhase("swap");
+                        await UI.wait(50);
+                        setPhase("receive");
+                        SoundManager.playRecovery();
+                        await UI.message(tr("Trade.Msg.Received", "{npc} sent over {name}.", { npc: o.npc, name: got.name() }));
+                        done();
+                    })();
+                }, []);
+                return html`<div class="pmz-pk-screen pmz-pk-trade" aria-live="polite">
+                    <div class=${`pmz-pk-trade-mon is-${phase}`}>
+                        ${phase === "receive"
+                            ? html`<${PokemonImage} pokemon=${got} view="front" scale=${3} />`
+                            : html`<${PokemonImage} pokemon=${sent} view="front" scale=${3} />`}
+                    </div>
+                    <div class="pmz-pk-trade-link" aria-hidden="true"></div>
+                </div>`;
+            }
+            return html`<${TradeView} />`;
+        });
+    }
+
+    //=========================================================================
     // Registration
     //=========================================================================
 
@@ -1933,6 +1974,7 @@
         pickTarget,
         townMapPosition,
         canFlyTo,
+        showTrade,
         components: { PokemonImage, PokemonIcon, HpBar, ExpBar, TypeBadge, Gender, StatusBadge, PartyView, BagView, SummaryView },
     };
 })();

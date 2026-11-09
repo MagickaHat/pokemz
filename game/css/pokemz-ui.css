@@ -1720,3 +1720,49 @@
     margin-left: 12px;
     color: var(--pmz-muted);
 }
+
+/* Trade ------------------------------------------------------------------*/
+
+.pmz-pk-trade {
+    background: radial-gradient(#f8f8ff, #88b8e8 75%);
+}
+
+.pmz-pk-trade-mon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 110px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.8s ease-in, opacity 0.8s;
+}
+
+.pmz-pk-trade-mon.is-swap {
+    transform: translateY(-260px) scale(0.3);
+    opacity: 0;
+}
+
+.pmz-pk-trade-mon.is-receive {
+    animation: pmz-pk-trade-in 0.8s ease-out;
+}
+
+@keyframes pmz-pk-trade-in {
+    from { transform: translateY(-260px) scale(0.3); opacity: 0; }
+    to { transform: none; opacity: 1; }
+}
+
+.pmz-pk-trade-link {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    margin-left: -3px;
+    background: repeating-linear-gradient(#fff 0 12px, transparent 12px 24px);
+    opacity: 0.6;
+    animation: pmz-pk-trade-flow 0.6s linear infinite;
+}
+
+@keyframes pmz-pk-trade-flow {
+    to { background-position: 0 24px; }
+}

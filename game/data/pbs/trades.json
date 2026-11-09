@@ -1,0 +1,16 @@
+{
+  "rattataformachop": {
+    "npcName": "Ken",
+    "nickname": "Bulky",
+    "wants": "rattata",
+    "gives": {"species": "machop", "level": 10, "otName": "Ken", "otId": 12345, "nature": "adamant"},
+    "once": true
+  },
+  "pidgeyforkadabra": {
+    "npcName": "Mia",
+    "nickname": "Spoony",
+    "wants": {"type": "flying", "minLevel": 5},
+    "gives": {"species": "kadabra", "level": 16, "otName": "Mia", "otId": 54321, "nature": "modest"},
+    "once": true
+  }
+}

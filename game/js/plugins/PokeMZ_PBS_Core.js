@@ -1827,6 +1827,38 @@
         }),
     });
 
+    class TradeData extends PbsData {}
+    TradeData.kind = "Trade";
+
+    registerFile({
+        name: "trades",
+        file: "trades.json",
+        cls: TradeData,
+        schema: T.struct({
+            npcName: T.localized(),
+            nickname: T.localized().opt(""),
+            wants: T.oneOf([
+                T.ref("species"),
+                T.struct({ species: T.array(T.ref("species")).opt(), type: T.ref("types").opt(), minLevel: T.int({ min: 1, max: 100 }).opt() }, { unknown: "error" }),
+            ]),
+            gives: T.struct({
+                species: T.ref("species"),
+                level: T.int({ min: 1, max: 100 }),
+                otName: T.string().opt(""),
+                otId: T.int({ min: 0, max: 65535 }).opt(0),
+                nature: optRef("natures"),
+                gender: T.enum("genders").opt(),
+                shiny: T.bool().opt(false),
+                ivs: T.oneOf([T.int({ min: 0, max: 31 }), T.stats({ max: 31 })]).opt(),
+                moves: T.array(T.ref("moves"), { max: 4 }).opt([]),
+                item: optRef("items"),
+                ball: optRef("items"),
+                abilitySlot: T.string().opt(),
+            }),
+            once: T.bool().opt(true),
+        }),
+    });
+
     //-------------------------------------------------------------------------
     // Two-pass load
     //-------------------------------------------------------------------------
@@ -2214,6 +2246,7 @@
             TownMap,
             PhoneContact,
             BattleTowerSet,
+            TradeData,
         },
         STATS,
         specs: SPECS,
