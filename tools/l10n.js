@@ -6,13 +6,16 @@
 /**
  * @file Localization command line tool (Node, no dependencies).
  *
+ *   node tools/l10n.js tag [--dry-run]       Give database entries and maps
+ *                                            readable <L10n: Item.POTION> keys
  *   node tools/l10n.js extract [--dry-run]   Key event text and copy game text
  *                                            into data/locales/*.csv
  *   node tools/l10n.js check                 Validate the string tables
  *   node tools/l10n.js stats                 Translation coverage
  *
  * Options: --root <dir> (project folder, default: the repository).
- * Close the RPG Maker editor before running extract: it rewrites map files.
+ * Close the RPG Maker editor before running tag or extract: they rewrite
+ * data files.
  */
 
 "use strict";
@@ -23,6 +26,61 @@ const crypto = require("crypto");
 const Engine = require("../js/plugins/PokeMZ_Locale.js");
 
 const SPECIAL_FILES = new Set(["languages.csv", "keyboards.csv"]);
+
+/** @brief Database files, key prefixes and localized fields (as the runtime). */
+const DB = [
+    ["Actors.json", "Actor", ["name", "nickname", "profile"]],
+    ["Classes.json", "Class", ["name"]],
+    ["Skills.json", "Skill", ["name", "description", "message1", "message2"]],
+    ["Items.json", "Item", ["name", "description"]],
+    ["Weapons.json", "Weapon", ["name", "description"]],
+    ["Armors.json", "Armor", ["name", "description"]],
+    ["Enemies.json", "Enemy", ["name"]],
+    ["States.json", "State", ["name", "message1", "message2", "message3", "message4"]],
+];
+
+/** @brief "message1" -> "Message1". */
+const capital = s => s[0].toUpperCase() + s.slice(1);
+
+/**
+ * @brief Reads the <L10n: key> tag from a note.
+ * @param {string} note Note text.
+ * @return {string|null} The key.
+ */
+function noteKey(note) {
+    const m = /<L10n:\s*([^>\s]+)\s*>/i.exec(note || "");
+    return m ? m[1] : null;
+}
+
+/**
+ * @brief True for editor-only separator entries such as "-----Reserved".
+ * @param {string} name Entry name.
+ * @return {boolean} True when the entry is a separator.
+ */
+const isSeparator = name => /^\s*-{3,}/.test(name || "");
+
+/**
+ * @brief Turns a name into a PBS-style ID: "Maiden’s Stance" -> MAIDENS_STANCE.
+ * @param {string} name Display name.
+ * @return {string} Upper-case ID (may be empty).
+ */
+function slugify(name) {
+    return String(name || "")
+        .normalize("NFKD")
+        .replace(/\p{M}/gu, "")
+        .replace(/['’‘`]/g, "")
+        .replace(/[^A-Za-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .toUpperCase();
+}
+
+/**
+ * @brief Appends a <L10n: key> tag to a note.
+ * @param {string} note Existing note.
+ * @param {string} key Key.
+ * @return {string} New note.
+ */
+const appendTag = (note, key) => (note ? `${note}\n<L10n: ${key}>` : `<L10n: ${key}>`);
 
 //=============================================================================
 // Files
@@ -120,6 +178,46 @@ class Table {
                 row[c] = value;
                 this.changed = true;
             }
+        }
+    }
+
+    /**
+     * @brief Renames a key, keeping its translations and notes. Does nothing
+     *        if the old key is missing or the new key already exists.
+     * @param {string} from Old key.
+     * @param {string} to New key.
+     * @return {boolean} True when renamed.
+     */
+    rename(from, to) {
+        const i = this.index.get(from);
+        if (i === undefined || this.index.has(to)) {
+            return false;
+        }
+        this.rows[i][0] = to;
+        this.index.delete(from);
+        this.index.set(to, i);
+        this.changed = true;
+        return true;
+    }
+
+    /** @return {boolean} True when a row has any translation (not the source). */
+    isTranslated(key, source) {
+        const row = this.row(key);
+        const src = this.col(source);
+        return !!row && this.header.some((h, i) => i > 0 && i !== src && !h.startsWith("#") && row[i]);
+    }
+
+    /**
+     * @brief Removes rows.
+     * @param {function(string): boolean} test Returns true for keys to drop.
+     */
+    removeWhere(test) {
+        const kept = this.rows.filter(r => !test((r[0] || "").trim()));
+        if (kept.length !== this.rows.length) {
+            this.rows = kept;
+            this.index = new Map();
+            kept.forEach((r, i) => r[0] && this.index.set(r[0].trim(), i));
+            this.changed = true;
         }
     }
 
@@ -242,35 +340,26 @@ function extractList(list, context, st) {
 /**
  * @brief Database and system fields, using the same keys as the runtime.
  * @param {string} root Project folder.
- * @return {Array<[string, string, string]>} Rows [key, text, context].
+ * @return {Array<[string, string, string]>} Rows [key, text, context]; the
+ *         array's `untagged` property counts entries without a note tag.
  */
 function databaseRows(root) {
     const rows = [];
+    rows.untagged = 0;
     const read = f => JSON.parse(fs.readFileSync(path.join(root, "data", f), "utf8"));
-    const capital = s => s[0].toUpperCase() + s.slice(1);
-    const noteKey = note => {
-        const m = /<L10n:\s*([^>\s]+)\s*>/i.exec(note || "");
-        return m ? m[1] : null;
-    };
-    const DB = [
-        ["Actors.json", "Actor", ["name", "nickname", "profile"]],
-        ["Classes.json", "Class", ["name"]],
-        ["Skills.json", "Skill", ["name", "description", "message1", "message2"]],
-        ["Items.json", "Item", ["name", "description"]],
-        ["Weapons.json", "Weapon", ["name", "description"]],
-        ["Armors.json", "Armor", ["name", "description"]],
-        ["Enemies.json", "Enemy", ["name"]],
-        ["States.json", "State", ["name", "message1", "message2", "message3", "message4"]],
-    ];
     for (const [file, type, fields] of DB) {
         if (!fs.existsSync(path.join(root, "data", file))) {
             continue;
         }
         for (const obj of read(file)) {
-            if (!obj) {
+            if (!obj || isSeparator(obj.name)) {
                 continue;
             }
-            const base = noteKey(obj.note) || `Db.${type}.${obj.id}`;
+            const tagged = noteKey(obj.note);
+            if (!tagged && obj.name) {
+                rows.untagged++;
+            }
+            const base = tagged || `Db.${type}.${obj.id}`;
             for (const f of fields) {
                 if (typeof obj[f] === "string" && obj[f]) {
                     rows.push([`${base}.${capital(f)}`, obj[f], `${type} ${obj.id}`]);
@@ -387,8 +476,23 @@ function extract(root, dryRun) {
     }
 
     const database = new Table(path.join(locDir, "database.csv"), undefined, header);
-    for (const [key, text, context] of databaseRows(root).concat(mapRows)) {
+    const dbRows = databaseRows(root);
+    const dbKeys = new Set();
+    for (const [key, text, context] of dbRows.concat(mapRows)) {
+        dbKeys.add(key);
         database.setSource(key, text, source, { Context: context });
+    }
+    // Text that left the game data (e.g. separators, cleared fields): drop
+    // it unless someone translated it, then just say so.
+    database.removeWhere(key => key && !dbKeys.has(key) && !database.isTranslated(key, source));
+    for (const row of database.rows) {
+        if (!dbKeys.has((row[0] || "").trim())) {
+            const c = database.col("#Context", true);
+            if (row[c] !== "(unused)") {
+                row[c] = "(unused)";
+                database.changed = true;
+            }
+        }
     }
 
     const summary = {
@@ -396,6 +500,7 @@ function extract(root, dryRun) {
         files: writes.map(w => w[0]),
         dialogueChanged: dialogue.changed,
         databaseChanged: database.changed,
+        untagged: dbRows.untagged,
     };
     if (!dryRun) {
         for (const [file, data] of writes) {
@@ -408,6 +513,104 @@ function extract(root, dryRun) {
         }
     }
     return summary;
+}
+
+//=============================================================================
+// tag
+//=============================================================================
+
+/**
+ * @brief Gives database entries (and maps with a display name) readable
+ *        <L10n: Type.SLUG> note tags, and renames their rows in database.csv
+ *        so translations are kept. Entries that already have a tag, have no
+ *        name, or are separators are left alone, so a tag never changes once
+ *        written.
+ * @param {string} root Project folder.
+ * @param {boolean} dryRun Report without writing.
+ * @return {Object} Summary {tagged: {Type: n}, renamed, files}.
+ */
+function tag(root, dryRun) {
+    const dataDir = path.join(root, "data");
+    const read = f => JSON.parse(fs.readFileSync(path.join(dataDir, f), "utf8"));
+    const renames = [];
+    const writes = [];
+    const tagged = {};
+
+    /**
+     * @brief Picks a free key for a name.
+     * @param {string} type Prefix.
+     * @param {string} name Display name.
+     * @param {number} id Fallback when the name has no letters or digits.
+     * @param {Set<string>} used Keys taken.
+     */
+    const pick = (type, name, id, used) => {
+        const slug = slugify(name) || `ID${id}`;
+        let key = `${type}.${slug}`;
+        for (let n = 2; used.has(key); n++) {
+            key = `${type}.${slug}_${n}`;
+        }
+        used.add(key);
+        return key;
+    };
+
+    for (const [file, type, fields] of DB) {
+        if (!fs.existsSync(path.join(dataDir, file))) {
+            continue;
+        }
+        const list = read(file);
+        const used = new Set(list.filter(Boolean).map(o => noteKey(o.note)).filter(Boolean));
+        let changed = false;
+        for (const obj of list) {
+            if (!obj || noteKey(obj.note) || !obj.name || isSeparator(obj.name)) {
+                continue;
+            }
+            const key = pick(type, obj.name, obj.id, used);
+            obj.note = appendTag(obj.note, key);
+            for (const f of fields) {
+                renames.push([`Db.${type}.${obj.id}.${capital(f)}`, `${key}.${capital(f)}`]);
+            }
+            tagged[type] = (tagged[type] || 0) + 1;
+            changed = true;
+        }
+        if (changed) {
+            writes.push([file, list]);
+        }
+    }
+
+    const infos = fs.existsSync(path.join(dataDir, "MapInfos.json")) ? read("MapInfos.json") : [];
+    const mapFiles = fs.readdirSync(dataDir).filter(f => /^Map\d+\.json$/.test(f)).sort();
+    const maps = mapFiles.map(f => [f, read(f)]);
+    const usedMaps = new Set(maps.map(([, m]) => noteKey(m.note)).filter(Boolean));
+    for (const [file, map] of maps) {
+        const id = Number(/\d+/.exec(file)[0]);
+        if (!map.displayName || noteKey(map.note)) {
+            continue;
+        }
+        const info = infos[id];
+        const key = pick("Map", (info && info.name) || map.displayName, id, usedMaps);
+        map.note = appendTag(map.note, key);
+        renames.push([`Map.${id}.DisplayName`, `${key}.DisplayName`]);
+        tagged.Map = (tagged.Map || 0) + 1;
+        writes.push([file, map]);
+    }
+
+    const csv = path.join(dataDir, "locales/database.csv");
+    const table = fs.existsSync(csv) ? new Table(csv) : null;
+    let renamed = 0;
+    if (table) {
+        for (const [from, to] of renames) {
+            renamed += table.rename(from, to) ? 1 : 0;
+        }
+    }
+    if (!dryRun) {
+        for (const [file, data] of writes) {
+            fs.writeFileSync(path.join(dataDir, file), writeMzJson(file, data));
+        }
+        if (table && table.changed) {
+            fs.writeFileSync(csv, table.toString());
+        }
+    }
+    return { tagged, renamed, files: writes.map(w => w[0]) };
 }
 
 //=============================================================================
@@ -430,10 +633,20 @@ function main(argv) {
     const dryRun = args.includes("--dry-run");
     const cmd = args.find(a => !a.startsWith("--")) || "help";
 
+    if (cmd === "tag") {
+        const s = tag(root, dryRun);
+        const counts = Object.entries(s.tagged).map(([type, n]) => `${type} ${n}`);
+        console.log(`${dryRun ? "[dry run] " : ""}tagged: ${counts.join(", ") || "nothing new"}; database.csv rows renamed: ${s.renamed}`);
+        console.log(`files changed: ${s.files.join(", ") || "none"}`);
+        return 0;
+    }
     if (cmd === "extract") {
         const s = extract(root, dryRun);
         console.log(`${dryRun ? "[dry run] " : ""}${s.keyed} dialogue entries; event files changed: ${s.files.join(", ") || "none"}`);
         console.log(`dialogue.csv ${s.dialogueChanged ? "updated" : "unchanged"}, database.csv ${s.databaseChanged ? "updated" : "unchanged"}`);
+        if (s.untagged) {
+            console.log(`${s.untagged} database entries use numeric keys; run "npm run l10n tag" to give them readable ones.`);
+        }
         return 0;
     }
     if (cmd === "check") {
@@ -452,7 +665,7 @@ function main(argv) {
         }
         return 0;
     }
-    console.log("usage: node tools/l10n.js <extract [--dry-run] | check | stats> [--root <dir>]");
+    console.log("usage: node tools/l10n.js <tag [--dry-run] | extract [--dry-run] | check | stats> [--root <dir>]");
     return cmd === "help" ? 0 : 1;
 }
 
@@ -460,4 +673,4 @@ if (require.main === module) {
     process.exitCode = main(process.argv.slice(2));
 }
 
-module.exports = { extract, extractList, findId, writeMzJson, Table, loadEngine, databaseRows, main };
+module.exports = { tag, extract, extractList, findId, writeMzJson, Table, loadEngine, databaseRows, slugify, isSeparator, noteKey, main };

@@ -218,8 +218,13 @@ character however it was typed.
 
 - Database names, descriptions and messages, System terms and map display names are swapped
   at load time and on every language change. Saves never contain them.
-- Give a database entry a readable key with `<L10n: Item.POTION>` in its note. Without one,
-  the key is `Db.Item.<id>`.
+- Database entries are keyed by an `<L10n: Item.POTION>` tag in their note. With the editor
+  closed, run `npm run l10n tag` after adding entries (or maps with a display name): it tags
+  every untagged entry from its name (`Maiden’s Stance` → `Skill.MAIDENS_STANCE`, duplicates
+  get `_2`), skipping separators such as `-----Reserved`, and renames existing
+  `database.csv` rows so translations carry over. Tags are never rewritten, so renaming or
+  moving an entry keeps its translations; edit the tag by hand to re-key one. Untagged
+  entries fall back to `Db.Item.<id>`, and `extract` reminds you about them.
 - Actor names, nicknames and profiles follow the language until the player renames the actor.
 - Game code should store IDs (species, moves, items) and never display text. In playtest, saving
   warns when a variable holds translated text.
@@ -247,6 +252,7 @@ translators). The editor keeps the English text. Re-running `extract` is safe:
 | F7 / Shift+F7 | Cycle languages, including the pseudo-locales `qps-accent` (accented, 40% longer) and `qps-keys` (shows IDs) / back to `en` |
 | `PokeMZ.L10n.report()` | Missing strings, fallbacks used, stale dialogue, table errors and coverage |
 | `PokeMZ.L10n.checkOverflow()` | Outlines UI text that doesn't fit (also runs after each language change) |
+| `npm run l10n tag` | Give database entries and maps readable keys (see above) |
 | `npm run l10n check` | Validate all tables (duplicates, codes, placeholders, ICU syntax, languages.csv) |
 | `npm run l10n stats` | Coverage per language |
 | `npm test` | Engine and tool tests |

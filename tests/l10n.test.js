@@ -323,3 +323,75 @@ test("extract: keys dialogue, is idempotent, keeps IDs, flags stale text, splits
     assert.equal(t2.row(copyId)[t2.col("en")], "I'm a copy.\nWelcome, \\N[1].");
     fs.rmSync(root, { recursive: true, force: true });
 });
+
+test("slugify makes PBS-style IDs", () => {
+    assert.equal(tool.slugify("Potion"), "POTION");
+    assert.equal(tool.slugify("Maiden’s Stance"), "MAIDENS_STANCE");
+    assert.equal(tool.slugify("Double Money/Items"), "DOUBLE_MONEY_ITEMS");
+    assert.equal(tool.slugify("Hi_monster"), "HI_MONSTER");
+    assert.equal(tool.slugify("Poké Ball"), "POKE_BALL");
+    assert.equal(tool.slugify("  -- Élan!  "), "ELAN");
+    assert.ok(tool.isSeparator("-----Priest & Sorcerer Skills"));
+    assert.ok(!tool.isSeparator("X-Ray"));
+});
+
+test("tag: readable note tags, CSV rows renamed with translations, idempotent", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "pmz-tag-"));
+    const data = path.join(root, "data");
+    fs.mkdirSync(path.join(data, "locales"), { recursive: true });
+    fs.copyFileSync(path.join(__dirname, "../data/System.json"), path.join(data, "System.json"));
+    fs.copyFileSync(path.join(__dirname, "../data/locales/languages.csv"), path.join(data, "locales/languages.csv"));
+    const item = (id, name, note = "") => ({ id, name, note, description: name ? `${name} desc` : "" });
+    const items = [
+        null,
+        item(1, "Potion"),
+        item(2, "-----Reserved"),
+        item(3, ""),
+        item(4, "Potion", "Keep me"),
+        item(5, "Ether", "<L10n: Item.MY_ETHER>"),
+    ];
+    const write = (f, d) => fs.writeFileSync(path.join(data, f), tool.writeMzJson(f, d));
+    write("Items.json", items);
+    write("CommonEvents.json", [null]);
+    write("Troops.json", [null]);
+    write("MapInfos.json", [null, { id: 1, name: "Pallet Town" }]);
+    const map = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/Map001.json"), "utf8"));
+    map.displayName = "Pallet";
+    write("Map001.json", map);
+
+    // State before tagging: numeric keys, one already translated.
+    tool.extract(root, false);
+    const csv = path.join(data, "locales/database.csv");
+    const before = new tool.Table(csv);
+    assert.ok(before.row("Db.Item.1.Name"));
+    assert.ok(!before.row("Db.Item.2.Name"), "separators aren't exported");
+    before.row("Db.Item.1.Name")[before.col("fr")] = "Potion (fr)";
+    fs.writeFileSync(csv, before.toString());
+
+    const s = tool.tag(root, false);
+    assert.deepEqual(s.tagged, { Item: 2, Map: 1 });
+    const tagged = JSON.parse(fs.readFileSync(path.join(data, "Items.json"), "utf8"));
+    assert.equal(tagged[1].note, "<L10n: Item.POTION>");
+    assert.equal(tagged[2].note, "", "separator untouched");
+    assert.equal(tagged[3].note, "", "nameless entry untouched");
+    assert.equal(tagged[4].note, "Keep me\n<L10n: Item.POTION_2>");
+    assert.equal(tagged[5].note, "<L10n: Item.MY_ETHER>");
+    assert.match(JSON.parse(fs.readFileSync(path.join(data, "Map001.json"), "utf8")).note, /<L10n: Map\.PALLET_TOWN>$/);
+
+    const after = new tool.Table(csv);
+    assert.equal(after.row("Item.POTION.Name")[after.col("fr")], "Potion (fr)");
+    assert.ok(!after.row("Db.Item.1.Name"));
+    assert.ok(after.row("Map.PALLET_TOWN.DisplayName"));
+
+    tool.extract(root, false);
+    const text = fs.readFileSync(csv, "utf8");
+    assert.ok(!/^Db\./m.test(text), "no numeric keys left");
+    assert.deepEqual(tool.tag(root, false).tagged, {}, "second run tags nothing");
+    tool.extract(root, false);
+    assert.equal(fs.readFileSync(csv, "utf8"), text, "second extract changes nothing");
+
+    const e = tool.loadEngine(root);
+    e.language = "fr";
+    assert.equal(e.lookup("Item.POTION.Name", { noSource: true }).text, "Potion (fr)");
+    fs.rmSync(root, { recursive: true, force: true });
+});
