@@ -1,884 +1,847 @@
 Key,en,es-es,es-mx,pt-pt,pt-br,fr,#Context
-Db.Actor.1.Name,Reid,,,,,,Actor 1
-Db.Actor.2.Name,Priscilla,,,,,,Actor 2
-Db.Actor.3.Name,Gale,,,,,,Actor 3
-Db.Actor.4.Name,Michelle,,,,,,Actor 4
-Db.Actor.5.Name,Albert,,,,,,Actor 5
-Db.Actor.6.Name,Kasey,,,,,,Actor 6
-Db.Actor.7.Name,Eliot,,,,,,Actor 7
-Db.Actor.8.Name,Roza,,,,,,Actor 8
-Db.Class.1.Name,Swordsman,,,,,,Class 1
-Db.Class.2.Name,Sorcerer,,,,,,Class 2
-Db.Class.3.Name,Priest,,,,,,Class 3
-Db.Class.4.Name,Knight,,,,,,Class 4
-Db.Class.5.Name,Martial Artist,,,,,,Class 5
-Db.Class.6.Name,Magic Swordsman,,,,,,Class 6
-Db.Class.7.Name,Hunter,,,,,,Class 7
-Db.Class.8.Name,Bandit,,,,,,Class 8
-Db.Skill.1.Name,Attack,,,,,,Skill 1
-Db.Skill.1.Message1,%1 attacks!,,,,,,Skill 1
-Db.Skill.2.Name,Guard,,,,,,Skill 2
-Db.Skill.2.Message1,%1 guards.,,,,,,Skill 2
-Db.Skill.3.Name,-----Reserved,,,,,,Skill 3
-Db.Skill.3.Description,"Below are spaces for when you would like to display
-things above skills when you open the menu.",,,,,,Skill 3
-Db.Skill.11.Name,-----Enemy,,,,,,Skill 11
-Db.Skill.12.Name,Dual Attack,,,,,,Skill 12
-Db.Skill.12.Description,Performs a series of attacks on an enemy.,,,,,,Skill 12
-Db.Skill.12.Message1,%1 attacks!,,,,,,Skill 12
-Db.Skill.13.Name,Double Attack,,,,,,Skill 13
-Db.Skill.13.Description,Performs a double attack on a random enemy.,,,,,,Skill 13
-Db.Skill.13.Message1,%1 attacks!,,,,,,Skill 13
-Db.Skill.14.Name,Triple Attack,,,,,,Skill 14
-Db.Skill.14.Description,Performs a triple attack on a random enemy.,,,,,,Skill 14
-Db.Skill.14.Message1,%1 attacks!,,,,,,Skill 14
-Db.Skill.15.Name,Escape,,,,,,Skill 15
-Db.Skill.15.Description,The user flees from battle.,,,,,,Skill 15
-Db.Skill.15.Message1,%1 flees.,,,,,,Skill 15
-Db.Skill.16.Name,Wait and See,,,,,,Skill 16
-Db.Skill.16.Description,Waits to see what happens.,,,,,,Skill 16
-Db.Skill.16.Message1,%1 is waiting to see what happens.,,,,,,Skill 16
-Db.Skill.17.Name,Blood Suck,,,,,,Skill 17
-Db.Skill.17.Description,Absorbs HP from an enemy.,,,,,,Skill 17
-Db.Skill.17.Message1,%1 sucks blood!,,,,,,Skill 17
-Db.Skill.18.Name,Meditate,,,,,,Skill 18
-Db.Skill.18.Description,Restores the user’s HP.,,,,,,Skill 18
-Db.Skill.18.Message1,%1 meditates!,,,,,,Skill 18
-Db.Skill.19.Name,Tranquilizer,,,,,,Skill 19
-Db.Skill.19.Description,Stabs an enemy with paralyzing needles.,,,,,,Skill 19
-Db.Skill.19.Message1,%1 does %2!,,,,,,Skill 19
-Db.Skill.20.Name,Bodyslam,,,,,,Skill 20
-Db.Skill.20.Description,Inflicts damage and causes an enemy to lose balance.,,,,,,Skill 20
-Db.Skill.20.Message1,%1 does bodyslam!,,,,,,Skill 20
-Db.Skill.21.Name,Shock,,,,,,Skill 21
-Db.Skill.21.Description,Inflicts Thunder-type damage and Paralysis state.,,,,,,Skill 21
-Db.Skill.21.Message1,%1 does %2!,,,,,,Skill 21
-Db.Skill.22.Name,Slime,,,,,,Skill 22
-Db.Skill.22.Description,Covers an enemy in slime and lowers their Agility.,,,,,,Skill 22
-Db.Skill.22.Message1,%1 shoots out slime!,,,,,,Skill 22
-Db.Skill.23.Name,Venom,,,,,,Skill 23
-Db.Skill.23.Description,Sprays an enemy with venom and inflicts Poison state.,,,,,,Skill 23
-Db.Skill.23.Message1,%1 uses %2!,,,,,,Skill 23
-Db.Skill.24.Name,Shout,,,,,,Skill 24
-Db.Skill.24.Description,"Rouses the user’s fighting spirit and fortifies
+Skill.ATTACK.Name,Attack,,,,,,Skill 1
+Skill.ATTACK.Message1,%1 attacks!,,,,,,Skill 1
+Skill.GUARD.Name,Guard,,,,,,Skill 2
+Skill.GUARD.Message1,%1 guards.,,,,,,Skill 2
+Skill.DUAL_ATTACK.Name,Dual Attack,,,,,,Skill 12
+Skill.DUAL_ATTACK.Description,Performs a series of attacks on an enemy.,,,,,,Skill 12
+Skill.DUAL_ATTACK.Message1,%1 attacks!,,,,,,Skill 12
+Skill.DOUBLE_ATTACK.Name,Double Attack,,,,,,Skill 13
+Skill.DOUBLE_ATTACK.Description,Performs a double attack on a random enemy.,,,,,,Skill 13
+Skill.DOUBLE_ATTACK.Message1,%1 attacks!,,,,,,Skill 13
+Skill.TRIPLE_ATTACK.Name,Triple Attack,,,,,,Skill 14
+Skill.TRIPLE_ATTACK.Description,Performs a triple attack on a random enemy.,,,,,,Skill 14
+Skill.TRIPLE_ATTACK.Message1,%1 attacks!,,,,,,Skill 14
+Skill.ESCAPE.Name,Escape,,,,,,Skill 15
+Skill.ESCAPE.Description,The user flees from battle.,,,,,,Skill 15
+Skill.ESCAPE.Message1,%1 flees.,,,,,,Skill 15
+Skill.WAIT_AND_SEE.Name,Wait and See,,,,,,Skill 16
+Skill.WAIT_AND_SEE.Description,Waits to see what happens.,,,,,,Skill 16
+Skill.WAIT_AND_SEE.Message1,%1 is waiting to see what happens.,,,,,,Skill 16
+Skill.BLOOD_SUCK.Name,Blood Suck,,,,,,Skill 17
+Skill.BLOOD_SUCK.Description,Absorbs HP from an enemy.,,,,,,Skill 17
+Skill.BLOOD_SUCK.Message1,%1 sucks blood!,,,,,,Skill 17
+Skill.MEDITATE.Name,Meditate,,,,,,Skill 18
+Skill.MEDITATE.Description,Restores the user’s HP.,,,,,,Skill 18
+Skill.MEDITATE.Message1,%1 meditates!,,,,,,Skill 18
+Skill.TRANQUILIZER.Name,Tranquilizer,,,,,,Skill 19
+Skill.TRANQUILIZER.Description,Stabs an enemy with paralyzing needles.,,,,,,Skill 19
+Skill.TRANQUILIZER.Message1,%1 does %2!,,,,,,Skill 19
+Skill.BODYSLAM.Name,Bodyslam,,,,,,Skill 20
+Skill.BODYSLAM.Description,Inflicts damage and causes an enemy to lose balance.,,,,,,Skill 20
+Skill.BODYSLAM.Message1,%1 does bodyslam!,,,,,,Skill 20
+Skill.SHOCK.Name,Shock,,,,,,Skill 21
+Skill.SHOCK.Description,Inflicts Thunder-type damage and Paralysis state.,,,,,,Skill 21
+Skill.SHOCK.Message1,%1 does %2!,,,,,,Skill 21
+Skill.SLIME.Name,Slime,,,,,,Skill 22
+Skill.SLIME.Description,Covers an enemy in slime and lowers their Agility.,,,,,,Skill 22
+Skill.SLIME.Message1,%1 shoots out slime!,,,,,,Skill 22
+Skill.VENOM.Name,Venom,,,,,,Skill 23
+Skill.VENOM.Description,Sprays an enemy with venom and inflicts Poison state.,,,,,,Skill 23
+Skill.VENOM.Message1,%1 uses %2!,,,,,,Skill 23
+Skill.SHOUT.Name,Shout,,,,,,Skill 24
+Skill.SHOUT.Description,"Rouses the user’s fighting spirit and fortifies
 their abilities.",,,,,,Skill 24
-Db.Skill.24.Message1,%1 rouses their fighting spirit!,,,,,,Skill 24
-Db.Skill.25.Name,Bizarre Dance,,,,,,Skill 25
-Db.Skill.25.Description,Absorbs MP from an enemy.,,,,,,Skill 25
-Db.Skill.25.Message1,%1 dances bizarrely!,,,,,,Skill 25
-Db.Skill.26.Name,Petrify,,,,,,Skill 26
-Db.Skill.26.Description,Glares at an enemy and paralyzes them.,,,,,,Skill 26
-Db.Skill.26.Message1,%1 does %2!,,,,,,Skill 26
-Db.Skill.27.Name,Eye Poke,,,,,,Skill 27
-Db.Skill.27.Description,Blinds an enemy.,,,,,,Skill 27
-Db.Skill.27.Message1,%1 does %2!,,,,,,Skill 27
-Db.Skill.28.Name,Sandstorm,,,,,,Skill 28
-Db.Skill.28.Description,Blinds all enemies.,,,,,,Skill 28
-Db.Skill.28.Message1,%1 does %2!,,,,,,Skill 28
-Db.Skill.29.Name,Flash,,,,,,Skill 29
-Db.Skill.29.Description,Blinds all enemies.,,,,,,Skill 29
-Db.Skill.29.Message1,%1 does %2!,,,,,,Skill 29
-Db.Skill.30.Name,Toxic Fog,,,,,,Skill 30
-Db.Skill.30.Description,Poisons all enemies.,,,,,,Skill 30
-Db.Skill.30.Message1,%1 does %2!,,,,,,Skill 30
-Db.Skill.31.Name,Lullaby,,,,,,Skill 31
-Db.Skill.31.Description,Puts all enemies to sleep.,,,,,,Skill 31
-Db.Skill.31.Message1,%1 sings a Lullaby!,,,,,,Skill 31
-Db.Skill.32.Name,Alluring Melody,,,,,,Skill 32
-Db.Skill.32.Description,Charms all enemies.,,,,,,Skill 32
-Db.Skill.32.Message1,%1 sings an Alluring Melody!,,,,,,Skill 32
-Db.Skill.33.Name,Song of Silence,,,,,,Skill 33
-Db.Skill.33.Description,Seals all enemies’ magic.,,,,,,Skill 33
-Db.Skill.33.Message1,%1 sings a Song of Silence!,,,,,,Skill 33
-Db.Skill.34.Name,Sonic Wave,,,,,,Skill 34
-Db.Skill.34.Description,Confuses all enemies.,,,,,,Skill 34
-Db.Skill.34.Message1,%1 does %2!,,,,,,Skill 34
-Db.Skill.35.Name,Stone Throw,,,,,,Skill 35
-Db.Skill.35.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 35
-Db.Skill.35.Message1,%1 does %2!,,,,,,Skill 35
-Db.Skill.36.Name,Dust Devil,,,,,,Skill 36
-Db.Skill.36.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 36
-Db.Skill.36.Message1,%1 does %2!,,,,,,Skill 36
-Db.Skill.37.Name,Fire Breath,,,,,,Skill 37
-Db.Skill.37.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 37
-Db.Skill.37.Message1,%1 does %2!,,,,,,Skill 37
-Db.Skill.38.Name,Ice Breath,,,,,,Skill 38
-Db.Skill.38.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 38
-Db.Skill.38.Message1,%1 does %2!,,,,,,Skill 38
-Db.Skill.39.Name,Earthquake,,,,,,Skill 39
-Db.Skill.39.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 39
-Db.Skill.39.Message1,%1 causes an Earthquake!,,,,,,Skill 39
-Db.Skill.40.Name,Tsunami,,,,,,Skill 40
-Db.Skill.40.Description,Inflicts Water-type damage on all enemies.,,,,,,Skill 40
-Db.Skill.40.Message1,%1 causes a Tsunami!,,,,,,Skill 40
-Db.Skill.41.Name,Scratch,,,,,,Skill 41
-Db.Skill.41.Description,Inflicts damage on an enemy.,,,,,,Skill 41
-Db.Skill.41.Message1,%1 attacks!,,,,,,Skill 41
-Db.Skill.51.Name,-----Basic Magic,,,,,,Skill 51
-Db.Skill.52.Name,Heal I,,,,,,Skill 52
-Db.Skill.52.Description,Restores an ally’s HP.,,,,,,Skill 52
-Db.Skill.52.Message1,%1 casts %2!,,,,,,Skill 52
-Db.Skill.53.Name,Heal II,,,,,,Skill 53
-Db.Skill.53.Description,Restores an ally’s HP.,,,,,,Skill 53
-Db.Skill.53.Message1,%1 casts %2!,,,,,,Skill 53
-Db.Skill.54.Name,Heal III,,,,,,Skill 54
-Db.Skill.54.Description,Restores an ally’s HP.,,,,,,Skill 54
-Db.Skill.54.Message1,%1 casts %2!,,,,,,Skill 54
-Db.Skill.56.Name,Recover I,,,,,,Skill 56
-Db.Skill.56.Description,Restores all allies’ HP.,,,,,,Skill 56
-Db.Skill.56.Message1,%1 casts %2!,,,,,,Skill 56
-Db.Skill.57.Name,Recover II,,,,,,Skill 57
-Db.Skill.57.Description,Restores all allies’ HP.,,,,,,Skill 57
-Db.Skill.57.Message1,%1 casts %2!,,,,,,Skill 57
-Db.Skill.58.Name,Recover III,,,,,,Skill 58
-Db.Skill.58.Description,Restores all allies’ HP.,,,,,,Skill 58
-Db.Skill.58.Message1,%1 casts %2!,,,,,,Skill 58
-Db.Skill.60.Name,Cure I,,,,,,Skill 60
-Db.Skill.60.Description,"Cures an ally’s Poison, Paralysis, or Sleep state.",,,,,,Skill 60
-Db.Skill.60.Message1,%1 casts %2!,,,,,,Skill 60
-Db.Skill.61.Name,Cure II,,,,,,Skill 61
-Db.Skill.61.Description,Cures an ally’s status ailments other than Dead.,,,,,,Skill 61
-Db.Skill.61.Message1,%1 casts %2!,,,,,,Skill 61
-Db.Skill.62.Name,Cure III,,,,,,Skill 62
-Db.Skill.62.Description,Cures all allies’ status ailments other than Dead.,,,,,,Skill 62
-Db.Skill.62.Message1,%1 casts %2!,,,,,,Skill 62
-Db.Skill.64.Name,Raise I,,,,,,Skill 64
-Db.Skill.64.Description,Raises an ally from the dead.,,,,,,Skill 64
-Db.Skill.64.Message1,%1 casts %2!,,,,,,Skill 64
-Db.Skill.65.Name,Raise II,,,,,,Skill 65
-Db.Skill.65.Description,"Raises an ally from the dead and greatly restores
+Skill.SHOUT.Message1,%1 rouses their fighting spirit!,,,,,,Skill 24
+Skill.BIZARRE_DANCE.Name,Bizarre Dance,,,,,,Skill 25
+Skill.BIZARRE_DANCE.Description,Absorbs MP from an enemy.,,,,,,Skill 25
+Skill.BIZARRE_DANCE.Message1,%1 dances bizarrely!,,,,,,Skill 25
+Skill.PETRIFY.Name,Petrify,,,,,,Skill 26
+Skill.PETRIFY.Description,Glares at an enemy and paralyzes them.,,,,,,Skill 26
+Skill.PETRIFY.Message1,%1 does %2!,,,,,,Skill 26
+Skill.EYE_POKE.Name,Eye Poke,,,,,,Skill 27
+Skill.EYE_POKE.Description,Blinds an enemy.,,,,,,Skill 27
+Skill.EYE_POKE.Message1,%1 does %2!,,,,,,Skill 27
+Skill.SANDSTORM.Name,Sandstorm,,,,,,Skill 28
+Skill.SANDSTORM.Description,Blinds all enemies.,,,,,,Skill 28
+Skill.SANDSTORM.Message1,%1 does %2!,,,,,,Skill 28
+Skill.FLASH.Name,Flash,,,,,,Skill 29
+Skill.FLASH.Description,Blinds all enemies.,,,,,,Skill 29
+Skill.FLASH.Message1,%1 does %2!,,,,,,Skill 29
+Skill.TOXIC_FOG.Name,Toxic Fog,,,,,,Skill 30
+Skill.TOXIC_FOG.Description,Poisons all enemies.,,,,,,Skill 30
+Skill.TOXIC_FOG.Message1,%1 does %2!,,,,,,Skill 30
+Skill.LULLABY.Name,Lullaby,,,,,,Skill 31
+Skill.LULLABY.Description,Puts all enemies to sleep.,,,,,,Skill 31
+Skill.LULLABY.Message1,%1 sings a Lullaby!,,,,,,Skill 31
+Skill.ALLURING_MELODY.Name,Alluring Melody,,,,,,Skill 32
+Skill.ALLURING_MELODY.Description,Charms all enemies.,,,,,,Skill 32
+Skill.ALLURING_MELODY.Message1,%1 sings an Alluring Melody!,,,,,,Skill 32
+Skill.SONG_OF_SILENCE.Name,Song of Silence,,,,,,Skill 33
+Skill.SONG_OF_SILENCE.Description,Seals all enemies’ magic.,,,,,,Skill 33
+Skill.SONG_OF_SILENCE.Message1,%1 sings a Song of Silence!,,,,,,Skill 33
+Skill.SONIC_WAVE.Name,Sonic Wave,,,,,,Skill 34
+Skill.SONIC_WAVE.Description,Confuses all enemies.,,,,,,Skill 34
+Skill.SONIC_WAVE.Message1,%1 does %2!,,,,,,Skill 34
+Skill.STONE_THROW.Name,Stone Throw,,,,,,Skill 35
+Skill.STONE_THROW.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 35
+Skill.STONE_THROW.Message1,%1 does %2!,,,,,,Skill 35
+Skill.DUST_DEVIL.Name,Dust Devil,,,,,,Skill 36
+Skill.DUST_DEVIL.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 36
+Skill.DUST_DEVIL.Message1,%1 does %2!,,,,,,Skill 36
+Skill.FIRE_BREATH.Name,Fire Breath,,,,,,Skill 37
+Skill.FIRE_BREATH.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 37
+Skill.FIRE_BREATH.Message1,%1 does %2!,,,,,,Skill 37
+Skill.ICE_BREATH.Name,Ice Breath,,,,,,Skill 38
+Skill.ICE_BREATH.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 38
+Skill.ICE_BREATH.Message1,%1 does %2!,,,,,,Skill 38
+Skill.EARTHQUAKE.Name,Earthquake,,,,,,Skill 39
+Skill.EARTHQUAKE.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 39
+Skill.EARTHQUAKE.Message1,%1 causes an Earthquake!,,,,,,Skill 39
+Skill.TSUNAMI.Name,Tsunami,,,,,,Skill 40
+Skill.TSUNAMI.Description,Inflicts Water-type damage on all enemies.,,,,,,Skill 40
+Skill.TSUNAMI.Message1,%1 causes a Tsunami!,,,,,,Skill 40
+Skill.SCRATCH.Name,Scratch,,,,,,Skill 41
+Skill.SCRATCH.Description,Inflicts damage on an enemy.,,,,,,Skill 41
+Skill.SCRATCH.Message1,%1 attacks!,,,,,,Skill 41
+Skill.HEAL_I.Name,Heal I,,,,,,Skill 52
+Skill.HEAL_I.Description,Restores an ally’s HP.,,,,,,Skill 52
+Skill.HEAL_I.Message1,%1 casts %2!,,,,,,Skill 52
+Skill.HEAL_II.Name,Heal II,,,,,,Skill 53
+Skill.HEAL_II.Description,Restores an ally’s HP.,,,,,,Skill 53
+Skill.HEAL_II.Message1,%1 casts %2!,,,,,,Skill 53
+Skill.HEAL_III.Name,Heal III,,,,,,Skill 54
+Skill.HEAL_III.Description,Restores an ally’s HP.,,,,,,Skill 54
+Skill.HEAL_III.Message1,%1 casts %2!,,,,,,Skill 54
+Skill.RECOVER_I.Name,Recover I,,,,,,Skill 56
+Skill.RECOVER_I.Description,Restores all allies’ HP.,,,,,,Skill 56
+Skill.RECOVER_I.Message1,%1 casts %2!,,,,,,Skill 56
+Skill.RECOVER_II.Name,Recover II,,,,,,Skill 57
+Skill.RECOVER_II.Description,Restores all allies’ HP.,,,,,,Skill 57
+Skill.RECOVER_II.Message1,%1 casts %2!,,,,,,Skill 57
+Skill.RECOVER_III.Name,Recover III,,,,,,Skill 58
+Skill.RECOVER_III.Description,Restores all allies’ HP.,,,,,,Skill 58
+Skill.RECOVER_III.Message1,%1 casts %2!,,,,,,Skill 58
+Skill.CURE_I.Name,Cure I,,,,,,Skill 60
+Skill.CURE_I.Description,"Cures an ally’s Poison, Paralysis, or Sleep state.",,,,,,Skill 60
+Skill.CURE_I.Message1,%1 casts %2!,,,,,,Skill 60
+Skill.CURE_II.Name,Cure II,,,,,,Skill 61
+Skill.CURE_II.Description,Cures an ally’s status ailments other than Dead.,,,,,,Skill 61
+Skill.CURE_II.Message1,%1 casts %2!,,,,,,Skill 61
+Skill.CURE_III.Name,Cure III,,,,,,Skill 62
+Skill.CURE_III.Description,Cures all allies’ status ailments other than Dead.,,,,,,Skill 62
+Skill.CURE_III.Message1,%1 casts %2!,,,,,,Skill 62
+Skill.RAISE_I.Name,Raise I,,,,,,Skill 64
+Skill.RAISE_I.Description,Raises an ally from the dead.,,,,,,Skill 64
+Skill.RAISE_I.Message1,%1 casts %2!,,,,,,Skill 64
+Skill.RAISE_II.Name,Raise II,,,,,,Skill 65
+Skill.RAISE_II.Description,"Raises an ally from the dead and greatly restores
 their HP.",,,,,,Skill 65
-Db.Skill.65.Message1,%1 casts %2!,,,,,,Skill 65
-Db.Skill.71.Name,Poison,,,,,,Skill 71
-Db.Skill.71.Description,Poisons all enemies.,,,,,,Skill 71
-Db.Skill.71.Message1,%1 casts %2!,,,,,,Skill 71
-Db.Skill.72.Name,Blind,,,,,,Skill 72
-Db.Skill.72.Description,Blinds all enemies.,,,,,,Skill 72
-Db.Skill.72.Message1,%1 casts %2!,,,,,,Skill 72
-Db.Skill.73.Name,Confuse,,,,,,Skill 73
-Db.Skill.73.Description,Confuses all enemies.,,,,,,Skill 73
-Db.Skill.73.Message1,%1 casts %2!,,,,,,Skill 73
-Db.Skill.74.Name,Silence,,,,,,Skill 74
-Db.Skill.74.Description,Seals all enemies’ magic.,,,,,,Skill 74
-Db.Skill.74.Message1,%1 casts %2!,,,,,,Skill 74
-Db.Skill.75.Name,Sleep,,,,,,Skill 75
-Db.Skill.75.Description,Puts all enemies to sleep.,,,,,,Skill 75
-Db.Skill.75.Message1,%1 casts %2!,,,,,,Skill 75
-Db.Skill.76.Name,Paralyze,,,,,,Skill 76
-Db.Skill.76.Description,Paralyzes all enemies.,,,,,,Skill 76
-Db.Skill.76.Message1,%1 casts %2!,,,,,,Skill 76
-Db.Skill.81.Name,Weapon Bless,,,,,,Skill 81
-Db.Skill.81.Description,"Increases an ally’s Attack.
+Skill.RAISE_II.Message1,%1 casts %2!,,,,,,Skill 65
+Skill.POISON.Name,Poison,,,,,,Skill 71
+Skill.POISON.Description,Poisons all enemies.,,,,,,Skill 71
+Skill.POISON.Message1,%1 casts %2!,,,,,,Skill 71
+Skill.BLIND.Name,Blind,,,,,,Skill 72
+Skill.BLIND.Description,Blinds all enemies.,,,,,,Skill 72
+Skill.BLIND.Message1,%1 casts %2!,,,,,,Skill 72
+Skill.CONFUSE.Name,Confuse,,,,,,Skill 73
+Skill.CONFUSE.Description,Confuses all enemies.,,,,,,Skill 73
+Skill.CONFUSE.Message1,%1 casts %2!,,,,,,Skill 73
+Skill.SILENCE.Name,Silence,,,,,,Skill 74
+Skill.SILENCE.Description,Seals all enemies’ magic.,,,,,,Skill 74
+Skill.SILENCE.Message1,%1 casts %2!,,,,,,Skill 74
+Skill.SLEEP.Name,Sleep,,,,,,Skill 75
+Skill.SLEEP.Description,Puts all enemies to sleep.,,,,,,Skill 75
+Skill.SLEEP.Message1,%1 casts %2!,,,,,,Skill 75
+Skill.PARALYZE.Name,Paralyze,,,,,,Skill 76
+Skill.PARALYZE.Description,Paralyzes all enemies.,,,,,,Skill 76
+Skill.PARALYZE.Message1,%1 casts %2!,,,,,,Skill 76
+Skill.WEAPON_BLESS.Name,Weapon Bless,,,,,,Skill 81
+Skill.WEAPON_BLESS.Description,"Increases an ally’s Attack.
 Usable up to 2 times in a row.",,,,,,Skill 81
-Db.Skill.81.Message1,%1 casts %2!,,,,,,Skill 81
-Db.Skill.82.Name,Weapon Curse,,,,,,Skill 82
-Db.Skill.82.Description,"Decreases all enemies’ Attack.
+Skill.WEAPON_BLESS.Message1,%1 casts %2!,,,,,,Skill 81
+Skill.WEAPON_CURSE.Name,Weapon Curse,,,,,,Skill 82
+Skill.WEAPON_CURSE.Description,"Decreases all enemies’ Attack.
 Usable up to 2 times in a row.",,,,,,Skill 82
-Db.Skill.82.Message1,%1 casts %2!,,,,,,Skill 82
-Db.Skill.83.Name,Armor Bless,,,,,,Skill 83
-Db.Skill.83.Description,"Increases an ally’s Defense.
+Skill.WEAPON_CURSE.Message1,%1 casts %2!,,,,,,Skill 82
+Skill.ARMOR_BLESS.Name,Armor Bless,,,,,,Skill 83
+Skill.ARMOR_BLESS.Description,"Increases an ally’s Defense.
 Usable up to 2 times in a row.",,,,,,Skill 83
-Db.Skill.83.Message1,%1 casts %2!,,,,,,Skill 83
-Db.Skill.84.Name,Armor Curse,,,,,,Skill 84
-Db.Skill.84.Description,"Decreases all enemies’ Defense.
+Skill.ARMOR_BLESS.Message1,%1 casts %2!,,,,,,Skill 83
+Skill.ARMOR_CURSE.Name,Armor Curse,,,,,,Skill 84
+Skill.ARMOR_CURSE.Description,"Decreases all enemies’ Defense.
 Usable up to 2 times in a row.",,,,,,Skill 84
-Db.Skill.84.Message1,%1 casts %2!,,,,,,Skill 84
-Db.Skill.85.Name,Spirit Bless,,,,,,Skill 85
-Db.Skill.85.Description,"Increases an ally’s M.Attack.
+Skill.ARMOR_CURSE.Message1,%1 casts %2!,,,,,,Skill 84
+Skill.SPIRIT_BLESS.Name,Spirit Bless,,,,,,Skill 85
+Skill.SPIRIT_BLESS.Description,"Increases an ally’s M.Attack.
 Usable up to 2 times in a row.",,,,,,Skill 85
-Db.Skill.85.Message1,%1 casts %2!,,,,,,Skill 85
-Db.Skill.86.Name,Spirit Curse,,,,,,Skill 86
-Db.Skill.86.Description,"Decreases all enemies’ M.Attack.
+Skill.SPIRIT_BLESS.Message1,%1 casts %2!,,,,,,Skill 85
+Skill.SPIRIT_CURSE.Name,Spirit Curse,,,,,,Skill 86
+Skill.SPIRIT_CURSE.Description,"Decreases all enemies’ M.Attack.
 Usable up to 2 times in a row.",,,,,,Skill 86
-Db.Skill.86.Message1,%1 casts %2!,,,,,,Skill 86
-Db.Skill.87.Name,Divine Bless,,,,,,Skill 87
-Db.Skill.87.Description,"Increases an ally’s M.Defense.
+Skill.SPIRIT_CURSE.Message1,%1 casts %2!,,,,,,Skill 86
+Skill.DIVINE_BLESS.Name,Divine Bless,,,,,,Skill 87
+Skill.DIVINE_BLESS.Description,"Increases an ally’s M.Defense.
 Usable up to 2 times in a row.",,,,,,Skill 87
-Db.Skill.87.Message1,%1 casts %2!,,,,,,Skill 87
-Db.Skill.88.Name,Divine Curse,,,,,,Skill 88
-Db.Skill.88.Description,"Decreases all enemies’ M.Defense.
+Skill.DIVINE_BLESS.Message1,%1 casts %2!,,,,,,Skill 87
+Skill.DIVINE_CURSE.Name,Divine Curse,,,,,,Skill 88
+Skill.DIVINE_CURSE.Description,"Decreases all enemies’ M.Defense.
 Usable up to 2 times in a row.",,,,,,Skill 88
-Db.Skill.88.Message1,%1 casts %2!,,,,,,Skill 88
-Db.Skill.89.Name,Quicken Movement,,,,,,Skill 89
-Db.Skill.89.Description,"Increases an ally’s Agility.
+Skill.DIVINE_CURSE.Message1,%1 casts %2!,,,,,,Skill 88
+Skill.QUICKEN_MOVEMENT.Name,Quicken Movement,,,,,,Skill 89
+Skill.QUICKEN_MOVEMENT.Description,"Increases an ally’s Agility.
 Usable up to 2 times in a row.",,,,,,Skill 89
-Db.Skill.89.Message1,%1 casts %2!,,,,,,Skill 89
-Db.Skill.90.Name,Slow Movement,,,,,,Skill 90
-Db.Skill.90.Description,"Decreases all enemies’ Agility.
+Skill.QUICKEN_MOVEMENT.Message1,%1 casts %2!,,,,,,Skill 89
+Skill.SLOW_MOVEMENT.Name,Slow Movement,,,,,,Skill 90
+Skill.SLOW_MOVEMENT.Description,"Decreases all enemies’ Agility.
 Usable up to 2 times in a row.",,,,,,Skill 90
-Db.Skill.90.Message1,%1 casts %2!,,,,,,Skill 90
-Db.Skill.91.Name,Life Drain,,,,,,Skill 91
-Db.Skill.91.Description,Absorbs HP from an enemy.,,,,,,Skill 91
-Db.Skill.91.Message1,%1 casts %2!,,,,,,Skill 91
-Db.Skill.92.Name,Mana Drain,,,,,,Skill 92
-Db.Skill.92.Description,Absorbs MP from an enemy.,,,,,,Skill 92
-Db.Skill.92.Message1,%1 casts %2!,,,,,,Skill 92
-Db.Skill.99.Name,Fire I,,,,,,Skill 99
-Db.Skill.99.Description,Inflicts Fire-type damage on an enemy.,,,,,,Skill 99
-Db.Skill.99.Message1,%1 casts %2!,,,,,,Skill 99
-Db.Skill.100.Name,Fire II,,,,,,Skill 100
-Db.Skill.100.Description,Inflicts Fire-type damage on an enemy.,,,,,,Skill 100
-Db.Skill.100.Message1,%1 casts %2!,,,,,,Skill 100
-Db.Skill.101.Name,Fire III,,,,,,Skill 101
-Db.Skill.101.Description,Inflicts Fire-type damage on an enemy.,,,,,,Skill 101
-Db.Skill.101.Message1,%1 casts %2!,,,,,,Skill 101
-Db.Skill.103.Name,Flame I,,,,,,Skill 103
-Db.Skill.103.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 103
-Db.Skill.103.Message1,%1 casts %2!,,,,,,Skill 103
-Db.Skill.104.Name,Flame II,,,,,,Skill 104
-Db.Skill.104.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 104
-Db.Skill.104.Message1,%1 casts %2!,,,,,,Skill 104
-Db.Skill.105.Name,Flame III,,,,,,Skill 105
-Db.Skill.105.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 105
-Db.Skill.105.Message1,%1 casts %2!,,,,,,Skill 105
-Db.Skill.107.Name,Ice I,,,,,,Skill 107
-Db.Skill.107.Description,Inflicts Ice-type damage on an enemy.,,,,,,Skill 107
-Db.Skill.107.Message1,%1 casts %2!,,,,,,Skill 107
-Db.Skill.108.Name,Ice II,,,,,,Skill 108
-Db.Skill.108.Description,Inflicts Ice-type damage on an enemy.,,,,,,Skill 108
-Db.Skill.108.Message1,%1 casts %2!,,,,,,Skill 108
-Db.Skill.109.Name,Ice III,,,,,,Skill 109
-Db.Skill.109.Description,Inflicts Ice-type damage on an enemy.,,,,,,Skill 109
-Db.Skill.109.Message1,%1 casts %2!,,,,,,Skill 109
-Db.Skill.111.Name,Blizzard I,,,,,,Skill 111
-Db.Skill.111.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 111
-Db.Skill.111.Message1,%1 casts %2!,,,,,,Skill 111
-Db.Skill.112.Name,Blizzard II,,,,,,Skill 112
-Db.Skill.112.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 112
-Db.Skill.112.Message1,%1 casts %2!,,,,,,Skill 112
-Db.Skill.113.Name,Blizzard III,,,,,,Skill 113
-Db.Skill.113.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 113
-Db.Skill.113.Message1,%1 casts %2!,,,,,,Skill 113
-Db.Skill.115.Name,Thunder I,,,,,,Skill 115
-Db.Skill.115.Description,Inflicts Thunder-type damage on an enemy.,,,,,,Skill 115
-Db.Skill.115.Message1,%1 casts %2!,,,,,,Skill 115
-Db.Skill.116.Name,Thunder II,,,,,,Skill 116
-Db.Skill.116.Description,Inflicts Thunder-type damage on an enemy.,,,,,,Skill 116
-Db.Skill.116.Message1,%1 casts %2!,,,,,,Skill 116
-Db.Skill.117.Name,Thunder III,,,,,,Skill 117
-Db.Skill.117.Description,Inflicts Thunder-type damage on an enemy.,,,,,,Skill 117
-Db.Skill.117.Message1,%1 casts %2!,,,,,,Skill 117
-Db.Skill.119.Name,Spark I,,,,,,Skill 119
-Db.Skill.119.Description,Inflicts Thunder-type damage on all enemies.,,,,,,Skill 119
-Db.Skill.119.Message1,%1 casts %2!,,,,,,Skill 119
-Db.Skill.120.Name,Spark II,,,,,,Skill 120
-Db.Skill.120.Description,Inflicts Thunder-type damage on all enemies.,,,,,,Skill 120
-Db.Skill.120.Message1,%1 casts %2!,,,,,,Skill 120
-Db.Skill.121.Name,Spark III,,,,,,Skill 121
-Db.Skill.121.Description,Inflicts Thunder-type damage on all enemies.,,,,,,Skill 121
-Db.Skill.121.Message1,%1 casts %2!,,,,,,Skill 121
-Db.Skill.123.Name,Water I,,,,,,Skill 123
-Db.Skill.123.Description,Inflicts Water-type damage on an enemy.,,,,,,Skill 123
-Db.Skill.123.Message1,%1 casts %2!,,,,,,Skill 123
-Db.Skill.124.Name,Water II,,,,,,Skill 124
-Db.Skill.124.Description,Inflicts Water-type damage on an enemy.,,,,,,Skill 124
-Db.Skill.124.Message1,%1 casts %2!,,,,,,Skill 124
-Db.Skill.126.Name,Wave I,,,,,,Skill 126
-Db.Skill.126.Description,Inflicts Water-type damage on all enemies.,,,,,,Skill 126
-Db.Skill.126.Message1,%1 casts %2!,,,,,,Skill 126
-Db.Skill.127.Name,Wave II,,,,,,Skill 127
-Db.Skill.127.Description,Inflicts Water-type damage on all enemies.,,,,,,Skill 127
-Db.Skill.127.Message1,%1 casts %2!,,,,,,Skill 127
-Db.Skill.129.Name,Stone I,,,,,,Skill 129
-Db.Skill.129.Description,Inflicts Earth-type damage on an enemy.,,,,,,Skill 129
-Db.Skill.129.Message1,%1 casts %2!,,,,,,Skill 129
-Db.Skill.130.Name,Stone II,,,,,,Skill 130
-Db.Skill.130.Description,Inflicts Earth-type damage on an enemy.,,,,,,Skill 130
-Db.Skill.130.Message1,%1 casts %2!,,,,,,Skill 130
-Db.Skill.132.Name,Quake I,,,,,,Skill 132
-Db.Skill.132.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 132
-Db.Skill.132.Message1,%1 casts %2!,,,,,,Skill 132
-Db.Skill.133.Name,Quake II,,,,,,Skill 133
-Db.Skill.133.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 133
-Db.Skill.133.Message1,%1 casts %2!,,,,,,Skill 133
-Db.Skill.135.Name,Wind I,,,,,,Skill 135
-Db.Skill.135.Description,Inflicts Wind-type damage on an enemy.,,,,,,Skill 135
-Db.Skill.135.Message1,%1 casts %2!,,,,,,Skill 135
-Db.Skill.136.Name,Wind II,,,,,,Skill 136
-Db.Skill.136.Description,Inflicts Wind-type damage on an enemy.,,,,,,Skill 136
-Db.Skill.136.Message1,%1 casts %2!,,,,,,Skill 136
-Db.Skill.138.Name,Tornado I,,,,,,Skill 138
-Db.Skill.138.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 138
-Db.Skill.138.Message1,%1 casts %2!,,,,,,Skill 138
-Db.Skill.139.Name,Tornado II,,,,,,Skill 139
-Db.Skill.139.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 139
-Db.Skill.139.Message1,%1 casts %2!,,,,,,Skill 139
-Db.Skill.141.Name,Saint I,,,,,,Skill 141
-Db.Skill.141.Description,Inflicts Light-type damage on an enemy.,,,,,,Skill 141
-Db.Skill.141.Message1,%1 casts %2!,,,,,,Skill 141
-Db.Skill.142.Name,Saint II,,,,,,Skill 142
-Db.Skill.142.Description,Inflicts Light-type damage on an enemy.,,,,,,Skill 142
-Db.Skill.142.Message1,%1 casts %2!,,,,,,Skill 142
-Db.Skill.144.Name,Starlight I,,,,,,Skill 144
-Db.Skill.144.Description,Inflicts Light-type damage on all enemies.,,,,,,Skill 144
-Db.Skill.144.Message1,%1 casts %2!,,,,,,Skill 144
-Db.Skill.145.Name,Starlight II,,,,,,Skill 145
-Db.Skill.145.Description,Inflicts Light-type damage on all enemies.,,,,,,Skill 145
-Db.Skill.145.Message1,%1 casts %2!,,,,,,Skill 145
-Db.Skill.147.Name,Shade I,,,,,,Skill 147
-Db.Skill.147.Description,Inflicts Darkness-type damage on an enemy.,,,,,,Skill 147
-Db.Skill.147.Message1,%1 casts %2!,,,,,,Skill 147
-Db.Skill.148.Name,Shade II,,,,,,Skill 148
-Db.Skill.148.Description,Inflicts Darkness-type damage on an enemy.,,,,,,Skill 148
-Db.Skill.148.Message1,%1 casts %2!,,,,,,Skill 148
-Db.Skill.150.Name,Darkness I,,,,,,Skill 150
-Db.Skill.150.Description,Inflicts Darkness-type damage on all enemies.,,,,,,Skill 150
-Db.Skill.150.Message1,%1 casts %2!,,,,,,Skill 150
-Db.Skill.151.Name,Darkness II,,,,,,Skill 151
-Db.Skill.151.Description,Inflicts Darkness-type damage on all enemies.,,,,,,Skill 151
-Db.Skill.151.Message1,%1 casts %2!,,,,,,Skill 151
-Db.Skill.153.Name,Burst I,,,,,,Skill 153
-Db.Skill.153.Description,Inflicts damage on an enemy regardless of Defense.,,,,,,Skill 153
-Db.Skill.153.Message1,%1 casts %2!,,,,,,Skill 153
-Db.Skill.154.Name,Burst II,,,,,,Skill 154
-Db.Skill.154.Description,Inflicts damage on an enemy regardless of Defense.,,,,,,Skill 154
-Db.Skill.154.Message1,%1 casts %2!,,,,,,Skill 154
-Db.Skill.156.Name,Nuke I,,,,,,Skill 156
-Db.Skill.156.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 156
-Db.Skill.156.Message1,%1 casts %2!,,,,,,Skill 156
-Db.Skill.157.Name,Nuke II,,,,,,Skill 157
-Db.Skill.157.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 157
-Db.Skill.157.Message1,%1 casts %2!,,,,,,Skill 157
-Db.Skill.171.Name,-----Swordsman Skills,,,,,,Skill 171
-Db.Skill.172.Name,Strong Attack,,,,,,Skill 172
-Db.Skill.172.Description,Performs a powerful attack on an enemy.,,,,,,Skill 172
-Db.Skill.172.Message1,%1 does %2!,,,,,,Skill 172
-Db.Skill.173.Name,Slash,,,,,,Skill 173
-Db.Skill.173.Description,Attacks all enemies.,,,,,,Skill 173
-Db.Skill.173.Message1,%1 mows down the enemy!,,,,,,Skill 173
-Db.Skill.174.Name,Dual Attack,,,,,,Skill 174
-Db.Skill.174.Description,Performs an attack on an enemy twice.,,,,,,Skill 174
-Db.Skill.174.Message1,%1 dual attacks!,,,,,,Skill 174
-Db.Skill.175.Name,Willpower,,,,,,Skill 175
-Db.Skill.175.Description,"Rouses the user’s fighting spirit and increases
+Skill.SLOW_MOVEMENT.Message1,%1 casts %2!,,,,,,Skill 90
+Skill.LIFE_DRAIN.Name,Life Drain,,,,,,Skill 91
+Skill.LIFE_DRAIN.Description,Absorbs HP from an enemy.,,,,,,Skill 91
+Skill.LIFE_DRAIN.Message1,%1 casts %2!,,,,,,Skill 91
+Skill.MANA_DRAIN.Name,Mana Drain,,,,,,Skill 92
+Skill.MANA_DRAIN.Description,Absorbs MP from an enemy.,,,,,,Skill 92
+Skill.MANA_DRAIN.Message1,%1 casts %2!,,,,,,Skill 92
+Skill.FIRE_I.Name,Fire I,,,,,,Skill 99
+Skill.FIRE_I.Description,Inflicts Fire-type damage on an enemy.,,,,,,Skill 99
+Skill.FIRE_I.Message1,%1 casts %2!,,,,,,Skill 99
+Skill.FIRE_II.Name,Fire II,,,,,,Skill 100
+Skill.FIRE_II.Description,Inflicts Fire-type damage on an enemy.,,,,,,Skill 100
+Skill.FIRE_II.Message1,%1 casts %2!,,,,,,Skill 100
+Skill.FIRE_III.Name,Fire III,,,,,,Skill 101
+Skill.FIRE_III.Description,Inflicts Fire-type damage on an enemy.,,,,,,Skill 101
+Skill.FIRE_III.Message1,%1 casts %2!,,,,,,Skill 101
+Skill.FLAME_I.Name,Flame I,,,,,,Skill 103
+Skill.FLAME_I.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 103
+Skill.FLAME_I.Message1,%1 casts %2!,,,,,,Skill 103
+Skill.FLAME_II.Name,Flame II,,,,,,Skill 104
+Skill.FLAME_II.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 104
+Skill.FLAME_II.Message1,%1 casts %2!,,,,,,Skill 104
+Skill.FLAME_III.Name,Flame III,,,,,,Skill 105
+Skill.FLAME_III.Description,Inflicts Fire-type damage on all enemies.,,,,,,Skill 105
+Skill.FLAME_III.Message1,%1 casts %2!,,,,,,Skill 105
+Skill.ICE_I.Name,Ice I,,,,,,Skill 107
+Skill.ICE_I.Description,Inflicts Ice-type damage on an enemy.,,,,,,Skill 107
+Skill.ICE_I.Message1,%1 casts %2!,,,,,,Skill 107
+Skill.ICE_II.Name,Ice II,,,,,,Skill 108
+Skill.ICE_II.Description,Inflicts Ice-type damage on an enemy.,,,,,,Skill 108
+Skill.ICE_II.Message1,%1 casts %2!,,,,,,Skill 108
+Skill.ICE_III.Name,Ice III,,,,,,Skill 109
+Skill.ICE_III.Description,Inflicts Ice-type damage on an enemy.,,,,,,Skill 109
+Skill.ICE_III.Message1,%1 casts %2!,,,,,,Skill 109
+Skill.BLIZZARD_I.Name,Blizzard I,,,,,,Skill 111
+Skill.BLIZZARD_I.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 111
+Skill.BLIZZARD_I.Message1,%1 casts %2!,,,,,,Skill 111
+Skill.BLIZZARD_II.Name,Blizzard II,,,,,,Skill 112
+Skill.BLIZZARD_II.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 112
+Skill.BLIZZARD_II.Message1,%1 casts %2!,,,,,,Skill 112
+Skill.BLIZZARD_III.Name,Blizzard III,,,,,,Skill 113
+Skill.BLIZZARD_III.Description,Inflicts Ice-type damage on all enemies.,,,,,,Skill 113
+Skill.BLIZZARD_III.Message1,%1 casts %2!,,,,,,Skill 113
+Skill.THUNDER_I.Name,Thunder I,,,,,,Skill 115
+Skill.THUNDER_I.Description,Inflicts Thunder-type damage on an enemy.,,,,,,Skill 115
+Skill.THUNDER_I.Message1,%1 casts %2!,,,,,,Skill 115
+Skill.THUNDER_II.Name,Thunder II,,,,,,Skill 116
+Skill.THUNDER_II.Description,Inflicts Thunder-type damage on an enemy.,,,,,,Skill 116
+Skill.THUNDER_II.Message1,%1 casts %2!,,,,,,Skill 116
+Skill.THUNDER_III.Name,Thunder III,,,,,,Skill 117
+Skill.THUNDER_III.Description,Inflicts Thunder-type damage on an enemy.,,,,,,Skill 117
+Skill.THUNDER_III.Message1,%1 casts %2!,,,,,,Skill 117
+Skill.SPARK_I.Name,Spark I,,,,,,Skill 119
+Skill.SPARK_I.Description,Inflicts Thunder-type damage on all enemies.,,,,,,Skill 119
+Skill.SPARK_I.Message1,%1 casts %2!,,,,,,Skill 119
+Skill.SPARK_II.Name,Spark II,,,,,,Skill 120
+Skill.SPARK_II.Description,Inflicts Thunder-type damage on all enemies.,,,,,,Skill 120
+Skill.SPARK_II.Message1,%1 casts %2!,,,,,,Skill 120
+Skill.SPARK_III.Name,Spark III,,,,,,Skill 121
+Skill.SPARK_III.Description,Inflicts Thunder-type damage on all enemies.,,,,,,Skill 121
+Skill.SPARK_III.Message1,%1 casts %2!,,,,,,Skill 121
+Skill.WATER_I.Name,Water I,,,,,,Skill 123
+Skill.WATER_I.Description,Inflicts Water-type damage on an enemy.,,,,,,Skill 123
+Skill.WATER_I.Message1,%1 casts %2!,,,,,,Skill 123
+Skill.WATER_II.Name,Water II,,,,,,Skill 124
+Skill.WATER_II.Description,Inflicts Water-type damage on an enemy.,,,,,,Skill 124
+Skill.WATER_II.Message1,%1 casts %2!,,,,,,Skill 124
+Skill.WAVE_I.Name,Wave I,,,,,,Skill 126
+Skill.WAVE_I.Description,Inflicts Water-type damage on all enemies.,,,,,,Skill 126
+Skill.WAVE_I.Message1,%1 casts %2!,,,,,,Skill 126
+Skill.WAVE_II.Name,Wave II,,,,,,Skill 127
+Skill.WAVE_II.Description,Inflicts Water-type damage on all enemies.,,,,,,Skill 127
+Skill.WAVE_II.Message1,%1 casts %2!,,,,,,Skill 127
+Skill.STONE_I.Name,Stone I,,,,,,Skill 129
+Skill.STONE_I.Description,Inflicts Earth-type damage on an enemy.,,,,,,Skill 129
+Skill.STONE_I.Message1,%1 casts %2!,,,,,,Skill 129
+Skill.STONE_II.Name,Stone II,,,,,,Skill 130
+Skill.STONE_II.Description,Inflicts Earth-type damage on an enemy.,,,,,,Skill 130
+Skill.STONE_II.Message1,%1 casts %2!,,,,,,Skill 130
+Skill.QUAKE_I.Name,Quake I,,,,,,Skill 132
+Skill.QUAKE_I.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 132
+Skill.QUAKE_I.Message1,%1 casts %2!,,,,,,Skill 132
+Skill.QUAKE_II.Name,Quake II,,,,,,Skill 133
+Skill.QUAKE_II.Description,Inflicts Earth-type damage on all enemies.,,,,,,Skill 133
+Skill.QUAKE_II.Message1,%1 casts %2!,,,,,,Skill 133
+Skill.WIND_I.Name,Wind I,,,,,,Skill 135
+Skill.WIND_I.Description,Inflicts Wind-type damage on an enemy.,,,,,,Skill 135
+Skill.WIND_I.Message1,%1 casts %2!,,,,,,Skill 135
+Skill.WIND_II.Name,Wind II,,,,,,Skill 136
+Skill.WIND_II.Description,Inflicts Wind-type damage on an enemy.,,,,,,Skill 136
+Skill.WIND_II.Message1,%1 casts %2!,,,,,,Skill 136
+Skill.TORNADO_I.Name,Tornado I,,,,,,Skill 138
+Skill.TORNADO_I.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 138
+Skill.TORNADO_I.Message1,%1 casts %2!,,,,,,Skill 138
+Skill.TORNADO_II.Name,Tornado II,,,,,,Skill 139
+Skill.TORNADO_II.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 139
+Skill.TORNADO_II.Message1,%1 casts %2!,,,,,,Skill 139
+Skill.SAINT_I.Name,Saint I,,,,,,Skill 141
+Skill.SAINT_I.Description,Inflicts Light-type damage on an enemy.,,,,,,Skill 141
+Skill.SAINT_I.Message1,%1 casts %2!,,,,,,Skill 141
+Skill.SAINT_II.Name,Saint II,,,,,,Skill 142
+Skill.SAINT_II.Description,Inflicts Light-type damage on an enemy.,,,,,,Skill 142
+Skill.SAINT_II.Message1,%1 casts %2!,,,,,,Skill 142
+Skill.STARLIGHT_I.Name,Starlight I,,,,,,Skill 144
+Skill.STARLIGHT_I.Description,Inflicts Light-type damage on all enemies.,,,,,,Skill 144
+Skill.STARLIGHT_I.Message1,%1 casts %2!,,,,,,Skill 144
+Skill.STARLIGHT_II.Name,Starlight II,,,,,,Skill 145
+Skill.STARLIGHT_II.Description,Inflicts Light-type damage on all enemies.,,,,,,Skill 145
+Skill.STARLIGHT_II.Message1,%1 casts %2!,,,,,,Skill 145
+Skill.SHADE_I.Name,Shade I,,,,,,Skill 147
+Skill.SHADE_I.Description,Inflicts Darkness-type damage on an enemy.,,,,,,Skill 147
+Skill.SHADE_I.Message1,%1 casts %2!,,,,,,Skill 147
+Skill.SHADE_II.Name,Shade II,,,,,,Skill 148
+Skill.SHADE_II.Description,Inflicts Darkness-type damage on an enemy.,,,,,,Skill 148
+Skill.SHADE_II.Message1,%1 casts %2!,,,,,,Skill 148
+Skill.DARKNESS_I.Name,Darkness I,,,,,,Skill 150
+Skill.DARKNESS_I.Description,Inflicts Darkness-type damage on all enemies.,,,,,,Skill 150
+Skill.DARKNESS_I.Message1,%1 casts %2!,,,,,,Skill 150
+Skill.DARKNESS_II.Name,Darkness II,,,,,,Skill 151
+Skill.DARKNESS_II.Description,Inflicts Darkness-type damage on all enemies.,,,,,,Skill 151
+Skill.DARKNESS_II.Message1,%1 casts %2!,,,,,,Skill 151
+Skill.BURST_I.Name,Burst I,,,,,,Skill 153
+Skill.BURST_I.Description,Inflicts damage on an enemy regardless of Defense.,,,,,,Skill 153
+Skill.BURST_I.Message1,%1 casts %2!,,,,,,Skill 153
+Skill.BURST_II.Name,Burst II,,,,,,Skill 154
+Skill.BURST_II.Description,Inflicts damage on an enemy regardless of Defense.,,,,,,Skill 154
+Skill.BURST_II.Message1,%1 casts %2!,,,,,,Skill 154
+Skill.NUKE_I.Name,Nuke I,,,,,,Skill 156
+Skill.NUKE_I.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 156
+Skill.NUKE_I.Message1,%1 casts %2!,,,,,,Skill 156
+Skill.NUKE_II.Name,Nuke II,,,,,,Skill 157
+Skill.NUKE_II.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 157
+Skill.NUKE_II.Message1,%1 casts %2!,,,,,,Skill 157
+Skill.STRONG_ATTACK.Name,Strong Attack,,,,,,Skill 172
+Skill.STRONG_ATTACK.Description,Performs a powerful attack on an enemy.,,,,,,Skill 172
+Skill.STRONG_ATTACK.Message1,%1 does %2!,,,,,,Skill 172
+Skill.SLASH.Name,Slash,,,,,,Skill 173
+Skill.SLASH.Description,Attacks all enemies.,,,,,,Skill 173
+Skill.SLASH.Message1,%1 mows down the enemy!,,,,,,Skill 173
+Skill.DUAL_ATTACK_2.Name,Dual Attack,,,,,,Skill 174
+Skill.DUAL_ATTACK_2.Description,Performs an attack on an enemy twice.,,,,,,Skill 174
+Skill.DUAL_ATTACK_2.Message1,%1 dual attacks!,,,,,,Skill 174
+Skill.WILLPOWER.Name,Willpower,,,,,,Skill 175
+Skill.WILLPOWER.Description,"Rouses the user’s fighting spirit and increases
 Attack. Usable up to 2 times in a row.",,,,,,Skill 175
-Db.Skill.175.Message1,%1 uses %2!,,,,,,Skill 175
-Db.Skill.176.Name,First Aid,,,,,,Skill 176
-Db.Skill.176.Description,Restores an ally’s HP.,,,,,,Skill 176
-Db.Skill.176.Message1,%1 performs %2!,,,,,,Skill 176
-Db.Skill.177.Name,Maiden’s Stance,,,,,,Skill 177
-Db.Skill.177.Description,Performs a super powerful attack on an enemy.,,,,,,Skill 177
-Db.Skill.177.Message1,%1 does %2!,,,,,,Skill 177
-Db.Skill.178.Name,Spin Crash,,,,,,Skill 178
-Db.Skill.178.Description,Performs a powerful attack on all enemies.,,,,,,Skill 178
-Db.Skill.178.Message1,%1 mows down the enemy!,,,,,,Skill 178
-Db.Skill.185.Name,-----Priest & Sorcerer Skills,,,,,,Skill 185
-Db.Skill.186.Name,Magic Barrier,,,,,,Skill 186
-Db.Skill.186.Description,"Increases all allies’ Defense and M.Defense.
+Skill.WILLPOWER.Message1,%1 uses %2!,,,,,,Skill 175
+Skill.FIRST_AID.Name,First Aid,,,,,,Skill 176
+Skill.FIRST_AID.Description,Restores an ally’s HP.,,,,,,Skill 176
+Skill.FIRST_AID.Message1,%1 performs %2!,,,,,,Skill 176
+Skill.MAIDENS_STANCE.Name,Maiden’s Stance,,,,,,Skill 177
+Skill.MAIDENS_STANCE.Description,Performs a super powerful attack on an enemy.,,,,,,Skill 177
+Skill.MAIDENS_STANCE.Message1,%1 does %2!,,,,,,Skill 177
+Skill.SPIN_CRASH.Name,Spin Crash,,,,,,Skill 178
+Skill.SPIN_CRASH.Description,Performs a powerful attack on all enemies.,,,,,,Skill 178
+Skill.SPIN_CRASH.Message1,%1 mows down the enemy!,,,,,,Skill 178
+Skill.MAGIC_BARRIER.Name,Magic Barrier,,,,,,Skill 186
+Skill.MAGIC_BARRIER.Description,"Increases all allies’ Defense and M.Defense.
 Usable up to 2 times in a row.",,,,,,Skill 186
-Db.Skill.186.Message1,%1 offered a prayer!,,,,,,Skill 186
-Db.Skill.187.Name,Spell Enhancement,,,,,,Skill 187
-Db.Skill.187.Description,Greatly increases the user’s M.Attack for 5 turns.,,,,,,Skill 187
-Db.Skill.187.Message1,%1 casts %2!,,,,,,Skill 187
-Db.Skill.188.Name,Yell,,,,,,Skill 188
-Db.Skill.188.Description,"Rouses all allies’ fighting spirit and increases
+Skill.MAGIC_BARRIER.Message1,%1 offered a prayer!,,,,,,Skill 186
+Skill.SPELL_ENHANCEMENT.Name,Spell Enhancement,,,,,,Skill 187
+Skill.SPELL_ENHANCEMENT.Description,Greatly increases the user’s M.Attack for 5 turns.,,,,,,Skill 187
+Skill.SPELL_ENHANCEMENT.Message1,%1 casts %2!,,,,,,Skill 187
+Skill.YELL.Name,Yell,,,,,,Skill 188
+Skill.YELL.Description,"Rouses all allies’ fighting spirit and increases
 Attack. Usable up to 2 times in a row.",,,,,,Skill 188
-Db.Skill.188.Message1,%1 gave encouragement!,,,,,,Skill 188
-Db.Skill.189.Name,Meteor,,,,,,Skill 189
-Db.Skill.189.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 189
-Db.Skill.189.Message1,%1 casts %2!,,,,,,Skill 189
-Db.Skill.190.Name,Fire Weapon,,,,,,Skill 190
-Db.Skill.190.Description,Bestows Fire-type for 5 turns.,,,,,,Skill 190
-Db.Skill.190.Message1,%1 casts %2!,,,,,,Skill 190
-Db.Skill.191.Name,Ice Weapon,,,,,,Skill 191
-Db.Skill.191.Description,Bestows Ice-type for 5 turns.,,,,,,Skill 191
-Db.Skill.191.Message1,%1 casts %2!,,,,,,Skill 191
-Db.Skill.192.Name,Thunder Weapon,,,,,,Skill 192
-Db.Skill.192.Description,Bestows Thunder-type for 5 turns.,,,,,,Skill 192
-Db.Skill.192.Message1,%1 casts %2!,,,,,,Skill 192
-Db.Skill.193.Name,Magic Mirror,,,,,,Skill 193
-Db.Skill.193.Description,Reflects M.Attack aimed at the user for 5 turns.,,,,,,Skill 193
-Db.Skill.193.Message1,%1 casts %2!,,,,,,Skill 193
-Db.Skill.195.Name,-----Knight Skills,,,,,,Skill 195
-Db.Skill.196.Name,Protect,,,,,,Skill 196
-Db.Skill.196.Description,Automatically protects allies with low HP for 1 turn.,,,,,,Skill 196
-Db.Skill.196.Message1,%1 protects team.,,,,,,Skill 196
-Db.Skill.197.Name,Falcon Thrust,,,,,,Skill 197
-Db.Skill.197.Description,"Performs an attack on an enemy faster than anyone
+Skill.YELL.Message1,%1 gave encouragement!,,,,,,Skill 188
+Skill.METEOR.Name,Meteor,,,,,,Skill 189
+Skill.METEOR.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 189
+Skill.METEOR.Message1,%1 casts %2!,,,,,,Skill 189
+Skill.FIRE_WEAPON.Name,Fire Weapon,,,,,,Skill 190
+Skill.FIRE_WEAPON.Description,Bestows Fire-type for 5 turns.,,,,,,Skill 190
+Skill.FIRE_WEAPON.Message1,%1 casts %2!,,,,,,Skill 190
+Skill.ICE_WEAPON.Name,Ice Weapon,,,,,,Skill 191
+Skill.ICE_WEAPON.Description,Bestows Ice-type for 5 turns.,,,,,,Skill 191
+Skill.ICE_WEAPON.Message1,%1 casts %2!,,,,,,Skill 191
+Skill.THUNDER_WEAPON.Name,Thunder Weapon,,,,,,Skill 192
+Skill.THUNDER_WEAPON.Description,Bestows Thunder-type for 5 turns.,,,,,,Skill 192
+Skill.THUNDER_WEAPON.Message1,%1 casts %2!,,,,,,Skill 192
+Skill.MAGIC_MIRROR.Name,Magic Mirror,,,,,,Skill 193
+Skill.MAGIC_MIRROR.Description,Reflects M.Attack aimed at the user for 5 turns.,,,,,,Skill 193
+Skill.MAGIC_MIRROR.Message1,%1 casts %2!,,,,,,Skill 193
+Skill.PROTECT.Name,Protect,,,,,,Skill 196
+Skill.PROTECT.Description,Automatically protects allies with low HP for 1 turn.,,,,,,Skill 196
+Skill.PROTECT.Message1,%1 protects team.,,,,,,Skill 196
+Skill.FALCON_THRUST.Name,Falcon Thrust,,,,,,Skill 197
+Skill.FALCON_THRUST.Description,"Performs an attack on an enemy faster than anyone
 else.",,,,,,Skill 197
-Db.Skill.197.Message1,%1 does %2!,,,,,,Skill 197
-Db.Skill.198.Name,Double Thrust,,,,,,Skill 198
-Db.Skill.198.Description,Performs an attack on an enemy twice.,,,,,,Skill 198
-Db.Skill.198.Message1,%1 does %2!,,,,,,Skill 198
-Db.Skill.199.Name,Armor Piercer,,,,,,Skill 199
-Db.Skill.199.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 199
-Db.Skill.199.Message1,%1 does %2!,,,,,,Skill 199
-Db.Skill.200.Name,Battle Cry,,,,,,Skill 200
-Db.Skill.200.Description,"Rouses all allies’ fighting spirit and increases
+Skill.FALCON_THRUST.Message1,%1 does %2!,,,,,,Skill 197
+Skill.DOUBLE_THRUST.Name,Double Thrust,,,,,,Skill 198
+Skill.DOUBLE_THRUST.Description,Performs an attack on an enemy twice.,,,,,,Skill 198
+Skill.DOUBLE_THRUST.Message1,%1 does %2!,,,,,,Skill 198
+Skill.ARMOR_PIERCER.Name,Armor Piercer,,,,,,Skill 199
+Skill.ARMOR_PIERCER.Description,Inflicts damage on all enemies regardless of Defense.,,,,,,Skill 199
+Skill.ARMOR_PIERCER.Message1,%1 does %2!,,,,,,Skill 199
+Skill.BATTLE_CRY.Name,Battle Cry,,,,,,Skill 200
+Skill.BATTLE_CRY.Description,"Rouses all allies’ fighting spirit and increases
 Attack. Usable up to 2 times in a row.",,,,,,Skill 200
-Db.Skill.200.Message1,%1 made a battle cry!,,,,,,Skill 200
-Db.Skill.201.Name,Windmill,,,,,,Skill 201
-Db.Skill.201.Description,Attacks all enemies.,,,,,,Skill 201
-Db.Skill.201.Message1,%1 does %2!,,,,,,Skill 201
-Db.Skill.202.Name,Clear Mind,,,,,,Skill 202
-Db.Skill.202.Description,Slightly increases the user’s TP.,,,,,,Skill 202
-Db.Skill.202.Message1,%1 cleared their mind!,,,,,,Skill 202
-Db.Skill.203.Name,Wild Thrust,,,,,,Skill 203
-Db.Skill.203.Description,Randomly performs 4 attacks on 4 enemies.,,,,,,Skill 203
-Db.Skill.203.Message1,%1 does %2!,,,,,,Skill 203
-Db.Skill.205.Name,-----Bandit Skills,,,,,,Skill 205
-Db.Skill.206.Name,Eye Poke,,,,,,Skill 206
-Db.Skill.206.Description,Blinds an enemy.,,,,,,Skill 206
-Db.Skill.206.Message1,%1 does %2!,,,,,,Skill 206
-Db.Skill.207.Name,Warm-up,,,,,,Skill 207
-Db.Skill.207.Description,Increases the user’s Agility.,,,,,,Skill 207
-Db.Skill.207.Message1,%1 started %2!,,,,,,Skill 207
-Db.Skill.208.Name,Flare,,,,,,Skill 208
-Db.Skill.208.Description,Blinds all enemies.,,,,,,Skill 208
-Db.Skill.208.Message1,%1 does %2!,,,,,,Skill 208
-Db.Skill.209.Name,Watchful Eye,,,,,,Skill 209
-Db.Skill.209.Description,"Increases items and money gained from battle for
+Skill.BATTLE_CRY.Message1,%1 made a battle cry!,,,,,,Skill 200
+Skill.WINDMILL.Name,Windmill,,,,,,Skill 201
+Skill.WINDMILL.Description,Attacks all enemies.,,,,,,Skill 201
+Skill.WINDMILL.Message1,%1 does %2!,,,,,,Skill 201
+Skill.CLEAR_MIND.Name,Clear Mind,,,,,,Skill 202
+Skill.CLEAR_MIND.Description,Slightly increases the user’s TP.,,,,,,Skill 202
+Skill.CLEAR_MIND.Message1,%1 cleared their mind!,,,,,,Skill 202
+Skill.WILD_THRUST.Name,Wild Thrust,,,,,,Skill 203
+Skill.WILD_THRUST.Description,Randomly performs 4 attacks on 4 enemies.,,,,,,Skill 203
+Skill.WILD_THRUST.Message1,%1 does %2!,,,,,,Skill 203
+Skill.EYE_POKE_2.Name,Eye Poke,,,,,,Skill 206
+Skill.EYE_POKE_2.Description,Blinds an enemy.,,,,,,Skill 206
+Skill.EYE_POKE_2.Message1,%1 does %2!,,,,,,Skill 206
+Skill.WARM_UP.Name,Warm-up,,,,,,Skill 207
+Skill.WARM_UP.Description,Increases the user’s Agility.,,,,,,Skill 207
+Skill.WARM_UP.Message1,%1 started %2!,,,,,,Skill 207
+Skill.FLARE.Name,Flare,,,,,,Skill 208
+Skill.FLARE.Description,Blinds all enemies.,,,,,,Skill 208
+Skill.FLARE.Message1,%1 does %2!,,,,,,Skill 208
+Skill.WATCHFUL_EYE.Name,Watchful Eye,,,,,,Skill 209
+Skill.WATCHFUL_EYE.Description,"Increases items and money gained from battle for
 a while.",,,,,,Skill 209
-Db.Skill.209.Message1,%1 is observing their surroundings carefully.,,,,,,Skill 209
-Db.Skill.210.Name,Wind Call,,,,,,Skill 210
-Db.Skill.210.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 210
-Db.Skill.210.Message1,%1 does %2!,,,,,,Skill 210
-Db.Skill.211.Name,Hide,,,,,,Skill 211
-Db.Skill.211.Description,Makes the user harder to target.,,,,,,Skill 211
-Db.Skill.211.Message1,%1 hid.,,,,,,Skill 211
-Db.Skill.215.Name,-----Martial Artist Skills,,,,,,Skill 215
-Db.Skill.216.Name,Sweep,,,,,,Skill 216
-Db.Skill.216.Description,Inflicts damage and causes all enemies to lose balance.,,,,,,Skill 216
-Db.Skill.216.Message1,%1 does %2!,,,,,,Skill 216
-Db.Skill.217.Name,Qigong,,,,,,Skill 217
-Db.Skill.217.Description,Cures the user from being weakened.,,,,,,Skill 217
-Db.Skill.217.Message1,%1 uses %2!,,,,,,Skill 217
-Db.Skill.218.Name,Roundhouse Kick,,,,,,Skill 218
-Db.Skill.218.Description,Inflicts huge damage on all enemies.,,,,,,Skill 218
-Db.Skill.218.Message1,%1 does %2!,,,,,,Skill 218
-Db.Skill.219.Name,Tiger Dance,,,,,,Skill 219
-Db.Skill.219.Description,Inflicts damage on an enemy regardless of Defense.,,,,,,Skill 219
-Db.Skill.219.Message1,%1 does %2!,,,,,,Skill 219
-Db.Skill.225.Name,-----Hunter Skills,,,,,,Skill 225
-Db.Skill.226.Name,Point Shot,,,,,,Skill 226
-Db.Skill.226.Description,Decreases an enemy’s Attack and Defense.,,,,,,Skill 226
-Db.Skill.226.Message1,%1 does %2!,,,,,,Skill 226
-Db.Skill.227.Name,Stun Shot,,,,,,Skill 227
-Db.Skill.227.Description,"Shoots at the footing of all enemies and causes them
+Skill.WATCHFUL_EYE.Message1,%1 is observing their surroundings carefully.,,,,,,Skill 209
+Skill.WIND_CALL.Name,Wind Call,,,,,,Skill 210
+Skill.WIND_CALL.Description,Inflicts Wind-type damage on all enemies.,,,,,,Skill 210
+Skill.WIND_CALL.Message1,%1 does %2!,,,,,,Skill 210
+Skill.HIDE.Name,Hide,,,,,,Skill 211
+Skill.HIDE.Description,Makes the user harder to target.,,,,,,Skill 211
+Skill.HIDE.Message1,%1 hid.,,,,,,Skill 211
+Skill.SWEEP.Name,Sweep,,,,,,Skill 216
+Skill.SWEEP.Description,Inflicts damage and causes all enemies to lose balance.,,,,,,Skill 216
+Skill.SWEEP.Message1,%1 does %2!,,,,,,Skill 216
+Skill.QIGONG.Name,Qigong,,,,,,Skill 217
+Skill.QIGONG.Description,Cures the user from being weakened.,,,,,,Skill 217
+Skill.QIGONG.Message1,%1 uses %2!,,,,,,Skill 217
+Skill.ROUNDHOUSE_KICK.Name,Roundhouse Kick,,,,,,Skill 218
+Skill.ROUNDHOUSE_KICK.Description,Inflicts huge damage on all enemies.,,,,,,Skill 218
+Skill.ROUNDHOUSE_KICK.Message1,%1 does %2!,,,,,,Skill 218
+Skill.TIGER_DANCE.Name,Tiger Dance,,,,,,Skill 219
+Skill.TIGER_DANCE.Description,Inflicts damage on an enemy regardless of Defense.,,,,,,Skill 219
+Skill.TIGER_DANCE.Message1,%1 does %2!,,,,,,Skill 219
+Skill.POINT_SHOT.Name,Point Shot,,,,,,Skill 226
+Skill.POINT_SHOT.Description,Decreases an enemy’s Attack and Defense.,,,,,,Skill 226
+Skill.POINT_SHOT.Message1,%1 does %2!,,,,,,Skill 226
+Skill.STUN_SHOT.Name,Stun Shot,,,,,,Skill 227
+Skill.STUN_SHOT.Description,"Shoots at the footing of all enemies and causes them
 to lose balance.",,,,,,Skill 227
-Db.Skill.227.Message1,%1 does %2!,,,,,,Skill 227
-Db.Skill.228.Name,Team Shot,,,,,,Skill 228
-Db.Skill.228.Description,Inflicts damage on an enemy 5 times.,,,,,,Skill 228
-Db.Skill.228.Message1,%1 does %2!,,,,,,Skill 228
-Db.Skill.229.Name,Rain Shot,,,,,,Skill 229
-Db.Skill.229.Description,Inflicts damage on all enemies 2 times.,,,,,,Skill 229
-Db.Skill.229.Message1,%1 does %2!,,,,,,Skill 229
-Db.Item.1.Name,-----Reserved,,,,,,Item 1
-Db.Item.1.Description,"Below are spaces for when you would like to display
-items above the recovery items.",,,,,,Item 1
-Db.Item.6.Name,-----Recovery Items,,,,,,Item 6
-Db.Item.7.Name,Potion,,,,,,Item 7
-Db.Item.7.Description,Restores HP by 500 points.,,,,,,Item 7
-Db.Item.8.Name,Super Potion,,,,,,Item 8
-Db.Item.8.Description,Restores HP by 1500 points.,,,,,,Item 8
-Db.Item.9.Name,Full Potion,,,,,,Item 9
-Db.Item.9.Description,Completely restores HP.,,,,,,Item 9
-Db.Item.10.Name,Magic Water,,,,,,Item 10
-Db.Item.10.Description,Restores MP by 300 points.,,,,,,Item 10
-Db.Item.11.Name,Stimulant,,,,,,Item 11
-Db.Item.11.Description,Raises the subject from the dead. (Restores HP by half.),,,,,,Item 11
-Db.Item.12.Name,Dispel Herb,,,,,,Item 12
-Db.Item.12.Description,"Removes all status ailments.
+Skill.STUN_SHOT.Message1,%1 does %2!,,,,,,Skill 227
+Skill.TEAM_SHOT.Name,Team Shot,,,,,,Skill 228
+Skill.TEAM_SHOT.Description,Inflicts damage on an enemy 5 times.,,,,,,Skill 228
+Skill.TEAM_SHOT.Message1,%1 does %2!,,,,,,Skill 228
+Skill.RAIN_SHOT.Name,Rain Shot,,,,,,Skill 229
+Skill.RAIN_SHOT.Description,Inflicts damage on all enemies 2 times.,,,,,,Skill 229
+Skill.RAIN_SHOT.Message1,%1 does %2!,,,,,,Skill 229
+Item.POTION.Name,Potion,,,,,,Item 7
+Item.POTION.Description,Restores HP by 500 points.,,,,,,Item 7
+Item.SUPER_POTION.Name,Super Potion,,,,,,Item 8
+Item.SUPER_POTION.Description,Restores HP by 1500 points.,,,,,,Item 8
+Item.FULL_POTION.Name,Full Potion,,,,,,Item 9
+Item.FULL_POTION.Description,Completely restores HP.,,,,,,Item 9
+Item.MAGIC_WATER.Name,Magic Water,,,,,,Item 10
+Item.MAGIC_WATER.Description,Restores MP by 300 points.,,,,,,Item 10
+Item.STIMULANT.Name,Stimulant,,,,,,Item 11
+Item.STIMULANT.Description,Raises the subject from the dead. (Restores HP by half.),,,,,,Item 11
+Item.DISPEL_HERB.Name,Dispel Herb,,,,,,Item 12
+Item.DISPEL_HERB.Description,"Removes all status ailments.
 Cannot revive a someone from being dead.",,,,,,Item 12
-Db.Item.13.Name,Antidote,,,,,,Item 13
-Db.Item.13.Description,Cures Poison or Paralysis states.,,,,,,Item 13
-Db.Item.14.Name,Miracle Drop,,,,,,Item 14
-Db.Item.14.Description,Restores HP and MP by half.,,,,,,Item 14
-Db.Item.15.Name,Elixir,,,,,,Item 15
-Db.Item.15.Description,Completely restores HP and MP.,,,,,,Item 15
-Db.Item.17.Name,-----Specialty Items,,,,,,Item 17
-Db.Item.18.Name,Encounter Decreaser,,,,,,Item 18
-Db.Item.18.Description,"Halves the number of enemies you will encounter
+Item.ANTIDOTE.Name,Antidote,,,,,,Item 13
+Item.ANTIDOTE.Description,Cures Poison or Paralysis states.,,,,,,Item 13
+Item.MIRACLE_DROP.Name,Miracle Drop,,,,,,Item 14
+Item.MIRACLE_DROP.Description,Restores HP and MP by half.,,,,,,Item 14
+Item.ELIXIR.Name,Elixir,,,,,,Item 15
+Item.ELIXIR.Description,Completely restores HP and MP.,,,,,,Item 15
+Item.ENCOUNTER_DECREASER.Name,Encounter Decreaser,,,,,,Item 18
+Item.ENCOUNTER_DECREASER.Description,"Halves the number of enemies you will encounter
 for a while.",,,,,,Item 18
-Db.Item.19.Name,Drop Increaser,,,,,,Item 19
-Db.Item.19.Description,"Increases items and money gained from battle for
+Item.DROP_INCREASER.Name,Drop Increaser,,,,,,Item 19
+Item.DROP_INCREASER.Description,"Increases items and money gained from battle for
 a while.",,,,,,Item 19
-Db.Item.22.Name,-----Enhancement Items,,,,,,Item 22
-Db.Item.23.Name,HP Increase,,,,,,Item 23
-Db.Item.23.Description,Increases max HP by 50 points.,,,,,,Item 23
-Db.Item.24.Name,MP Increase,,,,,,Item 24
-Db.Item.24.Description,Increases max MP by 10 points.,,,,,,Item 24
-Db.Item.25.Name,Attack Increase,,,,,,Item 25
-Db.Item.25.Description,Increases Attack by 3 points.,,,,,,Item 25
-Db.Item.26.Name,Defense Increase,,,,,,Item 26
-Db.Item.26.Description,Increases Defense by 3 points.,,,,,,Item 26
-Db.Item.27.Name,Magic Increase,,,,,,Item 27
-Db.Item.27.Description,Increases M.Attack by 3 points.,,,,,,Item 27
-Db.Item.28.Name,Resistance Increase,,,,,,Item 28
-Db.Item.28.Description,Increases M.Defense by 3 points.,,,,,,Item 28
-Db.Item.29.Name,Agility Increase,,,,,,Item 29
-Db.Item.29.Description,Increases Agility by 3 points.,,,,,,Item 29
-Db.Item.30.Name,Luck Increase,,,,,,Item 30
-Db.Item.30.Description,Increases Luck by 3 points.,,,,,,Item 30
-Db.Weapon.1.Name,Short Sword,,,,,,Weapon 1
-Db.Weapon.1.Description,[Sword] A light and easy-to-wield short-bladed sword.,,,,,,Weapon 1
-Db.Weapon.2.Name,Long Sword,,,,,,Weapon 2
-Db.Weapon.2.Description,[Sword] A long battle sword boasting a sharp cut.,,,,,,Weapon 2
-Db.Weapon.3.Name,Falchion,,,,,,Weapon 3
-Db.Weapon.3.Description,[Sword] A wide sword with a curved blade.,,,,,,Weapon 3
-Db.Weapon.4.Name,Mithril Sword,,,,,,Weapon 4
-Db.Weapon.4.Description,[Sword] A long sword forged with mithril.,,,,,,Weapon 4
-Db.Weapon.5.Name,Dragon Blade,,,,,,Weapon 5
-Db.Weapon.5.Description,[Sword] A sword forged from the fangs of a dragon.,,,,,,Weapon 5
-Db.Weapon.7.Name,Wooden Staff,,,,,,Weapon 7
-Db.Weapon.7.Description,[Staff] An inexpensive and widely-used staff.,,,,,,Weapon 7
-Db.Weapon.8.Name,Magic Wand,,,,,,Weapon 8
-Db.Weapon.8.Description,"[Staff] A wand that slightly increases its wielder’s
+Item.HP_INCREASE.Name,HP Increase,,,,,,Item 23
+Item.HP_INCREASE.Description,Increases max HP by 50 points.,,,,,,Item 23
+Item.MP_INCREASE.Name,MP Increase,,,,,,Item 24
+Item.MP_INCREASE.Description,Increases max MP by 10 points.,,,,,,Item 24
+Item.ATTACK_INCREASE.Name,Attack Increase,,,,,,Item 25
+Item.ATTACK_INCREASE.Description,Increases Attack by 3 points.,,,,,,Item 25
+Item.DEFENSE_INCREASE.Name,Defense Increase,,,,,,Item 26
+Item.DEFENSE_INCREASE.Description,Increases Defense by 3 points.,,,,,,Item 26
+Item.MAGIC_INCREASE.Name,Magic Increase,,,,,,Item 27
+Item.MAGIC_INCREASE.Description,Increases M.Attack by 3 points.,,,,,,Item 27
+Item.RESISTANCE_INCREASE.Name,Resistance Increase,,,,,,Item 28
+Item.RESISTANCE_INCREASE.Description,Increases M.Defense by 3 points.,,,,,,Item 28
+Item.AGILITY_INCREASE.Name,Agility Increase,,,,,,Item 29
+Item.AGILITY_INCREASE.Description,Increases Agility by 3 points.,,,,,,Item 29
+Item.LUCK_INCREASE.Name,Luck Increase,,,,,,Item 30
+Item.LUCK_INCREASE.Description,Increases Luck by 3 points.,,,,,,Item 30
+Weapon.SHORT_SWORD.Name,Short Sword,,,,,,Weapon 1
+Weapon.SHORT_SWORD.Description,[Sword] A light and easy-to-wield short-bladed sword.,,,,,,Weapon 1
+Weapon.LONG_SWORD.Name,Long Sword,,,,,,Weapon 2
+Weapon.LONG_SWORD.Description,[Sword] A long battle sword boasting a sharp cut.,,,,,,Weapon 2
+Weapon.FALCHION.Name,Falchion,,,,,,Weapon 3
+Weapon.FALCHION.Description,[Sword] A wide sword with a curved blade.,,,,,,Weapon 3
+Weapon.MITHRIL_SWORD.Name,Mithril Sword,,,,,,Weapon 4
+Weapon.MITHRIL_SWORD.Description,[Sword] A long sword forged with mithril.,,,,,,Weapon 4
+Weapon.DRAGON_BLADE.Name,Dragon Blade,,,,,,Weapon 5
+Weapon.DRAGON_BLADE.Description,[Sword] A sword forged from the fangs of a dragon.,,,,,,Weapon 5
+Weapon.WOODEN_STAFF.Name,Wooden Staff,,,,,,Weapon 7
+Weapon.WOODEN_STAFF.Description,[Staff] An inexpensive and widely-used staff.,,,,,,Weapon 7
+Weapon.MAGIC_WAND.Name,Magic Wand,,,,,,Weapon 8
+Weapon.MAGIC_WAND.Description,"[Staff] A wand that slightly increases its wielder’s
 magical powers.",,,,,,Weapon 8
-Db.Weapon.9.Name,Force Wand,,,,,,Weapon 9
-Db.Weapon.9.Description,"[Staff] A silver wand that increases its wielder’s
+Weapon.FORCE_WAND.Name,Force Wand,,,,,,Weapon 9
+Weapon.FORCE_WAND.Description,"[Staff] A silver wand that increases its wielder’s
 magical powers.",,,,,,Weapon 9
-Db.Weapon.10.Name,Mithril Rod,,,,,,Weapon 10
-Db.Weapon.10.Description,"[Staff] A mithril rod that increases its wielder’s
+Weapon.MITHRIL_ROD.Name,Mithril Rod,,,,,,Weapon 10
+Weapon.MITHRIL_ROD.Description,"[Staff] A mithril rod that increases its wielder’s
 magical powers.",,,,,,Weapon 10
-Db.Weapon.11.Name,Dragon Staff,,,,,,Weapon 11
-Db.Weapon.11.Description,"[Staff] A dragon staff that increases its wielder’s
+Weapon.DRAGON_STAFF.Name,Dragon Staff,,,,,,Weapon 11
+Weapon.DRAGON_STAFF.Description,"[Staff] A dragon staff that increases its wielder’s
 magical powers.",,,,,,Weapon 11
-Db.Weapon.13.Name,Stone Flail,,,,,,Weapon 13
-Db.Weapon.13.Description,"[Flail] A flail with a stone head attached to its
+Weapon.STONE_FLAIL.Name,Stone Flail,,,,,,Weapon 13
+Weapon.STONE_FLAIL.Description,"[Flail] A flail with a stone head attached to its
 handle with a chain.",,,,,,Weapon 13
-Db.Weapon.14.Name,Bronze Flail,,,,,,Weapon 14
-Db.Weapon.14.Description,"[Flail] A flail with a bronze head attached to its
+Weapon.BRONZE_FLAIL.Name,Bronze Flail,,,,,,Weapon 14
+Weapon.BRONZE_FLAIL.Description,"[Flail] A flail with a bronze head attached to its
 handle with a chain.",,,,,,Weapon 14
-Db.Weapon.15.Name,Morning Star,,,,,,Weapon 15
-Db.Weapon.15.Description,[Flail] A flail that has been strengthened with steel.,,,,,,Weapon 15
-Db.Weapon.16.Name,Mithril Flail,,,,,,Weapon 16
-Db.Weapon.16.Description,[Flail] A flail that has been strengthened with mithril.,,,,,,Weapon 16
-Db.Weapon.17.Name,Dragon Flail,,,,,,Weapon 17
-Db.Weapon.17.Description,[Flail] A flail that has been strengthened using fangs of a dragon.,,,,,,Weapon 17
-Db.Weapon.19.Name,Hand Axe,,,,,,Weapon 19
-Db.Weapon.19.Description,[Axe] A small axe used for logging trees.,,,,,,Weapon 19
-Db.Weapon.20.Name,Battle Axe,,,,,,Weapon 20
-Db.Weapon.20.Description,[Axe] A double-edged axe made for battle.,,,,,,Weapon 20
-Db.Weapon.21.Name,Bardiche,,,,,,Weapon 21
-Db.Weapon.21.Description,[Axe] A battle axe with a crescent-shaped blade.,,,,,,Weapon 21
-Db.Weapon.22.Name,Mithril Axe,,,,,,Weapon 22
-Db.Weapon.22.Description,[Axe] A battle axe forged with mithril.,,,,,,Weapon 22
-Db.Weapon.23.Name,Dragon Axe,,,,,,Weapon 23
-Db.Weapon.23.Description,[Axe] A battle axe forged from the fangs of a dragon.,,,,,,Weapon 23
-Db.Weapon.25.Name,Short Spear,,,,,,Weapon 25
-Db.Weapon.25.Description,[Spear] A short spear specialized for thrusting.,,,,,,Weapon 25
-Db.Weapon.26.Name,Long Spear,,,,,,Weapon 26
-Db.Weapon.26.Description,[Spear] A spear with the longest handle possible.,,,,,,Weapon 26
-Db.Weapon.27.Name,Halberd,,,,,,Weapon 27
-Db.Weapon.27.Description,[Spear] A spear with an axe-head at its tip.,,,,,,Weapon 27
-Db.Weapon.28.Name,Mithril Spear,,,,,,Weapon 28
-Db.Weapon.28.Description,[Spear] A spear forged with mithril.,,,,,,Weapon 28
-Db.Weapon.29.Name,Dragon Spear,,,,,,Weapon 29
-Db.Weapon.29.Description,[Spear] A spear forged from the fangs of a dragon.,,,,,,Weapon 29
-Db.Weapon.31.Name,Cestus,,,,,,Weapon 31
-Db.Weapon.31.Description,"[Glove] A battle glove with spikes attached to its
+Weapon.MORNING_STAR.Name,Morning Star,,,,,,Weapon 15
+Weapon.MORNING_STAR.Description,[Flail] A flail that has been strengthened with steel.,,,,,,Weapon 15
+Weapon.MITHRIL_FLAIL.Name,Mithril Flail,,,,,,Weapon 16
+Weapon.MITHRIL_FLAIL.Description,[Flail] A flail that has been strengthened with mithril.,,,,,,Weapon 16
+Weapon.DRAGON_FLAIL.Name,Dragon Flail,,,,,,Weapon 17
+Weapon.DRAGON_FLAIL.Description,[Flail] A flail that has been strengthened using fangs of a dragon.,,,,,,Weapon 17
+Weapon.HAND_AXE.Name,Hand Axe,,,,,,Weapon 19
+Weapon.HAND_AXE.Description,[Axe] A small axe used for logging trees.,,,,,,Weapon 19
+Weapon.BATTLE_AXE.Name,Battle Axe,,,,,,Weapon 20
+Weapon.BATTLE_AXE.Description,[Axe] A double-edged axe made for battle.,,,,,,Weapon 20
+Weapon.BARDICHE.Name,Bardiche,,,,,,Weapon 21
+Weapon.BARDICHE.Description,[Axe] A battle axe with a crescent-shaped blade.,,,,,,Weapon 21
+Weapon.MITHRIL_AXE.Name,Mithril Axe,,,,,,Weapon 22
+Weapon.MITHRIL_AXE.Description,[Axe] A battle axe forged with mithril.,,,,,,Weapon 22
+Weapon.DRAGON_AXE.Name,Dragon Axe,,,,,,Weapon 23
+Weapon.DRAGON_AXE.Description,[Axe] A battle axe forged from the fangs of a dragon.,,,,,,Weapon 23
+Weapon.SHORT_SPEAR.Name,Short Spear,,,,,,Weapon 25
+Weapon.SHORT_SPEAR.Description,[Spear] A short spear specialized for thrusting.,,,,,,Weapon 25
+Weapon.LONG_SPEAR.Name,Long Spear,,,,,,Weapon 26
+Weapon.LONG_SPEAR.Description,[Spear] A spear with the longest handle possible.,,,,,,Weapon 26
+Weapon.HALBERD.Name,Halberd,,,,,,Weapon 27
+Weapon.HALBERD.Description,[Spear] A spear with an axe-head at its tip.,,,,,,Weapon 27
+Weapon.MITHRIL_SPEAR.Name,Mithril Spear,,,,,,Weapon 28
+Weapon.MITHRIL_SPEAR.Description,[Spear] A spear forged with mithril.,,,,,,Weapon 28
+Weapon.DRAGON_SPEAR.Name,Dragon Spear,,,,,,Weapon 29
+Weapon.DRAGON_SPEAR.Description,[Spear] A spear forged from the fangs of a dragon.,,,,,,Weapon 29
+Weapon.CESTUS.Name,Cestus,,,,,,Weapon 31
+Weapon.CESTUS.Description,"[Glove] A battle glove with spikes attached to its
 knuckles.",,,,,,Weapon 31
-Db.Weapon.32.Name,Bagh Naka,,,,,,Weapon 32
-Db.Weapon.32.Description,[Claw] A combat weapon with 4 short claws attached.,,,,,,Weapon 32
-Db.Weapon.33.Name,Iron Claw,,,,,,Weapon 33
-Db.Weapon.33.Description,[Claw] A combat weapon with iron talons attached.,,,,,,Weapon 33
-Db.Weapon.34.Name,Mithril Claw,,,,,,Weapon 34
-Db.Weapon.34.Description,[Claw] A combat weapon with mithril talons attached.,,,,,,Weapon 34
-Db.Weapon.35.Name,Dragon Claw,,,,,,Weapon 35
-Db.Weapon.35.Description,[Claw] A combat weapon with dragon talons attached.,,,,,,Weapon 35
-Db.Weapon.37.Name,Short Bow,,,,,,Weapon 37
-Db.Weapon.37.Description,[Bow] A short bow made for hunting.,,,,,,Weapon 37
-Db.Weapon.38.Name,Long Bow,,,,,,Weapon 38
-Db.Weapon.38.Description,[Bow] A long bow for battle with superior power.,,,,,,Weapon 38
-Db.Weapon.39.Name,Crossbow,,,,,,Weapon 39
-Db.Weapon.39.Description,"[Bow] A crossbow that shoots arrows with powerful
+Weapon.BAGH_NAKA.Name,Bagh Naka,,,,,,Weapon 32
+Weapon.BAGH_NAKA.Description,[Claw] A combat weapon with 4 short claws attached.,,,,,,Weapon 32
+Weapon.IRON_CLAW.Name,Iron Claw,,,,,,Weapon 33
+Weapon.IRON_CLAW.Description,[Claw] A combat weapon with iron talons attached.,,,,,,Weapon 33
+Weapon.MITHRIL_CLAW.Name,Mithril Claw,,,,,,Weapon 34
+Weapon.MITHRIL_CLAW.Description,[Claw] A combat weapon with mithril talons attached.,,,,,,Weapon 34
+Weapon.DRAGON_CLAW.Name,Dragon Claw,,,,,,Weapon 35
+Weapon.DRAGON_CLAW.Description,[Claw] A combat weapon with dragon talons attached.,,,,,,Weapon 35
+Weapon.SHORT_BOW.Name,Short Bow,,,,,,Weapon 37
+Weapon.SHORT_BOW.Description,[Bow] A short bow made for hunting.,,,,,,Weapon 37
+Weapon.LONG_BOW.Name,Long Bow,,,,,,Weapon 38
+Weapon.LONG_BOW.Description,[Bow] A long bow for battle with superior power.,,,,,,Weapon 38
+Weapon.CROSSBOW.Name,Crossbow,,,,,,Weapon 39
+Weapon.CROSSBOW.Description,"[Bow] A crossbow that shoots arrows with powerful
 springs.",,,,,,Weapon 39
-Db.Weapon.40.Name,Mithril Bow,,,,,,Weapon 40
-Db.Weapon.40.Description,"[Bow] A crossbow that shoots mithril arrows with
+Weapon.MITHRIL_BOW.Name,Mithril Bow,,,,,,Weapon 40
+Weapon.MITHRIL_BOW.Description,"[Bow] A crossbow that shoots mithril arrows with
 powerful springs.",,,,,,Weapon 40
-Db.Weapon.41.Name,Dragon Bow,,,,,,Weapon 41
-Db.Weapon.41.Description,"[Bow] A long bow for battle made with dragon’s
+Weapon.DRAGON_BOW.Name,Dragon Bow,,,,,,Weapon 41
+Weapon.DRAGON_BOW.Description,"[Bow] A long bow for battle made with dragon’s
 whiskers.",,,,,,Weapon 41
-Db.Weapon.43.Name,Knife,,,,,,Weapon 43
-Db.Weapon.43.Description,[Dagger] A knife used for day-to-day tasks.,,,,,,Weapon 43
-Db.Weapon.44.Name,Daggar,,,,,,Weapon 44
-Db.Weapon.44.Description,[Dagger] A short blade used in close combat.,,,,,,Weapon 44
-Db.Weapon.45.Name,Machete,,,,,,Weapon 45
-Db.Weapon.45.Description,"[Dagger] A dagger with a thicker, sturdier blade.",,,,,,Weapon 45
-Db.Weapon.46.Name,Mithril Daggar,,,,,,Weapon 46
-Db.Weapon.46.Description,[Dagger] A dagger forged with mithril.,,,,,,Weapon 46
-Db.Weapon.47.Name,Dragon Daggar,,,,,,Weapon 47
-Db.Weapon.47.Description,[Dagger] A dagger forged from the fangs of a dragon.,,,,,,Weapon 47
-Db.Armor.1.Name,-----Armors,,,,,,Armor 1
-Db.Armor.2.Name,Linen Clothing,,,,,,Armor 2
-Db.Armor.2.Description,"[General Equipment] Linen clothing with high
+Weapon.KNIFE.Name,Knife,,,,,,Weapon 43
+Weapon.KNIFE.Description,[Dagger] A knife used for day-to-day tasks.,,,,,,Weapon 43
+Weapon.DAGGAR.Name,Daggar,,,,,,Weapon 44
+Weapon.DAGGAR.Description,[Dagger] A short blade used in close combat.,,,,,,Weapon 44
+Weapon.MACHETE.Name,Machete,,,,,,Weapon 45
+Weapon.MACHETE.Description,"[Dagger] A dagger with a thicker, sturdier blade.",,,,,,Weapon 45
+Weapon.MITHRIL_DAGGAR.Name,Mithril Daggar,,,,,,Weapon 46
+Weapon.MITHRIL_DAGGAR.Description,[Dagger] A dagger forged with mithril.,,,,,,Weapon 46
+Weapon.DRAGON_DAGGAR.Name,Dragon Daggar,,,,,,Weapon 47
+Weapon.DRAGON_DAGGAR.Description,[Dagger] A dagger forged from the fangs of a dragon.,,,,,,Weapon 47
+Armor.LINEN_CLOTHING.Name,Linen Clothing,,,,,,Armor 2
+Armor.LINEN_CLOTHING.Description,"[General Equipment] Linen clothing with high
 breathability.",,,,,,Armor 2
-Db.Armor.3.Name,Leather Vest,,,,,,Armor 3
-Db.Armor.3.Description,[General Equipment] A vest made of tanned hide.,,,,,,Armor 3
-Db.Armor.4.Name,Adventurer’s Clothing,,,,,,Armor 4
-Db.Armor.4.Description,"[General Equipment] Durable clothing that can
+Armor.LEATHER_VEST.Name,Leather Vest,,,,,,Armor 3
+Armor.LEATHER_VEST.Description,[General Equipment] A vest made of tanned hide.,,,,,,Armor 3
+Armor.ADVENTURERS_CLOTHING.Name,Adventurer’s Clothing,,,,,,Armor 4
+Armor.ADVENTURERS_CLOTHING.Description,"[General Equipment] Durable clothing that can
 withstand rough travels.",,,,,,Armor 4
-Db.Armor.5.Name,Hard Leather,,,,,,Armor 5
-Db.Armor.5.Description,"[General Equipment] A vest made of leather
+Armor.HARD_LEATHER.Name,Hard Leather,,,,,,Armor 5
+Armor.HARD_LEATHER.Description,"[General Equipment] A vest made of leather
 hardened with glue.",,,,,,Armor 5
-Db.Armor.6.Name,Brigandine,,,,,,Armor 6
-Db.Armor.6.Description,"[General Equipment] Tanned hide clothing reinforced
+Armor.BRIGANDINE.Name,Brigandine,,,,,,Armor 6
+Armor.BRIGANDINE.Description,"[General Equipment] Tanned hide clothing reinforced
 with steel plates.",,,,,,Armor 6
-Db.Armor.8.Name,Cloth Armor,,,,,,Armor 8
-Db.Armor.8.Description,[Light Equipment] Armor made of tough cloth.,,,,,,Armor 8
-Db.Armor.9.Name,Leather Armor,,,,,,Armor 9
-Db.Armor.9.Description,[Light Equipment] Armor made of layered hide.,,,,,,Armor 9
-Db.Armor.10.Name,Bronze Breastplate,,,,,,Armor 10
-Db.Armor.10.Description,[Light Equipment] A breastplate made of bronze.,,,,,,Armor 10
-Db.Armor.11.Name,Iron Breastplate,,,,,,Armor 11
-Db.Armor.11.Description,[Light Equipment] A breastplate made of iron steel.,,,,,,Armor 11
-Db.Armor.12.Name,Mithril Breastplate,,,,,,Armor 12
-Db.Armor.12.Description,[Light Equipment] A breastplate made of mithril.,,,,,,Armor 12
-Db.Armor.13.Name,Dragon Breastplate,,,,,,Armor 13
-Db.Armor.13.Description,[Light Equipment] A breastplate made of dragon scales.,,,,,,Armor 13
-Db.Armor.15.Name,Bronze Armor,,,,,,Armor 15
-Db.Armor.15.Description,[Heavy Equipment] Armor made of bronze.,,,,,,Armor 15
-Db.Armor.16.Name,Iron Armor,,,,,,Armor 16
-Db.Armor.16.Description,[Heavy Equipment] Armor made of iron steel.,,,,,,Armor 16
-Db.Armor.17.Name,Mithril Armor,,,,,,Armor 17
-Db.Armor.17.Description,[Heavy Equipment] Armor made of mithril.,,,,,,Armor 17
-Db.Armor.18.Name,Dragon Armor,,,,,,Armor 18
-Db.Armor.18.Description,[Heavy Equipment] Armor made of dragon scales.,,,,,,Armor 18
-Db.Armor.20.Name,Cotton Robe,,,,,,Armor 20
-Db.Armor.20.Description,"[Magic Equipment] A basic, widely prevalent robe.",,,,,,Armor 20
-Db.Armor.21.Name,Silk Cloak,,,,,,Armor 21
-Db.Armor.21.Description,[Magic Equipment] A high-quality cloak made of silk.,,,,,,Armor 21
-Db.Armor.22.Name,Tactician’s Robe,,,,,,Armor 22
-Db.Armor.22.Description,[Magic Equipment] A robe inscribed with runic letters.,,,,,,Armor 22
-Db.Armor.23.Name,Sage’s Robe,,,,,,Armor 23
-Db.Armor.23.Description,"[Magic Equipment] A robe interwoven with magical
+Armor.CLOTH_ARMOR.Name,Cloth Armor,,,,,,Armor 8
+Armor.CLOTH_ARMOR.Description,[Light Equipment] Armor made of tough cloth.,,,,,,Armor 8
+Armor.LEATHER_ARMOR.Name,Leather Armor,,,,,,Armor 9
+Armor.LEATHER_ARMOR.Description,[Light Equipment] Armor made of layered hide.,,,,,,Armor 9
+Armor.BRONZE_BREASTPLATE.Name,Bronze Breastplate,,,,,,Armor 10
+Armor.BRONZE_BREASTPLATE.Description,[Light Equipment] A breastplate made of bronze.,,,,,,Armor 10
+Armor.IRON_BREASTPLATE.Name,Iron Breastplate,,,,,,Armor 11
+Armor.IRON_BREASTPLATE.Description,[Light Equipment] A breastplate made of iron steel.,,,,,,Armor 11
+Armor.MITHRIL_BREASTPLATE.Name,Mithril Breastplate,,,,,,Armor 12
+Armor.MITHRIL_BREASTPLATE.Description,[Light Equipment] A breastplate made of mithril.,,,,,,Armor 12
+Armor.DRAGON_BREASTPLATE.Name,Dragon Breastplate,,,,,,Armor 13
+Armor.DRAGON_BREASTPLATE.Description,[Light Equipment] A breastplate made of dragon scales.,,,,,,Armor 13
+Armor.BRONZE_ARMOR.Name,Bronze Armor,,,,,,Armor 15
+Armor.BRONZE_ARMOR.Description,[Heavy Equipment] Armor made of bronze.,,,,,,Armor 15
+Armor.IRON_ARMOR.Name,Iron Armor,,,,,,Armor 16
+Armor.IRON_ARMOR.Description,[Heavy Equipment] Armor made of iron steel.,,,,,,Armor 16
+Armor.MITHRIL_ARMOR.Name,Mithril Armor,,,,,,Armor 17
+Armor.MITHRIL_ARMOR.Description,[Heavy Equipment] Armor made of mithril.,,,,,,Armor 17
+Armor.DRAGON_ARMOR.Name,Dragon Armor,,,,,,Armor 18
+Armor.DRAGON_ARMOR.Description,[Heavy Equipment] Armor made of dragon scales.,,,,,,Armor 18
+Armor.COTTON_ROBE.Name,Cotton Robe,,,,,,Armor 20
+Armor.COTTON_ROBE.Description,"[Magic Equipment] A basic, widely prevalent robe.",,,,,,Armor 20
+Armor.SILK_CLOAK.Name,Silk Cloak,,,,,,Armor 21
+Armor.SILK_CLOAK.Description,[Magic Equipment] A high-quality cloak made of silk.,,,,,,Armor 21
+Armor.TACTICIANS_ROBE.Name,Tactician’s Robe,,,,,,Armor 22
+Armor.TACTICIANS_ROBE.Description,[Magic Equipment] A robe inscribed with runic letters.,,,,,,Armor 22
+Armor.SAGES_ROBE.Name,Sage’s Robe,,,,,,Armor 23
+Armor.SAGES_ROBE.Description,"[Magic Equipment] A robe interwoven with magical
 powers.",,,,,,Armor 23
-Db.Armor.24.Name,Elemental Cloak,,,,,,Armor 24
-Db.Armor.24.Description,"[Magic Equipment] A cloak that houses the power of
+Armor.ELEMENTAL_CLOAK.Name,Elemental Cloak,,,,,,Armor 24
+Armor.ELEMENTAL_CLOAK.Description,"[Magic Equipment] A cloak that houses the power of
 spirits.",,,,,,Armor 24
-Db.Armor.26.Name,-----Shields,,,,,,Armor 26
-Db.Armor.27.Name,Buckler,,,,,,Armor 27
-Db.Armor.27.Description,[Small Shield] A small shield for deflecting attacks.,,,,,,Armor 27
-Db.Armor.28.Name,Round Buckler,,,,,,Armor 28
-Db.Armor.28.Description,"[Small Shield] A round, wooden shield reinforced
+Armor.BUCKLER.Name,Buckler,,,,,,Armor 27
+Armor.BUCKLER.Description,[Small Shield] A small shield for deflecting attacks.,,,,,,Armor 27
+Armor.ROUND_BUCKLER.Name,Round Buckler,,,,,,Armor 28
+Armor.ROUND_BUCKLER.Description,"[Small Shield] A round, wooden shield reinforced
 with an iron frame.",,,,,,Armor 28
-Db.Armor.29.Name,Spiked Buckler,,,,,,Armor 29
-Db.Armor.29.Description,"[Small Shield] A round shield with attack spikes
+Armor.SPIKED_BUCKLER.Name,Spiked Buckler,,,,,,Armor 29
+Armor.SPIKED_BUCKLER.Description,"[Small Shield] A round shield with attack spikes
 attached.",,,,,,Armor 29
-Db.Armor.30.Name,Mithril Buckler,,,,,,Armor 30
-Db.Armor.30.Description,[Small Shield] A small shield made of mithril.,,,,,,Armor 30
-Db.Armor.31.Name,Dragon Buckler,,,,,,Armor 31
-Db.Armor.31.Description,[Small Shield] A small shield made of dragon scales.,,,,,,Armor 31
-Db.Armor.33.Name,Wooden Shield,,,,,,Armor 33
-Db.Armor.33.Description,"[Large Shield] A large, average wooden shield.",,,,,,Armor 33
-Db.Armor.34.Name,Bronze Shield,,,,,,Armor 34
-Db.Armor.34.Description,[Large Shield] A large shield made of bronze plates.,,,,,,Armor 34
-Db.Armor.35.Name,Iron Shield,,,,,,Armor 35
-Db.Armor.35.Description,[Large Shield] A large shield made of iron steel.,,,,,,Armor 35
-Db.Armor.36.Name,Mithril Shield,,,,,,Armor 36
-Db.Armor.36.Description,[Large Shield] A large shield made of mithril.,,,,,,Armor 36
-Db.Armor.37.Name,Dragon Shield,,,,,,Armor 37
-Db.Armor.37.Description,[Large Shield] A large shield made of dragon scales.,,,,,,Armor 37
-Db.Armor.39.Name,Wooden Bangle,,,,,,Armor 39
-Db.Armor.39.Description,"[Magic Equipment] A bangle enchanted with protective
+Armor.MITHRIL_BUCKLER.Name,Mithril Buckler,,,,,,Armor 30
+Armor.MITHRIL_BUCKLER.Description,[Small Shield] A small shield made of mithril.,,,,,,Armor 30
+Armor.DRAGON_BUCKLER.Name,Dragon Buckler,,,,,,Armor 31
+Armor.DRAGON_BUCKLER.Description,[Small Shield] A small shield made of dragon scales.,,,,,,Armor 31
+Armor.WOODEN_SHIELD.Name,Wooden Shield,,,,,,Armor 33
+Armor.WOODEN_SHIELD.Description,"[Large Shield] A large, average wooden shield.",,,,,,Armor 33
+Armor.BRONZE_SHIELD.Name,Bronze Shield,,,,,,Armor 34
+Armor.BRONZE_SHIELD.Description,[Large Shield] A large shield made of bronze plates.,,,,,,Armor 34
+Armor.IRON_SHIELD.Name,Iron Shield,,,,,,Armor 35
+Armor.IRON_SHIELD.Description,[Large Shield] A large shield made of iron steel.,,,,,,Armor 35
+Armor.MITHRIL_SHIELD.Name,Mithril Shield,,,,,,Armor 36
+Armor.MITHRIL_SHIELD.Description,[Large Shield] A large shield made of mithril.,,,,,,Armor 36
+Armor.DRAGON_SHIELD.Name,Dragon Shield,,,,,,Armor 37
+Armor.DRAGON_SHIELD.Description,[Large Shield] A large shield made of dragon scales.,,,,,,Armor 37
+Armor.WOODEN_BANGLE.Name,Wooden Bangle,,,,,,Armor 39
+Armor.WOODEN_BANGLE.Description,"[Magic Equipment] A bangle enchanted with protective
 magic.",,,,,,Armor 39
-Db.Armor.40.Name,Bronze Bangle,,,,,,Armor 40
-Db.Armor.40.Description,"[Magic Equipment] A bangle enchanted with protective
+Armor.BRONZE_BANGLE.Name,Bronze Bangle,,,,,,Armor 40
+Armor.BRONZE_BANGLE.Description,"[Magic Equipment] A bangle enchanted with protective
 magic.",,,,,,Armor 40
-Db.Armor.41.Name,Iron Bangle,,,,,,Armor 41
-Db.Armor.41.Description,"[Magic Equipment] A bangle enchanted with protective
+Armor.IRON_BANGLE.Name,Iron Bangle,,,,,,Armor 41
+Armor.IRON_BANGLE.Description,"[Magic Equipment] A bangle enchanted with protective
 magic.",,,,,,Armor 41
-Db.Armor.42.Name,Mithril Bangle,,,,,,Armor 42
-Db.Armor.42.Description,"[Magic Equipment] A bangle enchanted with protective
+Armor.MITHRIL_BANGLE.Name,Mithril Bangle,,,,,,Armor 42
+Armor.MITHRIL_BANGLE.Description,"[Magic Equipment] A bangle enchanted with protective
 magic.",,,,,,Armor 42
-Db.Armor.43.Name,Dragon Bangle,,,,,,Armor 43
-Db.Armor.43.Description,"[Magic Equipment] A bangle enchanted with protective
+Armor.DRAGON_BANGLE.Name,Dragon Bangle,,,,,,Armor 43
+Armor.DRAGON_BANGLE.Description,"[Magic Equipment] A bangle enchanted with protective
 magic.",,,,,,Armor 43
-Db.Armor.45.Name,-----Helmets,,,,,,Armor 45
-Db.Armor.46.Name,Bandana,,,,,,Armor 46
-Db.Armor.46.Description,"[General Equipment] A cloth headband for protecting
+Armor.BANDANA.Name,Bandana,,,,,,Armor 46
+Armor.BANDANA.Description,"[General Equipment] A cloth headband for protecting
 the forehead.",,,,,,Armor 46
-Db.Armor.47.Name,Leather Bandana,,,,,,Armor 47
-Db.Armor.47.Description,"[General Equipment] A leather headband for protecting
+Armor.LEATHER_BANDANA.Name,Leather Bandana,,,,,,Armor 47
+Armor.LEATHER_BANDANA.Description,"[General Equipment] A leather headband for protecting
 the forehead.",,,,,,Armor 47
-Db.Armor.48.Name,Leather Hat,,,,,,Armor 48
-Db.Armor.48.Description,[General Equipment] A hat made of leather.,,,,,,Armor 48
-Db.Armor.49.Name,Turban,,,,,,Armor 49
-Db.Armor.49.Description,"[General Equipment] A thick cloth layered and wrapped
+Armor.LEATHER_HAT.Name,Leather Hat,,,,,,Armor 48
+Armor.LEATHER_HAT.Description,[General Equipment] A hat made of leather.,,,,,,Armor 48
+Armor.TURBAN.Name,Turban,,,,,,Armor 49
+Armor.TURBAN.Description,"[General Equipment] A thick cloth layered and wrapped
 around the head for protection.",,,,,,Armor 49
-Db.Armor.50.Name,Feathered Hat,,,,,,Armor 50
-Db.Armor.50.Description,"[General Equipment] A fancy hat with bird feathers
+Armor.FEATHERED_HAT.Name,Feathered Hat,,,,,,Armor 50
+Armor.FEATHERED_HAT.Description,"[General Equipment] A fancy hat with bird feathers
 attached.",,,,,,Armor 50
-Db.Armor.52.Name,Leather Cap,,,,,,Armor 52
-Db.Armor.52.Description,[Light Equipment] A hat made of tanned hide.,,,,,,Armor 52
-Db.Armor.53.Name,Wooden Cap,,,,,,Armor 53
-Db.Armor.53.Description,[Light Equipment] A light helmet made of wood.,,,,,,Armor 53
-Db.Armor.54.Name,Bronze Cap,,,,,,Armor 54
-Db.Armor.54.Description,"[Light Equipment] A light helmet reinforced with
+Armor.LEATHER_CAP.Name,Leather Cap,,,,,,Armor 52
+Armor.LEATHER_CAP.Description,[Light Equipment] A hat made of tanned hide.,,,,,,Armor 52
+Armor.WOODEN_CAP.Name,Wooden Cap,,,,,,Armor 53
+Armor.WOODEN_CAP.Description,[Light Equipment] A light helmet made of wood.,,,,,,Armor 53
+Armor.BRONZE_CAP.Name,Bronze Cap,,,,,,Armor 54
+Armor.BRONZE_CAP.Description,"[Light Equipment] A light helmet reinforced with
 bronze plates.",,,,,,Armor 54
-Db.Armor.55.Name,Iron Cap,,,,,,Armor 55
-Db.Armor.55.Description,"[Light Equipment] A light helmet reinforced with
+Armor.IRON_CAP.Name,Iron Cap,,,,,,Armor 55
+Armor.IRON_CAP.Description,"[Light Equipment] A light helmet reinforced with
 iron plates.",,,,,,Armor 55
-Db.Armor.56.Name,Mithril Cap,,,,,,Armor 56
-Db.Armor.56.Description,"[Light Equipment] A light helmet reinforced with
+Armor.MITHRIL_CAP.Name,Mithril Cap,,,,,,Armor 56
+Armor.MITHRIL_CAP.Description,"[Light Equipment] A light helmet reinforced with
 mithril.",,,,,,Armor 56
-Db.Armor.57.Name,Dragon Cap,,,,,,Armor 57
-Db.Armor.57.Description,"[Light Equipment] A light helmet reinforced with
+Armor.DRAGON_CAP.Name,Dragon Cap,,,,,,Armor 57
+Armor.DRAGON_CAP.Description,"[Light Equipment] A light helmet reinforced with
 dragon scales.",,,,,,Armor 57
-Db.Armor.59.Name,Chainmail Coif,,,,,,Armor 59
-Db.Armor.59.Description,"[Heavy Equipment] A hood made with fine, woven chains.",,,,,,Armor 59
-Db.Armor.60.Name,Bronze Helm,,,,,,Armor 60
-Db.Armor.60.Description,"[Heavy Equipment] A helmet made with thick bronze
+Armor.CHAINMAIL_COIF.Name,Chainmail Coif,,,,,,Armor 59
+Armor.CHAINMAIL_COIF.Description,"[Heavy Equipment] A hood made with fine, woven chains.",,,,,,Armor 59
+Armor.BRONZE_HELM.Name,Bronze Helm,,,,,,Armor 60
+Armor.BRONZE_HELM.Description,"[Heavy Equipment] A helmet made with thick bronze
 plates.",,,,,,Armor 60
-Db.Armor.61.Name,Iron Helm,,,,,,Armor 61
-Db.Armor.61.Description,"[Heavy Equipment] A helmet made with thick iron
+Armor.IRON_HELM.Name,Iron Helm,,,,,,Armor 61
+Armor.IRON_HELM.Description,"[Heavy Equipment] A helmet made with thick iron
 plates.",,,,,,Armor 61
-Db.Armor.62.Name,Mithril Helm,,,,,,Armor 62
-Db.Armor.62.Description,[Heavy Equipment] A helmet made of mithril.,,,,,,Armor 62
-Db.Armor.63.Name,Dragon Helm,,,,,,Armor 63
-Db.Armor.63.Description,[Heavy Equipment] A helmet made with dragon scales.,,,,,,Armor 63
-Db.Armor.65.Name,Pointed Hat,,,,,,Armor 65
-Db.Armor.65.Description,"[Magic Equipment] A triangular, tanned hide hat with
+Armor.MITHRIL_HELM.Name,Mithril Helm,,,,,,Armor 62
+Armor.MITHRIL_HELM.Description,[Heavy Equipment] A helmet made of mithril.,,,,,,Armor 62
+Armor.DRAGON_HELM.Name,Dragon Helm,,,,,,Armor 63
+Armor.DRAGON_HELM.Description,[Heavy Equipment] A helmet made with dragon scales.,,,,,,Armor 63
+Armor.POINTED_HAT.Name,Pointed Hat,,,,,,Armor 65
+Armor.POINTED_HAT.Description,"[Magic Equipment] A triangular, tanned hide hat with
 a wide brim.",,,,,,Armor 65
-Db.Armor.66.Name,Circlet,,,,,,Armor 66
-Db.Armor.66.Description,"[Magic Equipment] A simple crown enchanted with
+Armor.CIRCLET.Name,Circlet,,,,,,Armor 66
+Armor.CIRCLET.Description,"[Magic Equipment] A simple crown enchanted with
 protective magic.",,,,,,Armor 66
-Db.Armor.67.Name,Silver Circlet,,,,,,Armor 67
-Db.Armor.67.Description,"[Magic Equipment] A silver crown enchanted with
+Armor.SILVER_CIRCLET.Name,Silver Circlet,,,,,,Armor 67
+Armor.SILVER_CIRCLET.Description,"[Magic Equipment] A silver crown enchanted with
 protective magic.",,,,,,Armor 67
-Db.Armor.68.Name,Gold Circlet,,,,,,Armor 68
-Db.Armor.68.Description,"[Magic Equipment] A pure gold crown enchanted with
+Armor.GOLD_CIRCLET.Name,Gold Circlet,,,,,,Armor 68
+Armor.GOLD_CIRCLET.Description,"[Magic Equipment] A pure gold crown enchanted with
 protective magic.",,,,,,Armor 68
-Db.Armor.69.Name,Mithril Circlet,,,,,,Armor 69
-Db.Armor.69.Description,"[Magic Equipment] A mithril crown enchanted with
+Armor.MITHRIL_CIRCLET.Name,Mithril Circlet,,,,,,Armor 69
+Armor.MITHRIL_CIRCLET.Description,"[Magic Equipment] A mithril crown enchanted with
 protective magic.",,,,,,Armor 69
-Db.Armor.70.Name,Master Circlet,,,,,,Armor 70
-Db.Armor.70.Description,"[Magic Equipment] A sage’s crown enchanted with
+Armor.MASTER_CIRCLET.Name,Master Circlet,,,,,,Armor 70
+Armor.MASTER_CIRCLET.Description,"[Magic Equipment] A sage’s crown enchanted with
 protective magic.",,,,,,Armor 70
-Db.Armor.72.Name,-----Accessories,,,,,,Armor 72
-Db.Armor.73.Name,Guard Stone,,,,,,Armor 73
-Db.Armor.73.Description,[Accessory] A charm that increases Defense.,,,,,,Armor 73
-Db.Armor.74.Name,Guard Ring,,,,,,Armor 74
-Db.Armor.74.Description,[Accessory] A ring that increases Defense.,,,,,,Armor 74
-Db.Armor.75.Name,Power Stone,,,,,,Armor 75
-Db.Armor.75.Description,[Accessory] A charm that increases Attack.,,,,,,Armor 75
-Db.Armor.76.Name,Power Ring,,,,,,Armor 76
-Db.Armor.76.Description,[Accessory] A ring that increases Attack.,,,,,,Armor 76
-Db.Armor.77.Name,Speed Stone,,,,,,Armor 77
-Db.Armor.77.Description,[Accessory] A charm that increases Agility.,,,,,,Armor 77
-Db.Armor.78.Name,Speed Ring,,,,,,Armor 78
-Db.Armor.78.Description,[Accessory] A ring that increases Agility.,,,,,,Armor 78
-Db.Armor.79.Name,Lucky Stone,,,,,,Armor 79
-Db.Armor.79.Description,[Accessory] A charm that increases Luck.,,,,,,Armor 79
-Db.Armor.80.Name,Lucky Ring,,,,,,Armor 80
-Db.Armor.80.Description,[Accessory] A ring that increases Luck.,,,,,,Armor 80
-Db.Armor.81.Name,Magical Stone,,,,,,Armor 81
-Db.Armor.81.Description,[Accessory] A charm that increases M.Attack.,,,,,,Armor 81
-Db.Armor.82.Name,Magical Ring,,,,,,Armor 82
-Db.Armor.82.Description,[Accessory] A ring that increases M.Attack.,,,,,,Armor 82
-Db.Armor.83.Name,Shooter Stone,,,,,,Armor 83
-Db.Armor.83.Description,"[Accessory] A charm that increases the Hit Rate of
+Armor.GUARD_STONE.Name,Guard Stone,,,,,,Armor 73
+Armor.GUARD_STONE.Description,[Accessory] A charm that increases Defense.,,,,,,Armor 73
+Armor.GUARD_RING.Name,Guard Ring,,,,,,Armor 74
+Armor.GUARD_RING.Description,[Accessory] A ring that increases Defense.,,,,,,Armor 74
+Armor.POWER_STONE.Name,Power Stone,,,,,,Armor 75
+Armor.POWER_STONE.Description,[Accessory] A charm that increases Attack.,,,,,,Armor 75
+Armor.POWER_RING.Name,Power Ring,,,,,,Armor 76
+Armor.POWER_RING.Description,[Accessory] A ring that increases Attack.,,,,,,Armor 76
+Armor.SPEED_STONE.Name,Speed Stone,,,,,,Armor 77
+Armor.SPEED_STONE.Description,[Accessory] A charm that increases Agility.,,,,,,Armor 77
+Armor.SPEED_RING.Name,Speed Ring,,,,,,Armor 78
+Armor.SPEED_RING.Description,[Accessory] A ring that increases Agility.,,,,,,Armor 78
+Armor.LUCKY_STONE.Name,Lucky Stone,,,,,,Armor 79
+Armor.LUCKY_STONE.Description,[Accessory] A charm that increases Luck.,,,,,,Armor 79
+Armor.LUCKY_RING.Name,Lucky Ring,,,,,,Armor 80
+Armor.LUCKY_RING.Description,[Accessory] A ring that increases Luck.,,,,,,Armor 80
+Armor.MAGICAL_STONE.Name,Magical Stone,,,,,,Armor 81
+Armor.MAGICAL_STONE.Description,[Accessory] A charm that increases M.Attack.,,,,,,Armor 81
+Armor.MAGICAL_RING.Name,Magical Ring,,,,,,Armor 82
+Armor.MAGICAL_RING.Description,[Accessory] A ring that increases M.Attack.,,,,,,Armor 82
+Armor.SHOOTER_STONE.Name,Shooter Stone,,,,,,Armor 83
+Armor.SHOOTER_STONE.Description,"[Accessory] A charm that increases the Hit Rate of
 attacks.",,,,,,Armor 83
-Db.Armor.84.Name,Shooter Ring,,,,,,Armor 84
-Db.Armor.84.Description,"[Accessory] A ring that increases the Hit Rate of
+Armor.SHOOTER_RING.Name,Shooter Ring,,,,,,Armor 84
+Armor.SHOOTER_RING.Description,"[Accessory] A ring that increases the Hit Rate of
 attacks.",,,,,,Armor 84
-Db.Armor.85.Name,Master Stone,,,,,,Armor 85
-Db.Armor.85.Description,[Accessory] A charm that reduces MP Cost by 20%.,,,,,,Armor 85
-Db.Armor.86.Name,Master Ring,,,,,,Armor 86
-Db.Armor.86.Description,[Accessory] A ring that reduces MP Cost by 50%.,,,,,,Armor 86
-Db.Armor.88.Name,Poison Guard,,,,,,Armor 88
-Db.Armor.88.Description,"[Accessory] A ring that helps prevent Poison and
+Armor.MASTER_STONE.Name,Master Stone,,,,,,Armor 85
+Armor.MASTER_STONE.Description,[Accessory] A charm that reduces MP Cost by 20%.,,,,,,Armor 85
+Armor.MASTER_RING.Name,Master Ring,,,,,,Armor 86
+Armor.MASTER_RING.Description,[Accessory] A ring that reduces MP Cost by 50%.,,,,,,Armor 86
+Armor.POISON_GUARD.Name,Poison Guard,,,,,,Armor 88
+Armor.POISON_GUARD.Description,"[Accessory] A ring that helps prevent Poison and
 Paralysis states.",,,,,,Armor 88
-Db.Armor.89.Name,Super Poison Guard,,,,,,Armor 89
-Db.Armor.89.Description,"[Accessory] A ring that entirely prevents Poison
+Armor.SUPER_POISON_GUARD.Name,Super Poison Guard,,,,,,Armor 89
+Armor.SUPER_POISON_GUARD.Description,"[Accessory] A ring that entirely prevents Poison
 and Paralysis states.",,,,,,Armor 89
-Db.Armor.91.Name,Mental Guard,,,,,,Armor 91
-Db.Armor.91.Description,"[Accessory] A ring that helps prevent Sleep,
+Armor.MENTAL_GUARD.Name,Mental Guard,,,,,,Armor 91
+Armor.MENTAL_GUARD.Description,"[Accessory] A ring that helps prevent Sleep,
 Silence, Confusion, Charm, and Rage states.",,,,,,Armor 91
-Db.Armor.92.Name,Super Mental Guard,,,,,,Armor 92
-Db.Armor.92.Description,"[Accessory] A ring that entirely prevents Sleep,
+Armor.SUPER_MENTAL_GUARD.Name,Super Mental Guard,,,,,,Armor 92
+Armor.SUPER_MENTAL_GUARD.Description,"[Accessory] A ring that entirely prevents Sleep,
 Silence, Confusion, Charm, and Rage states.",,,,,,Armor 92
-Db.Armor.94.Name,Enemy Radar,,,,,,Armor 94
-Db.Armor.94.Description,"[Accessory] Raises the chance of performing a
+Armor.ENEMY_RADAR.Name,Enemy Radar,,,,,,Armor 94
+Armor.ENEMY_RADAR.Description,"[Accessory] Raises the chance of performing a
 preemptive attack.",,,,,,Armor 94
-Db.Armor.95.Name,Warning Bell,,,,,,Armor 95
-Db.Armor.95.Description,[Accessory] Prevents surprise attacks.,,,,,,Armor 95
-Db.Armor.96.Name,Stocker,,,,,,Armor 96
-Db.Armor.96.Description,"[Accessory] Allows you to carryover TP over into the
+Armor.WARNING_BELL.Name,Warning Bell,,,,,,Armor 95
+Armor.WARNING_BELL.Description,[Accessory] Prevents surprise attacks.,,,,,,Armor 95
+Armor.STOCKER.Name,Stocker,,,,,,Armor 96
+Armor.STOCKER.Description,"[Accessory] Allows you to carryover TP over into the
 next battle.",,,,,,Armor 96
-Db.Armor.97.Name,Ring of Guts,,,,,,Armor 97
-Db.Armor.97.Description,[Accessory] Increases TP Charge Rate.,,,,,,Armor 97
-Db.Armor.98.Name,MP Keeper,,,,,,Armor 98
-Db.Armor.98.Description,[Accessory] Decreases MP Cost Rate.,,,,,,Armor 98
-Db.Armor.99.Name,Elemental Guard,,,,,,Armor 99
-Db.Armor.99.Description,"[Accessory] Damage inflicted by Fire, Water, Wind,
+Armor.RING_OF_GUTS.Name,Ring of Guts,,,,,,Armor 97
+Armor.RING_OF_GUTS.Description,[Accessory] Increases TP Charge Rate.,,,,,,Armor 97
+Armor.MP_KEEPER.Name,MP Keeper,,,,,,Armor 98
+Armor.MP_KEEPER.Description,[Accessory] Decreases MP Cost Rate.,,,,,,Armor 98
+Armor.ELEMENTAL_GUARD.Name,Elemental Guard,,,,,,Armor 99
+Armor.ELEMENTAL_GUARD.Description,"[Accessory] Damage inflicted by Fire, Water, Wind,
 and Earth attacks is halved.",,,,,,Armor 99
-Db.Armor.100.Name,Spectacles,,,,,,Armor 100
-Db.Armor.100.Description,[Accessory] Sharpens eyesight and increases hit rate.,,,,,,Armor 100
-Db.Enemy.1.Name,Goblin,,,,,,Enemy 1
-Db.Enemy.2.Name,Gnome,,,,,,Enemy 2
-Db.Enemy.3.Name,Crow,,,,,,Enemy 3
-Db.Enemy.4.Name,Treant,,,,,,Enemy 4
-Db.Enemy.5.Name,Hi_monster,,,,,,Enemy 5
-Db.State.1.Name,Dead,,,,,,State 1
-Db.State.1.Message1,%1 has fallen!,,,,,,State 1
-Db.State.1.Message2,%1 is slain!,,,,,,State 1
-Db.State.1.Message4,%1 revives!,,,,,,State 1
-Db.State.2.Name,Guard,,,,,,State 2
-Db.State.3.Name,Immortal,,,,,,State 3
-Db.State.4.Name,Poison,,,,,,State 4
-Db.State.4.Message1,%1 is poisoned!,,,,,,State 4
-Db.State.4.Message2,%1 is poisoned!,,,,,,State 4
-Db.State.4.Message4,%1 is no longer poisoned!,,,,,,State 4
-Db.State.5.Name,Blind,,,,,,State 5
-Db.State.5.Message1,%1 is blinded!,,,,,,State 5
-Db.State.5.Message2,%1 is blinded!,,,,,,State 5
-Db.State.5.Message4,%1 is no longer blinded!,,,,,,State 5
-Db.State.6.Name,Silence,,,,,,State 6
-Db.State.6.Message1,%1 is silenced!,,,,,,State 6
-Db.State.6.Message2,%1 is silenced!,,,,,,State 6
-Db.State.6.Message4,%1 is no longer silenced!,,,,,,State 6
-Db.State.7.Name,Rage,,,,,,State 7
-Db.State.7.Message1,%1 is enraged!,,,,,,State 7
-Db.State.7.Message2,%1 is enraged!,,,,,,State 7
-Db.State.7.Message4,%1 is no longer enraged!,,,,,,State 7
-Db.State.8.Name,Confusion,,,,,,State 8
-Db.State.8.Message1,%1 is confused!,,,,,,State 8
-Db.State.8.Message2,%1 is confused!,,,,,,State 8
-Db.State.8.Message4,%1 is no longer confused!,,,,,,State 8
-Db.State.9.Name,Charm,,,,,,State 9
-Db.State.9.Message1,%1 is charmed!,,,,,,State 9
-Db.State.9.Message2,%1 is charmed!,,,,,,State 9
-Db.State.9.Message4,%1 is no longer charmed!,,,,,,State 9
-Db.State.10.Name,Sleep,,,,,,State 10
-Db.State.10.Message1,%1 falls asleep!,,,,,,State 10
-Db.State.10.Message2,%1 falls asleep!,,,,,,State 10
-Db.State.10.Message3,%1 is sleeping.,,,,,,State 10
-Db.State.10.Message4,%1 wakes up!,,,,,,State 10
-Db.State.12.Name,Paralysis,,,,,,State 12
-Db.State.12.Message1,%1 is paralyzed and can’t move!,,,,,,State 12
-Db.State.12.Message2,%1 is paralyzed!,,,,,,State 12
-Db.State.12.Message3,%1 is paralyzed and can’t move!,,,,,,State 12
-Db.State.12.Message4,%1 is no longer paralyzed!,,,,,,State 12
-Db.State.13.Name,Stun,,,,,,State 13
-Db.State.13.Message1,%1 lost balance!,,,,,,State 13
-Db.State.13.Message2,%1 lost balance!,,,,,,State 13
-Db.State.13.Message3,%1 is still off-balance...,,,,,,State 13
-Db.State.13.Message4,%1 has regained balance!,,,,,,State 13
-Db.State.15.Name,HP Regeneration,,,,,,State 15
-Db.State.16.Name,MP Regeneration,,,,,,State 16
-Db.State.17.Name,TP Regeneration,,,,,,State 17
-Db.State.18.Name,Magic Reflection,,,,,,State 18
-Db.State.19.Name,Protect,,,,,,State 19
-Db.State.20.Name,Provoke,,,,,,State 20
-Db.State.20.Message1,%1 became easier to hit!,,,,,,State 20
-Db.State.21.Name,Hide,,,,,,State 21
-Db.State.21.Message1,%1 became harder to hit!,,,,,,State 21
-Db.State.22.Name,Counter Attack,,,,,,State 22
-Db.State.23.Name,Status Ailment Block,,,,,,State 23
-Db.State.24.Name,Reduce MP Cost,,,,,,State 24
-Db.State.25.Name,Fire Force,,,,,,State 25
-Db.State.25.Message1,%1 is now enveloped in an aura of fire.,,,,,,State 25
-Db.State.25.Message2,%1 is now enveloped in an aura of fire.,,,,,,State 25
-Db.State.26.Name,Ice Force,,,,,,State 26
-Db.State.26.Message1,%1 is now enveloped in an icy aura.,,,,,,State 26
-Db.State.26.Message2,%1 is now enveloped in an icy aura.,,,,,,State 26
-Db.State.27.Name,Thunder Force,,,,,,State 27
-Db.State.27.Message1,%1 is now enveloped in a thunderous aura.,,,,,,State 27
-Db.State.27.Message2,%1 is now enveloped in a thunderous aura.,,,,,,State 27
-Db.State.29.Name,Half Encounters,,,,,,State 29
-Db.State.30.Name,Double Money/Items,,,,,,State 30
+Armor.SPECTACLES.Name,Spectacles,,,,,,Armor 100
+Armor.SPECTACLES.Description,[Accessory] Sharpens eyesight and increases hit rate.,,,,,,Armor 100
+Enemy.GOBLIN.Name,Goblin,,,,,,Enemy 1
+Enemy.GNOME.Name,Gnome,,,,,,Enemy 2
+Enemy.CROW.Name,Crow,,,,,,Enemy 3
+Enemy.TREANT.Name,Treant,,,,,,Enemy 4
+Enemy.HI_MONSTER.Name,Hi_monster,,,,,,Enemy 5
+State.DEAD.Name,Dead,,,,,,State 1
+State.DEAD.Message1,%1 has fallen!,,,,,,State 1
+State.DEAD.Message2,%1 is slain!,,,,,,State 1
+State.DEAD.Message4,%1 revives!,,,,,,State 1
+State.GUARD.Name,Guard,,,,,,State 2
+State.IMMORTAL.Name,Immortal,,,,,,State 3
+State.POISON.Name,Poison,,,,,,State 4
+State.POISON.Message1,%1 is poisoned!,,,,,,State 4
+State.POISON.Message2,%1 is poisoned!,,,,,,State 4
+State.POISON.Message4,%1 is no longer poisoned!,,,,,,State 4
+State.BLIND.Name,Blind,,,,,,State 5
+State.BLIND.Message1,%1 is blinded!,,,,,,State 5
+State.BLIND.Message2,%1 is blinded!,,,,,,State 5
+State.BLIND.Message4,%1 is no longer blinded!,,,,,,State 5
+State.SILENCE.Name,Silence,,,,,,State 6
+State.SILENCE.Message1,%1 is silenced!,,,,,,State 6
+State.SILENCE.Message2,%1 is silenced!,,,,,,State 6
+State.SILENCE.Message4,%1 is no longer silenced!,,,,,,State 6
+State.RAGE.Name,Rage,,,,,,State 7
+State.RAGE.Message1,%1 is enraged!,,,,,,State 7
+State.RAGE.Message2,%1 is enraged!,,,,,,State 7
+State.RAGE.Message4,%1 is no longer enraged!,,,,,,State 7
+State.CONFUSION.Name,Confusion,,,,,,State 8
+State.CONFUSION.Message1,%1 is confused!,,,,,,State 8
+State.CONFUSION.Message2,%1 is confused!,,,,,,State 8
+State.CONFUSION.Message4,%1 is no longer confused!,,,,,,State 8
+State.CHARM.Name,Charm,,,,,,State 9
+State.CHARM.Message1,%1 is charmed!,,,,,,State 9
+State.CHARM.Message2,%1 is charmed!,,,,,,State 9
+State.CHARM.Message4,%1 is no longer charmed!,,,,,,State 9
+State.SLEEP.Name,Sleep,,,,,,State 10
+State.SLEEP.Message1,%1 falls asleep!,,,,,,State 10
+State.SLEEP.Message2,%1 falls asleep!,,,,,,State 10
+State.SLEEP.Message3,%1 is sleeping.,,,,,,State 10
+State.SLEEP.Message4,%1 wakes up!,,,,,,State 10
+State.PARALYSIS.Name,Paralysis,,,,,,State 12
+State.PARALYSIS.Message1,%1 is paralyzed and can’t move!,,,,,,State 12
+State.PARALYSIS.Message2,%1 is paralyzed!,,,,,,State 12
+State.PARALYSIS.Message3,%1 is paralyzed and can’t move!,,,,,,State 12
+State.PARALYSIS.Message4,%1 is no longer paralyzed!,,,,,,State 12
+State.STUN.Name,Stun,,,,,,State 13
+State.STUN.Message1,%1 lost balance!,,,,,,State 13
+State.STUN.Message2,%1 lost balance!,,,,,,State 13
+State.STUN.Message3,%1 is still off-balance...,,,,,,State 13
+State.STUN.Message4,%1 has regained balance!,,,,,,State 13
+State.HP_REGENERATION.Name,HP Regeneration,,,,,,State 15
+State.MP_REGENERATION.Name,MP Regeneration,,,,,,State 16
+State.TP_REGENERATION.Name,TP Regeneration,,,,,,State 17
+State.MAGIC_REFLECTION.Name,Magic Reflection,,,,,,State 18
+State.PROTECT.Name,Protect,,,,,,State 19
+State.PROVOKE.Name,Provoke,,,,,,State 20
+State.PROVOKE.Message1,%1 became easier to hit!,,,,,,State 20
+State.HIDE.Name,Hide,,,,,,State 21
+State.HIDE.Message1,%1 became harder to hit!,,,,,,State 21
+State.COUNTER_ATTACK.Name,Counter Attack,,,,,,State 22
+State.STATUS_AILMENT_BLOCK.Name,Status Ailment Block,,,,,,State 23
+State.REDUCE_MP_COST.Name,Reduce MP Cost,,,,,,State 24
+State.FIRE_FORCE.Name,Fire Force,,,,,,State 25
+State.FIRE_FORCE.Message1,%1 is now enveloped in an aura of fire.,,,,,,State 25
+State.FIRE_FORCE.Message2,%1 is now enveloped in an aura of fire.,,,,,,State 25
+State.ICE_FORCE.Name,Ice Force,,,,,,State 26
+State.ICE_FORCE.Message1,%1 is now enveloped in an icy aura.,,,,,,State 26
+State.ICE_FORCE.Message2,%1 is now enveloped in an icy aura.,,,,,,State 26
+State.THUNDER_FORCE.Name,Thunder Force,,,,,,State 27
+State.THUNDER_FORCE.Message1,%1 is now enveloped in a thunderous aura.,,,,,,State 27
+State.THUNDER_FORCE.Message2,%1 is now enveloped in a thunderous aura.,,,,,,State 27
+State.HALF_ENCOUNTERS.Name,Half Encounters,,,,,,State 29
+State.DOUBLE_MONEY_ITEMS.Name,Double Money/Items,,,,,,State 30
 System.GameTitle,PokéMZ,,,,,,System
 System.CurrencyUnit,P,,,,,,System
 System.Elements.1,Physical,,,,,,System
@@ -1012,3 +975,4 @@ System.Terms.Messages.buffAdd,%1’s %2 went up!,,,,,,System
 System.Terms.Messages.debuffAdd,%1’s %2 went down!,,,,,,System
 System.Terms.Messages.buffRemove,%1’s %2 returned to normal!,,,,,,System
 System.Terms.Messages.actionFailure,There was no effect on %1!,,,,,,System
+Actor.PLAYER.Name,Player,,,,,,Actor 1
