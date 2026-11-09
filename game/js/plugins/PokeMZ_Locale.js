@@ -30,7 +30,7 @@
  * @desc CSV files in data/locales/ (a browser cannot list folders).
  * languages.csv and keyboards.csv are loaded separately.
  * @type string[]
- * @default ["ui.csv","database.csv","dialogue.csv","pokemon.csv","moves.csv","abilities.csv","items.csv","types.csv","trainer_types.csv","trainers.csv","map_metadata.csv","town_map.csv","encounters.csv","regional_dexes.csv","ribbons.csv","berry_plants.csv","battle_tower.csv","natures.csv"]
+ * @default ["ui.csv","database.csv","dialogue.csv","pokemon.csv","moves.csv","abilities.csv","items.csv","types.csv","trainer_types.csv","trainers.csv","map_metadata.csv","town_map.csv","encounters.csv","regional_dexes.csv","ribbons.csv","berry_plants.csv","battle_tower.csv","natures.csv","battle.csv"]
  *
  * @param showOption
  * @text Language Option

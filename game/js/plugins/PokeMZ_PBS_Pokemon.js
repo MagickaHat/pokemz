@@ -2137,8 +2137,9 @@
             this._pbsStepChecked = $gamePokemon.stepCounter;
             const enc = rollEncounter();
             if (enc && PokeMZ.Battle && PokeMZ.Battle.startWild) {
+                // The battle screen is pushed by startWild; returning false
+                // keeps Scene_Map from pushing MZ's Scene_Battle.
                 PokeMZ.Battle.startWild(enc.species, enc.level, { encounterType: enc.type });
-                return true;
             }
             return false;
         }
@@ -2692,7 +2693,7 @@
             await this.message(tr("Egg.Msg.Hatched", "{species} hatched from the Egg!", { species: pkmn.species().name }));
             const UI = window.PokeMZ.UI;
             if (UI && UI.confirm && UI.enterName && (await UI.confirm(tr("Pkmn.Msg.Nickname", "Give a nickname to {species}?", { species: pkmn.species().name })))) {
-                const name = await UI.enterName({ actor: pkmn, maxLength: 12 });
+                const name = await UI.enterName({ initial: pkmn.species().name, maxLength: 12 });
                 if (name) {
                     pkmn.setName(name);
                 }

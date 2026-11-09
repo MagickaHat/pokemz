@@ -678,3 +678,890 @@
     outline: 2px dashed #e000c0;
     outline-offset: -2px;
 }
+
+/*=========================================================================
+ * Pokémon screens (PokeMZ_UI_Pokemon) - Gen 3 inspired
+ * No `gap` on flex containers (NW.js Chromium); grid gap is fine.
+ *=======================================================================*/
+
+#pokemz-ui {
+    --pmz-pk-small: 24px;
+    --pmz-pk-bg: linear-gradient(#6fb0d8, #b8dcf0);
+    --pmz-pk-slot: #e8f4f8;
+    --pmz-pk-slot-lead: #d8ecf8;
+    --pmz-pk-slot-sel: #f8e8a8;
+    --pmz-pk-fainted: #f0c8c0;
+    --pmz-pk-hp-high: #58d080;
+    --pmz-pk-hp-mid: #f8c848;
+    --pmz-pk-hp-low: #f05838;
+    --pmz-pk-exp: #48a8f8;
+    --pmz-pk-male: #3878e0;
+    --pmz-pk-female: #e05068;
+    --pmz-pk-battle-sky: linear-gradient(#f8f8f0 0%, #d8f0d0 55%, #a8d890 100%);
+    --pmz-pk-platform: #88c070;
+}
+
+.pmz-pk-screen,
+.pmz-pk-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.pmz-pk-screen {
+    background: var(--pmz-pk-bg);
+    pointer-events: auto;
+    font-size: var(--pmz-pk-small);
+    line-height: 30px;
+}
+
+.pmz-pk-name {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+
+.pmz-pk-level {
+    margin-right: 8px;
+}
+
+.pmz-pk-gender {
+    margin-left: 6px;
+}
+
+.pmz-pk-gender.is-male {
+    color: var(--pmz-pk-male);
+}
+
+.pmz-pk-gender.is-female {
+    color: var(--pmz-pk-female);
+}
+
+.pmz-pk-status {
+    display: inline-block;
+    padding: 0 6px;
+    margin-right: 6px;
+    border-radius: 4px;
+    color: #fff;
+    text-shadow: none;
+    font-size: 18px;
+    line-height: 24px;
+    background: #888;
+}
+
+.pmz-pk-status.is-brn { background: #e07038; }
+.pmz-pk-status.is-par { background: #c8a800; }
+.pmz-pk-status.is-slp { background: #8890a0; }
+.pmz-pk-status.is-psn,
+.pmz-pk-status.is-tox { background: #a050b0; }
+.pmz-pk-status.is-frz { background: #58b8e0; }
+.pmz-pk-status.is-fnt { background: #c03028; }
+
+.pmz-pk-type {
+    display: inline-block;
+    min-width: 72px;
+    padding: 0 8px;
+    margin-right: 6px;
+    border-radius: 6px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
+    font-size: 18px;
+    line-height: 26px;
+    background: var(--pmz-type);
+}
+
+.pmz-pk-badge {
+    display: inline-block;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #fff;
+    text-shadow: none;
+    background: var(--pmz-accent);
+}
+
+.pmz-pk-hp {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.pmz-pk-hp-label {
+    padding: 0 4px;
+    margin-right: 4px;
+    border-radius: 3px;
+    color: #f8d030;
+    background: #404040;
+    text-shadow: none;
+}
+
+.pmz-pk-hp-track {
+    position: relative;
+    flex: 1;
+    height: 10px;
+    border: 2px solid #404040;
+    border-radius: 6px;
+    background: #505050;
+    overflow: hidden;
+}
+
+.pmz-pk-hp-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transition: width 0.4s linear, background 0.2s;
+}
+
+.pmz-pk-hp-fill.is-high { background: var(--pmz-pk-hp-high); }
+.pmz-pk-hp-fill.is-mid { background: var(--pmz-pk-hp-mid); }
+.pmz-pk-hp-fill.is-low { background: var(--pmz-pk-hp-low); }
+
+.pmz-pk-hp-numbers {
+    margin-left: 8px;
+    min-width: 72px;
+    text-align: right;
+    font-size: 20px;
+}
+
+.pmz-pk-exp {
+    position: relative;
+    height: 6px;
+    margin-top: 4px;
+    border: 2px solid #404040;
+    border-radius: 4px;
+    background: #505050;
+    overflow: hidden;
+}
+
+.pmz-pk-exp-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--pmz-pk-exp);
+    transition: width 0.6s linear;
+}
+
+.pmz-pk-kv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pmz-pk-kv > span:first-child {
+    color: var(--pmz-muted);
+    margin-right: 12px;
+}
+
+.pmz-pk-kv .is-up { color: var(--pmz-accent); }
+.pmz-pk-kv .is-down { color: var(--pmz-pk-male); }
+
+.pmz-pk-help {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 12px;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 16px;
+}
+
+.pmz-pk-help .pmz-back {
+    position: static;
+    min-height: 44px;
+    margin-left: 12px;
+}
+
+.pmz-pk-arrow {
+    display: inline-block;
+    padding: 0 12px;
+    cursor: pointer;
+}
+
+.pmz-pk-commands {
+    min-width: 260px;
+    max-width: 420px;
+    padding: 10px 12px;
+    pointer-events: auto;
+}
+
+.pmz-pk-commands.is-floating {
+    position: absolute;
+    right: 24px;
+    bottom: 92px;
+}
+
+.pmz-pk-commands-title {
+    padding: 0 8px 6px;
+    border-bottom: 2px solid var(--pmz-border-inner);
+    margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pmz-item.is-marked {
+    outline: 3px dashed var(--pmz-accent);
+}
+
+/* Party ------------------------------------------------------------------*/
+
+.pmz-pk-party-lead {
+    position: absolute;
+    left: 16px;
+    top: 72px;
+    width: 300px;
+}
+
+.pmz-pk-party-rest {
+    position: absolute;
+    left: 332px;
+    right: 16px;
+    top: 16px;
+    display: grid;
+    grid-template-rows: repeat(5, 82px);
+    grid-gap: 8px;
+}
+
+.pmz-pk-slot {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 6px 12px 6px 8px;
+    border: 3px solid var(--pmz-border);
+    border-radius: 14px;
+    background: var(--pmz-pk-slot);
+    white-space: normal;
+}
+
+.pmz-pk-slot.is-lead {
+    flex-direction: column;
+    align-items: flex-start;
+    height: 220px;
+    background: var(--pmz-pk-slot-lead);
+}
+
+.pmz-pk-slot.is-empty {
+    border-style: dashed;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.pmz-pk-slot.is-fainted {
+    background: var(--pmz-pk-fainted);
+}
+
+.pmz-pk-slot.is-selected {
+    background: var(--pmz-pk-slot-sel);
+}
+
+.pmz-pk-slot.is-selected::before {
+    display: none;
+}
+
+.pmz-pk-slot.is-disabled {
+    opacity: 0.6;
+}
+
+.pmz-pk-slot-body {
+    flex: 1;
+    min-width: 0;
+    margin-left: 8px;
+    width: 100%;
+}
+
+.pmz-pk-slot-name {
+    display: flex;
+    font-size: 24px;
+}
+
+.pmz-pk-slot-info {
+    font-size: 20px;
+}
+
+.pmz-pk-held {
+    color: var(--pmz-accent);
+    margin-right: 6px;
+}
+
+/* Summary ----------------------------------------------------------------*/
+
+.pmz-pk-summary-head {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 12px;
+    padding: 6px 16px;
+}
+
+.pmz-pk-tabs span {
+    display: inline-block;
+    padding: 0 16px;
+    margin-right: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.pmz-pk-tabs span.is-active {
+    background: var(--pmz-select);
+}
+
+.pmz-pk-summary-card {
+    position: absolute;
+    left: 16px;
+    top: 72px;
+    width: 280px;
+    bottom: 88px;
+    text-align: center;
+}
+
+.pmz-pk-summary-body {
+    position: absolute;
+    left: 312px;
+    right: 16px;
+    top: 72px;
+    bottom: 88px;
+    overflow: hidden;
+}
+
+.pmz-pk-memo,
+.pmz-pk-ability,
+.pmz-pk-desc {
+    margin: 8px 0 0;
+    white-space: normal;
+}
+
+.pmz-pk-shiny {
+    color: var(--pmz-accent);
+}
+
+.pmz-pk-move {
+    display: flex;
+    align-items: center;
+}
+
+.pmz-pk-move-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pmz-pk-move-pp {
+    margin-left: 8px;
+    font-size: 20px;
+}
+
+.pmz-pk-summary-moves .pmz-list {
+    margin-bottom: 8px;
+}
+
+/* Move pickers -----------------------------------------------------------*/
+
+.pmz-pk-movepick-head {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 12px;
+    padding: 4px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.pmz-pk-movepick-list {
+    position: absolute;
+    left: 16px;
+    width: 470px;
+    top: 92px;
+    bottom: 88px;
+}
+
+.pmz-pk-movepick-list .pmz-list {
+    max-height: 100%;
+}
+
+.pmz-pk-movepick-details {
+    position: absolute;
+    left: 500px;
+    right: 16px;
+    top: 92px;
+    bottom: 88px;
+    white-space: normal;
+}
+
+.pmz-item.is-new {
+    border-top: 2px dashed var(--pmz-border-inner);
+}
+
+/* Evolution --------------------------------------------------------------*/
+
+.pmz-pk-evolution {
+    background: radial-gradient(#ffffff, #a8c8e8 70%);
+}
+
+.pmz-pk-evolution-stage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 120px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Bag --------------------------------------------------------------------*/
+
+.pmz-pk-bag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.pmz-pk-bag-pocket {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: 300px;
+    height: 136px;
+    text-align: center;
+}
+
+.pmz-pk-bag-pocket-name {
+    display: inline-block;
+    min-width: 160px;
+}
+
+.pmz-pk-dots span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 3px;
+    border-radius: 5px;
+    background: var(--pmz-border-inner);
+}
+
+.pmz-pk-dots span.is-active {
+    background: var(--pmz-accent);
+}
+
+.pmz-pk-bag-list {
+    position: absolute;
+    left: 332px;
+    right: 16px;
+    top: 16px;
+    bottom: 160px;
+}
+
+.pmz-pk-bag-list .pmz-list {
+    max-height: 100%;
+}
+
+.pmz-pk-bag-list .pmz-item {
+    display: flex;
+}
+
+.pmz-pk-bag-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pmz-pk-bag-count {
+    margin-left: 12px;
+}
+
+.pmz-pk-bag-desc {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 12px;
+    height: 136px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.pmz-pk-bag-desc p {
+    margin: 0 0 0 12px;
+    white-space: normal;
+}
+
+/* Pokédex ----------------------------------------------------------------*/
+
+.pmz-pk-dex {
+    background: linear-gradient(#d84838, #f08070);
+}
+
+.pmz-pk-dex-head {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 12px;
+    padding: 4px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pmz-pk-dex-list {
+    position: absolute;
+    left: 332px;
+    right: 16px;
+    top: 72px;
+    bottom: 88px;
+}
+
+.pmz-pk-dex-list .pmz-list {
+    max-height: 100%;
+}
+
+.pmz-pk-dex-num {
+    display: inline-block;
+    width: 52px;
+}
+
+.pmz-pk-dex-mark {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    border-radius: 9px;
+    vertical-align: middle;
+}
+
+.pmz-pk-dex-mark.is-caught {
+    background: linear-gradient(#e04838 0 45%, #303030 45% 55%, #f8f8f8 55%);
+    box-shadow: 0 0 0 2px #303030;
+}
+
+.pmz-pk-dex-preview {
+    position: absolute;
+    left: 16px;
+    top: 72px;
+    width: 300px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pmz-pk-dex-entry {
+    background: linear-gradient(#d84838, #f08070);
+}
+
+.pmz-pk-dex-card {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 16px;
+    height: 240px;
+    display: flex;
+}
+
+.pmz-pk-dex-card > div {
+    flex: 1;
+    margin-left: 16px;
+}
+
+.pmz-pk-dex-text {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 268px;
+    bottom: 88px;
+    white-space: normal;
+}
+
+/* PC ---------------------------------------------------------------------*/
+
+.pmz-pk-pc-info {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: 220px;
+    bottom: 88px;
+    text-align: center;
+}
+
+.pmz-pk-pc-box {
+    position: absolute;
+    left: 248px;
+    width: 420px;
+    top: 16px;
+    bottom: 88px;
+    padding: 8px;
+    background: #c8e0b0;
+}
+
+.pmz-pk-pc-box[class*="is-wallpaper-"]:nth-child(n) {
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 12px, transparent 12px 24px);
+}
+
+.pmz-pk-pc-boxname {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.pmz-pk-pc-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--pmz-cols), 1fr);
+    grid-gap: 4px;
+}
+
+.pmz-pk-pc-cell {
+    position: relative;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.pmz-pk-pc-cell.is-selected {
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: inset 0 0 0 3px var(--pmz-accent);
+}
+
+.pmz-pk-pc-held {
+    position: absolute;
+    top: -24px;
+    opacity: 0.9;
+}
+
+.pmz-pk-pc-party {
+    position: absolute;
+    left: 680px;
+    right: 16px;
+    top: 16px;
+    bottom: 88px;
+    padding: 6px;
+}
+
+/* Battle -----------------------------------------------------------------*/
+
+.pmz-pk-battle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: auto;
+    font-size: 26px;
+    line-height: 32px;
+}
+
+.pmz-pk-battle-field {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 432px;
+    overflow: hidden;
+    background: var(--pmz-pk-battle-sky);
+}
+
+.pmz-pk-platform {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--pmz-pk-platform);
+    box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.15);
+}
+
+.pmz-pk-platform.is-foe {
+    left: 470px;
+    top: 180px;
+    width: 300px;
+    height: 70px;
+}
+
+.pmz-pk-platform.is-player {
+    left: 30px;
+    top: 392px;
+    width: 340px;
+    height: 80px;
+}
+
+.pmz-pk-battler {
+    position: absolute;
+}
+
+.pmz-pk-battler.is-foe {
+    left: 524px;
+    top: 28px;
+}
+
+.pmz-pk-battler.is-player {
+    left: 104px;
+    top: 240px;
+}
+
+.pmz-pk-battler.anim-enter.is-foe {
+    animation: pmz-pk-in-right 0.5s ease-out;
+}
+
+.pmz-pk-battler.anim-enter.is-player {
+    animation: pmz-pk-in-left 0.5s ease-out;
+}
+
+.pmz-pk-battler.anim-hit {
+    animation: pmz-pk-blink 0.4s steps(2) 2;
+}
+
+.pmz-pk-battler.anim-faint {
+    animation: pmz-pk-faint 0.5s ease-in forwards;
+}
+
+@keyframes pmz-pk-in-right {
+    from { transform: translateX(320px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+}
+
+@keyframes pmz-pk-in-left {
+    from { transform: translateX(-320px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+}
+
+@keyframes pmz-pk-blink {
+    50% { opacity: 0; }
+}
+
+@keyframes pmz-pk-faint {
+    to { transform: translateY(160px); opacity: 0; }
+}
+
+.pmz-pk-ball {
+    position: absolute;
+    left: 640px;
+    top: 168px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(#e04838 0 45%, #303030 45% 55%, #f8f8f8 55%);
+    box-shadow: 0 0 0 3px #303030;
+    animation: pmz-pk-throw 0.5s ease-out, pmz-pk-shake 0.6s ease-in-out 0.5s var(--pmz-shakes, 0);
+}
+
+.pmz-pk-ball.shakes-1 { --pmz-shakes: 1; }
+.pmz-pk-ball.shakes-2 { --pmz-shakes: 2; }
+.pmz-pk-ball.shakes-3 { --pmz-shakes: 3; }
+
+@keyframes pmz-pk-throw {
+    from { transform: translate(-480px, 200px) rotate(-360deg); }
+    to { transform: none; }
+}
+
+@keyframes pmz-pk-shake {
+    25% { transform: rotate(-25deg); }
+    75% { transform: rotate(25deg); }
+}
+
+.pmz-pk-bbox {
+    position: absolute;
+    width: 370px;
+    padding: 8px 16px;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.pmz-pk-bbox.is-foe {
+    left: 24px;
+    top: 24px;
+}
+
+.pmz-pk-bbox.is-player {
+    right: 24px;
+    top: 268px;
+}
+
+.pmz-pk-bbox-top {
+    display: flex;
+    align-items: baseline;
+}
+
+.pmz-pk-bbox-top .pmz-pk-name {
+    flex: 1;
+}
+
+.pmz-pk-bbox-hp {
+    display: flex;
+    align-items: center;
+}
+
+.pmz-pk-bbox-hp .pmz-pk-hp {
+    flex: 1;
+}
+
+.pmz-pk-battle-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 432px;
+    bottom: 0;
+    background: #283848;
+}
+
+.pmz-pk-battle-msg {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    bottom: 8px;
+    padding: 16px 24px;
+    white-space: normal;
+    background: #f8f8f8;
+}
+
+.pmz-pk-battle-cmd .pmz-pk-battle-msg {
+    right: 336px;
+}
+
+.pmz-pk-battle-commands {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 320px;
+    padding: 12px;
+}
+
+.pmz-pk-battle-movelist {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    right: 296px;
+    padding: 12px;
+}
+
+.pmz-pk-battle-movelist .pmz-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pmz-pk-battle-moveinfo {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 280px;
+    padding: 16px;
+}
+
+.pmz-pk-battle-back {
+    position: absolute;
+    right: 16px;
+    bottom: -4px;
+    display: none;
+}
