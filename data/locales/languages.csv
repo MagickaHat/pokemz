@@ -1,7 +1,0 @@
-Key,en,es-es,es-mx,pt-pt,pt-br,fr,#Notes
-Name,English,Español (España),Español (Latinoamérica),Português (Portugal),Português (Brasil),Français,Native name shown in Options
-Intl,en-US,es-ES,es-MX,pt-PT,pt-BR,fr-FR,BCP 47 tag for number/date formatting and sorting
-Fallback,,es-mx,es-es,pt-br,pt-pt,,Languages tried before the source language (separate with |)
-Direction,ltr,ltr,ltr,ltr,ltr,ltr,ltr or rtl
-Keyboard,qwerty,es,es,pt,pt,azerty,Name entry layout (a column of keyboards.csv)
-Font,,,,,,,Optional font file in fonts/ for this language
