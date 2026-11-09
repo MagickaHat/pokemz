@@ -256,3 +256,63 @@ translators). The editor keeps the English text. Re-running `extract` is safe:
 | `npm run l10n check` | Validate all tables (duplicates, codes, placeholders, ICU syntax, languages.csv) |
 | `npm run l10n stats` | Coverage per language |
 | `npm test` | Engine and tool tests |
+
+## FMOD audio
+
+The game can play its audio through [FMOD Studio](https://www.fmod.com) banks
+(`js/libs/fmodstudio.js` + `.wasm`, HTML5 build 2.03). Every MZ sound looks for a matching
+FMOD event first and plays the `.ogg` if there isn't one. So you can switch one sound at a time,
+and the game still runs if FMOD is missing or fails to start. Enable these plugins below
+the UI plugins, in this order:
+
+| Plugin | What it does |
+|---|---|
+| `PokeMZ_FMOD_Core` | Startup/shutdown, per-frame update, browser audio unlock, error handling, async bank loading, event instances, local/global parameters, default overrides, callbacks, snapshots, buses/VCAs, programmer sounds, focus handling, `PokeMZ.FMOD` API |
+| `PokeMZ_FMOD_Audio` | Takes over MZ's BGM/BGS/ME/SE and system sounds (name mapping, `.ogg` fallback), ME behaviour, Master Volume option and VCA sliders, per-map banks, save/load, scene snapshots, plugin commands |
+| `PokeMZ_FMOD_Spatial` | Listener (3D camera or player), handedness, event emitters, ambient emitters (point or region) |
+| `PokeMZ_FMOD_Debug` | F6 overlay and `PokeMZ.FMOD.debug` console tools (playtest only) |
+
+Bank layout, Studio naming conventions and upgrade notes: [`audio/fmod/README.md`](audio/fmod/README.md).
+
+### Note tags
+
+```
+Map note:
+<FMOD Bank: Forest, Caves>                          banks loaded while on this map
+<FMOD Ambient: event:/Amb/Waterfall x=12 y=4>      point ambience
+<FMOD Ambient: event:/Amb/Sea region=30>           area ambience (nearest region tile)
+<FMOD Ambient: event:/Amb/Wind volume=0.5>         2D ambience
+
+Event page comment / event note:
+<FMOD Emitter: event:/SFX/Fountain params="Flow:0.5">
+```
+
+### Plugin commands
+
+`PokeMZ_FMOD_Audio`: Play Event, Play One-Shot, Play Programmer Sound, Stop, Pause/Resume,
+Set Parameter (a handle, or `bgm` / `bgs`), Set Global Parameter, Start/Stop Snapshot,
+Load/Unload Bank, Set Bus/VCA Volume, Key Off, Set Timeline Position, Wait For Event End,
+Wait For Marker, Stop All.
+
+### Script
+
+```js
+const h = PokeMZ.FMOD.play("event:/SFX/Engine", { name: "engine", scope: "map",
+    params: { RPM: 1200 }, follow: PokeMZ.FMOD.spatial.follow($gamePlayer) });
+h.setParameter("RPM", 3000);
+h.on("marker", m => console.log(m.name));
+PokeMZ.FMOD.setGlobalParameter("TimeOfDay", 18);
+PokeMZ.FMOD.audio.setBgmParameter("Intensity", 1);   // kept in save files
+PokeMZ.FMOD.playProgrammer("event:/Cry", "Cry025");
+```
+
+### Debug tools (playtest)
+
+| | |
+|---|---|
+| F6 | Overlay: CPU, memory, banks, live instances with parameters and distance, listener, globals, snapshots, errors |
+| `PokeMZ.FMOD.debug.listEvents()` | Every event path in the loaded banks |
+| `PokeMZ.FMOD.debug.info(path)` / `.play(path)` | Inspect / audition an event |
+| `node --test tests/fmod.test.js` | Engine tests and a boot test against the real FMOD wasm (silent output) |
+
+Remember to ship `audio/fmod/`: MZ's "Exclude unused files" can't see it.
