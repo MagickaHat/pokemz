@@ -1034,7 +1034,7 @@ async function linkItems(root, o) {
 async function gfx(root) {
     const { registries } = await loadAll(root);
     const dir = path.join(root, "img", "pokemon");
-    const need = ["front.png", "back.png", "icon.png"];
+    const need = ["front.png", "back.png", "icon.png", "overworld.png"];
     let missing = 0;
     for (const s of registries.species || []) {
         const folder = s.baseSpecies ? path.join(dir, s.baseSpecies, s.folder) : path.join(dir, s.id);

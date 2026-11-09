@@ -1016,9 +1016,16 @@
                 const s = this.sides[sideId];
                 const list = s.team.filter(p => !p.isEgg());
                 const lead = list.findIndex(p => p.hp > 0);
-                const order = list.slice();
+                let order = list.slice();
                 if (lead > 0) {
                     order.unshift(order.splice(lead, 1)[0]);
+                }
+                if (s.owners) {
+                    // Two trainers share the side: each one's lead opens
+                    // their own slot.
+                    const firstOf = owner => order.find(p => s.owners.get(p) === owner && p.hp > 0);
+                    const leads = [firstOf(0), firstOf(1)].filter(Boolean);
+                    order = leads.concat(order.filter(p => !leads.includes(p)));
                 }
                 return order.map((p, i) => {
                     const token = `${prefix[sideId]}${i}`;

@@ -369,8 +369,11 @@ after `PokeMZ_UI_StartMenu`.
 | `PokeMZ_PBS_Core` | Async loading, line-accurate JSON parser, schemas, registries, two-pass references, MZ map/item alignment, hot reload |
 | `PokeMZ_PBS_Pokemon` | `Game_Pokemon` actors, party, bag and item handlers, Pokédex, PC boxes, day care and eggs, evolution, wild encounters |
 | `PokeMZ_PBS_Graphics` | pokeemerald-style graphics folders with shiny palette swaps |
-| `PokeMZ_PBS_Battle` | Battle bridge to Showdown, custom content as a Showdown mod, localized battle text |
-| `PokeMZ_UI_Pokemon` | Gen 3 style screens: battle, party, summary, bag, Pokédex, PC, evolution, move reminder, day care |
+| `PokeMZ_PBS_Battle` | Battle bridge to Showdown: singles, doubles and multi battles, battle-only forms (Mega, Primal, Z-Moves, Tera, Dynamax/Gigantamax), custom content as a Showdown mod, localized battle text |
+| `PokeMZ_PBS_Followers` | The first healthy party Pokémon follows the player (HGSS style), with moods, talking, found items and overworld effects |
+| `PokeMZ_PBS_Berries` | Berry planting (Gen 4 style): soil events, growth, watering, mulch, harvests |
+| `PokeMZ_PBS_Trade` | NPC trades, a portable Pokémon format and a trade protocol ready for online trades |
+| `PokeMZ_UI_Pokemon` | Gen 3 style screens: battle, party, summary, bag, Pokédex, PC, Town Map/Fly, evolution, trade, move reminder, day care |
 
 ### Files and IDs
 
@@ -386,7 +389,11 @@ the files from Showdown, so species and move IDs match Showdown by construction.
 | `pokemon_metrics.json` | species ID | Battler y offsets and elevation |
 | `items.json` | item ID | Pocket, field/battle use, `effect` (item handler) + `params` |
 | `map_metadata.json`, `encounters.json` | MZ map ID | Checked against `MapInfos.json`; add `"#map": "Route 1"` to be warned when the map is renamed |
-| `trainer_types.json`, `trainers.json`, `regional_dexes.json`, `ribbons.json`, `berry_plants.json`, `town_map.json`, `phone.json`, `battle_tower.json`, `map_connections.json` | ID | |
+| `trainers.json` | ID | `battleType` (`single` / `double`), `gimmicks` (`mega`, `zmove`, `dynamax`, `terastallize`); Pokémon may set `teraType`, `dynamaxLevel`, `gigantamax` |
+| `berry_plants.json` | Berry item ID | Hours per stage, soil drying per hour, yield (imported from PokeAPI) |
+| `town_map.json` | region ID | Image, grid size, points (localized names, POIs, `flyTo`, `switch`) |
+| `trades.json` | trade ID | In-game trades: `npcName`, `nickname`, `wants`, `gives`, `once` |
+| `trainer_types.json`, `regional_dexes.json`, `ribbons.json`, `phone.json`, `battle_tower.json`, `map_connections.json` | ID | |
 
 Errors keep their position, for example `moves.json:120:14  /thunderbolt/type  unknown types "electrik"
 (did you mean "electric"?)`. In playtest the boot stops on errors and lists them; warnings go to the
@@ -446,11 +453,97 @@ PokeMZ.Battle.registerEffect("abilities", "myability", { name: "My Ability", onM
 Entries marked `"custom": true` (fakemon, new moves) are not checked against Showdown and are loaded
 into the battle simulator as a Showdown mod.
 
+### Double battles and battle-only forms
+
+| Battle | How to start it |
+|---|---|
+| Trainer doubles | Give the trainer `"battleType": "double"` |
+| Two trainers at once | *Trainer Battle* with **Second Trainer**. Each trainer keeps to their own slot |
+| Partner battle (multi) | *Trainer Battle* with **Partner**. The partner is a `trainers.json` entry controlled by the AI |
+| Wild doubles | *Wild Battle* with **Second Species**, or `"doubles": <chance>` on an encounter type. Balls only work once one foe is left |
+
+In doubles the player chooses an action for each Pokémon, and Back returns to the previous one.
+Moves that need a target open a target picker.
+
+| Battle-only form | Key item needed | Extra requirement |
+|---|---|---|
+| Mega Evolution | Mega Ring | |
+| Primal Reversion | (none; it uses the Red/Blue Orb) | |
+| Z-Moves | Z-Ring | |
+| Terastallization | Tera Orb | Recharged by *Heal Party* |
+| Dynamax / Gigantamax | Dynamax Band | Map metadata `"dynamax": true` |
+
+When the player has the key item, Shift in the move menu toggles the gimmick. Trainers use only the gimmicks
+listed in their `gimmicks`. Pokémon have a Tera Type (Tera Shards change it), a Dynamax Level (Dynamax
+Candy) and a G-Max Factor (Max Soup). Battle-only forms revert after the battle.
+
+Sides other than the player's are driven by controllers (`PokeMZ.Battle.AIController`). Any object
+with `choose(sideId, bridge)` can drive a side, which is where an online opponent would plug in.
+
+### Following Pokémon
+
+The first party Pokémon that can battle follows the player. It uses
+`img/pokemon/<species>/overworld.png`: an MZ single-character sheet (3 × 4 frames, any frame size, shiny
+via the palettes, optional `overworldf.png`). A species without this sheet stays in its ball.
+
+It goes back into its ball:
+- while Surfing, unless it is a Water or Flying type
+- on the bicycle
+- on maps with `"followers": false`
+- while the plugin's switch is off
+
+Face it and press OK to talk. It reacts to friendship, status, HP, weather, time and the map, with a
+balloon and a localized line. Walking with it raises friendship, and it sometimes finds items
+(per-map `followerItems`).
+
+On 2D maps, grass, water and sand tiles show small effects. On 3D maps it is drawn like other
+followers, with shadow and reflection. Plugin commands: *Toggle Follower*, *Follower Emote*, *Talk To
+Follower*.
+
+### Berries
+
+Put `<Berry Plant>` in an event's note (or a page comment) to make it soil. The player plants a
+Berry, and it grows through five stages on the real clock (or play time).
+
+- **Watering:** watering cans water the soil. Hours spent dry lower the yield.
+- **Mulch:** laid before planting, it changes growth speed, drying, how long ripe Berries stay and how often they regrow.
+- **Unpicked Berries:** they fall and regrow, up to a limit.
+- **Graphics:** `img/characters/$berrytree_<id>.png` (or `$berrytree.png`), with rows for sprouted, taller, flowering and ripe. Without a sheet the event keeps its own image.
+
+### Town Map and Fly
+
+The Town Map (Town Map item, the start menu's Pokégear, or `openScreen("townMap")`) shows a
+`town_map.json` region. The image is `img/townmap/<image>.png`; without it, a grid is drawn. A
+blinking marker shows where the player is (map metadata `townMap`, or the parent map's). Fly is a
+field move on outdoor maps. It opens the map, and the player can fly to points whose `flyTo` map was
+visited or whose switch is on.
+
+### Trading
+
+*NPC Trade* runs a `trades.json` trade:
+1. The player chooses a Pokémon that fits `wants`: a species, or `{type, species, minLevel}`.
+2. The trade plays out on screen.
+3. The received Pokémon keeps its OT, so it gets the traded EXP bonus. Trade evolutions happen at once.
+
+The result goes to a variable: 1 traded, 2 declined, 3 no suitable Pokémon, 4 already traded.
+
+For online trading later:
+- **`PokemonCodec`** encodes a Pokémon as versioned, ID-only data with a checksum. It validates incoming data against the PBS registries (IVs/EVs, moves and PP, items, ability slot, gender, level).
+- **`TradeSession`** runs the protocol (`hello` → `offer` → `accept` → `confirm`, or `cancel`) over any transport with `send`, `onMessage` and `close`.
+- **`LocalTransport.pair()`** connects two sessions in memory, which is how NPC trades work. A WebSocket or WebRTC transport with the same three methods can connect two players.
+
+```js
+const { received } = await PokeMZ.Trade.tradeWith(transport, $gameParty.pokemon()[0]);
+```
+
 ### Plugin commands
 
 `PokeMZ_PBS_Pokemon`: Give Pokémon, Give Egg, Heal Party, Open PC, Open Day Care, Move Reminder,
 Check Evolution, Give Item, Party Has Species.
-`PokeMZ_PBS_Battle`: Wild Battle, Trainer Battle (result in a variable).
+`PokeMZ_PBS_Battle`: Wild Battle (optional second species), Trainer Battle (optional second trainer
+or partner). The result goes in a variable.
+`PokeMZ_PBS_Followers`: Toggle Follower, Follower Emote, Talk To Follower.
+`PokeMZ_PBS_Trade`: NPC Trade.
 
 ### Tools
 
@@ -461,7 +554,7 @@ Run these from `tools/` (run `npm install` there first):
 | `npm run pbs import` | Fill the PBS files from Showdown and PokeAPI and merge names (with official translations) into the locale CSVs. Options: `--only pokemon,moves`, `--dry-run`, `--offline` |
 | `npm run pbs check` | Validate the PBS files (exit code 1 on errors) |
 | `npm run pbs items` | Create tagged `Items.json` entries for PBS items. Close the editor first |
-| `npm run pbs gfx` | List species without graphics |
+| `npm run pbs gfx` | List species without graphics (battlers, icons, overworld sheets) |
 | `npm run build:showdown` | Rebuild `js/plugins/PS_Sim.js` |
 | `npm test` | All tests |
 
