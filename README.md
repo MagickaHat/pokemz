@@ -148,7 +148,7 @@ layer, so MZ windows, event conditions and other plugins keep working and follow
 - **Active device and glyphs**: `PokeMZ.Input.device` / `.family` (xbox, playstation,
   switch, generic) and `glyph(action)`. Preact screens use `<Glyph action>` and
   `useGlyph`; the Back button shows its key or button. Glyph art is optional: put sheets at
-  `img/system/InputGlyphs_<keyboard|xbox|playstation|switch|generic>.png` (square cells,
+  `img/system/InputGlyphs_<keyboard|xbox|playstation|switch|generic>.png` (square 16px cells,
   8 per row by default; the cell layout is in the plugin help). Without them, text badges
   are shown.
 - **Accessibility** (Options › Controls › Accessibility): toggle run, tap to turn, Nintendo

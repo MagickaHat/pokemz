@@ -31,6 +31,13 @@
     --pmz-radius: 0;
     --pmz-pad: 4px;
     --pmz-message-lines: 2;
+    /* Layout grid (game pixels). Screens place boxes from the screen edges
+     * with these, so bigger resolutions just get more room. */
+    --pmz-gap: 4px;               /* space between boxes and to the edge */
+    --pmz-row: 18px;              /* one text row (= --pmz-line) */
+    --pmz-header-h: 20px;         /* a one-row header strip */
+    --pmz-help-h: 22px;           /* the help bar at the bottom */
+    --pmz-content-bottom: 24px;   /* bottom of content above the help bar */
     pointer-events: none;
     overflow: hidden;
     user-select: none;
@@ -510,6 +517,15 @@
 
 .pmz-number-ok {
     align-self: stretch;
+    flex: none;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+
+/* Key/button hint in front of a button's label (Z OK, X Back). */
+.pmz-button .pmz-button-hint {
+    flex: none;
+    margin-right: 3px;
 }
 
 /*-------------------------------------------------------------------------
@@ -541,7 +557,7 @@
 .pmz-keyboard-page {
     position: absolute;
     right: 5px;
-    top: -13px;
+    top: -20px;
     padding: 0 4px;
     color: #fff;
     text-shadow: 1px 1px 0 #000;
@@ -639,7 +655,14 @@
 
 .pmz-controls-grid {
     display: block;
+    flex: 1;
+    min-height: 0; /* lets the rows scroll inside the panel */
     overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.pmz-controls-grid::-webkit-scrollbar {
+    display: none;
 }
 
 .pmz-controls-row .pmz-item {
@@ -835,7 +858,8 @@
 
 .pmz-pk-hp-track {
     position: relative;
-    flex: 1;
+    flex: none;
+    width: 48px; /* HP_BAR_WIDTH in PokeMZ_UI_Pokemon.js: the fill is set in whole px */
     height: 3px;
     border: 1px solid #404040;
     border-radius: 0;
@@ -864,6 +888,8 @@
 
 .pmz-pk-exp {
     position: relative;
+    width: 64px; /* EXP_BAR_WIDTH in PokeMZ_UI_Pokemon.js */
+    margin-left: auto;
     height: 2px;
     margin-top: 1px;
     border: 1px solid #404040;
@@ -896,19 +922,28 @@
 
 .pmz-pk-help {
     position: absolute;
-    left: 5px;
-    right: 5px;
-    bottom: 4px;
-    min-height: 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--pmz-help-h);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2px 5px;
+    padding: 0 0 0 5px;
+    white-space: nowrap;
+}
+
+.pmz-pk-help > span {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pmz-pk-help .pmz-back {
     position: static;
-    min-height: 14px;
+    height: 100%;
+    min-height: 0;
     margin-left: 4px;
 }
 
@@ -920,15 +955,22 @@
 
 .pmz-pk-commands {
     min-width: 82px;
-    max-width: 132px;
+    max-width: 200px;
     padding: 3px 4px;
     pointer-events: auto;
+    white-space: nowrap;
+}
+
+.pmz-pk-commands .pmz-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pmz-pk-commands.is-floating {
     position: absolute;
-    right: 8px;
-    bottom: 29px;
+    right: var(--pmz-gap);
+    bottom: var(--pmz-content-bottom);
+    max-height: calc(100% - var(--pmz-content-bottom) - var(--pmz-gap));
 }
 
 .pmz-pk-commands-title {
@@ -977,7 +1019,7 @@
 .pmz-pk-slot.is-lead {
     flex-direction: column;
     align-items: flex-start;
-    height: 69px;
+    height: 100px;
     background: var(--pmz-pk-slot-lead);
 }
 
@@ -1013,6 +1055,11 @@
 .pmz-pk-slot-name {
     display: flex;
     font-size: 16px;
+    white-space: nowrap;
+}
+
+.pmz-pk-slot-info {
+    white-space: nowrap;
 }
 
 /* Small slots (party members 2-6): name on top, level and HP bar below. */
@@ -1028,6 +1075,31 @@
 
 .pmz-pk-slot:not(.is-lead) .pmz-pk-hp {
     margin-left: 4px;
+    justify-content: flex-end;
+}
+
+/* Party icons are 32px with empty edges: let them overlap the slot padding. */
+.pmz-pk-slot:not(.is-lead) .pmz-pk-icon {
+    flex: none;
+    margin: -2px -4px -2px -4px;
+}
+
+.pmz-pk-slot:not(.is-lead) .pmz-pk-slot-body {
+    min-width: 0;
+}
+
+/* Small slots have no room for the "HP" tag: the bar alone, as in Gen 3. */
+.pmz-pk-slot:not(.is-lead) .pmz-pk-hp-label {
+    display: none;
+}
+
+/* Lead slot: HP numbers on their own line under the bar. */
+.pmz-pk-slot.is-lead .pmz-pk-hp {
+    flex-wrap: wrap;
+}
+
+.pmz-pk-slot.is-lead .pmz-pk-hp-numbers {
+    flex-basis: 100%;
 }
 
 .pmz-pk-slot:not(.is-lead) .pmz-pk-hp-numbers {
@@ -1044,20 +1116,25 @@
 }
 
 /* Summary ----------------------------------------------------------------*/
+/*
+ * Gen 4 style: tabs on top, the Pokémon on the left (sprite, name, level),
+ * one topic per page on the right. The Moves page uses the full width.
+ */
 
 .pmz-pk-summary-head {
     position: absolute;
-    left: 5px;
-    right: 5px;
-    top: 4px;
-    padding: 2px 5px;
+    left: var(--pmz-gap);
+    right: var(--pmz-gap);
+    top: 2px;
+    height: var(--pmz-header-h);
+    padding: 0 2px;
+    white-space: nowrap;
 }
 
 .pmz-pk-tabs span {
     display: inline-block;
-    padding: 0 5px;
-    margin-right: 3px;
-    border-radius: 0;
+    padding: 0 3px;
+    margin-right: 1px;
     cursor: pointer;
 }
 
@@ -1067,27 +1144,63 @@
 
 .pmz-pk-summary-card {
     position: absolute;
-    left: 5px;
-    top: 23px;
-    width: 88px;
-    bottom: 28px;
+    left: var(--pmz-gap);
+    top: 24px;
+    width: 106px;
+    bottom: var(--pmz-content-bottom);
+    padding: 2px 4px;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.pmz-pk-summary-card .pmz-pk-image {
+    display: block;
 }
 
 .pmz-pk-summary-body {
     position: absolute;
-    left: 98px;
-    right: 5px;
-    top: 23px;
-    bottom: 28px;
+    left: 112px;
+    right: var(--pmz-gap);
+    top: 24px;
+    bottom: var(--pmz-content-bottom);
     overflow: hidden;
 }
 
+.pmz-pk-summary.is-moves .pmz-pk-summary-card {
+    display: none;
+}
+
+.pmz-pk-summary.is-moves .pmz-pk-summary-body {
+    left: var(--pmz-gap);
+}
+
+.pmz-pk-summary-page .pmz-pk-kv {
+    white-space: nowrap;
+}
+
+.pmz-pk-summary-page > .pmz-pk-hp {
+    justify-content: flex-end;
+    margin-bottom: 2px;
+}
+
 .pmz-pk-memo,
-.pmz-pk-ability,
 .pmz-pk-desc {
-    margin: 3px 0 0;
+    margin: 0;
     white-space: normal;
+}
+
+.pmz-pk-ability-name {
+    margin-top: 2px;
+}
+
+.pmz-pk-ability {
+    margin: 0;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
 }
 
 .pmz-pk-shiny {
@@ -1097,54 +1210,118 @@
 .pmz-pk-move {
     display: flex;
     align-items: center;
+    white-space: nowrap;
+}
+
+.pmz-pk-move .pmz-pk-type {
+    flex: none;
+    min-width: 44px;
+    margin-right: 3px;
+    text-align: center;
 }
 
 .pmz-pk-move-name {
     flex: 1;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .pmz-pk-move-pp {
-    margin-left: 3px;
-    font-size: 16px;
+    margin-left: 4px;
 }
 
 .pmz-pk-summary-moves .pmz-list {
-    margin-bottom: 3px;
+    margin-bottom: 2px;
+}
+
+/* Move details: one row of numbers, then the description (2 lines). */
+.pmz-pk-move-details {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--pmz-border-inner);
+    padding-top: 1px;
+}
+
+.pmz-pk-move-details .pmz-pk-kv {
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.pmz-pk-move-details .pmz-pk-kv > span:first-child {
+    margin-right: 4px;
+    color: var(--pmz-muted);
+}
+
+/* Category needs no label ("Physical" says it). */
+.pmz-pk-move-details .pmz-pk-kv:first-child > span:first-child {
+    display: none;
+}
+
+.pmz-pk-move-details .pmz-pk-desc {
+    flex-basis: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 /* Move pickers -----------------------------------------------------------*/
+/* Header, up to 5 moves (4 + the new one) at full width, then details. */
 
 .pmz-pk-movepick-head {
     position: absolute;
-    left: 5px;
-    right: 5px;
-    top: 4px;
-    padding: 1px 5px;
+    left: var(--pmz-gap);
+    right: var(--pmz-gap);
+    top: 6px;
+    height: var(--pmz-header-h);
+    padding: 0 4px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+}
+
+/* The 32px party icon pokes out of the 20px header (its edges are empty). */
+.pmz-pk-movepick-head .pmz-pk-image {
+    margin: -6px 2px -6px 0;
 }
 
 .pmz-pk-movepick-list {
     position: absolute;
-    left: 5px;
-    width: 147px;
-    top: 29px;
-    bottom: 28px;
+    left: var(--pmz-gap);
+    right: var(--pmz-gap);
+    top: 28px;
+    height: 100px;
+    padding: 4px 4px;
 }
 
 .pmz-pk-movepick-list .pmz-list {
     max-height: 100%;
 }
 
+/* 5 rows of exactly 18px (4 moves + the new one). */
+.pmz-pk-movepick-list .pmz-item {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .pmz-pk-movepick-details {
     position: absolute;
-    left: 157px;
-    right: 5px;
-    top: 29px;
-    bottom: 28px;
+    left: var(--pmz-gap);
+    right: var(--pmz-gap);
+    top: 130px;
+    bottom: var(--pmz-content-bottom);
+    padding: 0 5px;
     white-space: normal;
+    overflow: hidden;
+}
+
+.pmz-pk-movepick-details .pmz-pk-move-details {
+    border-top: none;
+}
+
+.pmz-pk-movepick-details .pmz-pk-desc {
+    -webkit-line-clamp: 1;
 }
 
 .pmz-item.is-new {
@@ -1251,6 +1428,11 @@
 }
 
 /* Pokédex ----------------------------------------------------------------*/
+/*
+ * List: header (dex name, seen/owned), a 96x96 sprite frame on the left,
+ * the list on the right. Entry: a card with the sprite and 5 info rows,
+ * the dex text (3 lines) under it.
+ */
 
 .pmz-pk-dex {
     background: #e46454;
@@ -1258,29 +1440,37 @@
 
 .pmz-pk-dex-head {
     position: absolute;
-    left: 5px;
-    right: 5px;
-    top: 4px;
-    padding: 1px 5px;
+    left: var(--pmz-gap);
+    right: var(--pmz-gap);
+    top: 2px;
+    height: var(--pmz-header-h);
+    padding: 0 5px;
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
 }
 
 .pmz-pk-dex-list {
     position: absolute;
-    left: 104px;
-    right: 5px;
-    top: 23px;
-    bottom: 28px;
+    left: 106px;
+    right: var(--pmz-gap);
+    top: 24px;
+    bottom: var(--pmz-content-bottom);
+    padding: 3px 3px;
 }
 
 .pmz-pk-dex-list .pmz-list {
     max-height: 100%;
 }
 
+.pmz-pk-dex-list .pmz-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .pmz-pk-dex-num {
     display: inline-block;
-    width: 16px;
+    width: 26px;
 }
 
 .pmz-pk-dex-mark {
@@ -1288,21 +1478,21 @@
     width: 6px;
     height: 6px;
     margin-right: 3px;
-    border-radius: 0;
     vertical-align: middle;
 }
 
 .pmz-pk-dex-mark.is-caught {
-    background: linear-gradient(#e04838 0 45%, #303030 45% 55%, #f8f8f8 55%);
+    background: linear-gradient(#e04838 0 2px, #303030 2px 4px, #f8f8f8 4px);
     box-shadow: 0 0 0 1px #303030;
 }
 
 .pmz-pk-dex-preview {
     position: absolute;
-    left: 5px;
-    top: 23px;
-    width: 94px;
-    height: 75px;
+    left: var(--pmz-gap);
+    top: 24px;
+    width: 98px;
+    height: 98px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1314,45 +1504,82 @@
 
 .pmz-pk-dex-card {
     position: absolute;
-    left: 5px;
-    right: 5px;
-    top: 5px;
-    height: 75px;
+    left: var(--pmz-gap);
+    right: var(--pmz-gap);
+    top: 2px;
+    height: 104px;
+    padding: 3px 4px;
     display: flex;
+    white-space: nowrap;
+}
+
+.pmz-pk-dex-card .pmz-pk-image {
+    flex: none;
 }
 
 .pmz-pk-dex-card > div {
     flex: 1;
-    margin-left: 5px;
+    min-width: 0;
+    margin-left: 4px;
+}
+
+.pmz-pk-dex-card .pmz-pk-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pmz-pk-dex-text {
     position: absolute;
-    left: 5px;
-    right: 5px;
-    top: 84px;
-    bottom: 28px;
+    left: var(--pmz-gap);
+    right: var(--pmz-gap);
+    top: 108px;
+    bottom: var(--pmz-content-bottom);
+    padding: 2px 6px;
     white-space: normal;
+    overflow: hidden;
+}
+
+.pmz-pk-dex-text p {
+    margin: 0;
 }
 
 /* PC ---------------------------------------------------------------------*/
+/*
+ * info (sprite, name, level) | box (6 x 5 cells of 22px) | party column.
+ * Party icons are 32px and overlap the 22px cells a little (their edges
+ * are empty), like the Gen 3/4 PCs.
+ */
 
 .pmz-pk-pc-info {
     position: absolute;
-    left: 5px;
-    top: 5px;
-    width: 69px;
-    bottom: 28px;
+    left: var(--pmz-gap);
+    top: var(--pmz-gap);
+    width: 72px;
+    bottom: var(--pmz-content-bottom);
+    padding: 0;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* The 96px sprite is cropped to the middle of the 72px panel. */
+.pmz-pk-pc-info .pmz-pk-image {
+    display: block;
+    margin-left: -13px;
+}
+
+.pmz-pk-pc-types .pmz-pk-type {
+    display: block;
+    margin: 0 4px 1px;
 }
 
 .pmz-pk-pc-box {
     position: absolute;
-    left: 78px;
-    width: 132px;
-    top: 5px;
-    bottom: 28px;
-    padding: 3px;
+    left: 80px;
+    width: 143px;
+    top: var(--pmz-gap);
+    bottom: var(--pmz-content-bottom);
+    padding: 2px;
     background: #c8e0b0;
 }
 
@@ -1364,48 +1591,70 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 2px;
-    padding: 0 3px;
-    border-radius: 0;
+    padding: 0 2px;
     background: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
 }
 
 .pmz-pk-pc-grid {
     display: grid;
-    grid-template-columns: repeat(var(--pmz-cols), 1fr);
+    grid-template-columns: repeat(var(--pmz-cols), 22px);
+    grid-auto-rows: 22px;
     grid-gap: 1px;
 }
 
 .pmz-pk-pc-cell {
     position: relative;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0;
+    width: 22px;
+    height: 22px;
     cursor: pointer;
 }
 
+.pmz-pk-pc-cell .pmz-pk-image {
+    position: absolute;
+    left: -5px;
+    top: -6px;
+}
+
 .pmz-pk-pc-cell.is-selected {
+    z-index: 1;
     background: rgba(255, 255, 255, 0.6);
     box-shadow: inset 0 0 0 1px var(--pmz-accent);
 }
 
 .pmz-pk-pc-held {
     position: absolute;
-    top: -8px;
+    left: 0;
+    top: -10px;
+    z-index: 2;
     opacity: 0.9;
 }
 
 .pmz-pk-pc-party {
     position: absolute;
-    left: 213px;
-    right: 5px;
-    top: 5px;
-    bottom: 28px;
-    padding: 2px;
+    left: 226px;
+    right: var(--pmz-gap);
+    top: var(--pmz-gap);
+    bottom: var(--pmz-content-bottom);
+    padding: 1px 0 0 1px;
+    display: grid;
+    grid-auto-rows: 22px;
+    grid-gap: 1px;
+    align-content: start;
 }
 
 /* Battle -----------------------------------------------------------------*/
+/*
+ * Gen 4 top-screen field with a Gen 3 command box, at 256x192:
+ *
+ *   field   y 0-144    foe box top-left, foe on its platform top-right,
+ *                      player's back sprite bottom-left, player box right
+ *   bottom  y 144-192  message (2 lines) | FIGHT BAG / POKéMON RUN
+ *
+ * Battlers are zero-size anchors placed at the Pokémon's feet: the sprite
+ * stands on that point whatever its frame size. Move a battler by changing
+ * its --x / --y (feet position in game pixels).
+ */
 
 .pmz-pk-battle {
     position: absolute;
@@ -1414,8 +1663,7 @@
     bottom: 0;
     left: 0;
     pointer-events: auto;
-    font-size: 16px;
-    line-height: 16px;
+    --pmz-battle-bottom-h: 48px;
 }
 
 .pmz-pk-battle-field {
@@ -1423,61 +1671,66 @@
     left: 0;
     right: 0;
     top: 0;
-    height: 136px;
+    bottom: var(--pmz-battle-bottom-h);
     overflow: hidden;
     background: var(--pmz-pk-battle-sky);
 }
 
+/* Platforms: --x/--y is the centre of the platform. */
 .pmz-pk-platform {
     position: absolute;
-    border-radius: 0;
+    left: calc(var(--x) - var(--w) / 2);
+    top: calc(var(--y) - var(--h) / 2);
+    width: var(--w);
+    height: var(--h);
     background: var(--pmz-pk-platform);
     box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+    clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 6px), 0 6px);
 }
 
-.pmz-pk-platform.is-foe {
-    left: 147px;
-    top: 56px;
-    width: 94px;
-    height: 22px;
-}
+.pmz-pk-platform.is-foe { --x: 188px; --y: 82px; --w: 128px; --h: 24px; }
+.pmz-pk-platform.is-player { --x: 64px; --y: 140px; --w: 144px; --h: 28px; }
+.is-doubles .pmz-pk-platform.is-foe { --x: 180px; --y: 88px; --w: 152px; }
+.is-doubles .pmz-pk-platform.is-player { --x: 70px; --w: 160px; }
 
-.pmz-pk-platform.is-player {
-    left: 9px;
-    top: 123px;
-    width: 107px;
-    height: 25px;
-}
-
+/* Battlers: --x/--y is where the Pokémon's feet are. */
 .pmz-pk-battler {
     position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 0;
+    height: 0;
 }
 
-.pmz-pk-battler.is-foe0 { left: 164px; top: 9px; }
-.pmz-pk-battler.is-player0 { left: 33px; top: 75px; }
+.pmz-pk-battler > .pmz-pk-image {
+    position: absolute;
+    bottom: 0;
+    left: var(--pmz-img-half, -48px);
+}
 
-.is-doubles .pmz-pk-battler.is-foe0 { left: 191px; top: 14px; }
-.is-doubles .pmz-pk-battler.is-foe1 { left: 141px; top: 6px; }
-.is-doubles .pmz-pk-battler.is-player0 { left: 9px; top: 77px; }
-.is-doubles .pmz-pk-battler.is-player1 { left: 63px; top: 72px; }
+.pmz-pk-battler.is-foe0 { --x: 188px; --y: 88px; }
+.pmz-pk-battler.is-player0 { --x: 64px; --y: 144px; }
+
+.is-doubles .pmz-pk-battler.is-foe0 { --x: 208px; --y: 96px; }
+.is-doubles .pmz-pk-battler.is-foe1 { --x: 152px; --y: 92px; }
+.is-doubles .pmz-pk-battler.is-player0 { --x: 48px; --y: 144px; }
+.is-doubles .pmz-pk-battler.is-player1 { --x: 100px; --y: 144px; }
 
 .pmz-pk-battler.anim-enter.is-foe0,
 .pmz-pk-battler.anim-enter.is-foe1 {
-    animation: pmz-pk-in-right 0.5s ease-out;
+    animation: pmz-pk-in-right 0.5s steps(16, end);
 }
 
 .pmz-pk-battler.anim-enter.is-player0,
 .pmz-pk-battler.anim-enter.is-player1 {
-    animation: pmz-pk-in-left 0.5s ease-out;
+    animation: pmz-pk-in-left 0.5s steps(16, end);
 }
 
-/* Dynamax: bigger with a red glow; Tera: crystal shine. */
+/* Dynamax: twice the size (scaled around the feet) with a red outline;
+ * Tera: a crystal outline and crown. */
 .pmz-pk-battler.is-dynamax {
     transform: scale(2);
-    transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
     filter: drop-shadow(1px 0 0 #f03050) drop-shadow(-1px 0 0 #f03050) drop-shadow(0 1px 0 #f03050) drop-shadow(0 -1px 0 #f03050);
-    transition: transform 0.5s;
 }
 
 .pmz-pk-battler.is-tera {
@@ -1487,10 +1740,10 @@
 .pmz-pk-battler.is-tera::after {
     content: "";
     position: absolute;
-    left: 25%;
-    top: -6px;
-    width: 50%;
-    height: 7px;
+    left: -16px;
+    top: -92px;
+    width: 32px;
+    height: 8px;
     background: linear-gradient(#b8f4ff 0 33%, #58c8f0 33% 67%, #e8fcff 67%);
     clip-path: polygon(50% 0, 100% 40%, 80% 100%, 20% 100%, 0 40%);
     opacity: 0.9;
@@ -1501,16 +1754,16 @@
 }
 
 .pmz-pk-battler.anim-faint {
-    animation: pmz-pk-faint 0.5s ease-in forwards;
+    animation: pmz-pk-faint 0.5s steps(12, end) forwards;
 }
 
 @keyframes pmz-pk-in-right {
-    from { transform: translateX(100px); opacity: 0; }
+    from { transform: translateX(96px); opacity: 0; }
     to { transform: none; opacity: 1; }
 }
 
 @keyframes pmz-pk-in-left {
-    from { transform: translateX(-100px); opacity: 0; }
+    from { transform: translateX(-96px); opacity: 0; }
     to { transform: none; opacity: 1; }
 }
 
@@ -1519,64 +1772,175 @@
 }
 
 @keyframes pmz-pk-faint {
-    to { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(48px); opacity: 0; }
 }
 
+/* Poké Ball: --x/--y is where it lands (on the foe). */
 .pmz-pk-ball {
     position: absolute;
-    left: 201px;
-    top: 53px;
+    left: calc(var(--x) - 5px);
+    top: calc(var(--y) - 10px);
     width: 10px;
     height: 10px;
-    border-radius: 0;
-    background: linear-gradient(#e04838 0 45%, #303030 45% 55%, #f8f8f8 55%);
+    background: linear-gradient(#e04838 0 4px, #303030 4px 6px, #f8f8f8 6px);
     box-shadow: 0 0 0 1px #303030;
-    animation: pmz-pk-throw 0.5s ease-out, pmz-pk-shake 0.6s ease-in-out 0.5s var(--pmz-shakes, 0);
+    animation: pmz-pk-throw 0.5s steps(12, end), pmz-pk-shake 0.6s steps(4, end) 0.5s var(--pmz-shakes, 0);
+    --x: 188px;
+    --y: 80px;
 }
 
-.is-doubles .pmz-pk-ball.at-foe0 { left: 220px; top: 56px; }
-.is-doubles .pmz-pk-ball.at-foe1 { left: 169px; top: 50px; }
+.is-doubles .pmz-pk-ball.at-foe0 { --x: 208px; --y: 88px; }
+.is-doubles .pmz-pk-ball.at-foe1 { --x: 152px; --y: 84px; }
 .pmz-pk-ball.shakes-1 { --pmz-shakes: 1; }
 .pmz-pk-ball.shakes-2 { --pmz-shakes: 2; }
 .pmz-pk-ball.shakes-3 { --pmz-shakes: 3; }
 
 @keyframes pmz-pk-throw {
-    from { transform: translate(-151px, 63px) rotate(-360deg); }
+    from { transform: translate(-128px, 48px); }
     to { transform: none; }
 }
 
 @keyframes pmz-pk-shake {
-    25% { transform: rotate(-25deg); }
-    75% { transform: rotate(25deg); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
 }
+
+/* HP boxes ---------------------------------------------------------------*/
 
 .pmz-pk-bbox {
     position: absolute;
-    width: 116px;
-    padding: 3px 5px;
-    font-size: 16px;
-    line-height: 16px;
+    width: 128px;
+    padding: 2px 3px;
+    box-sizing: border-box;
 }
 
-.pmz-pk-bbox.is-foe0 { left: 8px; top: 8px; }
-.pmz-pk-bbox.is-player0 { right: 8px; top: 84px; }
+/* Foe: name and HP. Player: name, HP with numbers, EXP. */
+.pmz-pk-bbox.is-foe0 { left: 4px; top: 4px; }
+.pmz-pk-bbox.is-player0 { right: 4px; top: 96px; }
 
+.pmz-pk-bbox-top {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+}
+
+.pmz-pk-bbox-top .pmz-pk-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pmz-pk-bbox-hp {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pmz-pk-bbox-hp .pmz-pk-hp {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+/* Doubles: compact boxes (name row + bare HP bar), foes stacked top-left,
+ * the player's side stacked bottom-right. */
 .pmz-pk-bbox.is-compact {
-    width: 94px;
-    padding: 1px 4px;
-    font-size: 16px;
-    line-height: 16px;
+    width: 104px;
+    padding: 1px 3px 2px;
 }
 
-.is-doubles .pmz-pk-bbox.is-foe1 { left: 5px; top: 3px; }
-.is-doubles .pmz-pk-bbox.is-foe0 { left: 5px; top: 26px; }
-.is-doubles .pmz-pk-bbox.is-player0 { right: 5px; top: 88px; }
-.is-doubles .pmz-pk-bbox.is-player1 { right: 5px; top: 111px; }
+.pmz-pk-bbox.is-compact .pmz-pk-hp-label {
+    display: none;
+}
 
+.pmz-pk-bbox.is-compact .pmz-pk-bbox-hp {
+    height: 6px;
+}
+
+.is-doubles .pmz-pk-bbox.is-foe1 { left: 4px; top: 4px; }
+.is-doubles .pmz-pk-bbox.is-foe0 { left: 4px; top: 36px; }
+.is-doubles .pmz-pk-bbox.is-player0 { right: 4px; top: 80px; }
+.is-doubles .pmz-pk-bbox.is-player1 { right: 4px; top: 112px; }
+
+/* Bottom area ------------------------------------------------------------*/
+
+.pmz-pk-battle-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--pmz-battle-bottom-h);
+    background: #283848;
+}
+
+.pmz-pk-battle-msg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 4px 6px;
+    white-space: normal;
+    overflow: hidden;
+    background: #f8f8f8;
+}
+
+.pmz-pk-battle-cmd .pmz-pk-battle-msg {
+    right: 128px;
+}
+
+/* FIGHT BAG / POKéMON RUN */
+.pmz-pk-battle-commands {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 128px;
+    padding: 4px 2px;
+}
+
+.pmz-pk-battle-commands .pmz-list {
+    grid-template-columns: 76px 1fr;
+}
+
+.pmz-pk-battle-commands .pmz-item,
+.pmz-pk-battle-movelist .pmz-item {
+    padding-right: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Moves (2 x 2) | PP and type */
+.pmz-pk-battle-movelist {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 80px;
+    padding: 4px 2px;
+}
+
+.pmz-pk-battle-moveinfo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    padding: 4px 4px;
+    white-space: nowrap;
+}
+
+/* Dynamax / Tera / Mega / Z toggle: on the field under the foe's HP box,
+ * where it covers neither HP box. `fixed` places it relative to the UI
+ * root (the scaled overlay), i.e. in screen coordinates. */
 .pmz-pk-gimmick {
-    margin-top: 3px;
-    min-height: 13px;
-    font-size: 16px;
+    position: fixed;
+    left: var(--pmz-gap);
+    top: 52px;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 4px;
+    white-space: nowrap;
 }
 
 .pmz-pk-gimmick.is-on {
@@ -1585,110 +1949,35 @@
     text-shadow: none;
 }
 
+.pmz-pk-battle-back {
+    display: none;
+}
+
+/* Doubles target picker: covers the bottom area. */
 .pmz-pk-target {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 60px;
+    height: 48px;
     pointer-events: auto;
 }
 
 .pmz-pk-target-panel {
     position: absolute;
-    left: 3px;
-    right: 3px;
-    top: 3px;
-    bottom: 3px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 4px 2px;
 }
 
 .pmz-pk-target-title {
-    margin-bottom: 2px;
+    display: none;
 }
 
 .pmz-pk-target .pmz-item.is-ally {
     color: var(--pmz-pk-male);
-}
-
-.pmz-pk-bbox-top {
-    display: flex;
-    align-items: baseline;
-}
-
-.pmz-pk-bbox-top .pmz-pk-name {
-    flex: 1;
-}
-
-.pmz-pk-bbox-hp {
-    display: flex;
-    align-items: center;
-}
-
-.pmz-pk-bbox-hp .pmz-pk-hp {
-    flex: 1;
-}
-
-.pmz-pk-battle-bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 136px;
-    bottom: 0;
-    background: #283848;
-}
-
-.pmz-pk-battle-msg {
-    position: absolute;
-    left: 3px;
-    right: 3px;
-    top: 3px;
-    bottom: 3px;
-    padding: 5px 8px;
-    white-space: normal;
-    background: #f8f8f8;
-}
-
-.pmz-pk-battle-cmd .pmz-pk-battle-msg {
-    right: 105px;
-}
-
-.pmz-pk-battle-commands {
-    position: absolute;
-    right: 3px;
-    top: 3px;
-    bottom: 3px;
-    width: 100px;
-    padding: 4px;
-}
-
-.pmz-pk-battle-movelist {
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    bottom: 3px;
-    right: 93px;
-    padding: 4px;
-}
-
-.pmz-pk-battle-movelist .pmz-item {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.pmz-pk-battle-moveinfo {
-    position: absolute;
-    right: 3px;
-    top: 3px;
-    bottom: 3px;
-    width: 88px;
-    padding: 5px;
-}
-
-.pmz-pk-battle-back {
-    position: absolute;
-    right: 5px;
-    bottom: -1px;
-    display: none;
 }
 
 /* Town Map ---------------------------------------------------------------*/
@@ -1881,6 +2170,13 @@
 .pmz-option-row {
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
+}
+
+.pmz-option-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pmz-option-value {

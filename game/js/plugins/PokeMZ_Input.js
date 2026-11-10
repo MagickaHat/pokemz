@@ -55,10 +55,11 @@
  *
  * @param glyphCell
  * @text Glyph Cell Size
- * @desc Size in pixels of one square cell in a glyph sheet.
+ * @desc Size in pixels of one square cell in a glyph sheet. Glyphs are
+ * drawn 16px tall, so 16 keeps them on the pixel grid.
  * @type number
  * @min 8
- * @default 32
+ * @default 16
  *
  * @param glyphColumns
  * @text Glyph Columns
@@ -2349,7 +2350,7 @@
         cameraRelative: parseBool(params.cameraRelative, true),
         deadzone: parseNum(params.deadzone, 0.2),
         glyphFolder: String(params.glyphFolder || "img/system/").replace(/\/?$/, "/"),
-        glyphCell: parseNum(params.glyphCell, 32),
+        glyphCell: parseNum(params.glyphCell, 16),
         glyphColumns: parseNum(params.glyphColumns, 8),
         glyphMap: (() => {
             try {

@@ -1254,7 +1254,7 @@
      *        glyph sheet when one exists, else a text badge.
      * @param {Object} props {action, size = 24, class, player = 1}.
      */
-    function Glyph({ action, size = 24, class: cls, player = 1 }) {
+    function Glyph({ action, size = 16, class: cls, player = 1 }) {
         const g = useGlyph(action, player);
         if (!g) {
             return null;
@@ -1939,7 +1939,7 @@
      *        keys or a gamepad (hidden for mouse and touch).
      * @param {Object} props {action, size = 22, player = 1}.
      */
-    function ButtonHint({ action, size = 22, player = 1 }) {
+    function ButtonHint({ action, size = 16, player = 1 }) {
         const dev = useInputDevice(player);
         if (dev.device !== "keyboard" && dev.device !== "gamepad") {
             return null;
