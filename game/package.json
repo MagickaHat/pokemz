@@ -4,8 +4,8 @@
     "chromium-args": "--force-color-profile=srgb",
     "window": {
         "title": "PokéMZ",
-        "width": 816,
-        "height": 624,
+        "width": 256,
+        "height": 192,
         "position": "center",
         "icon": "icon/icon.png"
     }
