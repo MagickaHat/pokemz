@@ -42,7 +42,7 @@
  * @type number
  * @min 1
  * @max 6
- * @default 4
+ * @default 2
  *
  * @help
  * ============================================================================
@@ -83,7 +83,7 @@
         replaceNumberInput: UI.parseBool(params.replaceNumberInput, true),
         replaceNameInput: UI.parseBool(params.replaceNameInput, true),
         charsPerFrame: Number(params.charsPerFrame || 1),
-        lines: Number(params.lines || 4),
+        lines: Number(params.lines || 2),
     };
 
     /** @brief Focus priority of message UI (above screens). */
@@ -799,7 +799,7 @@
         }
         return html`<div class="pmz-name-screen">
             <div class="pmz-panel pmz-name-header">
-                ${actor && actor.faceName() ? html`<${Face} name=${actor.faceName()} index=${actor.faceIndex()} scale=${0.5} />` : null}
+                ${actor && actor.faceName() ? html`<${Face} name=${actor.faceName()} index=${actor.faceIndex()} scale=${1} />` : null}
                 <div class="pmz-name-info">
                     <div class="pmz-name-title">${title}</div>
                     <div class="pmz-name-slots">${slots}</div>

@@ -114,3 +114,7 @@ body {
         transform: rotate(360deg);
     }
 }
+/* PokeMZ_Display: the canvas is shown at whole multiples, without smoothing. */
+#gameCanvas {
+    image-rendering: pixelated;
+}

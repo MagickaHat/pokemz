@@ -2,15 +2,23 @@
  * PokéMZ UI theme (PokeMZ_UI_Core and friends).
  * Keep to CSS that the Chromium in MZ's NW.js runtime understands (80+):
  * no `inset` shorthand and no `gap` on flex containers (grid gap is fine).
- * Sizes are in game pixels: the overlay is scaled with the canvas.
+ *
+ * Sizes are in game pixels (256x192 by default): the overlay is scaled with
+ * the canvas by a whole multiple, so 1px here is one game pixel on screen.
+ * Pixel-grid rules (see docs/PREACT_UI.md):
+ *   - whole px values only, no fractional em/rem sizes
+ *   - font sizes are multiples of 16px (the pixel font's native size)
+ *   - no border-radius (use .pmz-corners or border-image), no blur, no soft
+ *     gradients: hard color stops only
+ *   - transforms move by whole pixels and scale by whole multiples
  * Override the variables below (or any class) to restyle or add graphics.
  */
 
 #pokemz-ui {
     /* --pmz-locale-font is set by PokeMZ_Locale for languages with their own font. */
     --pmz-font: var(--pmz-locale-font, "pokemz-ui-font"), rmmz-mainfont, Verdana, sans-serif;
-    --pmz-font-size: 30px;
-    --pmz-line: 36px;
+    --pmz-font-size: 16px;
+    --pmz-line: 18px;
     --pmz-fg: #404040;
     --pmz-fg-shadow: #d0d0c8;
     --pmz-muted: #8a8a8a;
@@ -20,9 +28,9 @@
     --pmz-accent: #e04838;
     --pmz-select: #dce8f8;
     --pmz-dim: rgba(0, 0, 0, 0.45);
-    --pmz-radius: 10px;
-    --pmz-pad: 14px;
-    --pmz-message-lines: 4;
+    --pmz-radius: 0;
+    --pmz-pad: 4px;
+    --pmz-message-lines: 2;
     pointer-events: none;
     overflow: hidden;
     user-select: none;
@@ -31,6 +39,7 @@
 }
 
 .pmz-root {
+    image-rendering: pixelated;
     position: absolute;
     left: 0;
     top: 0;
@@ -39,7 +48,7 @@
     font-size: var(--pmz-font-size);
     line-height: var(--pmz-line);
     color: var(--pmz-fg);
-    text-shadow: 2px 2px 0 var(--pmz-fg-shadow);
+    text-shadow: 1px 1px 0 var(--pmz-fg-shadow);
     -webkit-font-smoothing: none;
 }
 
@@ -97,27 +106,48 @@
  * Building blocks
  *-----------------------------------------------------------------------*/
 
+/* Stepped pixel corners instead of border-radius (which would draw smooth
+ * curves at screen resolution). Add class "pmz-corners" to a box to cut its
+ * corners in 1px steps; --pmz-corner is 2px (or 0 for square). It clips
+ * children too, so don't use it on a box with children poking out of it. */
+.pmz-button,
+.pmz-corners {
+    --pmz-corner: 2px;
+    --c: var(--pmz-corner);
+    --c2: calc(var(--pmz-corner) / 2);
+    clip-path: polygon(
+        0 var(--c), var(--c2) var(--c), var(--c2) var(--c2), var(--c) var(--c2), var(--c) 0,
+        calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--c2), calc(100% - var(--c2)) var(--c2), calc(100% - var(--c2)) var(--c), 100% var(--c),
+        100% calc(100% - var(--c)), calc(100% - var(--c2)) calc(100% - var(--c)), calc(100% - var(--c2)) calc(100% - var(--c2)), calc(100% - var(--c)) calc(100% - var(--c2)), calc(100% - var(--c)) 100%,
+        var(--c) 100%, var(--c) calc(100% - var(--c2)), var(--c2) calc(100% - var(--c2)), var(--c2) calc(100% - var(--c)), 0 calc(100% - var(--c))
+    );
+}
+
+.pmz-image {
+    image-rendering: pixelated;
+}
+
 .pmz-panel {
     position: relative;
     box-sizing: border-box;
     background: var(--pmz-bg);
-    border: 4px solid var(--pmz-border);
-    box-shadow: inset 0 0 0 3px var(--pmz-border-inner);
-    border-radius: var(--pmz-radius);
-    padding: var(--pmz-pad) calc(var(--pmz-pad) + 4px);
+    border: 1px solid var(--pmz-border);
+    box-shadow: inset 0 0 0 1px var(--pmz-border-inner);
+    border-radius: 0;
+    padding: var(--pmz-pad) calc(var(--pmz-pad) + 1px);
 }
 
 .pmz-panel-title,
 .pmz-title-bar {
-    font-size: 32px;
+    font-size: 16px;
 }
 
 .pmz-title-bar {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 16px;
-    padding: 8px 20px;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    padding: 3px 6px;
 }
 
 .pmz-button {
@@ -125,12 +155,12 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-width: 96px;
-    min-height: 48px; /* comfortable touch target */
-    padding: 4px 16px;
+    min-width: 30px;
+    min-height: 15px; /* comfortable touch target */
+    padding: 1px 5px;
     background: var(--pmz-bg);
-    border: 3px solid var(--pmz-border);
-    border-radius: var(--pmz-radius);
+    border: 1px solid var(--pmz-border);
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -144,8 +174,8 @@
 
 .pmz-back {
     position: absolute;
-    right: 16px;
-    bottom: 16px;
+    right: 5px;
+    bottom: 5px;
 }
 
 .pmz-list {
@@ -161,9 +191,9 @@
 
 .pmz-item {
     position: relative;
-    padding: 4px 8px 4px 32px;
+    padding: 1px 3px 1px 10px;
     min-height: var(--pmz-line);
-    border-radius: 6px;
+    border-radius: 0;
     cursor: pointer;
     white-space: nowrap;
 }
@@ -171,13 +201,13 @@
 .pmz-item.is-selected::before {
     content: "";
     position: absolute;
-    left: 8px;
+    left: 3px;
     top: 50%;
-    margin-top: -9px;
-    border-left: 14px solid var(--pmz-fg);
-    border-top: 9px solid transparent;
-    border-bottom: 9px solid transparent;
-    filter: drop-shadow(2px 2px 0 var(--pmz-fg-shadow));
+    margin-top: -3px;
+    border-left: 5px solid var(--pmz-fg);
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    filter: drop-shadow(1px 1px 0 var(--pmz-fg-shadow));
 }
 
 .pmz-item.is-selected {
@@ -194,8 +224,8 @@
 }
 
 .pmz-inline-icon {
-    width: 28px !important;
-    height: 28px !important;
+    width: 9px !important;
+    height: 9px !important;
 }
 
 /*-------------------------------------------------------------------------
@@ -204,7 +234,7 @@
 
 .pmz-toasts {
     position: absolute;
-    top: 12px;
+    top: 4px;
     left: 0;
     right: 0;
     display: flex;
@@ -218,12 +248,12 @@
     right: auto;
     bottom: auto;
     left: auto;
-    padding: 4px 18px;
-    font-size: 24px;
+    padding: 1px 6px;
+    font-size: 16px;
     color: #fff;
-    text-shadow: 2px 2px 0 #000;
+    text-shadow: 1px 1px 0 #000;
     background: rgba(32, 40, 56, 0.88);
-    border-radius: 20px;
+    border-radius: 0;
 }
 
 /*-------------------------------------------------------------------------
@@ -240,18 +270,18 @@
 
 .pmz-start-menu {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 280px;
-    max-height: calc(100% - 24px);
-    padding: 12px 10px;
+    top: 4px;
+    right: 4px;
+    width: 88px;
+    max-height: calc(100% - 8px);
+    padding: 4px 3px;
     display: flex;
     flex-direction: column;
 }
 
 .pmz-start-item {
-    min-height: 48px;
-    line-height: 40px;
+    min-height: 15px;
+    line-height: 20px;
 }
 
 /*-------------------------------------------------------------------------
@@ -266,15 +296,15 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background: linear-gradient(#a8d0f0, #e8f0f8);
+    background: #c8e0f4;
 }
 
 .pmz-placeholder-body {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 96px;
-    bottom: 84px;
+    left: 5px;
+    right: 5px;
+    top: 30px;
+    bottom: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,7 +315,7 @@
  *-----------------------------------------------------------------------*/
 
 .pmz-message-area {
-    --pmz-message-height: calc(var(--pmz-message-lines) * var(--pmz-line) + var(--pmz-pad) * 2 + 8px);
+    --pmz-message-height: calc(var(--pmz-message-lines) * var(--pmz-line) + var(--pmz-pad) * 2 + 3px);
     position: absolute;
     top: 0;
     right: 0;
@@ -293,7 +323,7 @@
     left: 0;
     display: flex;
     flex-direction: column;
-    padding: 12px;
+    padding: 4px;
     box-sizing: border-box;
 }
 
@@ -313,26 +343,26 @@
     position: relative;
     box-sizing: border-box;
     height: var(--pmz-message-height);
-    padding: var(--pmz-pad) 24px;
+    padding: var(--pmz-pad) 8px;
     display: flex;
-    border-radius: var(--pmz-radius);
+    border-radius: 0;
 }
 
 .pmz-message.is-window {
     background: var(--pmz-bg);
-    border: 4px solid var(--pmz-border);
-    box-shadow: inset 0 0 0 3px var(--pmz-border-inner);
+    border: 1px solid var(--pmz-border);
+    box-shadow: inset 0 0 0 1px var(--pmz-border-inner);
 }
 
 .pmz-message.is-dim {
     background: var(--pmz-dim);
     color: #fff;
-    text-shadow: 2px 2px 0 #000;
+    text-shadow: 1px 1px 0 #000;
 }
 
 .pmz-message.is-transparent {
     color: #fff;
-    text-shadow: 2px 2px 0 #000;
+    text-shadow: 1px 1px 0 #000;
 }
 
 .pmz-message-text {
@@ -357,74 +387,74 @@
 
 .pmz-message-name {
     position: absolute;
-    left: 12px;
-    top: -46px;
-    padding: 2px 16px;
+    left: 4px;
+    top: -14px;
+    padding: 1px 5px;
     background: var(--pmz-bg);
     color: var(--pmz-fg);
-    text-shadow: 2px 2px 0 var(--pmz-fg-shadow);
-    border: 4px solid var(--pmz-border);
-    border-radius: var(--pmz-radius);
+    text-shadow: 1px 1px 0 var(--pmz-fg-shadow);
+    border: 1px solid var(--pmz-border);
+    border-radius: 0;
 }
 
 .pmz-message-arrow {
     position: absolute;
-    right: 24px;
-    bottom: 14px;
-    border-top: 14px solid var(--pmz-accent);
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
+    right: 8px;
+    bottom: 4px;
+    border-top: 5px solid var(--pmz-accent);
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
     animation: pmz-bounce 0.6s ease-in-out infinite alternate;
 }
 
 @keyframes pmz-bounce {
     from {
-        transform: translateY(-3px);
+        transform: translateY(-1px);
     }
     to {
-        transform: translateY(3px);
+        transform: translateY(1px);
     }
 }
 
 .pmz-gold {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    min-width: 180px;
+    top: 4px;
+    right: 4px;
+    min-width: 56px;
     text-align: right;
 }
 
 .pmz-message-area.is-top .pmz-gold {
     top: auto;
-    bottom: 12px;
+    bottom: 4px;
 }
 
 /* Choices and number input sit beside the message box. */
 .pmz-message-area > .pmz-choices,
 .pmz-message-area > .pmz-number {
     position: absolute;
-    right: 12px;
-    bottom: calc(var(--pmz-message-height) + 20px);
-    min-width: 200px;
-    padding: 10px 8px;
+    right: 4px;
+    bottom: calc(var(--pmz-message-height) + 6px);
+    min-width: 63px;
+    padding: 3px 3px;
 }
 
 .pmz-message-area.is-top > .pmz-choices,
 .pmz-message-area.is-top > .pmz-number {
     bottom: auto;
-    top: calc(var(--pmz-message-height) + 20px);
+    top: calc(var(--pmz-message-height) + 6px);
 }
 
 .pmz-message-area.is-middle > .pmz-choices,
 .pmz-message-area.is-middle > .pmz-number,
 .pmz-message-area.is-input-only > .pmz-choices,
 .pmz-message-area.is-input-only > .pmz-number {
-    bottom: 12px;
+    bottom: 4px;
 }
 
 .pmz-message-area > .pmz-choices.is-left {
     right: auto;
-    left: 12px;
+    left: 4px;
 }
 
 .pmz-message-area > .pmz-choices.is-center {
@@ -435,7 +465,7 @@
 .pmz-choices .pmz-choices-back {
     position: static;
     display: flex;
-    margin-top: 8px;
+    margin-top: 3px;
     width: 100%;
 }
 
@@ -456,26 +486,26 @@
 }
 
 .pmz-number-digit {
-    width: 40px;
+    width: 13px;
     text-align: center;
-    border-radius: 6px;
-    font-size: 36px;
-    line-height: 44px;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 22px;
     cursor: pointer;
 }
 
 .pmz-number-cell.is-selected .pmz-number-digit {
     background: var(--pmz-select);
-    box-shadow: inset 0 0 0 2px var(--pmz-border);
+    box-shadow: inset 0 0 0 1px var(--pmz-border);
 }
 
 .pmz-number-up,
 .pmz-number-down {
-    min-width: 40px;
-    min-height: 36px;
+    min-width: 13px;
+    min-height: 11px;
     padding: 0;
-    font-size: 18px;
-    border-width: 2px;
+    font-size: 16px;
+    border-width: 1px;
 }
 
 .pmz-number-ok {
@@ -488,10 +518,10 @@
 
 .pmz-keyboard {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    bottom: 80px;
-    padding: 12px;
+    left: 5px;
+    right: 5px;
+    bottom: 25px;
+    padding: 4px;
     display: flex;
     flex-direction: column;
 }
@@ -510,11 +540,11 @@
 
 .pmz-keyboard-page {
     position: absolute;
-    right: 16px;
-    top: -42px;
-    padding: 0 12px;
+    right: 5px;
+    top: -13px;
+    padding: 0 4px;
     color: #fff;
-    text-shadow: 2px 2px 0 #000;
+    text-shadow: 1px 1px 0 #000;
 }
 
 .pmz-keyboard-row {
@@ -523,25 +553,25 @@
 
 .pmz-key {
     flex: 1;
-    min-height: 44px;
+    min-height: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    border-radius: 0;
     background: #fff;
-    border: 2px solid var(--pmz-border-inner);
+    border: 1px solid var(--pmz-border-inner);
     cursor: pointer;
 }
 
 .pmz-key.is-ctrl {
-    font-size: 24px;
+    font-size: 16px;
     background: #eef3fa;
 }
 
 .pmz-key.is-selected {
     background: var(--pmz-select);
     border-color: var(--pmz-border);
-    box-shadow: inset 0 0 0 2px var(--pmz-border);
+    box-shadow: inset 0 0 0 1px var(--pmz-border);
 }
 
 .pmz-key:active {
@@ -550,9 +580,9 @@
 
 .pmz-name-header {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 16px;
+    left: 5px;
+    right: 5px;
+    top: 5px;
     display: flex;
     align-items: center;
 }
@@ -562,9 +592,9 @@
 }
 
 .pmz-name-slot {
-    width: 30px;
+    width: 9px;
     text-align: center;
-    border-bottom: 3px solid var(--pmz-fg);
+    border-bottom: 1px solid var(--pmz-fg);
 }
 
 .pmz-name-slot.is-cursor {
@@ -584,27 +614,27 @@
 
 .pmz-controls-table {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 96px;
-    bottom: 84px;
+    left: 5px;
+    right: 5px;
+    top: 30px;
+    bottom: 26px;
     display: flex;
     flex-direction: column;
-    font-size: 26px;
-    line-height: 32px;
+    font-size: 16px;
+    line-height: 16px;
 }
 
 .pmz-controls-head,
 .pmz-controls-row {
     display: grid;
-    grid-template-columns: 200px 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: 63px 1fr 1fr;
+    gap: 3px;
     align-items: center;
 }
 
 .pmz-controls-head {
     color: var(--pmz-muted);
-    padding-bottom: 4px;
+    padding-bottom: 1px;
 }
 
 .pmz-controls-grid {
@@ -613,14 +643,14 @@
 }
 
 .pmz-controls-row .pmz-item {
-    min-height: 36px;
+    min-height: 11px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .pmz-controls-row.is-reset {
     grid-template-columns: 1fr;
-    margin-top: 8px;
+    margin-top: 3px;
 }
 
 .pmz-capture {
@@ -637,7 +667,7 @@
 
 .pmz-capture-box {
     text-align: center;
-    min-width: 360px;
+    min-width: 113px;
 }
 
 .pmz-capture-timer {
@@ -650,32 +680,32 @@
 
 .pmz-toasts > * + *,
 .pmz-keyboard-row + .pmz-keyboard-row {
-    margin-top: 6px;
+    margin-top: 2px;
 }
 
 .pmz-message-face + .pmz-message-text,
 .pmz-name-header > * + * {
-    margin-left: 20px;
+    margin-left: 6px;
 }
 
 .pmz-number > * + * {
-    margin-left: 16px;
+    margin-left: 5px;
 }
 
 .pmz-number-cells > * + * {
-    margin-left: 4px;
+    margin-left: 1px;
 }
 
 .pmz-keyboard-row > * + *,
 .pmz-name-slots > * + * {
-    margin-left: 6px;
+    margin-left: 2px;
 }
 
 /*
  * Localization debug (PokeMZ_Locale, playtest): text that doesn't fit its box.
  */
 .pmz-l10n-overflow {
-    outline: 2px dashed #e000c0;
+    outline: 1px dashed #e000c0;
     outline-offset: -2px;
 }
 
@@ -685,8 +715,8 @@
  *=======================================================================*/
 
 #pokemz-ui {
-    --pmz-pk-small: 24px;
-    --pmz-pk-bg: linear-gradient(#6fb0d8, #b8dcf0);
+    --pmz-pk-small: 16px;
+    --pmz-pk-bg: #94c6e4;
     --pmz-pk-slot: #e8f4f8;
     --pmz-pk-slot-lead: #d8ecf8;
     --pmz-pk-slot-sel: #f8e8a8;
@@ -697,7 +727,7 @@
     --pmz-pk-exp: #48a8f8;
     --pmz-pk-male: #3878e0;
     --pmz-pk-female: #e05068;
-    --pmz-pk-battle-sky: linear-gradient(#f8f8f0 0%, #d8f0d0 55%, #a8d890 100%);
+    --pmz-pk-battle-sky: linear-gradient(#f8f8f0 0 50%, #d8f0d0 50% 75%, #a8d890 75%);
     --pmz-pk-platform: #88c070;
 }
 
@@ -714,7 +744,7 @@
     background: var(--pmz-pk-bg);
     pointer-events: auto;
     font-size: var(--pmz-pk-small);
-    line-height: 30px;
+    line-height: 16px;
 }
 
 .pmz-pk-name {
@@ -727,11 +757,11 @@
 }
 
 .pmz-pk-level {
-    margin-right: 8px;
+    margin-right: 3px;
 }
 
 .pmz-pk-gender {
-    margin-left: 6px;
+    margin-left: 2px;
 }
 
 .pmz-pk-gender.is-male {
@@ -744,13 +774,13 @@
 
 .pmz-pk-status {
     display: inline-block;
-    padding: 0 6px;
-    margin-right: 6px;
-    border-radius: 4px;
+    padding: 0 2px;
+    margin-right: 2px;
+    border-radius: 0;
     color: #fff;
     text-shadow: none;
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 16px;
     background: #888;
 }
 
@@ -764,24 +794,24 @@
 
 .pmz-pk-type {
     display: inline-block;
-    min-width: 72px;
-    padding: 0 8px;
-    margin-right: 6px;
-    border-radius: 6px;
+    min-width: 23px;
+    padding: 0 3px;
+    margin-right: 2px;
+    border-radius: 0;
     text-align: center;
     color: #fff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
-    font-size: 18px;
-    line-height: 26px;
+    font-size: 16px;
+    line-height: 16px;
     background: var(--pmz-type);
 }
 
 .pmz-pk-badge {
     display: inline-block;
-    padding: 0 6px;
-    border-radius: 4px;
+    padding: 0 2px;
+    border-radius: 0;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 16px;
     color: #fff;
     text-shadow: none;
     background: var(--pmz-accent);
@@ -791,13 +821,13 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 16px;
 }
 
 .pmz-pk-hp-label {
-    padding: 0 4px;
-    margin-right: 4px;
-    border-radius: 3px;
+    padding: 0 1px;
+    margin-right: 1px;
+    border-radius: 0;
     color: #f8d030;
     background: #404040;
     text-shadow: none;
@@ -806,9 +836,9 @@
 .pmz-pk-hp-track {
     position: relative;
     flex: 1;
-    height: 10px;
-    border: 2px solid #404040;
-    border-radius: 6px;
+    height: 3px;
+    border: 1px solid #404040;
+    border-radius: 0;
     background: #505050;
     overflow: hidden;
 }
@@ -826,18 +856,18 @@
 .pmz-pk-hp-fill.is-low { background: var(--pmz-pk-hp-low); }
 
 .pmz-pk-hp-numbers {
-    margin-left: 8px;
-    min-width: 72px;
+    margin-left: 3px;
+    min-width: 23px;
     text-align: right;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .pmz-pk-exp {
     position: relative;
-    height: 6px;
-    margin-top: 4px;
-    border: 2px solid #404040;
-    border-radius: 4px;
+    height: 2px;
+    margin-top: 1px;
+    border: 1px solid #404040;
+    border-radius: 0;
     background: #505050;
     overflow: hidden;
 }
@@ -858,7 +888,7 @@
 
 .pmz-pk-kv > span:first-child {
     color: var(--pmz-muted);
-    margin-right: 12px;
+    margin-right: 4px;
 }
 
 .pmz-pk-kv .is-up { color: var(--pmz-accent); }
@@ -866,80 +896,80 @@
 
 .pmz-pk-help {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    bottom: 12px;
-    min-height: 64px;
+    left: 5px;
+    right: 5px;
+    bottom: 4px;
+    min-height: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 16px;
+    padding: 2px 5px;
 }
 
 .pmz-pk-help .pmz-back {
     position: static;
-    min-height: 44px;
-    margin-left: 12px;
+    min-height: 14px;
+    margin-left: 4px;
 }
 
 .pmz-pk-arrow {
     display: inline-block;
-    padding: 0 12px;
+    padding: 0 4px;
     cursor: pointer;
 }
 
 .pmz-pk-commands {
-    min-width: 260px;
-    max-width: 420px;
-    padding: 10px 12px;
+    min-width: 82px;
+    max-width: 132px;
+    padding: 3px 4px;
     pointer-events: auto;
 }
 
 .pmz-pk-commands.is-floating {
     position: absolute;
-    right: 24px;
-    bottom: 92px;
+    right: 8px;
+    bottom: 29px;
 }
 
 .pmz-pk-commands-title {
-    padding: 0 8px 6px;
-    border-bottom: 2px solid var(--pmz-border-inner);
-    margin-bottom: 6px;
+    padding: 0 3px 2px;
+    border-bottom: 1px solid var(--pmz-border-inner);
+    margin-bottom: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .pmz-item.is-marked {
-    outline: 3px dashed var(--pmz-accent);
+    outline: 1px dashed var(--pmz-accent);
 }
 
 /* Party ------------------------------------------------------------------*/
 
 .pmz-pk-party-lead {
     position: absolute;
-    left: 16px;
-    top: 72px;
-    width: 300px;
+    left: 5px;
+    top: 23px;
+    width: 94px;
 }
 
 .pmz-pk-party-rest {
     position: absolute;
-    left: 332px;
-    right: 16px;
-    top: 16px;
+    left: 104px;
+    right: 5px;
+    top: 5px;
     display: grid;
-    grid-template-rows: repeat(5, 82px);
-    grid-gap: 8px;
+    grid-template-rows: repeat(5, 28px);
+    grid-gap: 1px;
 }
 
 .pmz-pk-slot {
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    padding: 6px 12px 6px 8px;
-    border: 3px solid var(--pmz-border);
-    border-radius: 14px;
+    padding: 2px 4px 2px 3px;
+    border: 1px solid var(--pmz-border);
+    border-radius: 0;
     background: var(--pmz-pk-slot);
     white-space: normal;
 }
@@ -947,7 +977,7 @@
 .pmz-pk-slot.is-lead {
     flex-direction: column;
     align-items: flex-start;
-    height: 220px;
+    height: 69px;
     background: var(--pmz-pk-slot-lead);
 }
 
@@ -975,39 +1005,59 @@
 .pmz-pk-slot-body {
     flex: 1;
     min-width: 0;
-    margin-left: 8px;
+    margin-left: 3px;
     width: 100%;
+    line-height: 13px; /* two 16px-font lines in a 28px slot */
 }
 
 .pmz-pk-slot-name {
     display: flex;
-    font-size: 24px;
+    font-size: 16px;
+}
+
+/* Small slots (party members 2-6): name on top, level and HP bar below. */
+.pmz-pk-slot:not(.is-lead) .pmz-pk-slot-body {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
+.pmz-pk-slot:not(.is-lead) .pmz-pk-slot-name {
+    grid-column: 1 / 3;
+}
+
+.pmz-pk-slot:not(.is-lead) .pmz-pk-hp {
+    margin-left: 4px;
+}
+
+.pmz-pk-slot:not(.is-lead) .pmz-pk-hp-numbers {
+    display: none;
 }
 
 .pmz-pk-slot-info {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .pmz-pk-held {
     color: var(--pmz-accent);
-    margin-right: 6px;
+    margin-right: 2px;
 }
 
 /* Summary ----------------------------------------------------------------*/
 
 .pmz-pk-summary-head {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 12px;
-    padding: 6px 16px;
+    left: 5px;
+    right: 5px;
+    top: 4px;
+    padding: 2px 5px;
 }
 
 .pmz-pk-tabs span {
     display: inline-block;
-    padding: 0 16px;
-    margin-right: 8px;
-    border-radius: 6px;
+    padding: 0 5px;
+    margin-right: 3px;
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -1017,26 +1067,26 @@
 
 .pmz-pk-summary-card {
     position: absolute;
-    left: 16px;
-    top: 72px;
-    width: 280px;
-    bottom: 88px;
+    left: 5px;
+    top: 23px;
+    width: 88px;
+    bottom: 28px;
     text-align: center;
 }
 
 .pmz-pk-summary-body {
     position: absolute;
-    left: 312px;
-    right: 16px;
-    top: 72px;
-    bottom: 88px;
+    left: 98px;
+    right: 5px;
+    top: 23px;
+    bottom: 28px;
     overflow: hidden;
 }
 
 .pmz-pk-memo,
 .pmz-pk-ability,
 .pmz-pk-desc {
-    margin: 8px 0 0;
+    margin: 3px 0 0;
     white-space: normal;
 }
 
@@ -1056,32 +1106,32 @@
 }
 
 .pmz-pk-move-pp {
-    margin-left: 8px;
-    font-size: 20px;
+    margin-left: 3px;
+    font-size: 16px;
 }
 
 .pmz-pk-summary-moves .pmz-list {
-    margin-bottom: 8px;
+    margin-bottom: 3px;
 }
 
 /* Move pickers -----------------------------------------------------------*/
 
 .pmz-pk-movepick-head {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 12px;
-    padding: 4px 16px;
+    left: 5px;
+    right: 5px;
+    top: 4px;
+    padding: 1px 5px;
     display: flex;
     align-items: center;
 }
 
 .pmz-pk-movepick-list {
     position: absolute;
-    left: 16px;
-    width: 470px;
-    top: 92px;
-    bottom: 88px;
+    left: 5px;
+    width: 147px;
+    top: 29px;
+    bottom: 28px;
 }
 
 .pmz-pk-movepick-list .pmz-list {
@@ -1090,28 +1140,28 @@
 
 .pmz-pk-movepick-details {
     position: absolute;
-    left: 500px;
-    right: 16px;
-    top: 92px;
-    bottom: 88px;
+    left: 157px;
+    right: 5px;
+    top: 29px;
+    bottom: 28px;
     white-space: normal;
 }
 
 .pmz-item.is-new {
-    border-top: 2px dashed var(--pmz-border-inner);
+    border-top: 1px dashed var(--pmz-border-inner);
 }
 
 /* Evolution --------------------------------------------------------------*/
 
 .pmz-pk-evolution {
-    background: radial-gradient(#ffffff, #a8c8e8 70%);
+    background: #d4e4f4;
 }
 
 .pmz-pk-evolution-stage {
     position: absolute;
     left: 0;
     right: 0;
-    top: 120px;
+    top: 38px;
     display: flex;
     justify-content: center;
 }
@@ -1128,24 +1178,30 @@
 
 .pmz-pk-bag-pocket {
     position: absolute;
-    left: 16px;
-    top: 16px;
-    width: 300px;
-    height: 136px;
+    left: 5px;
+    top: 5px;
+    width: 94px;
+    height: 43px;
+    padding-left: 2px;
+    padding-right: 2px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .pmz-pk-bag-pocket-name {
     display: inline-block;
-    min-width: 160px;
+    min-width: 50px;
+    max-width: 62px;
+    overflow: hidden;
+    vertical-align: top;
 }
 
 .pmz-pk-dots span {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 3px;
-    border-radius: 5px;
+    width: 3px;
+    height: 3px;
+    margin: 0 1px;
+    border-radius: 0;
     background: var(--pmz-border-inner);
 }
 
@@ -1155,10 +1211,10 @@
 
 .pmz-pk-bag-list {
     position: absolute;
-    left: 332px;
-    right: 16px;
-    top: 16px;
-    bottom: 160px;
+    left: 104px;
+    right: 5px;
+    top: 5px;
+    bottom: 50px;
 }
 
 .pmz-pk-bag-list .pmz-list {
@@ -1176,46 +1232,46 @@
 }
 
 .pmz-pk-bag-count {
-    margin-left: 12px;
+    margin-left: 4px;
 }
 
 .pmz-pk-bag-desc {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    bottom: 12px;
-    height: 136px;
+    left: 5px;
+    right: 5px;
+    bottom: 4px;
+    height: 43px;
     display: flex;
     align-items: flex-start;
 }
 
 .pmz-pk-bag-desc p {
-    margin: 0 0 0 12px;
+    margin: 0 0 0 4px;
     white-space: normal;
 }
 
 /* Pokédex ----------------------------------------------------------------*/
 
 .pmz-pk-dex {
-    background: linear-gradient(#d84838, #f08070);
+    background: #e46454;
 }
 
 .pmz-pk-dex-head {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 12px;
-    padding: 4px 16px;
+    left: 5px;
+    right: 5px;
+    top: 4px;
+    padding: 1px 5px;
     display: flex;
     justify-content: space-between;
 }
 
 .pmz-pk-dex-list {
     position: absolute;
-    left: 332px;
-    right: 16px;
-    top: 72px;
-    bottom: 88px;
+    left: 104px;
+    right: 5px;
+    top: 23px;
+    bottom: 28px;
 }
 
 .pmz-pk-dex-list .pmz-list {
@@ -1224,58 +1280,58 @@
 
 .pmz-pk-dex-num {
     display: inline-block;
-    width: 52px;
+    width: 16px;
 }
 
 .pmz-pk-dex-mark {
     display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-    border-radius: 9px;
+    width: 6px;
+    height: 6px;
+    margin-right: 3px;
+    border-radius: 0;
     vertical-align: middle;
 }
 
 .pmz-pk-dex-mark.is-caught {
     background: linear-gradient(#e04838 0 45%, #303030 45% 55%, #f8f8f8 55%);
-    box-shadow: 0 0 0 2px #303030;
+    box-shadow: 0 0 0 1px #303030;
 }
 
 .pmz-pk-dex-preview {
     position: absolute;
-    left: 16px;
-    top: 72px;
-    width: 300px;
-    height: 240px;
+    left: 5px;
+    top: 23px;
+    width: 94px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .pmz-pk-dex-entry {
-    background: linear-gradient(#d84838, #f08070);
+    background: #e46454;
 }
 
 .pmz-pk-dex-card {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 16px;
-    height: 240px;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    height: 75px;
     display: flex;
 }
 
 .pmz-pk-dex-card > div {
     flex: 1;
-    margin-left: 16px;
+    margin-left: 5px;
 }
 
 .pmz-pk-dex-text {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 268px;
-    bottom: 88px;
+    left: 5px;
+    right: 5px;
+    top: 84px;
+    bottom: 28px;
     white-space: normal;
 }
 
@@ -1283,70 +1339,70 @@
 
 .pmz-pk-pc-info {
     position: absolute;
-    left: 16px;
-    top: 16px;
-    width: 220px;
-    bottom: 88px;
+    left: 5px;
+    top: 5px;
+    width: 69px;
+    bottom: 28px;
     text-align: center;
 }
 
 .pmz-pk-pc-box {
     position: absolute;
-    left: 248px;
-    width: 420px;
-    top: 16px;
-    bottom: 88px;
-    padding: 8px;
+    left: 78px;
+    width: 132px;
+    top: 5px;
+    bottom: 28px;
+    padding: 3px;
     background: #c8e0b0;
 }
 
 .pmz-pk-pc-box[class*="is-wallpaper-"]:nth-child(n) {
-    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 12px, transparent 12px 24px);
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 4px, transparent 4px 8px);
 }
 
 .pmz-pk-pc-boxname {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 6px;
-    padding: 0 8px;
-    border-radius: 8px;
+    margin-bottom: 2px;
+    padding: 0 3px;
+    border-radius: 0;
     background: rgba(255, 255, 255, 0.7);
 }
 
 .pmz-pk-pc-grid {
     display: grid;
     grid-template-columns: repeat(var(--pmz-cols), 1fr);
-    grid-gap: 4px;
+    grid-gap: 1px;
 }
 
 .pmz-pk-pc-cell {
     position: relative;
-    height: 64px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 0;
     cursor: pointer;
 }
 
 .pmz-pk-pc-cell.is-selected {
     background: rgba(255, 255, 255, 0.6);
-    box-shadow: inset 0 0 0 3px var(--pmz-accent);
+    box-shadow: inset 0 0 0 1px var(--pmz-accent);
 }
 
 .pmz-pk-pc-held {
     position: absolute;
-    top: -24px;
+    top: -8px;
     opacity: 0.9;
 }
 
 .pmz-pk-pc-party {
     position: absolute;
-    left: 680px;
-    right: 16px;
-    top: 16px;
-    bottom: 88px;
-    padding: 6px;
+    left: 213px;
+    right: 5px;
+    top: 5px;
+    bottom: 28px;
+    padding: 2px;
 }
 
 /* Battle -----------------------------------------------------------------*/
@@ -1358,8 +1414,8 @@
     bottom: 0;
     left: 0;
     pointer-events: auto;
-    font-size: 26px;
-    line-height: 32px;
+    font-size: 16px;
+    line-height: 16px;
 }
 
 .pmz-pk-battle-field {
@@ -1367,43 +1423,43 @@
     left: 0;
     right: 0;
     top: 0;
-    height: 432px;
+    height: 136px;
     overflow: hidden;
     background: var(--pmz-pk-battle-sky);
 }
 
 .pmz-pk-platform {
     position: absolute;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--pmz-pk-platform);
-    box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
 }
 
 .pmz-pk-platform.is-foe {
-    left: 470px;
-    top: 180px;
-    width: 300px;
-    height: 70px;
+    left: 147px;
+    top: 56px;
+    width: 94px;
+    height: 22px;
 }
 
 .pmz-pk-platform.is-player {
-    left: 30px;
-    top: 392px;
-    width: 340px;
-    height: 80px;
+    left: 9px;
+    top: 123px;
+    width: 107px;
+    height: 25px;
 }
 
 .pmz-pk-battler {
     position: absolute;
 }
 
-.pmz-pk-battler.is-foe0 { left: 524px; top: 28px; }
-.pmz-pk-battler.is-player0 { left: 104px; top: 240px; }
+.pmz-pk-battler.is-foe0 { left: 164px; top: 9px; }
+.pmz-pk-battler.is-player0 { left: 33px; top: 75px; }
 
-.is-doubles .pmz-pk-battler.is-foe0 { left: 610px; top: 44px; }
-.is-doubles .pmz-pk-battler.is-foe1 { left: 450px; top: 20px; }
-.is-doubles .pmz-pk-battler.is-player0 { left: 30px; top: 244px; }
-.is-doubles .pmz-pk-battler.is-player1 { left: 200px; top: 228px; }
+.is-doubles .pmz-pk-battler.is-foe0 { left: 191px; top: 14px; }
+.is-doubles .pmz-pk-battler.is-foe1 { left: 141px; top: 6px; }
+.is-doubles .pmz-pk-battler.is-player0 { left: 9px; top: 77px; }
+.is-doubles .pmz-pk-battler.is-player1 { left: 63px; top: 72px; }
 
 .pmz-pk-battler.anim-enter.is-foe0,
 .pmz-pk-battler.anim-enter.is-foe1 {
@@ -1417,24 +1473,25 @@
 
 /* Dynamax: bigger with a red glow; Tera: crystal shine. */
 .pmz-pk-battler.is-dynamax {
-    transform: scale(1.45);
+    transform: scale(2);
     transform-origin: 50% 100%;
-    filter: drop-shadow(0 0 8px #f03050) drop-shadow(0 0 4px #ff8098);
+    transform-origin: 50% 100%;
+    filter: drop-shadow(1px 0 0 #f03050) drop-shadow(-1px 0 0 #f03050) drop-shadow(0 1px 0 #f03050) drop-shadow(0 -1px 0 #f03050);
     transition: transform 0.5s;
 }
 
 .pmz-pk-battler.is-tera {
-    filter: drop-shadow(0 0 6px #7fe8ff) brightness(1.08) saturate(1.2);
+    filter: drop-shadow(1px 0 0 #7fe8ff) drop-shadow(-1px 0 0 #7fe8ff) drop-shadow(0 1px 0 #7fe8ff) drop-shadow(0 -1px 0 #7fe8ff) brightness(1.08) saturate(1.2);
 }
 
 .pmz-pk-battler.is-tera::after {
     content: "";
     position: absolute;
     left: 25%;
-    top: -18px;
+    top: -6px;
     width: 50%;
-    height: 22px;
-    background: linear-gradient(135deg, #b8f4ff, #58c8f0 50%, #e8fcff);
+    height: 7px;
+    background: linear-gradient(#b8f4ff 0 33%, #58c8f0 33% 67%, #e8fcff 67%);
     clip-path: polygon(50% 0, 100% 40%, 80% 100%, 20% 100%, 0 40%);
     opacity: 0.9;
 }
@@ -1448,12 +1505,12 @@
 }
 
 @keyframes pmz-pk-in-right {
-    from { transform: translateX(320px); opacity: 0; }
+    from { transform: translateX(100px); opacity: 0; }
     to { transform: none; opacity: 1; }
 }
 
 @keyframes pmz-pk-in-left {
-    from { transform: translateX(-320px); opacity: 0; }
+    from { transform: translateX(-100px); opacity: 0; }
     to { transform: none; opacity: 1; }
 }
 
@@ -1462,29 +1519,29 @@
 }
 
 @keyframes pmz-pk-faint {
-    to { transform: translateY(160px); opacity: 0; }
+    to { transform: translateY(50px); opacity: 0; }
 }
 
 .pmz-pk-ball {
     position: absolute;
-    left: 640px;
-    top: 168px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    left: 201px;
+    top: 53px;
+    width: 10px;
+    height: 10px;
+    border-radius: 0;
     background: linear-gradient(#e04838 0 45%, #303030 45% 55%, #f8f8f8 55%);
-    box-shadow: 0 0 0 3px #303030;
+    box-shadow: 0 0 0 1px #303030;
     animation: pmz-pk-throw 0.5s ease-out, pmz-pk-shake 0.6s ease-in-out 0.5s var(--pmz-shakes, 0);
 }
 
-.is-doubles .pmz-pk-ball.at-foe0 { left: 700px; top: 180px; }
-.is-doubles .pmz-pk-ball.at-foe1 { left: 540px; top: 160px; }
+.is-doubles .pmz-pk-ball.at-foe0 { left: 220px; top: 56px; }
+.is-doubles .pmz-pk-ball.at-foe1 { left: 169px; top: 50px; }
 .pmz-pk-ball.shakes-1 { --pmz-shakes: 1; }
 .pmz-pk-ball.shakes-2 { --pmz-shakes: 2; }
 .pmz-pk-ball.shakes-3 { --pmz-shakes: 3; }
 
 @keyframes pmz-pk-throw {
-    from { transform: translate(-480px, 200px) rotate(-360deg); }
+    from { transform: translate(-151px, 63px) rotate(-360deg); }
     to { transform: none; }
 }
 
@@ -1495,31 +1552,31 @@
 
 .pmz-pk-bbox {
     position: absolute;
-    width: 370px;
-    padding: 8px 16px;
-    font-size: 24px;
-    line-height: 30px;
+    width: 116px;
+    padding: 3px 5px;
+    font-size: 16px;
+    line-height: 16px;
 }
 
-.pmz-pk-bbox.is-foe0 { left: 24px; top: 24px; }
-.pmz-pk-bbox.is-player0 { right: 24px; top: 268px; }
+.pmz-pk-bbox.is-foe0 { left: 8px; top: 8px; }
+.pmz-pk-bbox.is-player0 { right: 8px; top: 84px; }
 
 .pmz-pk-bbox.is-compact {
-    width: 300px;
-    padding: 4px 12px;
-    font-size: 20px;
-    line-height: 24px;
+    width: 94px;
+    padding: 1px 4px;
+    font-size: 16px;
+    line-height: 16px;
 }
 
-.is-doubles .pmz-pk-bbox.is-foe1 { left: 16px; top: 10px; }
-.is-doubles .pmz-pk-bbox.is-foe0 { left: 16px; top: 84px; }
-.is-doubles .pmz-pk-bbox.is-player0 { right: 16px; top: 280px; }
-.is-doubles .pmz-pk-bbox.is-player1 { right: 16px; top: 354px; }
+.is-doubles .pmz-pk-bbox.is-foe1 { left: 5px; top: 3px; }
+.is-doubles .pmz-pk-bbox.is-foe0 { left: 5px; top: 26px; }
+.is-doubles .pmz-pk-bbox.is-player0 { right: 5px; top: 88px; }
+.is-doubles .pmz-pk-bbox.is-player1 { right: 5px; top: 111px; }
 
 .pmz-pk-gimmick {
-    margin-top: 8px;
-    min-height: 40px;
-    font-size: 20px;
+    margin-top: 3px;
+    min-height: 13px;
+    font-size: 16px;
 }
 
 .pmz-pk-gimmick.is-on {
@@ -1533,20 +1590,20 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 192px;
+    height: 60px;
     pointer-events: auto;
 }
 
 .pmz-pk-target-panel {
     position: absolute;
-    left: 8px;
-    right: 8px;
-    top: 8px;
-    bottom: 8px;
+    left: 3px;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
 }
 
 .pmz-pk-target-title {
-    margin-bottom: 6px;
+    margin-bottom: 2px;
 }
 
 .pmz-pk-target .pmz-item.is-ally {
@@ -1575,42 +1632,42 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 432px;
+    top: 136px;
     bottom: 0;
     background: #283848;
 }
 
 .pmz-pk-battle-msg {
     position: absolute;
-    left: 8px;
-    right: 8px;
-    top: 8px;
-    bottom: 8px;
-    padding: 16px 24px;
+    left: 3px;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
+    padding: 5px 8px;
     white-space: normal;
     background: #f8f8f8;
 }
 
 .pmz-pk-battle-cmd .pmz-pk-battle-msg {
-    right: 336px;
+    right: 105px;
 }
 
 .pmz-pk-battle-commands {
     position: absolute;
-    right: 8px;
-    top: 8px;
-    bottom: 8px;
-    width: 320px;
-    padding: 12px;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
+    width: 100px;
+    padding: 4px;
 }
 
 .pmz-pk-battle-movelist {
     position: absolute;
-    left: 8px;
-    top: 8px;
-    bottom: 8px;
-    right: 296px;
-    padding: 12px;
+    left: 3px;
+    top: 3px;
+    bottom: 3px;
+    right: 93px;
+    padding: 4px;
 }
 
 .pmz-pk-battle-movelist .pmz-item {
@@ -1620,43 +1677,43 @@
 
 .pmz-pk-battle-moveinfo {
     position: absolute;
-    right: 8px;
-    top: 8px;
-    bottom: 8px;
-    width: 280px;
-    padding: 16px;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
+    width: 88px;
+    padding: 5px;
 }
 
 .pmz-pk-battle-back {
     position: absolute;
-    right: 16px;
-    bottom: -4px;
+    right: 5px;
+    bottom: -1px;
     display: none;
 }
 
 /* Town Map ---------------------------------------------------------------*/
 
 .pmz-pk-townmap {
-    background: linear-gradient(#58a0d0, #a8d8f0);
+    background: #80bce0;
 }
 
 .pmz-pk-townmap-head {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    top: 8px;
-    padding: 2px 16px;
+    left: 5px;
+    right: 5px;
+    top: 3px;
+    padding: 1px 5px;
     display: flex;
     justify-content: space-between;
 }
 
 .pmz-pk-townmap-area {
     position: absolute;
-    left: 24px;
-    top: 62px;
+    left: 8px;
+    top: 19px;
     overflow: hidden;
-    border: 3px solid var(--pmz-border);
-    border-radius: 8px;
+    border: 1px solid var(--pmz-border);
+    border-radius: 0;
     background: #b8e0a0;
 }
 
@@ -1688,9 +1745,9 @@
     top: 30%;
     width: 40%;
     height: 40%;
-    border-radius: 3px;
+    border-radius: 0;
     background: #f8f0a0;
-    box-shadow: 0 0 0 2px #604820;
+    box-shadow: 0 0 0 1px #604820;
 }
 
 .pmz-pk-townmap-point.is-town::after {
@@ -1706,39 +1763,39 @@
 }
 
 .pmz-pk-townmap-player {
-    border-radius: 50%;
+    border-radius: 0;
     background: radial-gradient(#3878e0 40%, transparent 45%);
 }
 
 .pmz-pk-townmap-cursor {
-    border: 3px solid var(--pmz-accent);
-    border-radius: 4px;
-    box-shadow: 0 0 0 2px #fff;
+    border: 1px solid var(--pmz-accent);
+    border-radius: 0;
+    box-shadow: 0 0 0 1px #fff;
 }
 
 .pmz-pk-townmap-bar small {
-    margin-left: 12px;
+    margin-left: 4px;
     color: var(--pmz-muted);
 }
 
 /* Trade ------------------------------------------------------------------*/
 
 .pmz-pk-trade {
-    background: radial-gradient(#f8f8ff, #88b8e8 75%);
+    background: #c0d8f4;
 }
 
 .pmz-pk-trade-mon {
     position: absolute;
     left: 0;
     right: 0;
-    top: 110px;
+    top: 35px;
     display: flex;
     justify-content: center;
     transition: transform 0.8s ease-in, opacity 0.8s;
 }
 
 .pmz-pk-trade-mon.is-swap {
-    transform: translateY(-260px) scale(0.3);
+    transform: translateY(-82px) scale(0.5);
     opacity: 0;
 }
 
@@ -1747,7 +1804,7 @@
 }
 
 @keyframes pmz-pk-trade-in {
-    from { transform: translateY(-260px) scale(0.3); opacity: 0; }
+    from { transform: translateY(-82px) scale(0.5); opacity: 0; }
     to { transform: none; opacity: 1; }
 }
 
@@ -1756,15 +1813,15 @@
     left: 50%;
     top: 0;
     bottom: 0;
-    width: 6px;
-    margin-left: -3px;
-    background: repeating-linear-gradient(#fff 0 12px, transparent 12px 24px);
+    width: 2px;
+    margin-left: -1px;
+    background: repeating-linear-gradient(#fff 0 4px, transparent 4px 8px);
     opacity: 0.6;
     animation: pmz-pk-trade-flow 0.6s linear infinite;
 }
 
 @keyframes pmz-pk-trade-flow {
-    to { background-position: 0 24px; }
+    to { background-position: 0 8px; }
 }
 
 /*-------------------------------------------------------------------------
@@ -1782,12 +1839,12 @@
 }
 
 .pmz-glyph.is-text {
-    padding: 0 6px;
-    border: 2px solid var(--pmz-border);
-    border-radius: 6px;
+    padding: 0 2px;
+    border: 1px solid var(--pmz-border);
+    border-radius: 0;
     background: var(--pmz-bg);
     color: var(--pmz-fg);
-    font-size: 0.7em;
+    font-size: 16px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1795,7 +1852,7 @@
 }
 
 .pmz-glyph.is-gamepad.is-text {
-    border-radius: 999px;
+    border-radius: 0;
 }
 
 .pmz-glyph-text {
@@ -1805,12 +1862,12 @@
     top: 50%;
     transform: translateY(-50%);
     text-align: center;
-    font-size: 0.55em;
+    font-size: 16px;
 }
 
 .pmz-controls-section {
     color: var(--pmz-accent);
-    margin-top: 6px;
+    margin-top: 2px;
 }
 
 .pmz-controls-row.is-reset {
@@ -1828,7 +1885,7 @@
 
 .pmz-option-value {
     color: var(--pmz-border);
-    padding-left: 16px;
+    padding-left: 5px;
 }
 
 .pmz-touch {
@@ -1847,7 +1904,7 @@
     position: absolute;
     box-sizing: border-box;
     background: rgba(32, 40, 56, 0.55);
-    border: 3px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     color: #fff;
     display: flex;
     align-items: center;
@@ -1855,16 +1912,16 @@
 }
 
 .pmz-touch-dpad {
-    left: 24px;
-    bottom: 24px;
-    width: calc(168px * var(--pmz-touch-scale));
-    height: calc(168px * var(--pmz-touch-scale));
-    border-radius: 50%;
+    left: 8px;
+    bottom: 8px;
+    width: calc(53px * var(--pmz-touch-scale));
+    height: calc(53px * var(--pmz-touch-scale));
+    border-radius: 0;
 }
 
 .pmz-touch-arrow {
     position: absolute;
-    font-size: calc(26px * var(--pmz-touch-scale));
+    font-size: calc(16px * var(--pmz-touch-scale));
     pointer-events: none;
 }
 
@@ -1886,17 +1943,17 @@
 
 .pmz-touch-buttons {
     position: absolute;
-    right: 24px;
-    bottom: 24px;
-    width: calc(200px * var(--pmz-touch-scale));
-    height: calc(200px * var(--pmz-touch-scale));
+    right: 8px;
+    bottom: 8px;
+    width: calc(63px * var(--pmz-touch-scale));
+    height: calc(63px * var(--pmz-touch-scale));
 }
 
 .pmz-touch-button {
-    width: calc(76px * var(--pmz-touch-scale));
-    height: calc(76px * var(--pmz-touch-scale));
-    border-radius: 50%;
-    font-size: calc(30px * var(--pmz-touch-scale));
+    width: calc(24px * var(--pmz-touch-scale));
+    height: calc(24px * var(--pmz-touch-scale));
+    border-radius: 0;
+    font-size: calc(16px * var(--pmz-touch-scale));
 }
 
 .pmz-touch-button.is-confirm {
@@ -1910,10 +1967,10 @@
 }
 
 .pmz-touch-button.is-small {
-    width: calc(88px * var(--pmz-touch-scale));
-    height: calc(36px * var(--pmz-touch-scale));
-    border-radius: 18px;
-    font-size: calc(18px * var(--pmz-touch-scale));
+    width: calc(28px * var(--pmz-touch-scale));
+    height: calc(11px * var(--pmz-touch-scale));
+    border-radius: 0;
+    font-size: calc(16px * var(--pmz-touch-scale));
 }
 
 .pmz-touch-button.is-menu {
@@ -1932,12 +1989,12 @@
 
 .pmz-pk-player-tag {
     display: inline-block;
-    margin-right: 10px;
-    padding: 0 8px;
-    border-radius: 6px;
+    margin-right: 3px;
+    padding: 0 3px;
+    border-radius: 0;
     background: #3870d8;
     color: #fff;
-    font-size: 0.75em;
+    font-size: 16px;
     line-height: 1.4;
     vertical-align: middle;
 }
@@ -1959,7 +2016,7 @@
 }
 
 .pmz-join-box {
-    max-width: 560px;
+    max-width: 176px;
     text-align: center;
     white-space: normal;
 }

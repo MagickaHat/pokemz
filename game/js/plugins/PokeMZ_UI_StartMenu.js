@@ -64,7 +64,8 @@
  *       order: 45, visible: () => true, enabled: () => true,
  *       onSelect: () => PokeMZ.UI.openScreen("townMap") });
  *   PokeMZ.UI.menu.removeCommand("pokegear");
- * onSelect may return "keep" to leave the menu open.
+ * The menu stays open under whatever onSelect opens; return "close" to
+ * close it (the Exit entry does).
  */
 
 (() => {
@@ -102,7 +103,7 @@
         /**
          * @brief Adds or replaces a menu entry.
          * @param {Object} cmd {id, labelKey, fallback?, order, visible?(),
-         *        enabled?(), onSelect()}. onSelect returns "keep" to stay.
+         *        enabled?(), onSelect()}. onSelect returns "close" to close the menu.
          */
         addCommand(cmd) {
             commands.set(cmd.id, Object.assign({ order: 100, visible: () => true, enabled: () => true }, cmd));

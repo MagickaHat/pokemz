@@ -25,7 +25,8 @@
  *
  * On 3D maps the 2D character sprites are hidden but kept alive. This addon
  * moves each hidden sprite to where its 3D billboard appears on screen, and
- * scales it to the billboard's on-screen size. Everything MZ (or another
+ * scales it to the billboard's on-screen size (always 1 with the core's
+ * Pixel-Perfect Billboards, so overlays stay on the pixel grid). Everything MZ (or another
  * plugin) attaches to a character sprite therefore lines up again:
  *
  *   - Balloon icons
@@ -70,12 +71,12 @@
      * @return {THREE.Vector3} `out`.
      */
     function characterFeet(c, out) {
-        const th = $gameMap.tileHeight();
+        const tpu = Three.config.texelsPerUnit;
         const x = c._realX + 0.5;
         const z = c._realY + 0.5;
-        let y = Three.heightAtWorld(x, z) + c.jumpHeight() / th;
+        let y = Three.heightAtWorld(x, z) + c.jumpHeight() / tpu;
         if (c instanceof Game_Vehicle) {
-            y += c._altitude / th;
+            y += c._altitude / tpu;
         }
         return out.set(x, y, z);
     }
@@ -93,7 +94,9 @@
             view.worldToScreen(_world, _screen);
             this.x = Math.round(_screen.x);
             this.y = Math.round(_screen.y);
-            const k = view.pixelsPerUnitAt(_world) / $gameMap.tileHeight();
+            // Pixel-perfect billboards are always one texel per game pixel,
+            // so their 2D overlays (balloons) stay unscaled too.
+            const k = Three.config.billboardPixelScale ? 1 : view.pixelsPerUnitAt(_world) / Three.config.texelsPerUnit;
             this.scale.set(k, k);
             this._threeProjected = true;
         } else if (this._threeProjected) {

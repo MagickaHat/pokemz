@@ -2,6 +2,25 @@
 
 The official repository for the free-to-play fan game engine.
 
+## Display: one pixel grid
+
+The game renders at a small native resolution (**256×192** by default, with 16×16 tiles and the
+16px FRLG font) and `PokeMZ_Display` shows it at a **whole multiple** of that size, with black
+bars around it. Every game pixel is therefore the same square of screen pixels, whether it comes
+from the 2D canvas, the 3D view or the Preact UI. Enable it right after `PokeMZ_Input`.
+
+- **Options › Resolution**: 256×192, 320×240, 384×288, 336×192, 432×240 (edit the list in the
+  plugin's *Resolutions* parameter). A bigger resolution shows more of the world; it never stretches it.
+- **Options › Window Size**: Auto (largest multiple that fits) or 1×–8×. **Scaling**: Pixel Perfect
+  or Fit (fills the window, uneven pixels). **Fullscreen**.
+- MZ's smoothing and anti-aliasing are off (*Pixel Art Mode*): images, sprites and the canvas use
+  nearest-neighbour, and text on MZ bitmaps is drawn without anti-aliasing, with a 1px drop shadow.
+- MZ window line height and padding follow the font size (*Small Window Metrics*). Draw
+  `img/system/Window.png` for a 16px grid.
+- MZ's own 48px touch buttons are off by default; the Preact UI has its own touch controls.
+- Script: `PokeMZ.Display.setResolution(320, 240)`, `.setWindowScale("auto" | n)`,
+  `.setScaling("pixel" | "fit")`, `.onChange(fn)`.
+
 ## 3D maps (Three.js)
 
 Maps can opt in to a Three.js renderer while MZ keeps running all game logic,
@@ -13,7 +32,7 @@ windows, pictures, weather, tone and fades. The system is split into plugins
 | `PokeMZ_Three_Core` | Renderer bridge, terrain from tile data, animated autotiles, water, upright tiles, billboarded characters, blob shadows, scriptable camera |
 | `PokeMZ_Three_Effects` | Balloons, animations and the destination marker follow 3D characters |
 | `PokeMZ_Three_Input` | Mouse / touch picking (click to move, tap events) |
-| `PokeMZ_Three_Movement` | Height-aware passability and Pokémon-style ledges |
+| `PokeMZ_Three_Movement` | Height-aware passability, walkable hills and Pokémon-style ledges |
 | `PokeMZ_Three_Models` | glTF / GLB buildings and props from the `models/` folder |
 | `PokeMZ_Three_Lighting` | Ambient, sun (optional shadows), point lights, time of day |
 
@@ -24,23 +43,46 @@ windows, pictures, weather, tone and fades. The system is split into plugins
    **ramp regions** (default 21) for stairs and slopes. Cliff walls are generated.
    Keep these separate from your encounter-zone regions.
 3. Paint cliffs like a 2D map: cliff-top tiles get a height region, and the
-   cliff face rows in front (south) use A3/A4 wall-side tiles or B-E tiles with
-   terrain tag **5**. In 3D the face rows become a steep slope showing those tiles,
-   covering exactly the same tiles as in 2D (about 2 rows per tile of height).
+   cliff face rows in front (south) use A3/A4 wall-side tiles or tiles with one of
+   these terrain tags. Each face tile picks its own style:
+
+   | Terrain tag | Style | Face rows |
+   |---|---|---|
+   | **4** | **Vertical wall.** The face rows are raised to the cliff top, and a wall at their south edge shows the painted tiles at 1 texel per pixel. | 1 per tile of height |
+   | **5** | **Slope.** A steep slope from the cliff top to the ground, covering the same tiles as in 2D. | about 2 per tile of height |
+   | **3** | **Hill.** Like a slope, but walkable on 3D maps (you can't step off its sides). | any |
+   | none (A3/A4 wall side) | The map's `<3D Cliffs: wall\|slope>`, or the *Default Cliff Style* parameter (wall) | |
+
 4. Give tall B-E tiles (trees, signs, fences) terrain tag **7** to stand them up,
    and ledge tiles terrain tag **6** (and make them impassable).
 5. Water reflects characters, upright tiles and models automatically.
    Random encounters zoom the 3D camera onto the player.
 
+#### Pixel-perfect 3D
+
+- One world unit is one tile, and one tile is **Texels Per World Unit** (16) pixels of art. It is a
+  single global constant that sizes billboards, jumps and the camera.
+- `distance=auto` (the default) puts the camera exactly far enough for the ground under the player
+  to show one texel per game pixel at any resolution.
+- Characters and upright tiles are always drawn at one texel per pixel and snapped to whole pixels
+  (*Pixel-Perfect Billboards*). The 3D view renders at the game resolution itself.
+- Under perspective, vertical walls and far-away ground are foreshortened. A lower pitch shows walls
+  closer to 1:1.
+- **Follow camera**: like the Gen 4 games, the camera keeps the player centred. Past the map edges
+  the edge tiles continue (*Map Border*, `<3D Border: repeat|off|#color>`), so nothing is cut off.
+  `<3D Clamp: on>` stops the camera at the map edges instead.
+
 ### Map note tags
 
 ```
 <3D>
-<3D Camera: pitch=55 yaw=0 distance=14 fov=30>
+<3D Camera: pitch=55 yaw=0 distance=auto fov=30>
 <3D Smooth: 0.5>
 <3D Water: depth=0.2 opacity=0.85 bed=#1c3550>
 <3D Fog: #b8d0e8 near=20 far=45>
-<3D Clamp: off>
+<3D Clamp: on>
+<3D Border: repeat>              (or off, or a color such as #000000)
+<3D Cliffs: slope>               (A3/A4 wall sides without a tag: wall or slope)
 <3D Reflections: off>            (or a strength, e.g. <3D Reflections: 0.5>)
 <3D LedgeDirection: 2>
 <3D Model: house.glb x=5 y=8 rot=0 scale=1 block=4x3 door>
@@ -138,6 +180,9 @@ layer, so MZ windows, event conditions and other plugins keep working and follow
 
 ## Preact UI
 
+**Step-by-step guide: [`docs/PREACT_UI.md`](docs/PREACT_UI.md)** (where each piece lives, the
+pixel-grid rules, restyling with CSS only, writing and replacing screens, a worked example).
+
 Screens can be written as [Preact](https://preactjs.com) components that sit in a DOM
 overlay locked to the game canvas. There is no build step: `js/libs/preact-htm.js` is
 vendored and components use `htm` tagged templates. Enable these plugins below the 3D
@@ -198,7 +243,8 @@ Other entry points:
 
 Patch MZ methods with `PokeMZ.UI.patch(...)` so a plugin can be hot reloaded. Styling lives
 in `css/pokemz-ui.css` (CSS variables at the top), so graphics can be added later with CSS
-alone.
+alone. Sizes are in game pixels (256×192): whole px only, fonts at 16px, no rounded corners or
+blur. See the guide.
 
 While playtesting, F6 (or saving a file, in NW.js) reloads the UI CSS, `data/locales/*.csv`
 and the `PokeMZ_UI_*` plugins other than Core.
