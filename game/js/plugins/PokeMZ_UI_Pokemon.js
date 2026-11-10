@@ -127,9 +127,19 @@
             height=${h}
             role="img"
             aria-label=${pokemon ? pokemon.name() : speciesId ? (PBS.species.tryGet(speciesId) || {}).name || "" : ""}
-            style=${Object.assign({ width: `${w * scale}px`, height: `${h * scale}px` }, style || {})}
+            style=${Object.assign(
+                // --pmz-img-half lets an anchor centre the sprite on its feet
+                // (see .pmz-pk-battler) whatever the frame size.
+                { width: `${w * scale}px`, height: `${h * scale}px`, "--pmz-img-half": `${-Math.floor((w * scale) / 2)}px` },
+                style || {}
+            )}
         />`;
     }
+
+    /** @brief Width of the HP bar's track in game pixels (Gen 3: 48). */
+    const HP_BAR_WIDTH = 48;
+    /** @brief Width of the EXP bar's track in game pixels. */
+    const EXP_BAR_WIDTH = 64;
 
     /** @brief A bobbing party icon. */
     function PokemonIcon({ pokemon, scale = 1, active }) {
@@ -146,7 +156,7 @@
         const color = r > 0.5 ? "is-high" : r > 0.2 ? "is-mid" : "is-low";
         return html`<div class="pmz-pk-hp" role="meter" aria-valuemin="0" aria-valuemax=${max} aria-valuenow=${hp} aria-label=${tr("Pkmn.HP", "HP")}>
             <span class="pmz-pk-hp-label">${tr("Pkmn.HP", "HP")}</span>
-            <span class="pmz-pk-hp-track"><span class=${`pmz-pk-hp-fill ${color}`} style=${{ width: `${r * 100}%` }}></span></span>
+            <span class="pmz-pk-hp-track"><span class=${`pmz-pk-hp-fill ${color}`} style=${{ width: `${Math.round(r * HP_BAR_WIDTH)}px` }}></span></span>
             ${numbers ? html`<span class="pmz-pk-hp-numbers">${hp}/${max}</span>` : null}
         </div>`;
     }
@@ -157,7 +167,7 @@
         const a = pokemon.expForLevel(lv);
         const b = pokemon.expForLevel(lv + 1);
         const r = pokemon.isMaxLevel() ? 0 : Math.max(0, Math.min(1, (pokemon.currentExp() - a) / Math.max(1, b - a)));
-        return html`<div class="pmz-pk-exp" aria-hidden="true"><span class="pmz-pk-exp-fill" style=${{ width: `${r * 100}%` }}></span></div>`;
+        return html`<div class="pmz-pk-exp" aria-hidden="true"><span class="pmz-pk-exp-fill" style=${{ width: `${Math.round(r * EXP_BAR_WIDTH)}px` }}></span></div>`;
     }
 
     /** @brief Type badge with the type's color. */
@@ -454,6 +464,12 @@
         </div>`;
     }
 
+    /**
+     * @brief Summary pages (Gen 4 style: one topic per page, so each fits
+     *        the 256x192 screen).
+     */
+    const SUMMARY_PAGE = { info: 0, memo: 1, skills: 2, ability: 3, moves: 4 };
+
     /** @brief The summary view. */
     function SummaryView({ list, index: start, done, reorder }) {
         UI.useStrings();
@@ -463,7 +479,8 @@
         const [swap, setSwap] = useState(-1);
         const [, force] = useState(0);
         const p = list[index];
-        const pages = p.isEgg() ? 1 : 3;
+        const pages = p.isEgg() ? 1 : 5;
+        const lastPage = q => (q.isEgg() ? 0 : SUMMARY_PAGE.moves);
         const moves = p.moves();
         useFocus(
             {
@@ -474,7 +491,7 @@
                         setMoveIndex((moveIndex + moves.length - 1) % moves.length);
                     } else if (list.length > 1) {
                         setIndex((index + list.length - 1) % list.length);
-                        setPage(Math.min(page, list[(index + list.length - 1) % list.length].isEgg() ? 0 : 2));
+                        setPage(Math.min(page, lastPage(list[(index + list.length - 1) % list.length])));
                     }
                     SoundManager.playCursor();
                 },
@@ -483,15 +500,15 @@
                         setMoveIndex((moveIndex + 1) % moves.length);
                     } else if (list.length > 1) {
                         setIndex((index + 1) % list.length);
-                        setPage(Math.min(page, list[(index + 1) % list.length].isEgg() ? 0 : 2));
+                        setPage(Math.min(page, lastPage(list[(index + 1) % list.length])));
                     }
                     SoundManager.playCursor();
                 },
                 ok: () => {
-                    if (page === 2 && moveIndex < 0) {
+                    if (page === SUMMARY_PAGE.moves && moveIndex < 0) {
                         SoundManager.playOk();
                         setMoveIndex(0);
-                    } else if (page === 2 && reorder !== false) {
+                    } else if (page === SUMMARY_PAGE.moves && reorder !== false) {
                         SoundManager.playOk();
                         if (swap < 0) {
                             setSwap(moveIndex);
@@ -516,7 +533,13 @@
             { priority: 6 }
         );
         const species = p.species();
-        const tabs = [tr("Summary.Info", "Info"), tr("Summary.Skills", "Skills"), tr("Summary.Moves", "Moves")].slice(0, pages);
+        const tabs = [
+            tr("Summary.Info", "Info"),
+            tr("Summary.MemoTab", "Memo"),
+            tr("Summary.Skills", "Skills"),
+            tr("Summary.AbilityTab", "Ability"),
+            tr("Summary.Moves", "Moves"),
+        ].slice(0, pages);
         const nature = PBS.natures.tryGet(p.nature);
         const mint = p.statNature() !== p.nature ? PBS.natures.tryGet(p.statNature()) : null;
         const statNature = PBS.natures.tryGet(p.statNature());
@@ -527,7 +550,7 @@
             body = html`<div class="pmz-pk-summary-page">
                 <p>${tr(`Summary.Egg.${stage}`, { Far: "It looks like this Egg will take a long time to hatch.", Mid: "What will hatch from this? It doesn't seem close to hatching.", Soon: "Sounds can be heard coming from inside! It will hatch soon!" }[stage])}</p>
             </div>`;
-        } else if (page === 0) {
+        } else if (page === SUMMARY_PAGE.info) {
             body = html`<div class="pmz-pk-summary-page">
                 <div class="pmz-pk-kv"><span>${tr("Summary.DexNo", "Dex No.")}</span><span>${String(species.num).padStart(4, "0")}</span></div>
                 <div class="pmz-pk-kv"><span>${tr("Summary.Species", "Species")}</span><span>${species.name}</span></div>
@@ -535,14 +558,15 @@
                 <div class="pmz-pk-kv"><span>${tr("Summary.OT", "OT")}</span><span>${p._otName || "—"}</span></div>
                 <div class="pmz-pk-kv"><span>${tr("Summary.ID", "ID No.")}</span><span>${String(p._otId >= 0 ? p._otId : 0).padStart(5, "0")}</span></div>
                 <div class="pmz-pk-kv"><span>${tr("Summary.Item", "Item")}</span><span>${p.heldItem ? PBS.items.get(p.heldItem).name : tr("Summary.None", "None")}</span></div>
+            </div>`;
+        } else if (page === SUMMARY_PAGE.memo) {
+            body = html`<div class="pmz-pk-summary-page">
                 <p class="pmz-pk-memo">
                     ${tr("Summary.Memo", "{nature} nature. Met at Lv. {level}.", { nature: nature ? nature.name : "", level: p._metLevel || p.level })}
                     ${mint ? html`<br />${tr("Summary.Mint", "Stats changed by the {nature} Mint.", { nature: mint.name })}` : null}
                 </p>
             </div>`;
-        } else if (page === 1) {
-            const next = p.isMaxLevel() ? 0 : p.expForLevel(p.level + 1) - p.currentExp();
-            const ability = PBS.abilities.tryGet(p.ability());
+        } else if (page === SUMMARY_PAGE.skills) {
             body = html`<div class="pmz-pk-summary-page">
                 <div class="pmz-pk-kv"><span>${statName("hp")}</span><span>${p.hp}/${p.mhp}</span></div>
                 <${HpBar} hp=${p.hp} max=${p.mhp} />
@@ -553,10 +577,16 @@
                         <span>${p.stat(s)}</span>
                     </div>`;
                 })}
+            </div>`;
+        } else if (page === SUMMARY_PAGE.ability) {
+            const next = p.isMaxLevel() ? 0 : p.expForLevel(p.level + 1) - p.currentExp();
+            const ability = PBS.abilities.tryGet(p.ability());
+            body = html`<div class="pmz-pk-summary-page">
                 <div class="pmz-pk-kv"><span>${tr("Summary.Exp", "Exp. Points")}</span><span>${fmt(p.currentExp())}</span></div>
                 <div class="pmz-pk-kv"><span>${tr("Summary.NextLv", "To Next Lv.")}</span><span>${fmt(next)}</span></div>
                 <${ExpBar} pokemon=${p} />
-                <div class="pmz-pk-ability"><b>${ability ? ability.name : ""}</b> ${ability ? ability.description : ""}</div>
+                <div class="pmz-pk-ability-name">${ability ? ability.name : ""}</div>
+                <p class="pmz-pk-ability">${ability ? ability.description : ""}</p>
             </div>`;
         } else {
             body = html`<div class="pmz-pk-summary-page pmz-pk-summary-moves">
@@ -570,7 +600,7 @@
                 ${moveIndex >= 0 ? html`<${MoveDetails} id=${moves[moveIndex] && moves[moveIndex].id} />` : null}
             </div>`;
         }
-        return html`<div class="pmz-pk-screen pmz-pk-summary">
+        return html`<div class=${`pmz-pk-screen pmz-pk-summary ${page === SUMMARY_PAGE.moves && !p.isEgg() ? "is-moves" : ""}`}>
             <div class="pmz-panel pmz-pk-summary-head">
                 <div class="pmz-pk-tabs" role="tablist">
                     ${tabs.map((t, i) => html`<span key=${i} role="tab" aria-selected=${String(i === page)} class=${i === page ? "is-active" : ""} onPointerUp=${() => setPage(i)}>${t}</span>`)}
@@ -586,7 +616,7 @@
                 ${p.isEgg() ? null : html`<${StatusBadge} status=${p.status} fainted=${p.hp <= 0} />`}
             </div>
             <div class="pmz-panel pmz-pk-summary-body">${body}</div>
-            <${HelpBar} text=${page === 2 ? tr("Summary.MovesHelp", "OK: details / reorder") : tr("Summary.Help", "←→ Page  ↑↓ Pokémon")} onBack=${() => done()} />
+            <${HelpBar} text=${page === SUMMARY_PAGE.moves ? tr("Summary.MovesHelp", "OK: details / reorder") : tr("Summary.Help", "←→ Page  ↑↓ Pokémon")} onBack=${() => done()} />
         </div>`;
     }
 
@@ -1797,12 +1827,12 @@
             <div class="pmz-panel pmz-pk-battle-moveinfo">
                 <div>${tr("Pkmn.PP", "PP")} ${m ? `${m.pp}/${m.maxpp}` : ""}</div>
                 <div>${tr("Battle.TypeLabel", "TYPE/")}${data ? html`<${TypeBadge} type=${data.type} />` : null}</div>
-                ${gimmicks.length
-                    ? html`<${Button} class=${`pmz-pk-gimmick ${gimmick ? "is-on" : ""}`} onPress=${cycleGimmick} sound="">
-                          ${gimmick ? gLabel(gimmick) : tr("Battle.Gimmick.Off", "Shift: {g}", { g: gimmicks.map(gLabel).join(" / ") })}
-                      <//>`
-                    : null}
             </div>
+            ${gimmicks.length
+                ? html`<${Button} class=${`pmz-pk-gimmick ${gimmick ? "is-on" : ""}`} onPress=${cycleGimmick} sound="">
+                      ${gimmick ? gLabel(gimmick) : tr("Battle.Gimmick.Off", "Shift: {g}", { g: gimmicks.map(gLabel).join(" / ") })}
+                  <//>`
+                : null}
             <${BackButton} onPress=${back} class="pmz-pk-battle-back" player=${player} />
         </div>`;
     }

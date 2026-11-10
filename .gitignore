@@ -37,3 +37,6 @@ input-recordings/
 
 # PBS tool download cache
 tools/.cache/
+
+# Preact UI layout audit output (tools/ui-audit.js)
+tools/ui-audit-out/

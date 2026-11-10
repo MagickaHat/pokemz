@@ -8,7 +8,8 @@
     "l10n": "node l10n.js",
     "pbs": "node pbs.js",
     "sprites": "node sprites.js",
-    "build:showdown": "node build-showdown.js"
+    "build:showdown": "node build-showdown.js",
+    "ui:audit": "node ui-audit.js"
   },
   "keywords": [],
   "author": "",
