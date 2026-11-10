@@ -41,6 +41,49 @@ These keep the UI on the same pixel grid as the 2D and 3D layers. `css/pokemz-ui
 
 `zoom` transitions and the Poké Ball spin in battle break rule 5 while they run. That is fine for a few frames, but avoid it for anything that stays on screen.
 
+## Layout grid
+
+The top of `css/pokemz-ui.css` defines a few layout tokens. Screens place their boxes from the screen edges with them, instead of hard-coding the 192px height, so a larger resolution gives the screen more room instead of breaking it:
+
+| Token | Value | Meaning |
+|---|---|---|
+| `--pmz-gap` | 4px | space between boxes, and to the screen edge |
+| `--pmz-row` | 18px | one row of text (16px font + 2px) |
+| `--pmz-header-h` | 20px | a one-row header or tab strip at the top |
+| `--pmz-help-h` | 22px | the help bar at the bottom |
+| `--pmz-content-bottom` | 24px | where content ends, above the help bar (`bottom: var(--pmz-content-bottom)`) |
+
+A typical screen: header `top: 2px; height: var(--pmz-header-h)`, content from `top: 24px` to `bottom: var(--pmz-content-bottom)`, then the `HelpBar`. Budget rows: a panel with 4px padding and a 1px border holds `floor((height - 10) / 18)` rows of text.
+
+### Sprites stand on their feet
+
+Pokémon sprites are 96×96 frames drawn at 1×. Don't position the image's top-left corner; place a zero-size **anchor** at the Pokémon's feet and let the sprite stand on it. That is how `.pmz-pk-battler` works:
+
+```css
+.pmz-pk-battler { position: absolute; left: var(--x); top: var(--y); width: 0; height: 0; }
+.pmz-pk-battler > .pmz-pk-image { position: absolute; bottom: 0; left: var(--pmz-img-half); }
+```
+
+`PokemonImage` sets `--pmz-img-half` to minus half its width, so 64px, 80px and 96px art all centre on the same point. Animations (`transform`) on the anchor scale and move around the feet.
+
+### Battle coordinates (256×192)
+
+Feet and platform positions are CSS variables in the Battle section of the stylesheet. Change `--x`/`--y` to move things:
+
+| What | Selector | Default |
+|---|---|---|
+| Foe (singles), feet | `.pmz-pk-battler.is-foe0` | `--x: 188px; --y: 88px` |
+| Player (singles), feet | `.pmz-pk-battler.is-player0` | `--x: 64px; --y: 144px` |
+| Foe platform (centre, size) | `.pmz-pk-platform.is-foe` | `188, 82`, 128×24 |
+| Player platform | `.pmz-pk-platform.is-player` | `64, 140`, 144×28 |
+| Doubles foes | `.is-doubles … .is-foe0 / .is-foe1` | `208, 96` / `152, 92` |
+| Doubles players | `.is-doubles … .is-player0 / .is-player1` | `48, 144` / `100, 144` |
+| Foe HP box | `.pmz-pk-bbox.is-foe0` | `left: 4px; top: 4px`, 128 wide |
+| Player HP box | `.pmz-pk-bbox.is-player0` | `right: 4px; top: 96px` |
+| Bottom area height | `--pmz-battle-bottom-h` | 48px (2 lines of text) |
+
+HP bars are 48px tracks (`HP_BAR_WIDTH` in `PokeMZ_UI_Pokemon.js`) and EXP bars 64px (`EXP_BAR_WIDTH`), so the fill is always a whole number of pixels. Change the constant and the CSS width together.
+
 ## Changing how something looks (CSS only)
 
 Most edits never touch JavaScript.
@@ -184,6 +227,8 @@ Players can pick another resolution in Options (320×240, 384×288, 16:9 ones, �
 Check each screen at 256×192 first, since it is the tightest.
 
 ## Debugging
+
+- **Layout audit:** `cd tools && npm run ui:audit` opens every Preact screen (party, summary pages, bag, Pokédex, PC, battles, messages, name entry, controls, …) in a headless Chromium at 256×192 and 320×240. It reports anything off screen, text that doesn't fit its box, and boxes running into the help bar, and saves a screenshot of every screen to `tools/ui-audit-out/`. Use `-- --only battle` for one screen and `-- --res 256x192` for one resolution. It needs Playwright: `npm i -D playwright && npx playwright install chromium`. Add your own screens to `SCENARIOS` at the top of `tools/ui-audit.js`.
 
 - `PokeMZ.L10n.checkOverflow()` (or F7 to cycle pseudo-locales) outlines text that doesn't fit its box.
 - **F10:** input overlay (focus owners and contexts).
