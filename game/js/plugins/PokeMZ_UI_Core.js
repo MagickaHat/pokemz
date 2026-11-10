@@ -99,7 +99,8 @@
  * htm tagged templates). Needs js/libs/preact-htm.js in js/main.js.
  *
  * The UI is a DOM layer kept exactly on top of the game canvas and scaled
- * with it, so components are laid out in game pixels (816 x 624 by default).
+ * with it, so components are laid out in game pixels (256 x 192 by default;
+ * other resolutions come from PokeMZ_Display). See docs/PREACT_UI.md.
  *
  * Everything lives in window.PokeMZ.UI:
  *   html, h, Fragment, hooks          Preact + htm
@@ -357,11 +358,17 @@
             const w = Graphics.width;
             const hh = Graphics.height;
             const s = this.el.style;
-            s.position = "absolute";
-            s.margin = "auto";
-            s.left = s.top = s.right = s.bottom = "0";
-            s.width = `${w * scale}px`;
-            s.height = `${hh * scale}px`;
+            const display = window.PokeMZ && window.PokeMZ.Display;
+            if (display) {
+                // Same box as the canvas: whole-pixel corner, whole multiple.
+                display.place(this.el, w, hh);
+            } else {
+                s.position = "absolute";
+                s.margin = "auto";
+                s.left = s.top = s.right = s.bottom = "0";
+                s.width = `${w * scale}px`;
+                s.height = `${hh * scale}px`;
+            }
             s.zIndex = String(CONFIG.zIndex);
             const r = this.root.style;
             r.width = `${w}px`;
@@ -1145,7 +1152,9 @@
      *        A canvas is used because MZ revokes decrypted image URLs.
      */
     function MzImage(props) {
-        const { folder, name, rect, scale = 1, class: cls, style } = props;
+        const { folder, name, rect, class: cls, style } = props;
+        // Whole multiples only: a fractional scale would mix pixel sizes.
+        const scale = Math.max(1, Math.round(props.scale || 1));
         const bitmap = useBitmap(folder, name);
         const ref = useRef(null);
         const r = rect || (bitmap ? [0, 0, bitmap.width, bitmap.height] : [0, 0, 1, 1]);
@@ -1796,7 +1805,11 @@
     // Transitions
     //=========================================================================
 
+    // Slides move in whole game pixels (steps easing, 2px per step), so
+    // nothing ever lands between pixels. Scaled transitions (zoom) are the
+    // one exception: they resample the screen while they run.
     const slide = (x, y) => ({
+        easing: `steps(${Math.max(1, Math.round(Math.max(Math.abs(x), Math.abs(y)) / 2))}, end)`,
         enter: [
             { opacity: 0, transform: `translate(${x}px, ${y}px)` },
             { opacity: 1, transform: "none" },
@@ -1810,10 +1823,10 @@
     const transitionRegistry = new Map([
         ["none", { enter: null, exit: null }],
         ["fade", { enter: [{ opacity: 0 }, { opacity: 1 }], exit: [{ opacity: 1 }, { opacity: 0 }] }],
-        ["slideLeft", slide(-48, 0)],
-        ["slideRight", slide(48, 0)],
-        ["slideUp", slide(0, -48)],
-        ["slideDown", slide(0, 48)],
+        ["slideLeft", slide(-16, 0)],
+        ["slideRight", slide(16, 0)],
+        ["slideUp", slide(0, -16)],
+        ["slideDown", slide(0, 16)],
         [
             "zoom",
             {
@@ -1881,7 +1894,7 @@
                 done();
                 return;
             }
-            const anim = ref.current.animate(def.exit, { duration, easing: "ease-in", fill: "forwards" });
+            const anim = ref.current.animate(def.exit, { duration, easing: def.easing || "ease-in", fill: "forwards" });
             anim.onfinish = done;
             anim.oncancel = done;
         }, [show]);

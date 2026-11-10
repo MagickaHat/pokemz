@@ -348,7 +348,7 @@
         /** @brief Adds, swaps and moves event models. */
         updateEvents() {
             const seen = new Set();
-            const th = $gameMap.tileHeight();
+            const th = Three.config.texelsPerUnit;
             for (const event of $gameMap.events()) {
                 const tag = event._erased ? null : Three.noteTag(Three.eventText(event), "Model");
                 const key = tag ? tag.raw : "";

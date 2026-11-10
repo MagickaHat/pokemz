@@ -61,6 +61,11 @@
  *   than "Max Step Height", so cliffs block walking while ramps don't.
  *   Vehicles and "Through" characters ignore heights.
  *
+ * Hills
+ *   Slope faces with PokeMZ_Three_Core's "Hill Terrain Tag" (default 3) are
+ *   walkable on 3D maps, even if the tileset marks them impassable. You walk
+ *   up and down a hill along its slope; its sides are too steep to step off.
+ *
  * Ledges
  *   Give ledge tiles the "Ledge Terrain Tag" and make them impassable.
  *   Walking into a ledge hops the player (and followers) two tiles over it,
@@ -116,6 +121,35 @@
     }
 
     Three.heightAllows = heightAllows;
+
+    //-------------------------------------------------------------------------
+    // Hills: walkable slope faces
+    //-------------------------------------------------------------------------
+
+    /**
+     * @brief Whether a tile is a hill (a slope face with the core's Hill
+     *        Terrain Tag) on the current 3D map.
+     * @param {number} x Tile X.
+     * @param {number} y Tile Y.
+     * @return {boolean} True for hills.
+     */
+    function isHill(x, y) {
+        if (!Three.isMap3D()) {
+            return false;
+        }
+        const hf = Three.heights();
+        return !!(hf && hf.isHill(x, y));
+    }
+
+    Three.isHill = isHill;
+
+    // Hills are passable whatever their tileset passage says, so the same
+    // painted tiles can block in 2D and be climbed in 3D. Stepping off a
+    // hill's sides is still blocked by heightAllows (its edges are sloped).
+    const _Game_Map_isPassable = Game_Map.prototype.isPassable;
+    Game_Map.prototype.isPassable = function(x, y, d) {
+        return isHill(x, y) || _Game_Map_isPassable.call(this, x, y, d);
+    };
 
     const _Game_CharacterBase_isMapPassable = Game_CharacterBase.prototype.isMapPassable;
     Game_CharacterBase.prototype.isMapPassable = function(x, y, d) {

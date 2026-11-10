@@ -8,14 +8,29 @@
  * @author MagickaHat
  * @url https://github.com/MagickaHat/pokemz
  *
+ * @param texelsPerUnit
+ * @text Texels Per World Unit
+ * @desc Pixels of art per tile (one world unit). Billboards, jumps and the
+ * pixel-perfect camera are sized from this. Match your tile size (16).
+ * @type number
+ * @min 1
+ * @default 16
+ *
  * @param renderScale
- * @text Pixel Scale
- * @desc The 3D view renders at (screen size / this) and is scaled up with
- * nearest-neighbour filtering. 1 = native, 2 = chunky pixel art.
+ * @text Extra Pixel Scale
+ * @desc The 3D view renders at (game resolution / this). Keep 1: the game
+ * resolution already is the pixel grid. 2+ = chunkier than the 2D layer.
  * @type number
  * @min 1
  * @max 6
- * @default 2
+ * @default 1
+ *
+ * @param billboardPixelScale
+ * @text Pixel-Perfect Billboards
+ * @desc Characters and upright tiles always draw at exactly one texel per
+ * game pixel, at any depth, snapped to whole pixels.
+ * @type boolean
+ * @default true
  *
  * @param snapToTexel
  * @text Snap Camera To Texels
@@ -42,9 +57,10 @@
  *
  * @param distance
  * @text Camera Distance (tiles)
- * @type number
- * @decimals 1
- * @default 14
+ * @desc "auto" = pixel perfect: the ground at the player shows one texel
+ * per game pixel at any resolution. Or a number of tiles.
+ * @type string
+ * @default auto
  *
  * @param fov
  * @text Field of View (degrees)
@@ -53,9 +69,26 @@
  *
  * @param clampCamera
  * @text Clamp Camera To Map
- * @desc Keeps the follow camera from showing too far past the map edges.
+ * @desc Stops the camera at the map edges instead of keeping the player
+ * centred (Gen 4 style keeps it centred; the Map Border fills the rest).
  * @type boolean
- * @default true
+ * @default false
+ *
+ * @param border
+ * @text Map Border
+ * @desc What is drawn past the map edges: "repeat" (edge tiles continue),
+ * "off" (nothing), or a color such as #000000.
+ * Overridable per map with <3D Border: ...>.
+ * @type string
+ * @default repeat
+ *
+ * @param borderTiles
+ * @text Map Border Size (tiles)
+ * @desc How far the repeated edge reaches past the map.
+ * @type number
+ * @min 0
+ * @max 64
+ * @default 20
  *
  * @param regionHeight
  * @text Height per Region ID (tiles)
@@ -112,13 +145,40 @@
  * @default true
  *
  * @param cliffTag
- * @text Cliff Terrain Tag
- * @desc B-E tiles with this terrain tag count as painted cliff faces
- * (A3/A4 wall sides always do). 0 = disabled.
+ * @text Slope Face Terrain Tag
+ * @desc Tiles with this terrain tag are painted cliff faces drawn as a
+ * steep slope. 0 = disabled.
  * @type number
  * @min 0
  * @max 7
  * @default 5
+ *
+ * @param wallTag
+ * @text Wall Face Terrain Tag
+ * @desc Tiles with this terrain tag are painted cliff faces drawn as a
+ * vertical wall (one face row per tile of height). 0 = disabled.
+ * @type number
+ * @min 0
+ * @max 7
+ * @default 4
+ *
+ * @param hillTag
+ * @text Hill Terrain Tag
+ * @desc Tiles with this terrain tag are walkable slopes (hills): drawn
+ * like slope faces, and passable on 3D maps. 0 = disabled.
+ * @type number
+ * @min 0
+ * @max 7
+ * @default 3
+ *
+ * @param defaultCliffStyle
+ * @text Default Cliff Style
+ * @desc Style of A3/A4 wall-side tiles without one of the tags above.
+ * Overridable per map with <3D Cliffs: wall> or <3D Cliffs: slope>.
+ * @type select
+ * @option wall
+ * @option slope
+ * @default wall
  *
  * @param waterDepth
  * @text Water Depth (tiles)
@@ -251,6 +311,7 @@
  *
  * @arg distance
  * @text Distance (tiles)
+ * @desc A number of tiles, or "auto" for the pixel-perfect distance.
  * @type string
  *
  * @arg fov
@@ -367,12 +428,26 @@
  * Map note tags
  * ---------------------------------------------------------------------------
  *   <3D>                                  Render this map in 3D (required).
- *   <3D Camera: pitch=55 yaw=0 distance=14 fov=30>
+ *   <3D Camera: pitch=55 yaw=0 distance=auto fov=30>
  *   <3D Smooth: 0.5>                      Blend steps up to 0.5 into slopes.
  *   <3D Water: depth=0.2 opacity=0.85 bed=#1c3550>
  *   <3D Fog: #b8d0e8 near=20 far=45>
- *   <3D Clamp: off>                       Let the camera see past map edges.
+ *   <3D Clamp: on>                        Stop the camera at the map edges.
+ *   <3D Border: repeat>                   Or off, or a color (#000000).
+ *   <3D Cliffs: slope>                    A3/A4 wall sides as slopes (or wall).
  *   <3D Reflections: off>                 Or a strength, e.g. 0.5.
+ *
+ * ---------------------------------------------------------------------------
+ * Pixel grid
+ * ---------------------------------------------------------------------------
+ * One world unit is one tile, and one tile is "Texels Per World Unit" (16)
+ * pixels of art. With distance=auto the camera sits exactly far enough for
+ * the ground under the player to show one texel per game pixel, at any
+ * resolution (a bigger resolution shows more of the map). Characters and
+ * upright tiles are always drawn at one texel per pixel and snapped to
+ * whole pixels ("Pixel-Perfect Billboards"). The camera follows the player
+ * and keeps them centred, like the Gen 4 games; past the map edge the edge
+ * tiles are repeated ("Map Border").
  *
  * Random encounters zoom the 3D camera onto the player (instead of MZ's 2D
  * screen zoom), after taking the usual battle background snapshot.
@@ -386,13 +461,29 @@
  * automatically wherever neighbouring tiles differ in height.
  *
  * Cliffs: paint them exactly as on a 2D map. Put a height region on the
- * cliff top, then paint the cliff face rows in front of it (south side) with
- * A3/A4 wall-side tiles, or B-E tiles with the "Cliff Terrain Tag". The face
- * rows need no region: in 3D they become a steep slope from the cliff top
- * down to the ground, covering exactly the tiles they cover in 2D, and show
- * the tiles you painted. Use about 2 face rows per tile of height (region 2
- * with the default 0.5 per region). Height steps without painted faces get a
- * plain wall that repeats the tile above it.
+ * cliff top, then paint the cliff face rows in front of it (south side). The
+ * face rows need no region. Each face tile picks one of three styles by its
+ * terrain tag (A3/A4 wall-side tiles without a tag use "Default Cliff
+ * Style", or the map's <3D Cliffs: ...>):
+ *
+ *   Wall  (Wall Face Terrain Tag, default 4)
+ *     A vertical wall. The face rows are raised to the cliff-top height (the
+ *     cliff-top tile just north of them continues over them), and the wall
+ *     stands at their south edge showing the painted face tiles, top row
+ *     first, one row per tile of height. Use 1 face row per tile of height
+ *     (region 2 with the default 0.5 per region = 1 face row). Extra height
+ *     repeats the bottom row. The ground in front is exactly as in 2D.
+ *
+ *   Slope (Slope Face Terrain Tag, default 5)
+ *     A steep slope from the cliff top down to the ground, covering exactly
+ *     the tiles it covers in 2D. Use about 2 face rows per tile of height.
+ *
+ *   Hill  (Hill Terrain Tag, default 3)
+ *     Like a slope, but walkable on 3D maps: the player walks up and down
+ *     it, and can't step off its sides onto lower ground.
+ *
+ * Height steps without painted faces get a plain wall that repeats the tile
+ * above it.
  *
  * Pokémon-style games also use regions for encounter zones, so keep the
  * height range separate from your encounter regions.
@@ -603,15 +694,36 @@
     // Configuration
     //=========================================================================
 
+    /**
+     * @brief Parses a camera distance: "auto" (pixel perfect) or tiles.
+     * @param {*} value Raw value.
+     * @param {number|null} fallback Value when empty (null = auto).
+     * @return {number|null} Tiles, or null for auto.
+     */
+    function parseDistance(value, fallback) {
+        if (value === undefined || value === "" || value === true) {
+            return fallback;
+        }
+        if (String(value).trim().toLowerCase() === "auto") {
+            return null;
+        }
+        const n = Number(value);
+        return isNaN(n) || n <= 0 ? fallback : n;
+    }
+
     /** @brief Plugin settings parsed from the plugin parameters. */
     const CONFIG = {
-        renderScale: Math.max(1, num(params.renderScale, 2)),
+        texelsPerUnit: Math.max(1, num(params.texelsPerUnit, 16)),
+        renderScale: Math.max(1, num(params.renderScale, 1)),
+        billboardPixelScale: parseBool(params.billboardPixelScale, true),
         snapToTexel: parseBool(params.snapToTexel, true),
         pitch: num(params.pitch, 55),
         yaw: num(params.yaw, 0),
-        distance: num(params.distance, 14),
+        distance: parseDistance(params.distance, null),
         fov: num(params.fov, 30),
-        clampCamera: parseBool(params.clampCamera, true),
+        clampCamera: parseBool(params.clampCamera, false),
+        border: String(params.border || "repeat").trim(),
+        borderTiles: Math.max(0, num(params.borderTiles, 20)),
         regionHeight: num(params.regionHeight, 0.5),
         heightRegions: parseRangeList(params.heightRegions || "1-20"),
         rampRegions: parseRangeList(params.rampRegions || "21"),
@@ -620,6 +732,9 @@
         uprightTag: num(params.uprightTag, 7),
         paintedCliffs: parseBool(params.paintedCliffs, true),
         cliffTag: num(params.cliffTag, 5),
+        wallTag: num(params.wallTag, 4),
+        hillTag: num(params.hillTag, 3),
+        defaultCliffStyle: params.defaultCliffStyle === "slope" ? "slope" : "wall",
         waterDepth: num(params.waterDepth, 0.2),
         waterOpacity: num(params.waterOpacity, 0.85),
         waterBedColor: params.waterBedColor || "#1c3550",
@@ -645,6 +760,8 @@
         const fog = noteTag(note, "Fog");
         const smooth = noteTag(note, "Smooth");
         const clamp = noteTag(note, "Clamp");
+        const border = noteTag(note, "Border");
+        const cliffs = noteTag(note, "Cliffs");
         const refl = noteTag(note, "Reflections");
         let reflectionStrength = CONFIG.reflections ? CONFIG.reflectionStrength : 0;
         if (refl) {
@@ -655,10 +772,12 @@
             reflectionStrength,
             pitch: num(cam.pitch, CONFIG.pitch),
             yaw: num(cam.yaw, CONFIG.yaw),
-            distance: num(cam.distance, CONFIG.distance),
+            distance: parseDistance(cam.distance, CONFIG.distance),
             fov: num(cam.fov, CONFIG.fov),
             smooth: smooth ? num(smooth._[0], CONFIG.smooth) : CONFIG.smooth,
             clampCamera: clamp ? !(clamp.off || clamp.false) : CONFIG.clampCamera,
+            border: border && border.raw ? border.raw : CONFIG.border,
+            cliffStyle: cliffs && /^slope/i.test(cliffs.raw) ? "slope" : cliffs && /^wall/i.test(cliffs.raw) ? "wall" : CONFIG.defaultCliffStyle,
             waterDepth: num(water.depth, CONFIG.waterDepth),
             waterOpacity: num(water.opacity, CONFIG.waterOpacity),
             waterBedColor: water.bed || CONFIG.waterBedColor,
@@ -705,7 +824,12 @@
             this.corners = new Float32Array(W * H * 4);
             this.ramp = new Uint8Array(W * H);
             this.water = new Uint8Array(W * H);
+            /** @brief 1 on slope faces and hills (painted, sloped). */
             this.face = new Uint8Array(W * H);
+            /** @brief 1 on hills (walkable slope faces). */
+            this.hill = new Uint8Array(W * H);
+            /** @brief 1 on wall faces (painted, raised + vertical wall). */
+            this.wall = new Uint8Array(W * H);
             this.waterDepth = cfg.waterDepth;
             const flags = gameMap.tilesetFlags();
 
@@ -721,8 +845,12 @@
                     if (Tilemap.isWaterTile(gameMap.tileId(x, y, 0))) {
                         this.water[i] = 1;
                     }
-                    if (CONFIG.paintedCliffs && isCliffFace(gameMap, flags, x, y)) {
+                    const style = CONFIG.paintedCliffs ? cliffStyle(gameMap, flags, x, y, cfg.cliffStyle) : null;
+                    if (style === "wall") {
+                        this.wall[i] = 1;
+                    } else if (style) {
                         this.face[i] = 1;
+                        this.hill[i] = style === "hill" ? 1 : 0;
                     }
                 }
             }
@@ -753,10 +881,47 @@
             return i >= 0 && this.water[i] === 1;
         }
 
-        /** @brief Whether tile (x, y) is a painted cliff face. */
+        /** @brief Whether tile (x, y) is a sloped painted face (or a hill). */
         isFace(x, y) {
             const i = this.index(x, y);
             return i >= 0 && this.face[i] === 1;
+        }
+
+        /** @brief Whether tile (x, y) is a hill (walkable slope face). */
+        isHill(x, y) {
+            const i = this.index(x, y);
+            return i >= 0 && this.hill[i] === 1;
+        }
+
+        /** @brief Whether tile (x, y) is a painted wall face. */
+        isWall(x, y) {
+            const i = this.index(x, y);
+            return i >= 0 && this.wall[i] === 1;
+        }
+
+        /**
+         * @brief The wall-face column through tile (x, y): the cliff-top tile
+         *        north of it, the face rows and the ground in front.
+         * @return {{top: number, first: number, last: number, height: number,
+         *          ground: number}|null} Rows and heights, or null when the
+         *          tile is no raised wall face.
+         */
+        wallColumn(x, y) {
+            if (!this.isWall(x, y)) {
+                return null;
+            }
+            const n = this._scan(x, y, 0, -1, this.wall);
+            const s = this._scan(x, y, 0, 1, this.wall);
+            if (!n || n.h <= (s ? s.h : 0)) {
+                return null;
+            }
+            return {
+                top: y - n.n,
+                first: y - n.n + 1,
+                last: y + (s ? s.n : this.height - y) - 1,
+                height: n.h,
+                ground: s ? s.h : Math.min(0, n.h),
+            };
         }
 
         /**
@@ -788,7 +953,11 @@
             const c = i * 4;
             let nw, ne, se, sw;
             const faceSlope = this.face[i] ? this._faceSlope(x, y) : null;
-            if (faceSlope) {
+            const wall = this.wall[i] ? this.wallColumn(x, y) : null;
+            if (wall) {
+                nw = ne = se = sw = wall.height;
+                this.base[i] = wall.height;
+            } else if (faceSlope) {
                 [nw, ne, se, sw] = faceSlope;
                 this.base[i] = (nw + se) / 2;
             } else if (this.ramp[i]) {
@@ -867,7 +1036,7 @@
                     const slots = [];
                     for (const [ox, oy, corner] of around) {
                         const i = this.index(vx + ox, vy + oy);
-                        if (i >= 0 && !this.water[i] && !this.face[i]) {
+                        if (i >= 0 && !this.water[i] && !this.face[i] && !this.wall[i]) {
                             slots.push(i * 4 + corner);
                         }
                     }
@@ -943,28 +1112,38 @@
     }
 
     /**
-     * @brief Whether a tile shows a cliff face: an A3/A4 wall side, or a B-E
-     *        tile with the cliff terrain tag, on any tile layer.
+     * @brief The painted cliff style of a tile, from the terrain tags of its
+     *        layers (top layer first): "wall", "slope", "hill", or null. A3/A4
+     *        wall-side tiles without one of the tags use `fallback`.
      * @param {Game_Map} gameMap The map.
      * @param {number[]} flags Tileset flags.
-     * @return {boolean} True for cliff faces.
+     * @param {number} x Tile X.
+     * @param {number} y Tile Y.
+     * @param {string} fallback "wall" or "slope".
+     * @return {string|null} The style.
      */
-    function isCliffFace(gameMap, flags, x, y) {
-        for (let z = 0; z < 4; z++) {
+    function cliffStyle(gameMap, flags, x, y, fallback) {
+        let wallSide = false;
+        for (let z = 3; z >= 0; z--) {
             const tileId = gameMap.tileId(x, y, z);
-            if (Tilemap.isWallSideTile(tileId)) {
-                return true;
+            if (tileId <= 0) {
+                continue;
             }
-            if (
-                CONFIG.cliffTag > 0 &&
-                tileId > 0 &&
-                tileId < Tilemap.TILE_ID_A5 &&
-                flags[tileId] >> 12 === CONFIG.cliffTag
-            ) {
-                return true;
+            const tag = flags[tileId] >> 12;
+            if (tag > 0) {
+                if (tag === CONFIG.wallTag) {
+                    return "wall";
+                }
+                if (tag === CONFIG.cliffTag) {
+                    return "slope";
+                }
+                if (tag === CONFIG.hillTag) {
+                    return "hill";
+                }
             }
+            wallSide = wallSide || Tilemap.isWallSideTile(tileId);
         }
-        return false;
+        return wallSide ? fallback : null;
     }
 
     /** @brief HeightField cache for the current map. */
@@ -1097,6 +1276,16 @@
         uDepthBias: { value: CONFIG.depthBias },
         /** @brief (1, 1) normally; flips sprites for the reflection pass. */
         uMirror: { value: new THREE.Vector2(1, 1) },
+        /**
+         * @brief View depth at which one world unit is texelsPerUnit game
+         *        pixels; billboards are scaled by depth / this so they always
+         *        draw at one texel per pixel. 0 = plain perspective.
+         */
+        uPixelDepth: { value: 0 },
+        /** @brief Render target size in pixels (for pixel snapping). */
+        uResolution: { value: new THREE.Vector2(1, 1) },
+        /** @brief texelsPerUnit. */
+        uTexels: { value: CONFIG.texelsPerUnit },
     };
 
     const BILLBOARD_VERTEX = `
@@ -1107,6 +1296,9 @@
         uniform float uFlat;
         uniform float uDepthBias;
         uniform vec2 uMirror;
+        uniform float uPixelDepth;
+        uniform vec2 uResolution;
+        uniform float uTexels;
         uniform vec3 uAmbient;
         uniform int uLightCount;
         uniform vec3 uLightPos[MAX_LIGHTS];
@@ -1126,8 +1318,21 @@
             } else {
                 // Face the camera, so pixel art keeps its exact proportions...
                 mvPosition = viewMatrix * vec4(a, 1.0);
+                if (uPixelDepth > 0.0) {
+                    // ...at one texel per pixel, whatever the depth...
+                    off *= max(-mvPosition.z, 0.01) / uPixelDepth;
+                }
                 mvPosition.xy += off * uMirror;
                 gl_Position = projectionMatrix * mvPosition;
+                if (uPixelDepth > 0.0 && uMirror.y > 0.0) {
+                    // ...with its edges on whole pixels (every vertex shares
+                    // the anchor, so the whole sprite moves together).
+                    vec4 ca = projectionMatrix * viewMatrix * vec4(a, 1.0);
+                    vec2 px = (ca.xy / ca.w * 0.5 + 0.5) * uResolution;
+                    vec2 halfW = vec2(fract(uScale.x * uTexels * 0.5), 0.0);
+                    vec2 snapped = floor(px + halfW + 0.5) - halfW;
+                    gl_Position.xy += (snapped - px) / uResolution * 2.0 * gl_Position.w;
+                }
                 // ...but take depth from an upright card at the anchor, so
                 // sprites never lean into walls or slopes behind them.
                 float upY = max(abs(viewMatrix[1][1]), 0.2);
@@ -1669,6 +1874,13 @@
      * @return {{group: THREE.Group, chunks: TerrainChunk[]}} The terrain.
      */
     function buildTerrain(bitmaps) {
+        if (!buildTerrain.warned && $gameTemp && $gameTemp.isPlaytest() && $gameMap.tileWidth() !== CONFIG.texelsPerUnit) {
+            buildTerrain.warned = true;
+            console.warn(
+                `PokeMZ_Three_Core: tile size is ${$gameMap.tileWidth()}px but Texels Per World Unit is ` +
+                    `${CONFIG.texelsPerUnit}; terrain and characters will have different pixel sizes.`
+            );
+        }
         const W = $gameMap.width();
         const H = $gameMap.height();
         const cs = CONFIG.chunkSize;
@@ -1681,6 +1893,16 @@
         const bedColor = parseColor(cfg.waterBedColor, "#1c3550");
         const group = new THREE.Group();
         const chunks = [];
+        const borderMode = String(cfg.border || "repeat").toLowerCase();
+        const borderTiles = borderMode === "repeat" ? CONFIG.borderTiles : 0;
+        if (borderMode !== "repeat" && borderMode !== "off" && borderMode !== "none") {
+            // A flat color under the whole map, reaching past its edges.
+            const size = Math.max(W, H) + 2 * Math.max(16, CONFIG.borderTiles);
+            const geo = new THREE.PlaneGeometry(size, size).rotateX(-Math.PI / 2);
+            const mesh = new THREE.Mesh(geo, createSurfaceMaterial({ color: parseColor(cfg.border, "#000000") }));
+            mesh.position.set(W / 2, Math.min(0, ...hf.corners) - 0.02, H / 2);
+            group.add(mesh);
+        }
 
         for (let cy = 0; cy * cs < H; cy++) {
             for (let cx = 0; cx * cs < W; cx++) {
@@ -1709,12 +1931,29 @@
                         const [nw, ne, se, sw] = hf.cornersAt(x, y);
                         const isWater = hf.water[i] === 1;
                         const top = isWater ? water : ground;
-                        top.quad([x, nw, y], [x + 1, ne, y], [x + 1, se, y + 1], [x, sw, y + 1], tileUv(x, y));
+                        const wall = hf.wall[i] ? hf.wallColumn(x, y) : null;
+                        if (wall) {
+                            // The cliff-top tile draws the top of the raised
+                            // face rows; this tile is one row of the wall.
+                            addFaceWall(ground, x, y, wall, tileUv);
+                        } else {
+                            top.quad([x, nw, y], [x + 1, ne, y], [x + 1, se, y + 1], [x, sw, y + 1], tileUv(x, y));
+                        }
+                        const below = hf.isWall(x, y + 1) ? hf.wallColumn(x, y + 1) : null;
+                        if (below && below.top === y) {
+                            for (let r = below.first; r <= below.last; r++) {
+                                const h = below.height;
+                                top.quad([x, h, r], [x + 1, h, r], [x + 1, h, r + 1], [x, h, r + 1], tileUv(x, y));
+                            }
+                        }
                         const bedY = Math.min(nw, ne, se, sw) - 0.35;
                         if (isWater && translucent) {
                             bed.quad([x, bedY, y], [x + 1, bedY, y], [x + 1, bedY, y + 1], [x, bedY, y + 1], [0, 1, 1, 0]);
                         }
-                        addWalls(ground, hf, x, y, translucent, tileUv);
+                        addWalls(ground, hf, x, y, translucent, tileUv, wall ? 2 : 0);
+                        if (borderTiles > 0 && (x === 0 || y === 0 || x === W - 1 || y === H - 1)) {
+                            addBorder(top, hf, x, y, borderTiles, tileUv);
+                        }
                         if (split.mask[i]) {
                             hasUpright = true;
                             let yb = y;
@@ -1790,11 +2029,84 @@
     }
 
     /**
+     * @brief Adds this face row's part of a vertical wall: segment
+     *        (y - first) of the wall standing at the south edge of the face
+     *        rows, one tile of height per row, at one texel per pixel. The
+     *        bottom row also fills any extra height below the last row.
+     * @param {QuadBuilder} builder Ground builder of the row's chunk.
+     * @param {number} x Tile X.
+     * @param {number} y Face row.
+     * @param {Object} col Result of HeightField.wallColumn().
+     * @param {Function} tileUv UV rectangle of a tile in its chunk.
+     */
+    function addFaceWall(builder, x, y, col, tileUv) {
+        const z = col.last + 1;
+        const tall = col.height - col.ground;
+        const rows = col.last - col.first + 1;
+        const j = y - col.first;
+        const last = y === col.last ? Math.max(j + 1, Math.ceil(tall - 0.001)) : j + 1;
+        for (let s = j; s < last; s++) {
+            const top = col.height - s;
+            const bottom = Math.max(col.ground, top - 1);
+            if (top - bottom <= 0.001) {
+                break;
+            }
+            builder.quad([x, top, z], [x + 1, top, z], [x + 1, bottom, z], [x, bottom, z], tileUv(x, y, top - bottom));
+        }
+        if (y === col.last && $gameTemp && $gameTemp.isPlaytest() && Math.abs(tall - rows) > 0.01 && !col.warned) {
+            console.warn(
+                `PokeMZ_Three_Core: wall face at (${x}, ${col.first}-${col.last}) has ${rows} row(s) for ` +
+                    `${tall} tile(s) of height; use one face row per tile of height.`
+            );
+        }
+    }
+
+    /**
+     * @brief Continues an edge tile past the map edge: flat copies of the
+     *        tile at the height of its outer edge, `n` tiles out (corners
+     *        fill the diagonal block).
+     */
+    function addBorder(builder, hf, x, y, n, tileUv) {
+        const W = hf.width;
+        const H = hf.height;
+        const c = hf.cornersAt(x, y);
+        // Bilinear height inside tile (x, y) at u, v in [0, 1].
+        const at = (u, v) => {
+            const top = c[0] + (c[1] - c[0]) * u;
+            const bottom = c[3] + (c[2] - c[3]) * u;
+            return top + (bottom - top) * v;
+        };
+        const uv = tileUv(x, y);
+        for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+                if ((dx === 0 && dy === 0) || (dx < 0 && x !== 0) || (dx > 0 && x !== W - 1) || (dy < 0 && y !== 0) || (dy > 0 && y !== H - 1)) {
+                    continue;
+                }
+                for (let j = dy === 0 ? 0 : 1; j <= (dy === 0 ? 0 : n); j++) {
+                    for (let i = dx === 0 ? 0 : 1; i <= (dx === 0 ? 0 : n); i++) {
+                        const tx = x + dx * i;
+                        const ty = y + dy * j;
+                        const h = (cx, cz) => at(Math.max(0, Math.min(1, cx - x)), Math.max(0, Math.min(1, cz - y)));
+                        builder.quad(
+                            [tx, h(tx, ty), ty],
+                            [tx + 1, h(tx + 1, ty), ty],
+                            [tx + 1, h(tx + 1, ty + 1), ty + 1],
+                            [tx, h(tx, ty + 1), ty + 1],
+                            uv
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * @brief Adds cliff walls on every edge of tile (x, y) where it is higher
      *        than its neighbour. Walls repeat the tile's texture once per
      *        tile of height instead of stretching it.
+     * @param {number} [skipDir] An MZ direction (2, 4, 6, 8) to leave open.
      */
-    function addWalls(builder, hf, x, y, translucent, tileUv) {
+    function addWalls(builder, hf, x, y, translucent, tileUv, skipDir) {
         const [nw, ne, se, sw] = hf.cornersAt(x, y);
         // [dx, dy, my corners (left, right as seen from outside),
         //  neighbour corner indices matching them, quad corner builder]
@@ -1805,6 +2117,12 @@
             [-1, 0, nw, sw, 1, 2, (l, r, bl, br) => [[x, l, y], [x, r, y + 1], [x, br, y + 1], [x, bl, y]]],
         ];
         for (const [dx, dy, l, r, il, ir, make] of sides) {
+            if (skipDir && dx === 0 && dy === (skipDir === 2 ? 1 : skipDir === 8 ? -1 : 9)) {
+                continue;
+            }
+            if (skipDir && dy === 0 && dx === (skipDir === 6 ? 1 : skipDir === 4 ? -1 : 9)) {
+                continue;
+            }
             const nx = x + dx;
             const ny = y + dy;
             let bl, br;
@@ -1907,9 +2225,8 @@
             const ih = bitmap.height;
             u.uUvRect.value.set(frame.x / iw, 1 - (frame.y + fh) / ih, fw / iw, fh / ih);
 
-            const tw = $gameMap.tileWidth();
-            const th = $gameMap.tileHeight();
-            this.size.set(fw / tw, fh / th);
+            const tpu = CONFIG.texelsPerUnit;
+            this.size.set(fw / tpu, fh / tpu);
             u.uScale.value.copy(this.size);
             u.uOpacity.value = s.opacity / 255;
             u.uBush.value = s._bushDepth > 0 ? s._bushDepth / fh : 0;
@@ -1923,9 +2240,9 @@
             const z = c._realY + 0.5;
             let y = hf.heightAtWorld(x, z);
             this.groundY = y;
-            y += c.jumpHeight() / th;
+            y += c.jumpHeight() / tpu;
             if (c instanceof Game_Vehicle) {
-                y += c._altitude / th;
+                y += c._altitude / tpu;
             }
             this.feet.set(x, y, z);
             this.object.position.copy(this.feet);
@@ -1951,17 +2268,24 @@
      */
     class BlobShadows {
         constructor(max) {
+            // A hard-edged pixel ellipse (no soft gradient), so the shadow
+            // stays on the same pixel grid as everything else.
+            const size = CONFIG.texelsPerUnit;
             const canvas = document.createElement("canvas");
-            canvas.width = canvas.height = 32;
+            canvas.width = canvas.height = size;
             const ctx = canvas.getContext("2d");
-            const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-            grad.addColorStop(0, "rgba(0,0,0,0.55)");
-            grad.addColorStop(0.6, "rgba(0,0,0,0.35)");
-            grad.addColorStop(1, "rgba(0,0,0,0)");
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, 32, 32);
+            const r = size / 2;
+            ctx.fillStyle = "rgba(0,0,0,0.4)";
+            for (let py = 0; py < size; py++) {
+                for (let px = 0; px < size; px++) {
+                    const dx = (px + 0.5 - r) / r;
+                    const dy = (py + 0.5 - r) / r;
+                    if (dx * dx + dy * dy <= 1) {
+                        ctx.fillRect(px, py, 1, 1);
+                    }
+                }
+            }
             this.texture = pixelTexture(canvas, true);
-            this.texture.magFilter = THREE.LinearFilter;
             const geo = new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2);
             const mat = new THREE.MeshBasicMaterial({
                 map: this.texture,
@@ -1988,12 +2312,12 @@
          */
         update(billboards) {
             let n = 0;
-            const th = $gameMap.tileHeight();
+            const tpu = CONFIG.texelsPerUnit;
             for (const b of billboards) {
                 if (!b.castsShadow || n >= this.max) {
                     continue;
                 }
-                const jump = b.character.jumpHeight() / th;
+                const jump = b.character.jumpHeight() / tpu;
                 const k = Math.max(0.4, 1 - jump * 0.4) * CONFIG.shadowSize * Math.min(1.5, b.size.x);
                 this._p.set(b.feet.x, b.groundY + 0.01, b.feet.z);
                 this._s.set(k, 1, k * 0.6);
@@ -2049,6 +2373,25 @@
             return $gameMap._threeCamera;
         }
 
+        /**
+         * @brief Pixel-perfect camera distance: the ground at the look-at
+         *        point shows one texel per game pixel.
+         * @param {number} fov Vertical field of view in degrees.
+         * @return {number} Distance in tiles.
+         */
+        autoDistance(fov) {
+            const f = THREE.MathUtils.degToRad(fov || CONFIG.fov);
+            return Graphics.height / (2 * Math.tan(f / 2) * CONFIG.texelsPerUnit);
+        }
+
+        /** @return {number} The current distance (auto resolved). */
+        distance() {
+            const state = this.state;
+            return state.distance === null || state.distance === undefined
+                ? this.autoDistance(state.fov)
+                : state.distance;
+        }
+
         /** @brief The map's default camera state. */
         defaultState() {
             const cfg = mapConfig();
@@ -2088,15 +2431,20 @@
         tweenTo(values, duration, easing) {
             const state = this.state;
             for (const key of Object.keys(values)) {
-                const to = values[key];
-                if (to === undefined || to === null || isNaN(to)) {
+                let to = values[key];
+                const toAuto = key === "distance" && String(to).toLowerCase() === "auto";
+                if (!toAuto && (to === undefined || to === null || isNaN(to))) {
                     continue;
                 }
                 this.tweens = this.tweens.filter(t => t.key !== key);
+                const from = key === "distance" ? this.distance() : state[key];
+                if (toAuto) {
+                    to = this.autoDistance(values.fov === undefined || values.fov === null ? state.fov : values.fov);
+                }
                 if (duration <= 0) {
-                    state[key] = to;
+                    state[key] = toAuto ? null : to;
                 } else {
-                    this.tweens.push({ key, from: state[key], to, t: 0, duration, ease: EASING[easing] || EASING.easeInOut });
+                    this.tweens.push({ key, from, to, toAuto, t: 0, duration, ease: EASING[easing] || EASING.easeInOut });
                 }
             }
         }
@@ -2154,6 +2502,9 @@
             for (const tw of this.tweens) {
                 tw.t++;
                 state[tw.key] = tw.from + (tw.to - tw.from) * tw.ease(Math.min(1, tw.t / tw.duration));
+                if (tw.toAuto && tw.t >= tw.duration) {
+                    state[tw.key] = null;
+                }
             }
             this.tweens = this.tweens.filter(tw => tw.t < tw.duration);
 
@@ -2182,15 +2533,15 @@
                 const z = p._realY + 0.5;
                 target.set(x, Three.heightAtWorld(x, z) + 0.5, z);
             } else if (mapConfig().clampCamera && !this.blend && state.follow.type !== "point") {
-                this._clamp(target, state.distance, fovRad, camera.aspect, pitch);
+                this._clamp(target, this.distance(), camera, pitch);
             }
             target.x += state.ox;
             target.y += state.oy;
             target.z += state.oz;
             if (CONFIG.snapToTexel) {
-                const tw = $gameMap.tileWidth();
-                target.x = Math.round(target.x * tw) / tw;
-                target.z = Math.round(target.z * tw) / tw;
+                const tpu = CONFIG.texelsPerUnit;
+                target.x = Math.round(target.x * tpu) / tpu;
+                target.z = Math.round(target.z * tpu) / tpu;
             }
             this.look.copy(target);
 
@@ -2205,7 +2556,7 @@
                 }
             }
 
-            const d = state.distance / Math.max(0.01, this.zoom);
+            const d = this.distance() / Math.max(0.01, this.zoom);
             camera.position.set(
                 look.x + Math.sin(yaw) * Math.cos(pitch) * d,
                 look.y + Math.sin(pitch) * d,
@@ -2219,18 +2570,53 @@
             camera.updateMatrixWorld();
         }
 
-        /** @brief Keeps the target far enough from the map edge (yaw 0 only). */
-        _clamp(target, distance, fov, aspect, pitch) {
+        /**
+         * @brief Keeps the view inside the map (yaw 0 only): intersects the
+         *        real view frustum with the ground plane through the target,
+         *        so the trapezoid seen under perspective never shows past an
+         *        edge. Maps smaller than the view are centred.
+         */
+        _clamp(target, distance, camera, pitch) {
             if (Math.abs(this.state.yaw) > 1) {
                 return;
             }
+            const ext = this._groundExtent(distance, camera, pitch);
             const W = $gameMap.width();
             const H = $gameMap.height();
-            const halfH = distance * Math.tan(fov / 2);
-            const halfW = halfH * aspect;
-            const halfD = halfH / Math.max(0.3, Math.sin(pitch));
-            target.x = W > halfW * 2 ? Math.max(halfW, Math.min(W - halfW, target.x)) : W / 2;
-            target.z = H > halfD * 2 ? Math.max(halfD, Math.min(H - halfD, target.z)) : H / 2;
+            const fit = (v, lo, hi, size) => (hi - lo < size ? Math.max(-lo, Math.min(size - hi, v)) : size / 2 - (lo + hi) / 2);
+            target.x = fit(target.x, ext.minX, ext.maxX, W);
+            target.z = fit(target.z, ext.minZ, ext.maxZ, H);
+        }
+
+        /**
+         * @brief Ground area seen by a camera looking at the origin, relative
+         *        to the look-at point (rays above the horizon are capped).
+         * @return {{minX: number, maxX: number, minZ: number, maxZ: number}}
+         */
+        _groundExtent(distance, camera, pitch) {
+            const cam = this._probe || (this._probe = new THREE.PerspectiveCamera());
+            cam.fov = this.state.fov;
+            cam.aspect = camera.aspect;
+            cam.near = 0.1;
+            cam.far = 500;
+            cam.updateProjectionMatrix();
+            cam.position.set(0, Math.sin(pitch) * distance, Math.cos(pitch) * distance);
+            cam.lookAt(0, 0, 0);
+            cam.updateMatrixWorld();
+            const out = { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity };
+            const p = new THREE.Vector3();
+            const maxReach = distance * 3;
+            for (const [nx, ny] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+                p.set(nx, ny, 0.5).unproject(cam).sub(cam.position).normalize();
+                const t = p.y < -1e-3 ? Math.min(maxReach, -cam.position.y / p.y) : maxReach;
+                const x = cam.position.x + p.x * t;
+                const z = cam.position.z + p.z * t;
+                out.minX = Math.min(out.minX, x);
+                out.maxX = Math.max(out.maxX, x);
+                out.minZ = Math.min(out.minZ, z);
+                out.maxZ = Math.max(out.maxZ, z);
+            }
+            return out;
         }
     }
 
@@ -2287,7 +2673,11 @@
             this.resize();
         }
 
-        /** @brief Matches the internal render size to MZ's screen. */
+        /**
+         * @brief Matches the internal render size to MZ's screen: one render
+         *        pixel per game pixel (unless Extra Pixel Scale is above 1),
+         *        so the 3D view shares the 2D layer's pixel grid.
+         */
         resize() {
             const scale = CONFIG.renderScale;
             const w = Math.ceil(Graphics.width / scale);
@@ -2296,6 +2686,7 @@
             this.camera.aspect = w / h;
             this.camera.updateProjectionMatrix();
             this.pixiSprite.scale.set(Graphics.width / w, Graphics.height / h);
+            billboardUniforms.uResolution.value.set(w, h);
             this._size = [Graphics.width, Graphics.height];
         }
 
@@ -2443,7 +2834,11 @@
             if (this._size[0] !== Graphics.width || this._size[1] !== Graphics.height) {
                 this.resize();
             }
-            this.cameraController.update(this.camera);
+            const cam = this.cameraController;
+            cam.update(this.camera);
+            billboardUniforms.uPixelDepth.value = CONFIG.billboardPixelScale
+                ? cam.autoDistance(this.camera.fov) / Math.max(0.01, cam.zoom)
+                : 0;
             this.callHooks("onPreUpdate");
         }
 
@@ -2737,7 +3132,7 @@
             {
                 pitch: num(args.pitch, null),
                 yaw: num(args.yaw, null),
-                distance: num(args.distance, null),
+                distance: String(args.distance || "").trim().toLowerCase() === "auto" ? "auto" : num(args.distance, null),
                 fov: num(args.fov, null),
             },
             num(args.duration, 60),
@@ -2772,7 +3167,11 @@
         const d = cam.defaultState();
         const duration = num(args.duration, 30);
         cam.setFollow({ type: "player" }, duration, "easeInOut");
-        cam.tweenTo({ pitch: d.pitch, yaw: d.yaw, distance: d.distance, fov: d.fov, ox: 0, oy: 0, oz: 0 }, duration, "easeInOut");
+        cam.tweenTo(
+            { pitch: d.pitch, yaw: d.yaw, distance: d.distance === null ? "auto" : d.distance, fov: d.fov, ox: 0, oy: 0, oz: 0 },
+            duration,
+            "easeInOut"
+        );
         maybeWait(this, args.wait);
     });
 

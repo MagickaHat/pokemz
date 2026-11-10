@@ -83,7 +83,9 @@
      *        silhouette, class, frame (icons)}.
      */
     function PokemonImage(props) {
-        const { pokemon, view = "front", scale = 2, silhouette, class: cls, style } = props;
+        const { pokemon, view = "front", silhouette, class: cls, style } = props;
+        // Whole multiples only: a fractional scale would mix pixel sizes.
+        const scale = Math.max(1, Math.round(props.scale || 1));
         const speciesId = props.speciesId || (pokemon ? pokemon.speciesId : "");
         const opts = pokemon ? window.PokeMZ.Graphics.optsOf(pokemon, view) : { view, shiny: !!props.shiny };
         if (props.egg) {
@@ -130,7 +132,7 @@
     }
 
     /** @brief A bobbing party icon. */
-    function PokemonIcon({ pokemon, scale = 2, active }) {
+    function PokemonIcon({ pokemon, scale = 1, active }) {
         const count = UI.useFrameCount();
         const r = pokemon && pokemon.mhp ? pokemon.hp / pokemon.mhp : 1;
         const speed = pokemon && pokemon.isEgg && pokemon.isEgg() ? 24 : r <= 0 ? 0 : r < 0.25 ? 32 : r < 0.5 ? 20 : 10;
@@ -575,7 +577,7 @@
                 </div>
             </div>
             <div class="pmz-panel pmz-pk-summary-card">
-                <${PokemonImage} pokemon=${p} view="front" scale=${2} />
+                <${PokemonImage} pokemon=${p} view="front" scale=${1} />
                 <div class="pmz-pk-summary-name">
                     <span class="pmz-pk-name">${p.name()}</span>
                     ${p.isEgg() ? null : html`<${Gender} gender=${p.gender} />`}
@@ -691,8 +693,8 @@
         return html`<div class="pmz-pk-screen pmz-pk-evolution">
             <div class="pmz-pk-evolution-stage">
                 ${showNew
-                    ? html`<${PokemonImage} speciesId=${target} shiny=${pokemon.shiny} view="front" scale=${3} silhouette=${silhouette} />`
-                    : html`<${PokemonImage} pokemon=${pokemon} view="front" scale=${3} silhouette=${silhouette} />`}
+                    ? html`<${PokemonImage} speciesId=${target} shiny=${pokemon.shiny} view="front" scale=${1} silhouette=${silhouette} />`
+                    : html`<${PokemonImage} pokemon=${pokemon} view="front" scale=${1} silhouette=${silhouette} />`}
             </div>
             <div class="pmz-pk-help pmz-panel"><span>${phase === "morph" ? tr("Evolution.CancelHelp", "Press Cancel to stop the evolution.") : ""}</span></div>
         </div>`;
@@ -759,7 +761,7 @@
                 </div>
             </div>
             <div class="pmz-panel pmz-pk-bag-desc">
-                ${current ? html`<${Icon} index=${current.item.iconIndex} scale=${1.5} />` : null}
+                ${current ? html`<${Icon} index=${current.item.iconIndex} scale=${1} />` : null}
                 <p>${current ? current.item.description : help || ""}</p>
             </div>
         </div>`;
@@ -871,7 +873,7 @@
         const metric = (v, unit) => tr(`Dex.Unit.${unit}`, unit === "m" ? "{n} m" : "{n} kg", { n: L10n() ? L10n().formatNumber(v, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : v.toFixed(1) });
         return html`<div class="pmz-pk-screen pmz-pk-dex-entry">
             <div class="pmz-panel pmz-pk-dex-card">
-                <${PokemonImage} speciesId=${id} view="front" scale=${2} silhouette=${dex.isSeen(id) ? null : "#404040"} />
+                <${PokemonImage} speciesId=${id} view="front" scale=${1} silhouette=${dex.isSeen(id) ? null : "#404040"} />
                 <div>
                     <div class="pmz-pk-name">${String(s.num).padStart(4, "0")} ${dex.isSeen(id) ? s.name : unknown}</div>
                     <div>${open ? tr("Dex.Genus", "{genus}", { genus: s.genus }) : unknown}</div>
@@ -933,7 +935,7 @@
                 </div>
             </div>
             <div class="pmz-panel pmz-pk-dex-preview">
-                ${shown[cursor.index] && dex.isSeen(shown[cursor.index]) ? html`<${PokemonImage} speciesId=${shown[cursor.index]} view="front" scale=${2} />` : null}
+                ${shown[cursor.index] && dex.isSeen(shown[cursor.index]) ? html`<${PokemonImage} speciesId=${shown[cursor.index]} view="front" scale=${1} />` : null}
             </div>
             <${HelpBar} text=${dexes.length > 1 ? tr("Dex.Help", "Shift: switch Pokédex") : ""} onBack=${close} />
         </div>`;
@@ -1112,14 +1114,14 @@
                 class=${`pmz-pk-pc-cell ${i === cur ? "is-selected" : ""}`}
                 onPointerUp=${() => (i === cur ? act() : setCur(i))}
             >
-                ${p ? html`<${PokemonIcon} pokemon=${p} scale=${1.5} active=${i === cur} />` : null}
-                ${i === cur && held ? html`<div class="pmz-pk-pc-held"><${PokemonIcon} pokemon=${held.pokemon} scale=${1.5} active=${true} /></div>` : null}
+                ${p ? html`<${PokemonIcon} pokemon=${p} scale=${1} active=${i === cur} />` : null}
+                ${i === cur && held ? html`<div class="pmz-pk-pc-held"><${PokemonIcon} pokemon=${held.pokemon} scale=${1} active=${true} /></div>` : null}
             </div>`;
         };
         const focus = at(cur) || (held && held.pokemon);
         return html`<div class="pmz-pk-screen pmz-pk-pc">
             <div class="pmz-panel pmz-pk-pc-info">
-                ${focus ? html`<${PokemonImage} pokemon=${focus} view="front" scale=${1.5} />` : null}
+                ${focus ? html`<${PokemonImage} pokemon=${focus} view="front" scale=${1} />` : null}
                 ${focus ? html`<div class="pmz-pk-name">${focus.name()}</div>` : null}
                 ${focus && !focus.isEgg() ? html`<div><${Level} level=${focus.level} /> <${Gender} gender=${focus.gender} /></div>` : null}
                 ${focus && !focus.isEgg() ? html`<div class="pmz-pk-pc-types">${focus.types().map(t => html`<${TypeBadge} key=${t} type=${t} />`)}</div>` : null}
@@ -1308,8 +1310,8 @@
         const form = info.formId && info.pokemon && info.formId !== info.pokemon.speciesId;
         return html`<div class=${cls} key=${`${pos}-${info.token}`}>
             ${form
-                ? html`<${PokemonImage} speciesId=${info.formId} shiny=${info.pokemon.shiny} view=${back ? "back" : "front"} scale=${2} />`
-                : html`<${PokemonImage} pokemon=${info.pokemon} view=${back ? "back" : "front"} scale=${2} />`}
+                ? html`<${PokemonImage} speciesId=${info.formId} shiny=${info.pokemon.shiny} view=${back ? "back" : "front"} scale=${1} />`
+                : html`<${PokemonImage} pokemon=${info.pokemon} view=${back ? "back" : "front"} scale=${1} />`}
         </div>`;
     }
 
@@ -1879,7 +1881,7 @@
             </div>`;
         }
         const [cols, rows] = region.size;
-        const cell = Math.floor(Math.min(768 / cols, 456 / rows));
+        const cell = Math.max(1, Math.floor(Math.min((Graphics.width - 16) / cols, (Graphics.height - 48) / rows)));
         const pointAt = (x, y) => region.points.findIndex(p => p.x === x && p.y === y);
         const pi = pointAt(cur.x, cur.y);
         const point = pi >= 0 ? region.points[pi] : null;
@@ -1993,8 +1995,8 @@
                 return html`<div class="pmz-pk-screen pmz-pk-trade" aria-live="polite">
                     <div class=${`pmz-pk-trade-mon is-${phase}`}>
                         ${phase === "receive"
-                            ? html`<${PokemonImage} pokemon=${got} view="front" scale=${3} />`
-                            : html`<${PokemonImage} pokemon=${sent} view="front" scale=${3} />`}
+                            ? html`<${PokemonImage} pokemon=${got} view="front" scale=${1} />`
+                            : html`<${PokemonImage} pokemon=${sent} view="front" scale=${1} />`}
                     </div>
                     <div class="pmz-pk-trade-link" aria-hidden="true"></div>
                 </div>`;
